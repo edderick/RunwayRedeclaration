@@ -7,6 +7,8 @@ public class Sidebar extends JFrame {
 
         setSize(200,200);
 
+	setDefaultCloseOperation(HIDE_ON_CLOSE);
+
         setVisible(true);
     }
 

@@ -10,6 +10,8 @@ public class Toolbar extends JFrame {
 
         setJMenuBar(new Menubar());
 
+	setDefaultCloseOperation(EXIT_ON_CLOSE);
+
         setVisible(true);
     }
 
@@ -17,6 +19,9 @@ public class Toolbar extends JFrame {
 
         Toolbar tb = new Toolbar();
         Sidebar sb = new Sidebar();
+	TopView tv = new TopView();
+	SideView sv = new SideView();
+
 
     }
     
