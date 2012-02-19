@@ -1,16 +1,9 @@
 import javax.swing.JFrame;
 
-public class SideView extends JFrame {
+public class SideView extends View{
 
-    public SideView() {
-        super("Side view");
-
-        setSize(800,400);
-
-	setDefaultCloseOperation(HIDE_ON_CLOSE);
-
-        setVisible(true);
-    }
-
+	public SideView(int x, int y, int width, int height){
+		super(x,y,width,height);
+	}
 
 }

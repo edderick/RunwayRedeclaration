@@ -1,16 +1,9 @@
 import javax.swing.JFrame;
 
-public class TopView extends JFrame {
+public class TopView extends View{
 
-    public TopView() {
-        super("Top view");
-
-        setSize(800,400);
-
-	setDefaultCloseOperation(HIDE_ON_CLOSE);
-
-        setVisible(true);
-    }
-
-
+	public TopView(int x, int y, int width, int height){
+		super(x,y,width,height);
+	}
+	
 }

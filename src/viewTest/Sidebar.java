@@ -1,16 +1,20 @@
 import javax.swing.JFrame;
+import java.awt.Rectangle; 
+import java.awt.GraphicsEnvironment;
 
 public class Sidebar extends JFrame {
 
-    public Sidebar() {
-        super("Side Bar");
+	public Sidebar(int x, int y) {
+		super("Side Bar");
 
-        setSize(200,200);
+		Rectangle usableScreen = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
 
-	setDefaultCloseOperation(HIDE_ON_CLOSE);
+		setSize(200, usableScreen.height - y);
 
-        setVisible(true);
-    }
+		setLocation(x, y);
+	
+		setDefaultCloseOperation(HIDE_ON_CLOSE);
 
-
+		setVisible(true);
+	}
 }
