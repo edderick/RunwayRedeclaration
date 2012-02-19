@@ -21,13 +21,18 @@ public class Toolbar extends JFrame {
 	public static void main(String[] args){
 
 		Toolbar tb = new Toolbar();
-		Sidebar sb = new Sidebar(0, tb.getSize().height);
-		View tv = new TopView(sb.getSize().width, 
-				tb.getSize().height, 
+		Sidebar sb = new Sidebar(0, tb.getSize().height + tb.getLocation().y);
+		
+		//There is currently a race condition here,
+		//The windows are drawn and then they are displaced by the taskbar,
+		//They may not be displaced before the next window is drawn... :/
+		
+		View tv = new TopView(sb.getSize().width + sb.getLocation().x, 
+				tb.getSize().height + tb.getLocation().y, 
 				tb.getSize().width - sb.getSize().width, 
 				sb.getSize().height / 2);
-		View sv = new SideView(sb.getSize().width, 
-				tb.getSize().height + tv.getSize().height, 
+		View sv = new SideView(sb.getSize().width + sb.getLocation().x, 
+				tb.getSize().height + tb.getLocation().y + tv.getSize().height, 
 				tb.getSize().width - sb.getSize().width, 
 				sb.getSize().height / 2);
 
