@@ -1,6 +1,6 @@
 import javax.swing.JFrame;
 
-public class View extends JFrame {
+public class View extends ResetableFrame {
 
 	public View(int x, int y, int width, int height, String title) {
 		super(title);

@@ -2,7 +2,7 @@ import javax.swing.JFrame;
 import java.awt.Rectangle;
 import java.awt.GraphicsEnvironment;
 
-public class Toolbar extends JFrame {
+public class Toolbar extends ResetableFrame {
 
 	public Toolbar() {
 		super("Program Name");
@@ -16,6 +16,7 @@ public class Toolbar extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		setVisible(true);
+
 	}
 
 	public static void main(String[] args){
@@ -39,6 +40,11 @@ public class Toolbar extends JFrame {
 
 		tb.requestFocus();
 
+		tb.setCurrentAsDefault();
+		sb.setCurrentAsDefault();
+		tv.setCurrentAsDefault();
+		sv.setCurrentAsDefault();
+	
 	}
 
 }

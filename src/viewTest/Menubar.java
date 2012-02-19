@@ -55,6 +55,8 @@ public class Menubar extends JMenuBar {
 		topView = new JCheckBoxMenuItem("Top View", true);
 		windows.add(topView);
 
+		windows.addSeparator();
+
 		reset = new JMenuItem("Reset");
 		windows.add(reset);
 

@@ -2,7 +2,7 @@ import javax.swing.JFrame;
 import java.awt.Rectangle; 
 import java.awt.GraphicsEnvironment;
 
-public class Sidebar extends JFrame {
+public class Sidebar extends ResetableFrame {
 
 	public Sidebar(int x, int y) {
 		super("Side Bar");
