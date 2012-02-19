@@ -37,6 +37,8 @@ public class Toolbar extends JFrame {
 				sb.getSize().height / 2);
 
 
+		tb.requestFocus();
+
 	}
 
 }

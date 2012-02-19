@@ -2,8 +2,8 @@ import javax.swing.JFrame;
 
 public class View extends JFrame {
 
-	public View(int x, int y, int width, int height) {
-		super();
+	public View(int x, int y, int width, int height, String title) {
+		super(title);
 
 		setSize(width, height);
 
