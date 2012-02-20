@@ -2,25 +2,21 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JCheckBoxMenuItem;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Menubar extends JMenuBar {
     
     //Need to hold these in some kind of collection
     //Might use a hashMap... 
     
-    //Menus
-    JMenu file;
-    JMenu edit;
-    JMenu windows;
-    
-    //Menu items
-    JMenuItem exit;
-	JMenuItem reset;
-    
-    //CheckBox menu items
-    JCheckBoxMenuItem sideBar;
-	JCheckBoxMenuItem sideView;
-	JCheckBoxMenuItem topView;
+	//Idea: Instantiate using short scope variables
+	//This allows ordering control
+	//Then add to hashmap to allow external access
+
+	private Map<String,JMenu> menuMap;
+	private Map<String,JMenuItem> menuItemMap;
+	private Map<String,JCheckBoxMenuItem> checkBoxMenuItemMap;
 
     public Menubar(){
         super();
@@ -31,35 +27,62 @@ public class Menubar extends JMenuBar {
     }
 
     private void createMenus(){
-        file = new JMenu("File");
+        menuMap = new HashMap<String,JMenu>();
+
+		//Might be neater to implement this as file.toString()	
+	
+		JMenu file = new JMenu("File");
         add(file);
+        menuMap.put("File", file);
 
-        edit = new JMenu("Edit");
+		JMenu edit = new JMenu("Edit");
         add(edit);
+		menuMap.put("Edit", edit);
 
-        windows = new JMenu("Windows");
+        JMenu windows = new JMenu("Windows");
         add(windows);
+		menuMap.put("Windows", windows);
     }
 
+	public JMenu getMenu(String name){
+		return menuMap.get(name);
+	}
+		
 
     private void createMenuItems(){
-        exit = new JMenuItem("Exit");
-        file.add(exit);
+        menuItemMap = new HashMap<String, JMenuItem>();
+		checkBoxMenuItemMap = new HashMap<String, JCheckBoxMenuItem>();
+
+		JMenuItem exit = new JMenuItem("Exit");
+        getMenu("File").add(exit);
+		menuItemMap.put("Exit", exit);
+
 	
-		sideBar = new JCheckBoxMenuItem("Side Bar", true);
-		windows.add(sideBar);
+		JCheckBoxMenuItem sideBar = new JCheckBoxMenuItem("Side Bar", true);
+		getMenu("Windows").add(sideBar);
+		checkBoxMenuItemMap.put("Side Bar", sideBar);
 
-		sideView = new JCheckBoxMenuItem("Side View", true);
-		windows.add(sideView);
-		
-		topView = new JCheckBoxMenuItem("Top View", true);
-		windows.add(topView);
+		JCheckBoxMenuItem sideView = new JCheckBoxMenuItem("Side View", true);
+		getMenu("Windows").add(sideView);
+		checkBoxMenuItemMap.put("Side View", sideView);
 
-		windows.addSeparator();
+		JCheckBoxMenuItem topView = new JCheckBoxMenuItem("Top View", true);
+		getMenu("Windows").add(topView);
+		checkBoxMenuItemMap.put("Top View", topView);
 
-		reset = new JMenuItem("Reset");
-		windows.add(reset);
+		getMenu("Windows").addSeparator();
+
+		JMenuItem reset = new JMenuItem("Reset");
+		getMenu("Windows").add(reset);
+		menuItemMap.put("Reset", reset);
 
     }
 
+	public JMenuItem getMenuItem(String name){
+		return menuItemMap.get(name);
+	}
+
+	public JCheckBoxMenuItem getCheckBoxMenuItem(String name){
+		return checkBoxMenuItemMap.get(name);
+	}
 }
