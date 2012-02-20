@@ -14,18 +14,18 @@ public class MainFrame extends JFrame{
 		  }
 	
 	public static void main(String[] args){
-		
 		MainFrame mf = new MainFrame();
 		mf.setContentPane(new DesktopPane());
 		mf.getContentPane().setBackground(Color.LIGHT_GRAY);
-		mf.getContentPane().add(new DemoChildWindow());
-		mf.getContentPane().add(new DemoChildWindow());
-		
-		System.out.println("wtf?");
+		mf.getContentPane().add(new TopView());
+		mf.getContentPane().add(new SideView());
+		mf.getContentPane().add(new Sidebar());		
 	}
 	
 	public MainFrame(){
 		super("Main Frame");
+		//Set the minimized size
+		setSize(400,400);
 		setNativeLookAndFeel();
 		setExtendedState(getExtendedState()|JFrame.MAXIMIZED_BOTH);
 		setVisible(true);
