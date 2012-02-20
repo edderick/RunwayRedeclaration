@@ -26,8 +26,8 @@ public class MainFrame extends JFrame{
 	
 	public MainFrame(){
 		super("Main Frame");
-		setSize(400, 400);
 		setNativeLookAndFeel();
+		setExtendedState(getExtendedState()|JFrame.MAXIMIZED_BOTH);
 		setVisible(true);
 	}
 	
