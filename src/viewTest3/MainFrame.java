@@ -17,6 +17,13 @@ public class MainFrame extends JFrame{
 		a.setLeftComponent(new JPanel());	
 		b.setTopComponent(new JPanel());
 		b.setBottomComponent(new JPanel());
+		
+		//hackedy hack :D
+		mf.setVisible(true);
+		
+		a.setDividerLocation(0.5);
+		b.setDividerLocation(0.5);
+	
 	}
 	
 	public MainFrame(){
