@@ -1,0 +1,6 @@
+@startuml img/classDiagram.png
+
+Airport "1" *-- "many" Runway
+Runway "1" o-- "1" Obstacle
+
+@enduml
