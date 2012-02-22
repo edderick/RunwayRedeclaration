@@ -5,6 +5,7 @@ public class Runway {
 	private String name;
 	private int TORA, ASDA, TODA, LDA;
 	
+	//Constructor
 	public Runway(String n, int tora, int asda, int toda, int lda){
 		name = n;
 		TORA = tora;
@@ -14,6 +15,7 @@ public class Runway {
 		
 	}
 	
+	//Getters and Setters
 	public String getName() {
 		return name;
 	}
