@@ -6,7 +6,7 @@ import javax.xml.transform.dom.*;
 import javax.xml.transform.stream.*;
 import org.w3c.dom.*;
 
-//Creates XML file with an Airport's details
+//Creates XML document with an Airport's details
 public class XMLFile {
 	
 	public XMLFile(Airport a) throws Exception {
