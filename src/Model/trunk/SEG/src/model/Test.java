@@ -6,7 +6,7 @@ public class Test {
 	
 	public static void main(String[] args) {
 		
-		Airport a = new Airport();
+		Airport a = new Airport("JFK");
 		Runway r = new Runway("one", 888, 999, 777, 666);
 		Runway r1 = new Runway("two", 88, 99, 77, 66);
 		Runway r2 = new Runway("three", 8884, 9994, 7774, 6664);
@@ -26,6 +26,8 @@ public class Test {
 		for (Object o : a.runways()) {
 			System.out.println(((Runway) o).getName() +" "+ ((Runway) o).getASDA() +" "+ ((Runway) o).getLDA() +" "+ ((Runway) o).getTODA() +" "+ ((Runway) o).getTORA());
 		}
+		
+		a.saveToXML();
 		
 	}
 

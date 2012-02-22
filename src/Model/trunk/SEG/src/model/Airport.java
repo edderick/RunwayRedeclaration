@@ -9,10 +9,16 @@ public class Airport {
 	
 	//List of runways
 	private ArrayList<Runway> runways;
+	private String name;
 	
 	//Constructor
-	public Airport(){
+	public Airport(String n){
 		runways = new ArrayList<Runway>();
+		name = n;
+	}
+	
+	public String getName(){
+		return name;
 	}
 	
 	//Method to add runway to the list
@@ -35,6 +41,16 @@ public class Airport {
 	//Method that returns the whole list of runways
 	public ArrayList runways(){
 		return runways;
+	}
+	
+	public void saveToXML(){
+		
+		try {
+			XMLFile f = new XMLFile(this);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 }
