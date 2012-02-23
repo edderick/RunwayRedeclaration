@@ -1,7 +1,9 @@
 package model;
 
-import java.io.StringWriter;
 import java.io.*;
+
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.parsers.*;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.*;
@@ -11,17 +13,23 @@ import org.w3c.dom.*;
 //Creates XML document with an Airport's details
 public class XMLFile {
 
+	File file;
+	
 	public XMLFile(Airport a) throws Exception {
 
 		int no = a.runways().size();
-		String root = a.getName();
-		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory
-				.newInstance();
-		DocumentBuilder documentBuilder = documentBuilderFactory
-				.newDocumentBuilder();
+		String root = "Airport";//a.getName();
+		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 		Document document = documentBuilder.newDocument();
 		Element rootElement = document.createElement(root);
 		document.appendChild(rootElement);
+		
+		//First element, the airport's name
+		Element airportName = document.createElement("AirportName"/* element */);
+		airportName.appendChild(document.createTextNode(a.getName()));
+		rootElement.appendChild(airportName);
+		
 		for (int i = 0; i < no; i++) {
 			Runway r = (Runway) a.runways().get(i);
 
@@ -54,12 +62,31 @@ public class XMLFile {
 			rootElement.appendChild(em);
 		}
 		
-		File file = new File("xmlTest.xml");
+		
+		JFileChooser fc = new JFileChooser();
+		int returnVal = fc.showSaveDialog(null);
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+            file = fc.getSelectedFile();
+            //This is where a real application would open the file.
+            //log.append("Opening: " + file.getName() + "." + newline);
+        } else {
+            System.out.println("Open command cancelled by user.");
+        }
+		//File file = new File("xmlTest.xml");
+		//File file = fc.getSelectedFile();
+		//FileWriter fw = new FileWriter(file);
+		//fw.write(contents);
+		
+		
+		/*JFileChooser filesave = new JFileChooser();
+        FileFilter filter = new FileNameExtensionFilter("Text file", "txt");
+        filesave.addChoosableFileFilter(filter);
+        int ret = filesave.showSaveDialog(null);*/
 
-		TransformerFactory transformerFactory = TransformerFactory
-				.newInstance();
+		TransformerFactory transformerFactory = TransformerFactory.newInstance();
 		Transformer transformer = transformerFactory.newTransformer();
 		transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+		
 		
 		StreamResult result = new StreamResult(file/*new StringWriter()*//*System.out*/);//initialize w/ file object to save to file
 		file.createNewFile();

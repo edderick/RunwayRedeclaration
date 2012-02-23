@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<JFK>
+<Airport>
+<AirportName>JFK</AirportName>
 <Runway>
 <Name>two</Name>
 <TORA>88</TORA>
@@ -21,4 +22,4 @@
 <TODA>77567</TODA>
 <LDA>65666</LDA>
 </Runway>
-</JFK>
+</Airport>
