@@ -29,6 +29,10 @@ public class Test {
 		
 		a.saveToXML();
 		
+		/*
+		XMLFile x = new XMLFile();
+		System.out.println(x.loadAirport());
+		*/
 	}
 
 }

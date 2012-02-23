@@ -56,7 +56,9 @@ public class Runway {
 		LDA = lDA;
 	}
 
-	
+	public String toString(){
+		return "Runway Name: "+name+"\n"+"TORA: "+TORA+"    ASDA: "+ASDA+"\nTODA: "+TODA+"    LDA: "+LDA;
+	}
 	
 	
 	

@@ -41,14 +41,22 @@ public class Airport {
 		return runways;
 	}
 	
-	public void saveToXML(){
+	public String toString(){
+		String s = "Airport name: " + name +"\n";
 		
+		for(int i=0; i < runways.size(); i++){
+			s += runways.get(i) + "\n";
+		}
+		
+		return s;
+	}
+	
+	public void saveToXML(){
 		try {
 			XMLFile f = new XMLFile(this);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
 
 }

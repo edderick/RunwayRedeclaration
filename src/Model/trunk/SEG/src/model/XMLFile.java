@@ -9,30 +9,28 @@ import javax.xml.transform.*;
 import javax.xml.transform.dom.*;
 import javax.xml.transform.stream.*;
 import org.w3c.dom.*;
+import org.xml.sax.SAXException;
 
 //Creates XML document with an Airport's details
 public class XMLFile {
 
 	Document document;
 	File file;
-	Airport airport;
 
-	public XMLFile(Airport a){
-
-		this.airport = a;
-		//int no = a.runways().size();
-		//String root = "Airport"; // a.getName(); //<- replaced by the FINAL value in Airport Class
-		
-		createDocument();
-
-		createAirportDOMTree();
-		
-		fileSaving();
+	public XMLFile() {
 
 	}
 
-	private void createDocument() {
-		
+	public XMLFile(Airport a) {
+		createXMLFile();
+		createAirportDOMTree(a);
+		fileSaving();
+
+		// loadDocument();
+	}
+
+	private void createXMLFile() {
+
 		/*
 		 * DocumentBuilderFactory documentBuilderFactory =
 		 * DocumentBuilderFactory.newInstance(); DocumentBuilder documentBuilder
@@ -50,18 +48,23 @@ public class XMLFile {
 
 		} catch (ParserConfigurationException pce) {
 			// dump it
-			System.out.println("Error while trying to instantiate DocumentBuilder " + pce);
+			System.out
+					.println("Error while trying to instantiate DocumentBuilder "
+							+ pce);
 			System.exit(1);
 		}
 	}
 
-	private void createAirportDOMTree(){
-		
+	private void createAirportDOMTree(Airport airport) {
+
 		int no = airport.runways().size();
-		
-		Element rootElement = document.createElement("Airport"/*airport.getName()*/);
+		// String root = "Airport"; // a.getName(); //<- replaced by the FINAL
+		// value in Airport Class
+
+		Element rootElement = document
+				.createElement("Airport"/* airport.getName() */);
 		document.appendChild(rootElement);
-		
+
 		// First element, the airport's name
 		Element airportName = document.createElement("AirportName"/* element */);
 		airportName.appendChild(document.createTextNode(airport.getName()));
@@ -99,8 +102,8 @@ public class XMLFile {
 			rootElement.appendChild(em);
 		}
 	}
-	
-	private void fileSaving(){
+
+	private void fileSaving() {
 		JFileChooser fc = new JFileChooser();
 		int returnVal = fc.showSaveDialog(null);
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -128,8 +131,11 @@ public class XMLFile {
 		try {
 			transformer = transformerFactory.newTransformer();
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-			StreamResult result = new StreamResult(file/* new StringWriter() / System.out*/);
-			                                       // initialize w/ file object to save to file
+			StreamResult result = new StreamResult(file/*
+														 * new StringWriter() /
+														 * System.out
+														 */);
+			// initialize w/ file object to save to file
 			file.createNewFile();
 			DOMSource source = new DOMSource(document);
 			transformer.transform(source, result);
@@ -153,5 +159,103 @@ public class XMLFile {
 		 * TransformerFactory.newInstance().newTransformer();
 		 * transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 		 */
+	}
+
+	private void loadXMLFile() {
+		JFileChooser fc = new JFileChooser();
+		class MyFilter extends javax.swing.filechooser.FileFilter {
+			public boolean accept(File file) {
+				String filename = file.getName();
+				return filename.endsWith(".xml");
+			}
+
+			public String getDescription() {
+				return "*.xml";
+			}
+		}
+		fc.addChoosableFileFilter(new MyFilter());
+		int returnVal = fc.showSaveDialog(null);
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			file = fc.getSelectedFile();
+
+			// get the factory
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+
+			try {
+				// Using factory get an instance of document builder
+				DocumentBuilder db = dbf.newDocumentBuilder();
+
+				// parse using builder to get DOM representation of the XML file
+				// System.out.println(file.getName());
+				document = db.parse(file.getAbsoluteFile());
+
+			} catch (ParserConfigurationException pce) {
+				pce.printStackTrace();
+			} catch (SAXException se) {
+				se.printStackTrace();
+			} catch (IOException ioe) {
+				ioe.printStackTrace();
+			}
+		} else {
+			System.out.println("Open command cancelled by user.");
+		}
+	}
+
+	public Airport loadAirport() {
+		loadXMLFile();
+		
+		// get the root element
+		Element docEle = document.getDocumentElement();
+		Airport airport = null;
+		try {
+			airport = new Airport(getStringValue(docEle, "AirportName"));
+			// get a nodelist of elements
+			NodeList nl = docEle.getElementsByTagName("Runway");
+			if (nl != null && nl.getLength() > 0) {
+				for (int i = 0; i < nl.getLength(); i++) {
+
+					// get the runway element
+					Element el = (Element) nl.item(i);
+
+					// get the runway object
+					Runway r = getRunway(el);
+
+					// add it to list
+					airport.addRunway(r);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return airport;
+	}
+
+	private Runway getRunway(Element empEl) {
+
+		// for each <Runway> element get text or int values
+		String name = getStringValue(empEl, "Name");
+		int tora = getIntValue(empEl, "TORA");
+		int asda = getIntValue(empEl, "ASDA");
+		int toda = getIntValue(empEl, "TODA");
+		int lda = getIntValue(empEl, "LDA");
+
+		// Create a new runway with the value read from the xml nodes
+		Runway r = new Runway(name, tora, asda, toda, lda);
+		
+		return r;
+	}
+
+	private String getStringValue(Element ele, String tagName) {
+		String textVal = null;
+		NodeList nl = ele.getElementsByTagName(tagName);
+		if (nl != null && nl.getLength() > 0) {
+			Element el = (Element) nl.item(0);
+			textVal = el.getFirstChild().getNodeValue();
+		}
+		return textVal;
+	}
+
+	private int getIntValue(Element ele, String tagName) {
+		return Integer.parseInt(getStringValue(ele, tagName));
 	}
 }
