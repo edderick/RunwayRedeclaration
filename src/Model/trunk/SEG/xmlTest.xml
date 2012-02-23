@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<JFK>
+<Runway>
+<Name>two</Name>
+<TORA>88</TORA>
+<ASDA>99</ASDA>
+<TODA>77</TODA>
+<LDA>66</LDA>
+</Runway>
+<Runway>
+<Name>three</Name>
+<TORA>8884</TORA>
+<ASDA>9994</ASDA>
+<TODA>7774</TODA>
+<LDA>6664</LDA>
+</Runway>
+<Runway>
+<Name>four</Name>
+<TORA>88568</TORA>
+<ASDA>95699</ASDA>
+<TODA>77567</TODA>
+<LDA>65666</LDA>
+</Runway>
+</JFK>
