@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+
+
 public class Airport {
 	
 	//List of runways
@@ -41,22 +43,14 @@ public class Airport {
 		return runways;
 	}
 	
-	public String toString(){
-		String s = "Airport name: " + name +"\n";
-		
-		for(int i=0; i < runways.size(); i++){
-			s += runways.get(i) + "\n";
-		}
-		
-		return s;
-	}
-	
 	public void saveToXML(){
+		
 		try {
-			XMLFile f = new XMLFile(this);
+			SaveToXMLFile f = new SaveToXMLFile(this);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 	}
 
 }
