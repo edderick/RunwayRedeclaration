@@ -1,6 +1,16 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
 
 public class AddressBook {
 
@@ -69,8 +79,48 @@ public class AddressBook {
 		}
 	}
 	
-	public void sendEmails(ArrayList<Contact> recipients, RunwayWithObstacle rwo){
-		//Waiting for implementation
+	public static void sendEmails(ArrayList<Contact> recipients, String to, String subject, String text){
+		String host = "smtp.gmail.com";
+	    String from = "abc";     //username
+	    String pass = "abcxyz"; //password
+	    Properties props = System.getProperties();
+	    props.put("mail.smtp.starttls.enable", "true");
+	    props.put("mail.smtp.host", host);
+	    props.put("mail.smtp.user", from);
+	    props.put("mail.smtp.password", pass);
+	    props.put("mail.smtp.port", "587");
+	    props.put("mail.smtp.auth", "true");
+
+	    Session session = Session.getDefaultInstance(props, null);
+	    MimeMessage message = new MimeMessage(session);
+	    try {
+			message.setFrom(new InternetAddress(from));
+			InternetAddress[] toAddress = new InternetAddress[recipients.size()];
+
+		    // To get the array of addresses
+		    for( int i=0; i < recipients.size(); i++ ) {
+		        toAddress[i] = new InternetAddress(recipients.get(i).getEmail());
+		    }
+		    System.out.println(Message.RecipientType.TO);
+
+		    for( int i=0; i < toAddress.length; i++) {
+		        message.addRecipient(Message.RecipientType.TO, toAddress[i]);
+		    }
+		    message.setSubject(subject);
+		    message.setText(text);
+		    Transport transport = session.getTransport("smtp");
+		    transport.connect(host, from, pass);
+		    transport.sendMessage(message, message.getAllRecipients());
+		    transport.close();
+			
+		} catch (AddressException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 }
