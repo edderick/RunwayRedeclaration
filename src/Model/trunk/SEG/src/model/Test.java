@@ -8,10 +8,10 @@ public class Test {
 		
 		//create airport and 4 runways
 		Airport a = new Airport("Gatwick");
-		Runway r = new Runway("one", 888, 999, 777, 666);
-		Runway r1 = new Runway("two", 88, 99, 77, 66);
-		Runway r2 = new Runway("three", 8884, 9994, 7774, 6664);
-		Runway r3 = new Runway("four", 88568, 95699, 77567, 65666);
+		Runway r = new Runway("one", 888, 999, 777, 666, 0);
+		Runway r1 = new Runway("two", 88, 99, 77, 66, 306);
+		Runway r2 = new Runway("three", 8884, 9994, 7774, 6664, 0);
+		Runway r3 = new Runway("four", 88568, 95699, 77567, 65666, 307);
 		
 		//add runways to airport
 		a.addRunway(r);

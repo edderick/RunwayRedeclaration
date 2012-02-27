@@ -3,16 +3,16 @@ package model;
 public class Runway {
 
 	private String name;
-	private int TORA, ASDA, TODA, LDA;
+	private int TORA, ASDA, TODA, LDA, displacedThreshold;
 	
 	//Constructor
-	public Runway(String n, int tora, int asda, int toda, int lda){
+	public Runway(String n, int tora, int asda, int toda, int lda, int disThres){
 		name = n;
 		TORA = tora;
 		ASDA = asda;
 		TODA = toda;
 		LDA = lda;
-		
+		displacedThreshold = disThres;
 	}
 	
 	//Getters and Setters
@@ -54,6 +54,14 @@ public class Runway {
 
 	public void setLDA(int lDA) {
 		LDA = lDA;
+	}
+
+	public int getDisplacedThreshold() {
+		return displacedThreshold;
+	}
+
+	public void setDisplacedThreshold(int displacedThreshold) {
+		this.displacedThreshold = displacedThreshold;
 	}
 
 	

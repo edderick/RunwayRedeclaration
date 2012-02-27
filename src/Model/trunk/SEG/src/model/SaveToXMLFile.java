@@ -62,6 +62,11 @@ public class SaveToXMLFile {
 			String ld = Integer.toString(r.getLDA());
 			lda.appendChild(document.createTextNode(ld));
 			em.appendChild(lda);
+			
+			Element displacedThreshold = document.createElement("DisplacedThreshold");
+			String dt = Integer.toString(r.getDisplacedThreshold());
+			displacedThreshold.appendChild(document.createTextNode(dt));
+			em.appendChild(displacedThreshold);
 
 			rootElement.appendChild(em);
 		}

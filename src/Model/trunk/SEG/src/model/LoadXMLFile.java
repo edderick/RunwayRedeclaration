@@ -60,8 +60,9 @@ public class LoadXMLFile {
 					int asda = Integer.parseInt(getTagValue("ASDA", eElement));
 					int toda = Integer.parseInt(getTagValue("TODA", eElement));
 					int lda = Integer.parseInt(getTagValue("LDA", eElement));
+					int dt = Integer.parseInt(getTagValue("DisplacedThreshold", eElement));
 
-					Runway r = new Runway(name, tora, asda, toda, lda);
+					Runway r = new Runway(name, tora, asda, toda, lda, dt);
 					arpt.addRunway(r);
 				}
 			}
