@@ -22,17 +22,17 @@ public class RunwayWithObstacle {
 		reset();
 		this.obstacle = obstacle;
 		this.distanceAwayFromThreshold = distanceAwayFromThreshold;
-		
+
 		calculateParameters();
 	}
-	
-	public void removeObstacleAndReset(){
+
+	public void removeObstacleAndReset() {
 		obstacle = null;
 		distanceAwayFromThreshold = 0;
 		reset();
 	}
-	
-	private void reset(){
+
+	private void reset() {
 		angleOfSlope = 50;
 		REZA = 240;
 		stopway = 60;
@@ -46,8 +46,8 @@ public class RunwayWithObstacle {
 		LDAtoOb = 0;
 		LDAoverOb = 0;
 	}
-	
-	private void calculateParameters(){
+
+	private void calculateParameters() {
 		TORAtoOb = calTORAtoOb();
 		TORAawayOb = calTORAawayOb();
 		ASDAtoOb = calASDAtoOb();
@@ -89,7 +89,7 @@ public class RunwayWithObstacle {
 	public void setStopway(double stopway) {
 		this.stopway = stopway;
 	}
-	
+
 	public double getBlastAllowance() {
 		return blastAllowance;
 	}
@@ -139,8 +139,8 @@ public class RunwayWithObstacle {
 	}
 
 	private double calLDAtoOb() {
-		return runway.getLDA() - distanceAwayFromThreshold - REZA - stopway;
-		/*- runway.getDisplacedThreshold()*/
+		return runway.getLDA() - runway.getDisplacedThreshold()
+				- distanceAwayFromThreshold - REZA - stopway;
 	}
 
 	private double calLDAoverOb() {
@@ -149,35 +149,36 @@ public class RunwayWithObstacle {
 	}
 
 	private double calTORAawayOb() {
-		return runway.getTORA() - distanceAwayFromThreshold - blastAllowance;
-		/*- runway.getDisplacedThreshold()*/
+		return runway.getTORA() - distanceAwayFromThreshold - blastAllowance
+				- -runway.getDisplacedThreshold();
 	}
 
 	private double calTORAtoOb() {
 		return runway.getTORA() - distanceAwayFromThreshold
-				- (obstacle.getHeight() * angleOfSlope) - stopway;
-		/*- runway.getDisplacedThreshold()*/
+				- (obstacle.getHeight() * angleOfSlope) - stopway
+				- runway.getDisplacedThreshold();
 	}
-	
+
 	private double calASDAawayOb() {
-		return runway.getASDA() - distanceAwayFromThreshold - blastAllowance;
-		/*- runway.getDisplacedThreshold()*/
+		return runway.getASDA() - distanceAwayFromThreshold - blastAllowance
+				- -runway.getDisplacedThreshold();
 	}
 
 	private double calASDAtoOb() {
 		return runway.getASDA() - distanceAwayFromThreshold
-				- (obstacle.getHeight() * angleOfSlope) - stopway;
-		/*- runway.getDisplacedThreshold()*/
+				- (obstacle.getHeight() * angleOfSlope) - stopway
+				- runway.getDisplacedThreshold();
+
 	}
-	
+
 	private double calTODAawayOb() {
-		return runway.getTODA() - distanceAwayFromThreshold - blastAllowance;
-		/*- runway.getDisplacedThreshold()*/
+		return runway.getTODA() - distanceAwayFromThreshold - blastAllowance
+				- runway.getDisplacedThreshold();
 	}
 
 	private double calTODAtoOb() {
 		return runway.getTODA() - distanceAwayFromThreshold
-				- (obstacle.getHeight() * angleOfSlope) - stopway;
-		/*- runway.getDisplacedThreshold()*/
+				- (obstacle.getHeight() * angleOfSlope) - stopway
+				- runway.getDisplacedThreshold();
 	}
 }
