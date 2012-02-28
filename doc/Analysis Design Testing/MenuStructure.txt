@@ -1,0 +1,42 @@
+File
+   New
+      Airport (will bring up Edit runway PU)
+      Obstacle (will bring up Edit obstacle PU)
+   Open Airport (will bring up sys dialogue & when OK, select runway PU)
+   Open recent Airport
+      <list of recent airports>
+   Open Obstacle (will bring up sys dislogue & when OK, Position obstacle PU)
+   Open recent Obstacle
+      <list of recent obstacles>
+   Save Airport
+   Save Obstacle
+   Exit
+Edit
+   Runway
+   Select runway (from airport)
+   (maybe a line seperater here?)
+   Airport
+   (maybe a line seperater here?)
+   Obstacle   
+View
+   Panel1
+      Top View*
+      Side View*
+      Calculation breakdowns*
+      None*
+   Panel2
+      Top View*
+      Side View*
+      Calculation breakdowns*
+      None*
+Order Food
+Tools
+   Email
+   Address book
+
+^ = brings up pop up
+* = radio ticks
+
+Notes
+Edit runway PU will allow you to edit the name of the airport, name and values of all the runways on the airport, add/delete runway icons
+Would be nice to have undo/redo options in Edit.
