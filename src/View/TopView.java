@@ -13,7 +13,7 @@ public class TopView extends JPanel {
 	final int tagBorder = 10;
 	
 	//this value determines how much of the width of the panel the runway takes up.
-	final double ratio = 0.2;
+	final double ratio = 0.75;
 	
 	
 	int TORA;
@@ -80,6 +80,7 @@ public class TopView extends JPanel {
 		g2d.rotate(-0.5 * Math.PI,  xRunway + tagBorder, yRunway+(height/4));
 		g2d.rotate(-0.5 * Math.PI,  xRunway + width - tagBorder, yRunway+(3*(height/4)));
 		g2d.drawString(rightTag, xRunway+ width - tagBorder, yRunway+(3*(height/4)));
+		g2d.rotate(0.5 * Math.PI,  xRunway + width - tagBorder, yRunway+(3*(height/4)));
 		
 		
 		
@@ -88,8 +89,10 @@ public class TopView extends JPanel {
 	public void obstacleCreation(Graphics2D g2d){
 		g2d.setColor(Color.RED);
 		int pWidth = this.getWidth();
+		int r = (int) ((ratio*pWidth)/runwayWidth);
 			
-		g2d.fillRect(100, 100, obstacleLength, obstacleWidth);
+		g2d.fillRect((r*xObstacle)+xRunway, (r*yObstacle)+yRunway, r*obstacleLength, r*obstacleWidth);
+		
 	}
 	
 	public void setRunwayDimensions(int width, int height, String left, String right){
