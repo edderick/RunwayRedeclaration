@@ -17,7 +17,8 @@ Edit
    (maybe a line seperater here?)
    Airport
    (maybe a line seperater here?)
-   Obstacle   
+   Obstacle 
+   Position Obstacle  
 View
    Panel1
       Top View*
