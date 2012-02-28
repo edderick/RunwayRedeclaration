@@ -21,62 +21,49 @@ public class Menubar extends JMenuBar {
     public Menubar(){
         super();
     
-        createMenus();
         createMenuItems();    
        
     }
 
-    private void createMenus(){
-        menuMap = new HashMap<String,JMenu>();
-
-		//Might be neater to implement this as file.toString()	
-	
-		JMenu file = new JMenu("File");
-        add(file);
-        menuMap.put("File", file);
-
-		JMenu edit = new JMenu("Edit");
-        add(edit);
-		menuMap.put("Edit", edit);
-
-        JMenu windows = new JMenu("Windows");
-        add(windows);
-		menuMap.put("Windows", windows);
-    }
 
 	public JMenu getMenu(String name){
 		return menuMap.get(name);
 	}
-		
+	
+
+	private void createMenu(String text, String parent){
+		JMenu m = new JMenu(text);
+		JMenu p = getMenu(parent);
+		if (p == null){
+			add(m);
+			menuMap.put(text, m);
+		}
+		else{
+			p.add(m);
+			menuMap.put(parent + "_" + text, m);
+		}
+	}
+
+	private void createMenuItem(String text, String parent){
+		JMenuItem mi = new JMenuItem(text);
+		getMenu(parent).add(mi);
+		menuItemMap.put(parent + "_" + text,mi);
+	}
+
 
     private void createMenuItems(){
-        menuItemMap = new HashMap<String, JMenuItem>();
+		menuItemMap = new HashMap<String, JMenuItem>();
 		checkBoxMenuItemMap = new HashMap<String, JCheckBoxMenuItem>();
+		menuMap = new HashMap<String,JMenu>();
 
-		JMenuItem exit = new JMenuItem("Exit");
-        getMenu("File").add(exit);
-		menuItemMap.put("Exit", exit);
-
-	
-		JCheckBoxMenuItem sideBar = new JCheckBoxMenuItem("Side Bar", true);
-		getMenu("Windows").add(sideBar);
-		checkBoxMenuItemMap.put("Side Bar", sideBar);
-
-		JCheckBoxMenuItem sideView = new JCheckBoxMenuItem("Side View", true);
-		getMenu("Windows").add(sideView);
-		checkBoxMenuItemMap.put("Side View", sideView);
-
-		JCheckBoxMenuItem topView = new JCheckBoxMenuItem("Top View", true);
-		getMenu("Windows").add(topView);
-		checkBoxMenuItemMap.put("Top View", topView);
-
-		getMenu("Windows").addSeparator();
-
-		JMenuItem reset = new JMenuItem("Reset");
-		getMenu("Windows").add(reset);
-		menuItemMap.put("Reset", reset);
-
-    }
+		createMenu("File", null);	
+		createMenu("New", "File");	
+		createMenuItem("Airport", "File_New");
+		createMenuItem("Obstacle", "File_New");
+		createMenuItem("Open Airport", "File");
+		createMenuItem("Open Recent Airport", "File");
+		createMenuItem("Open Obstacle", "File");
+	}
 
 	public JMenuItem getMenuItem(String name){
 		return menuItemMap.get(name);
@@ -86,3 +73,4 @@ public class Menubar extends JMenuBar {
 		return checkBoxMenuItemMap.get(name);
 	}
 }
+
