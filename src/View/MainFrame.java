@@ -9,7 +9,8 @@ public class MainFrame extends JFrame{
 	public static void main(String[] args){
 		MainFrame mf = new MainFrame();
 		
-		
+		mf.setJMenuBar(new Menubar());
+
 		JSplitPane b = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
 		JSplitPane a = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 		
