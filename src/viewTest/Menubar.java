@@ -2,8 +2,10 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JRadioButtonMenuItem;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.ButtonGroup;
 
 public class Menubar extends JMenuBar {
     
@@ -16,13 +18,10 @@ public class Menubar extends JMenuBar {
 
 	private Map<String,JMenu> menuMap;
 	private Map<String,JMenuItem> menuItemMap;
-	private Map<String,JCheckBoxMenuItem> checkBoxMenuItemMap;
 
     public Menubar(){
         super();
-    
         createMenuItems();    
-       
     }
 
 
@@ -50,10 +49,16 @@ public class Menubar extends JMenuBar {
 		menuItemMap.put(parent + "_" + text,mi);
 	}
 
+	private void createRadioButtonMenuItem(String text, String parent, ButtonGroup bg){
+		JRadioButtonMenuItem mi = new JRadioButtonMenuItem(text);
+		getMenu(parent).add(mi);
+		menuItemMap.put(parent + "_" + text,mi);
+		bg.add(mi);
+	}
+
 
     private void createMenuItems(){
 		menuItemMap = new HashMap<String, JMenuItem>();
-		checkBoxMenuItemMap = new HashMap<String, JCheckBoxMenuItem>();
 		menuMap = new HashMap<String,JMenu>();
 
 		createMenu("File", null);	
@@ -63,14 +68,44 @@ public class Menubar extends JMenuBar {
 		createMenuItem("Open Airport", "File");
 		createMenuItem("Open Recent Airport", "File");
 		createMenuItem("Open Obstacle", "File");
+		createMenuItem("Open Recent Obstacle", "File");
+		createMenuItem("Save Airport", "File");
+		createMenuItem("Save Obstacle", "File");
+		createMenuItem("Exit", "File");
+
+		createMenu("Edit", null);
+		createMenuItem("Select Runway", "Edit");
+		createMenuItem("Runway", "Edit");
+		createMenuItem("Airport", "Edit");
+		createMenuItem("Obstacle", "Edit");
+		createMenuItem("Obstacle Position", "Edit");
+		
+		createMenu("View", null);
+		createMenu("Top Panel", "View");
+		createMenu("Bottom Panel", "View");
+		
+		ButtonGroup bg1 = new ButtonGroup();
+		createRadioButtonMenuItem("Top View", "View_Top Panel", bg1);
+		createRadioButtonMenuItem("Side View", "View_Top Panel", bg1);
+		createRadioButtonMenuItem("Calculations", "View_Top Panel", bg1);
+		createRadioButtonMenuItem("None", "View_Top Panel", bg1);
+		
+		ButtonGroup bg2 = new ButtonGroup();
+		createRadioButtonMenuItem("Top View", "View_Bottom Panel", bg2);
+		createRadioButtonMenuItem("Side View", "View_Bottom Panel", bg2);
+		createRadioButtonMenuItem("Calculations", "View_Bottom Panel", bg2);
+		createRadioButtonMenuItem("None", "View_Bottom Panel", bg2);
+
+		createMenu("Order Food", null);
+		createMenuItem("Sorbet", "Order Food");
+
+		createMenu("Tools", null);
+		createMenuItem("Email", "Tools");
+		createMenuItem("Address Book", "Tools");
 	}
 
 	public JMenuItem getMenuItem(String name){
 		return menuItemMap.get(name);
-	}
-
-	public JCheckBoxMenuItem getCheckBoxMenuItem(String name){
-		return checkBoxMenuItemMap.get(name);
 	}
 }
 
