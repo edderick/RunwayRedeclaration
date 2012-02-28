@@ -21,7 +21,7 @@ public class MainFrame extends JFrame{
 		
 		TopView tv = new TopView();
 		tv.setRunwayDimensions(100, 20, "08L", "27R");
-		tv.setValues(0, 0, 0, 0, true, 50, 10, 10, 10);
+		tv.setValues(80, 5, 40, 0, 73, 2, 15, 50, true, 76, 3, 9, 4);
 	
 		b.setTopComponent(tv);
 		b.setBottomComponent(new JPanel());
@@ -46,5 +46,4 @@ public class MainFrame extends JFrame{
 	}
 	
 	
-
 }
