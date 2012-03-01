@@ -7,6 +7,45 @@ import javax.mail.internet.*;
 public class Test2 {
 	
 	public static void main(String[] args) throws Exception {
+		Airport a = new Airport("Heathrow");
+		PhysicalRunway pr1, pr2;
+		
+		Runway r1_1, r1_2;
+		Runway r2_1, r2_2;
+		r1_1 = new Runway("09L", 3902, 3902, 3902, 3595, 306);
+		r1_2 = new Runway("27R", 3884, 3962, 3884, 3884, 0);
+		pr1 = new PhysicalRunway("09L-27R", r1_1, r1_2);
+		
+		r2_1 = new Runway("09R", 3658, 3658, 3658, 3353, 307);
+		r2_2 = new Runway("27L", 3658, 3658, 3658, 3658, 0);
+		pr2 = new PhysicalRunway("09R-27L", r2_1, r2_2);
+		a.addPhysicalRunway(pr1);
+		a.addPhysicalRunway(pr2);
+		
+		Obstacle ob = new Obstacle("Boeing 777", "Aeroplane", "Big", 25, 75, 80);
+		
+		PhysicalRunway copyOfpr1 = (PhysicalRunway) a.runways().get(0);
+	    copyOfpr1.placeNewObstacle(ob, 500, copyOfpr1.getB().getName());
+	    
+	    Runway one, two;
+	    one = copyOfpr1.getA();
+	    two = copyOfpr1.getB();
+	    
+	    System.out.println("Original data:");
+	    System.out.println("Physical Runway Name: "+copyOfpr1.getId());
+	    System.out.println("Runway: "+one.getName());
+	    System.out.println("Original TORA: "+one.getTODA(0)+"    New TORA: "+one.getTORA(1));
+	    System.out.println("Original ASDA: "+one.getASDA(0)+"    New ASDA: "+one.getASDA(1));
+	    System.out.println("Original TODA: "+one.getTODA(0)+"    New TODA: "+one.getTODA(1));
+	    System.out.println("Original LDA : "+one.getLDA(0)+"    New LDA: "+one.getLDA(1));
+	    
+	    System.out.println("Runway: "+two.getName());
+	    System.out.println("Original TORA: "+two.getTODA(0)+"    New TORA: "+two.getTORA(1));
+	    System.out.println("Original ASDA: "+two.getASDA(0)+"    New ASDA: "+two.getASDA(1));
+	    System.out.println("Original TODA: "+two.getTODA(0)+"    New TODA: "+two.getTODA(1));
+	    System.out.println("Original LDA : "+two.getLDA(0)+"    New LDA: "+two.getLDA(1));
+		
+		/*
 		String host = "smtp.gmail.com";
 	    String from = "kelvin.ycchan";
 	    String pass = "YNWAjft96";
@@ -41,6 +80,7 @@ public class Test2 {
 	    transport.connect(host, from, pass);
 	    transport.sendMessage(message, message.getAllRecipients());
 	    transport.close();
+	    */
 	}
 
 }

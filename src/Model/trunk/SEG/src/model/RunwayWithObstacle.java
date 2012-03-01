@@ -2,6 +2,7 @@ package model;
 
 public class RunwayWithObstacle {
 
+	/*
 	private Runway runway; // With left and right end?
 	private Obstacle obstacle;
 	private double distanceAwayFromThreshold, REZA, stopway, blastAllowance; // In meter
@@ -150,7 +151,7 @@ public class RunwayWithObstacle {
 
 	private double calTORAawayOb() {
 		return runway.getTORA() - distanceAwayFromThreshold - blastAllowance
-				- -runway.getDisplacedThreshold();
+				- runway.getDisplacedThreshold();
 	}
 
 	private double calTORAtoOb() {
@@ -168,7 +169,6 @@ public class RunwayWithObstacle {
 		return runway.getASDA() - distanceAwayFromThreshold
 				- (obstacle.getHeight() * angleOfSlope) - stopway
 				- runway.getDisplacedThreshold();
-
 	}
 
 	private double calTODAawayOb() {
@@ -181,4 +181,5 @@ public class RunwayWithObstacle {
 				- (obstacle.getHeight() * angleOfSlope) - stopway
 				- runway.getDisplacedThreshold();
 	}
+	*/
 }
