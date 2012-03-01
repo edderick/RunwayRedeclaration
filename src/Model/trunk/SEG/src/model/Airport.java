@@ -8,12 +8,12 @@ import java.util.Iterator;
 public class Airport {
 	
 	//List of runways
-	private ArrayList<Runway> runways;
+	private ArrayList<PhysicalRunway> runways;
 	private String name;
 	
 	//Constructor
 	public Airport(String n){
-		runways = new ArrayList<Runway>();
+		runways = new ArrayList<PhysicalRunway>();
 		name = n;
 	}
 	
@@ -22,17 +22,17 @@ public class Airport {
 	}
 	
 	//Method to add runway to the list
-	public void addRunway(Runway r){
+	public void addPhysicalRunway(PhysicalRunway r){
 		runways.add(r);
 	}
 	
 	//Method to remove runway from the list
-	public void removeRunway(String n){
+	public void removePhysicalRunway(String id){
 		
 		for (Iterator i = runways.iterator(); i.hasNext(); ) {
 		    Object element = i.next();
 
-		    if (((Runway) element).getName() == n) {
+		    if (((PhysicalRunway) element).getId() == id) {
 		        i.remove();
 		    }
 		}
