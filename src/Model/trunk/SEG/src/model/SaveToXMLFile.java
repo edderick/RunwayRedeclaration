@@ -19,8 +19,10 @@ public class SaveToXMLFile {
 	
 	public SaveToXMLFile(Airport a) throws Exception {
 
-		int no = a.runways().size();
-		String root = "Airport";//a.getName();
+		int no = a.runways().size(); //number of physical runways
+		
+		
+		String root = "Airport";
 		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 		Document document = documentBuilder.newDocument();
@@ -28,12 +30,23 @@ public class SaveToXMLFile {
 		document.appendChild(rootElement);
 		
 		//First element, the airport's name
-		Element airportName = document.createElement("AirportName"/* element */);
+		Element airportName = document.createElement("AirportName");
 		airportName.appendChild(document.createTextNode(a.getName()));
 		rootElement.appendChild(airportName);
 		
-		for (int i = 0; i < no; i++) {
-			Runway r = (Runway) a.runways().get(i);
+		
+		for (int j = 0; j < no; j++) { // looping through all physical runways
+			
+			Element physicalRunway = document.createElement("PhysicalRunway");
+			String nam = ((PhysicalRunway) a.runways().get(j)).getId();//name of physical runway
+			//physicalRunway.appendChild(document.createTextNode(nam));
+			
+			Element prName = document.createElement("Name");
+			prName.appendChild(document.createTextNode(nam));
+			physicalRunway.appendChild(prName);
+		
+		for (int i = 0; i < 2; i++) { // looping through each actual runway (2 only)
+			Runway r = (Runway) a.runways().get(j).getRunway(i);//getting a runway
 
 			//Creating runway element and appending to root element
 			Element em = document.createElement("Runway");
@@ -44,38 +57,40 @@ public class SaveToXMLFile {
 			em.appendChild(name);
 
 			Element tora = document.createElement("TORA");
-			String to = Integer.toString(r.getTORA());
+			String to = Integer.toString(r.getTORA(1));//getting the tora value that can be modified
 			tora.appendChild(document.createTextNode(to));
 			em.appendChild(tora);
 
 			Element asda = document.createElement("ASDA");
-			String as = Integer.toString(r.getASDA());
+			String as = Integer.toString(r.getASDA(1));
 			asda.appendChild(document.createTextNode(as));
 			em.appendChild(asda);
 
 			Element toda = document.createElement("TODA");
-			String tod = Integer.toString(r.getTODA());
+			String tod = Integer.toString(r.getTODA(1));
 			toda.appendChild(document.createTextNode(tod));
 			em.appendChild(toda);
 
 			Element lda = document.createElement("LDA");
-			String ld = Integer.toString(r.getLDA());
+			String ld = Integer.toString(r.getLDA(1));
 			lda.appendChild(document.createTextNode(ld));
 			em.appendChild(lda);
 			
 			Element displacedThreshold = document.createElement("DisplacedThreshold");
-			String dt = Integer.toString(r.getDisplacedThreshold());
+			String dt = Integer.toString(r.getDisplacedThreshold(1));
 			displacedThreshold.appendChild(document.createTextNode(dt));
 			em.appendChild(displacedThreshold);
 
-			rootElement.appendChild(em);
-		}
+			physicalRunway.appendChild(em);
+			//rootElement.appendChild(em);
+		}//end of loop
+		
+		rootElement.appendChild(physicalRunway);
+		}//end of loop
 		
 		//Creating JFileChooser object and storing its return value
 		JFileChooser fc = new JFileChooser();
-		//XMLFileFilter ff = new XMLFileFilter();
-		//fc.setFileFilter(ff);
-		//fc.setFileHidingEnabled(false);//show hidden files
+		
 		int returnVal = fc.showSaveDialog(null);
 		
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
