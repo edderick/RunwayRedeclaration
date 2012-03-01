@@ -5,13 +5,16 @@ public class Obstacle {
 	private String name;
 	private String type; // Aircraft ; Vehicle ; etc...
 	private String sizeType; // Small ; Medium ; Large
-	private double height;
+	private double height, width, length;
 
-	public Obstacle(String name, String type, String sizeType, double height) {
+	public Obstacle(String name, String type, String sizeType, double height,
+			double width, double length) {
 		this.name = name;
 		this.type = type;
 		this.sizeType = sizeType;
 		this.height = height;
+		this.width = width;
+		this.length = length;
 	}
 
 	public String getName() {
@@ -44,6 +47,22 @@ public class Obstacle {
 
 	public void setHeight(double height) {
 		this.height = height;
+	}
+	
+	public double getWidth() {
+		return width;
+	}
+
+	public void setWidth(double width) {
+		this.width = width;
+	}
+
+	public double getLength() {
+		return length;
+	}
+
+	public void setLength(double length) {
+		this.length = length;
 	}
 
 }
