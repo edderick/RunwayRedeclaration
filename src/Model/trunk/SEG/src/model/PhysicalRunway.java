@@ -2,9 +2,11 @@ package model;
 
 public class PhysicalRunway {
 
-	Runway a, b;
+	private String id;
+	private Runway a, b;
 	
-	public PhysicalRunway(Runway one, Runway two){	
+	public PhysicalRunway(String identifier, Runway one, Runway two){	
+		id = identifier;
 		a = one;
 		b = two;
 	}
@@ -25,6 +27,13 @@ public class PhysicalRunway {
 		this.b = b;
 	}
 	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 	
 	
 }
