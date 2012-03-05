@@ -45,8 +45,6 @@ public class TopView extends JPanel {
 	int xObstacle;
 	int yObstacle;
 	
-	
-	
 		
 	public TopView(){
 		super();
