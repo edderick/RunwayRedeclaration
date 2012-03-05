@@ -54,6 +54,9 @@ public class TopView extends JPanel {
 		this.setBackground(Color.WHITE);
 		setVisible(true);
 			
+		setRunwayDimensions(0, 0, "", "");
+		setValues(0, 0, 0, 0, 0, 0, 0, 0, true, 0, 0, 0, 0);
+		
 	}
 	
 	public void paint (Graphics g){
