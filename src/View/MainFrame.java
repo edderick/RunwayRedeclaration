@@ -7,6 +7,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JSplitPane;
 import javax.swing.JMenuBar;
 import javax.swing.JLabel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -45,6 +48,23 @@ public class MainFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public MainFrame() {
+		
+		try {
+		    UIManager.setLookAndFeel(
+		        UIManager.getSystemLookAndFeelClassName());
+		} catch (UnsupportedLookAndFeelException ex) {
+		  System.out.println("Unable to load native look and feel");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 636, 524);
 		
@@ -131,10 +151,10 @@ public class MainFrame extends JFrame {
 		tv.setValues(80, 5, 40, 0, 73, 2, 15, 50, true, 76, 3, 9, 4);
 		splitPane_1.setLeftComponent(tv);
 		
-		TopView topView = new TopView();
-		topView.setRunwayDimensions(100, 20, "08L", "27R");
-		topView.setValues(80, 5, 40, 0, 73, 2, 15, 50, true, 76, 3, 9, 4);
-		splitPane_1.setRightComponent(topView);
+		SideView sideView = new SideView();
+		sideView.setRunwayDimensions(80);
+		sideView.setValues(80, 5, 40, 0, 73, 2, 15, 50, true, 76, 3, 9);
+		splitPane_1.setRightComponent(sideView);
 		
 		
 		
