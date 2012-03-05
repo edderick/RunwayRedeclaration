@@ -31,6 +31,15 @@ public class MainFrame extends JFrame{
 		
 		a.setDividerLocation(0.5);
 		b.setDividerLocation(0.5);
+		
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		tv.setValues(40, 10, 20, 0, 25, 6, 10, 25, true, 32, 5, 4, 2);
+		tv.repaint();
 	
 	}
 	
