@@ -20,6 +20,11 @@ import javax.swing.border.TitledBorder;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.awt.FlowLayout;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JSeparator;
+import javax.swing.JRadioButtonMenuItem;
+import javax.swing.ButtonGroup;
 
 
 public class MainFrame extends JFrame {
@@ -28,6 +33,8 @@ public class MainFrame extends JFrame {
 	private JTable OriginalParametersTable;
 	private JTable RedeclaredParametersTable;
 	private JTable ObstacleDetailsTable;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private final ButtonGroup buttonGroup_1 = new ButtonGroup();
 
 	/**
 	 * Launch the application.
@@ -69,8 +76,134 @@ public class MainFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 636, 524);
 		
-		JMenuBar menuBar = new Menubar();
+		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
+		
+		JMenu mnFile = new JMenu("File");
+		menuBar.add(mnFile);
+		
+		JMenu mnAirport = new JMenu("New");
+		mnAirport.setMnemonic('n');
+		mnFile.add(mnAirport);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Airport");
+		mnAirport.add(mntmNewMenuItem);
+		
+		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Obstacle");
+		mnAirport.add(mntmNewMenuItem_1);
+		
+		JMenu mnNewMenu = new JMenu("Open");
+		mnFile.add(mnNewMenu);
+		
+		JMenuItem mntmAirport = new JMenuItem("Airport");
+		mnNewMenu.add(mntmAirport);
+		
+		JMenuItem mntmObstacle = new JMenuItem("Obstacle");
+		mnNewMenu.add(mntmObstacle);
+		
+		JMenu mnOpenRecent = new JMenu("Open Recent");
+		mnFile.add(mnOpenRecent);
+		
+		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Airport");
+		mnOpenRecent.add(mntmNewMenuItem_2);
+		
+		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Obstacle");
+		mnOpenRecent.add(mntmNewMenuItem_3);
+		
+		JMenu mnSave = new JMenu("Save");
+		mnFile.add(mnSave);
+		
+		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Airport");
+		mnSave.add(mntmNewMenuItem_4);
+		
+		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Obstacle");
+		mnSave.add(mntmNewMenuItem_5);
+		
+		JSeparator separator_1 = new JSeparator();
+		mnFile.add(separator_1);
+		
+		JMenuItem mntmExit = new JMenuItem("Exit");
+		mnFile.add(mntmExit);
+		
+		JMenu mnEdit = new JMenu("Edit");
+		menuBar.add(mnEdit);
+		
+		JMenuItem mntmNewMenuItem_6 = new JMenuItem("Runway");
+		mnEdit.add(mntmNewMenuItem_6);
+		
+		JMenuItem mntmAirport_1 = new JMenuItem("Airport");
+		mnEdit.add(mntmAirport_1);
+		
+		JMenuItem mntmNewMenuItem_7 = new JMenuItem("Obstacle");
+		mnEdit.add(mntmNewMenuItem_7);
+		
+		JSeparator separator = new JSeparator();
+		mnEdit.add(separator);
+		
+		JMenuItem mntmSelectRunway = new JMenuItem("Select Runway");
+		mnEdit.add(mntmSelectRunway);
+		
+		JMenuItem mntmPositionObstacle = new JMenuItem("Position Obstacle");
+		mnEdit.add(mntmPositionObstacle);
+		
+		JMenu mnView = new JMenu("View");
+		menuBar.add(mnView);
+		
+		JMenu mnTopPanel = new JMenu("Top Panel");
+		mnView.add(mnTopPanel);
+		
+		JRadioButtonMenuItem rdbtnmntmNewRadioItem = new JRadioButtonMenuItem("Top View");
+		buttonGroup.add(rdbtnmntmNewRadioItem);
+		mnTopPanel.add(rdbtnmntmNewRadioItem);
+		
+		JRadioButtonMenuItem rdbtnmntmNewRadioItem_1 = new JRadioButtonMenuItem("Side View");
+		buttonGroup.add(rdbtnmntmNewRadioItem_1);
+		mnTopPanel.add(rdbtnmntmNewRadioItem_1);
+		
+		JRadioButtonMenuItem rdbtnmntmNewRadioItem_2 = new JRadioButtonMenuItem("Calculations");
+		buttonGroup.add(rdbtnmntmNewRadioItem_2);
+		mnTopPanel.add(rdbtnmntmNewRadioItem_2);
+		
+		JRadioButtonMenuItem rdbtnmntmNewRadioItem_3 = new JRadioButtonMenuItem("None");
+		buttonGroup.add(rdbtnmntmNewRadioItem_3);
+		mnTopPanel.add(rdbtnmntmNewRadioItem_3);
+		
+		JMenu mnNewMenu_1 = new JMenu("Bottom Panel");
+		mnView.add(mnNewMenu_1);
+		
+		JRadioButtonMenuItem rdbtnmntmTopView = new JRadioButtonMenuItem("Top View");
+		buttonGroup_1.add(rdbtnmntmTopView);
+		mnNewMenu_1.add(rdbtnmntmTopView);
+		
+		JRadioButtonMenuItem rdbtnmntmSideView = new JRadioButtonMenuItem("Side View");
+		buttonGroup_1.add(rdbtnmntmSideView);
+		mnNewMenu_1.add(rdbtnmntmSideView);
+		
+		JRadioButtonMenuItem rdbtnmntmCalculations = new JRadioButtonMenuItem("Calculations");
+		buttonGroup_1.add(rdbtnmntmCalculations);
+		mnNewMenu_1.add(rdbtnmntmCalculations);
+		
+		JRadioButtonMenuItem rdbtnmntmNone = new JRadioButtonMenuItem("None");
+		buttonGroup_1.add(rdbtnmntmNone);
+		mnNewMenu_1.add(rdbtnmntmNone);
+		
+		JMenu mnEmail = new JMenu("Email");
+		menuBar.add(mnEmail);
+		
+		JMenuItem mntmSendEmail = new JMenuItem("Send email");
+		mnEmail.add(mntmSendEmail);
+		
+		JMenuItem mntmAddressBook = new JMenuItem("Address book");
+		mnEmail.add(mntmAddressBook);
+		
+		JMenu mnHelp = new JMenu("Help");
+		menuBar.add(mnHelp);
+		
+		JMenuItem mntmShowHelp = new JMenuItem("Show help");
+		mnHelp.add(mntmShowHelp);
+		
+		JMenuItem mntmAbout = new JMenuItem("About ");
+		mnHelp.add(mntmAbout);
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
