@@ -19,6 +19,7 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.border.TitledBorder;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import java.awt.FlowLayout;
 
 
 public class MainFrame extends JFrame {
@@ -73,20 +74,16 @@ public class MainFrame extends JFrame {
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-		
-		JSplitPane mainSplitPane = new JSplitPane();
-		mainSplitPane.setResizeWeight(0.25);
-		contentPane.add(mainSplitPane, BorderLayout.CENTER);
+		contentPane.setLayout(new MigLayout("", "[270px][grow]", "[grow]"));
 		
 		JPanel leftPanel = new JPanel();
-		mainSplitPane.setLeftComponent(leftPanel);
-		leftPanel.setLayout(new MigLayout("", "[grow]", "[grow]"));
+		contentPane.add(leftPanel, "cell 0 0,alignx center,aligny top");
+		leftPanel.setLayout(new MigLayout("", "[275px,grow]", "[][][][grow]"));
 		
 		JPanel leftTopPanel = new JPanel();
 		leftTopPanel.setBorder(new TitledBorder(null, "Original Parameters", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		leftPanel.add(leftTopPanel, "flowy,cell 0 0,grow");
+		leftPanel.add(leftTopPanel, "cell 0 0,grow");
 		leftTopPanel.setLayout(new BorderLayout(0, 0));
 		
 		OriginalParametersTable = new JTable();
@@ -101,11 +98,11 @@ public class MainFrame extends JFrame {
 				"New column", "New column"
 			}
 		));
-		leftTopPanel.add(OriginalParametersTable);
+		leftTopPanel.add(OriginalParametersTable, BorderLayout.CENTER);
 		
 		JPanel leftMiddlePanel = new JPanel();
 		leftMiddlePanel.setBorder(new TitledBorder(null, "Redeclared Parameters", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		leftPanel.add(leftMiddlePanel, "cell 0 0,grow");
+		leftPanel.add(leftMiddlePanel, "cell 0 1,grow");
 		leftMiddlePanel.setLayout(new BorderLayout(0, 0));
 		
 		RedeclaredParametersTable = new JTable();
@@ -124,7 +121,7 @@ public class MainFrame extends JFrame {
 		
 		JPanel letBottomPanel = new JPanel();
 		letBottomPanel.setBorder(new TitledBorder(null, "Obstacle Details", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		leftPanel.add(letBottomPanel, "flowy,cell 0 0,grow");
+		leftPanel.add(letBottomPanel, "cell 0 2,grow");
 		letBottomPanel.setLayout(new BorderLayout(0, 0));
 		
 		ObstacleDetailsTable = new JTable();
@@ -142,9 +139,9 @@ public class MainFrame extends JFrame {
 		letBottomPanel.add(ObstacleDetailsTable);
 		
 		JSplitPane rightSplitPane = new JSplitPane();
+		contentPane.add(rightSplitPane, "cell 1 0,grow");
 		rightSplitPane.setResizeWeight(0.5);
 		rightSplitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
-		mainSplitPane.setRightComponent(rightSplitPane);
 		
 		TopView topView = new TopView();
 		topView.setRunwayDimensions(100, 20, "08L", "27R");
