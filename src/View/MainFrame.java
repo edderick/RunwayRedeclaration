@@ -24,9 +24,9 @@ import javax.swing.table.DefaultTableModel;
 public class MainFrame extends JFrame {
 
 	private JPanel contentPane;
-	private JTable table;
-	private JTable table_1;
-	private JTable table_2;
+	private JTable OriginalParametersTable;
+	private JTable RedeclaredParametersTable;
+	private JTable ObstacleDetailsTable;
 
 	/**
 	 * Launch the application.
@@ -76,21 +76,21 @@ public class MainFrame extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
-		JSplitPane splitPane = new JSplitPane();
-		splitPane.setResizeWeight(0.25);
-		contentPane.add(splitPane, BorderLayout.CENTER);
+		JSplitPane mainSplitPane = new JSplitPane();
+		mainSplitPane.setResizeWeight(0.25);
+		contentPane.add(mainSplitPane, BorderLayout.CENTER);
 		
-		JPanel panel = new JPanel();
-		splitPane.setLeftComponent(panel);
-		panel.setLayout(new MigLayout("", "[grow]", "[grow]"));
+		JPanel leftPanel = new JPanel();
+		mainSplitPane.setLeftComponent(leftPanel);
+		leftPanel.setLayout(new MigLayout("", "[grow]", "[grow]"));
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new TitledBorder(null, "Original Parameters", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.add(panel_1, "flowy,cell 0 0,grow");
-		panel_1.setLayout(new BorderLayout(0, 0));
+		JPanel leftTopPanel = new JPanel();
+		leftTopPanel.setBorder(new TitledBorder(null, "Original Parameters", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		leftPanel.add(leftTopPanel, "flowy,cell 0 0,grow");
+		leftTopPanel.setLayout(new BorderLayout(0, 0));
 		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
+		OriginalParametersTable = new JTable();
+		OriginalParametersTable.setModel(new DefaultTableModel(
 			new Object[][] {
 				{"TORA", "3884m"},
 				{"TODA", "3962m"},
@@ -101,15 +101,15 @@ public class MainFrame extends JFrame {
 				"New column", "New column"
 			}
 		));
-		panel_1.add(table);
+		leftTopPanel.add(OriginalParametersTable);
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBorder(new TitledBorder(null, "Redeclared Parameters", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.add(panel_2, "cell 0 0,grow");
-		panel_2.setLayout(new BorderLayout(0, 0));
+		JPanel leftMiddlePanel = new JPanel();
+		leftMiddlePanel.setBorder(new TitledBorder(null, "Redeclared Parameters", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		leftPanel.add(leftMiddlePanel, "cell 0 0,grow");
+		leftMiddlePanel.setLayout(new BorderLayout(0, 0));
 		
-		table_1 = new JTable();
-		table_1.setModel(new DefaultTableModel(
+		RedeclaredParametersTable = new JTable();
+		RedeclaredParametersTable.setModel(new DefaultTableModel(
 			new Object[][] {
 				{"TORA(R)", "3884m"},
 				{"TODA(R)", "3962m"},
@@ -120,15 +120,15 @@ public class MainFrame extends JFrame {
 				"New column", "New column"
 			}
 		));
-		panel_2.add(table_1, BorderLayout.CENTER);
+		leftMiddlePanel.add(RedeclaredParametersTable, BorderLayout.CENTER);
 		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBorder(new TitledBorder(null, "Obstacle Details", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.add(panel_3, "flowy,cell 0 0,grow");
-		panel_3.setLayout(new BorderLayout(0, 0));
+		JPanel letBottomPanel = new JPanel();
+		letBottomPanel.setBorder(new TitledBorder(null, "Obstacle Details", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		leftPanel.add(letBottomPanel, "flowy,cell 0 0,grow");
+		letBottomPanel.setLayout(new BorderLayout(0, 0));
 		
-		table_2 = new JTable();
-		table_2.setModel(new DefaultTableModel(
+		ObstacleDetailsTable = new JTable();
+		ObstacleDetailsTable.setModel(new DefaultTableModel(
 			new Object[][] {
 				{"Height", "48m"},
 				{"Distance from Threshold", "73m"},
@@ -139,22 +139,22 @@ public class MainFrame extends JFrame {
 				"New column", "New column"
 			}
 		));
-		panel_3.add(table_2);
+		letBottomPanel.add(ObstacleDetailsTable);
 		
-		JSplitPane splitPane_1 = new JSplitPane();
-		splitPane_1.setResizeWeight(0.5);
-		splitPane_1.setOrientation(JSplitPane.VERTICAL_SPLIT);
-		splitPane.setRightComponent(splitPane_1);
+		JSplitPane rightSplitPane = new JSplitPane();
+		rightSplitPane.setResizeWeight(0.5);
+		rightSplitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
+		mainSplitPane.setRightComponent(rightSplitPane);
 		
-		TopView tv = new TopView();
-		tv.setRunwayDimensions(100, 20, "08L", "27R");
-		tv.setValues(80, 5, 40, 0, 73, 2, 15, 50, true, 76, 3, 9, 4);
-		splitPane_1.setLeftComponent(tv);
+		TopView topView = new TopView();
+		topView.setRunwayDimensions(100, 20, "08L", "27R");
+		topView.setValues(80, 5, 40, 0, 73, 2, 15, 50, true, 76, 3, 9, 4);
+		rightSplitPane.setLeftComponent(topView);
 		
 		SideView sideView = new SideView();
 		sideView.setRunwayDimensions(80);
 		sideView.setValues(80, 5, 40, 0, 73, 2, 15, 50, true, 76, 3, 9);
-		splitPane_1.setRightComponent(sideView);
+		rightSplitPane.setRightComponent(sideView);
 		
 		
 		
