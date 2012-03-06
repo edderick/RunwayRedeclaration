@@ -33,8 +33,8 @@ public class MainFrame extends JFrame {
 	private JTable OriginalParametersTable;
 	private JTable RedeclaredParametersTable;
 	private JTable ObstacleDetailsTable;
-	private final ButtonGroup buttonGroup = new ButtonGroup();
-	private final ButtonGroup buttonGroup_1 = new ButtonGroup();
+	private final ButtonGroup topPanelButtonGroup = new ButtonGroup();
+	private final ButtonGroup bottomPanelButtonGroup = new ButtonGroup();
 
 	/**
 	 * Launch the application.
@@ -153,38 +153,38 @@ public class MainFrame extends JFrame {
 		mnView.add(mnTopPanel);
 		
 		JRadioButtonMenuItem rdbtnmntmNewRadioItem = new JRadioButtonMenuItem("Top View");
-		buttonGroup.add(rdbtnmntmNewRadioItem);
+		topPanelButtonGroup.add(rdbtnmntmNewRadioItem);
 		mnTopPanel.add(rdbtnmntmNewRadioItem);
 		
 		JRadioButtonMenuItem rdbtnmntmNewRadioItem_1 = new JRadioButtonMenuItem("Side View");
-		buttonGroup.add(rdbtnmntmNewRadioItem_1);
+		topPanelButtonGroup.add(rdbtnmntmNewRadioItem_1);
 		mnTopPanel.add(rdbtnmntmNewRadioItem_1);
 		
 		JRadioButtonMenuItem rdbtnmntmNewRadioItem_2 = new JRadioButtonMenuItem("Calculations");
-		buttonGroup.add(rdbtnmntmNewRadioItem_2);
+		topPanelButtonGroup.add(rdbtnmntmNewRadioItem_2);
 		mnTopPanel.add(rdbtnmntmNewRadioItem_2);
 		
 		JRadioButtonMenuItem rdbtnmntmNewRadioItem_3 = new JRadioButtonMenuItem("None");
-		buttonGroup.add(rdbtnmntmNewRadioItem_3);
+		topPanelButtonGroup.add(rdbtnmntmNewRadioItem_3);
 		mnTopPanel.add(rdbtnmntmNewRadioItem_3);
 		
 		JMenu mnNewMenu_1 = new JMenu("Bottom Panel");
 		mnView.add(mnNewMenu_1);
 		
 		JRadioButtonMenuItem rdbtnmntmTopView = new JRadioButtonMenuItem("Top View");
-		buttonGroup_1.add(rdbtnmntmTopView);
+		bottomPanelButtonGroup.add(rdbtnmntmTopView);
 		mnNewMenu_1.add(rdbtnmntmTopView);
 		
 		JRadioButtonMenuItem rdbtnmntmSideView = new JRadioButtonMenuItem("Side View");
-		buttonGroup_1.add(rdbtnmntmSideView);
+		bottomPanelButtonGroup.add(rdbtnmntmSideView);
 		mnNewMenu_1.add(rdbtnmntmSideView);
 		
 		JRadioButtonMenuItem rdbtnmntmCalculations = new JRadioButtonMenuItem("Calculations");
-		buttonGroup_1.add(rdbtnmntmCalculations);
+		bottomPanelButtonGroup.add(rdbtnmntmCalculations);
 		mnNewMenu_1.add(rdbtnmntmCalculations);
 		
 		JRadioButtonMenuItem rdbtnmntmNone = new JRadioButtonMenuItem("None");
-		buttonGroup_1.add(rdbtnmntmNone);
+		bottomPanelButtonGroup.add(rdbtnmntmNone);
 		mnNewMenu_1.add(rdbtnmntmNone);
 		
 		JMenu mnEmail = new JMenu("Email");
