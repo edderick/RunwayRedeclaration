@@ -1,26 +1,32 @@
-import java.awt.BorderLayout;
+package GUIBuilderTest;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JList;
-import net.miginfocom.swing.MigLayout;
-import javax.swing.JTextField;
 import javax.swing.JLabel;
-import javax.swing.AbstractListModel;
+import java.awt.BorderLayout;
+import javax.swing.BoxLayout;
+import java.awt.Font;
+import javax.swing.JTabbedPane;
+import javax.swing.JPanel;
 import javax.swing.JButton;
+import java.awt.Window.Type;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import javax.swing.JTextField;
+import javax.swing.JList;
+import javax.swing.AbstractListModel;
+import java.awt.Component;
+import javax.swing.Box;
+import javax.swing.JSeparator;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.border.BevelBorder;
+import javax.swing.ListSelectionModel;
 
+public class PoppingUp {
 
-public class EditAirportFrame extends JFrame {
-
-	private JPanel contentPane;
-	private JTextField textField;
-	private JButton btnNewButton;
-	private JButton btnNewButton_1;
+	private JFrame frmEditAirport;
+	private JTextField txtLondonHeathrow;
 
 	/**
 	 * Launch the application.
@@ -29,8 +35,8 @@ public class EditAirportFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EditAirportFrame frame = new EditAirportFrame();
-					frame.setVisible(true);
+					PoppingUp window = new PoppingUp();
+					window.frmEditAirport.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -39,28 +45,36 @@ public class EditAirportFrame extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Create the application.
 	 */
-	public EditAirportFrame() {
-		setTitle("Edit Airport");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 222, 236);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[grow][]", "[][][grow][][260px]"));
+	public PoppingUp() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frmEditAirport = new JFrame();
+		frmEditAirport.setResizable(false);
+		frmEditAirport.setTitle("Edit airport");
+		frmEditAirport.setType(Type.POPUP);
+		frmEditAirport.setBounds(100, 100, 352, 300);
+		frmEditAirport.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmEditAirport.getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Name");
-		contentPane.add(lblNewLabel, "flowx,cell 0 1 2 1");
-		
-		textField = new JTextField();
-		contentPane.add(textField, "cell 0 1");
-		textField.setColumns(10);
+		txtLondonHeathrow = new JTextField();
+		txtLondonHeathrow.setEditable(false);
+		txtLondonHeathrow.setText("London Heathrow");
+		txtLondonHeathrow.setToolTipText("Double click to edit the name of this airport");
+		txtLondonHeathrow.setBounds(10, 11, 151, 20);
+		frmEditAirport.getContentPane().add(txtLondonHeathrow);
+		txtLondonHeathrow.setColumns(10);
 		
 		JList list = new JList();
-		list.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.setModel(new AbstractListModel() {
-			String[] values = new String[] {"09L", "27R", "09R", "27L"};
+			String[] values = new String[] {"09L/27R", "27L/09R"};
 			public int getSize() {
 				return values.length;
 			}
@@ -68,21 +82,41 @@ public class EditAirportFrame extends JFrame {
 				return values[index];
 			}
 		});
-		contentPane.add(list, "cell 0 3 2 1,grow");
+		list.setSelectedIndex(0);
+		list.setBounds(20, 42, 141, 202);
+		frmEditAirport.getContentPane().add(list);
 		
-		btnNewButton = new JButton("Apply");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		JButton btnEdit = new JButton("Edit");
+		btnEdit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("I just had sex");
 			}
 		});
-		contentPane.add(btnNewButton, "flowx,cell 1 4");
+		btnEdit.setBounds(185, 76, 131, 23);
+		frmEditAirport.getContentPane().add(btnEdit);
 		
-		btnNewButton_1 = new JButton("Cancel");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		contentPane.add(btnNewButton_1, "cell 1 4");
+		JButton btnNewRunway = new JButton("New Runway");
+		btnNewRunway.setBounds(185, 42, 131, 23);
+		frmEditAirport.getContentPane().add(btnNewRunway);
+		
+		JButton btnDelete = new JButton("Delete");
+		btnDelete.setBounds(185, 120, 131, 23);
+		frmEditAirport.getContentPane().add(btnDelete);
+		
+		JButton btnOk = new JButton("OK");
+		btnOk.setBounds(185, 178, 131, 23);
+		frmEditAirport.getContentPane().add(btnOk);
+		
+		JButton btnCancel = new JButton("Cancel");
+		btnCancel.setBounds(185, 212, 131, 23);
+		frmEditAirport.getContentPane().add(btnCancel);
+		
+		JSeparator separator = new JSeparator();
+		separator.setBounds(195, 110, 121, 11);
+		frmEditAirport.getContentPane().add(separator);
+		
+		JSeparator separator_1 = new JSeparator();
+		separator_1.setBounds(195, 154, 121, 11);
+		frmEditAirport.getContentPane().add(separator_1);
 	}
-
 }
