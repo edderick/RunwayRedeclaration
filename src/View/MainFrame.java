@@ -260,13 +260,14 @@ public class MainFrame extends JFrame {
 		ObstacleDetailsTable = new JTable();
 		ObstacleDetailsTable.setModel(new DefaultTableModel(
 			new Object[][] {
+				{"Type", "747"},
 				{"Height", "48m"},
 				{"Distance from Threshold", "73m"},
 				{"Engine Blast Allowance", "10m"},
 				{"Angle of Slope", "1:50"},
 			},
 			new String[] {
-				"New column", "New column"
+				"Property", "Value"
 			}
 		));
 		letBottomPanel.add(ObstacleDetailsTable);

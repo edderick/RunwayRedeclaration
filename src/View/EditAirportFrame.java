@@ -1,5 +1,3 @@
-package GUIBuilderTest;
-
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -10,7 +8,6 @@ import java.awt.Font;
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
 import javax.swing.JButton;
-import java.awt.Window.Type;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import javax.swing.JTextField;
@@ -23,7 +20,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ListSelectionModel;
 
-public class PoppingUp {
+public class EditAirportFrame {
 
 	private JFrame frmEditAirport;
 	private JTextField txtLondonHeathrow;
@@ -35,7 +32,7 @@ public class PoppingUp {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PoppingUp window = new PoppingUp();
+					EditAirportFrame window = new EditAirportFrame();
 					window.frmEditAirport.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -47,7 +44,7 @@ public class PoppingUp {
 	/**
 	 * Create the application.
 	 */
-	public PoppingUp() {
+	public EditAirportFrame() {
 		initialize();
 	}
 
@@ -58,7 +55,7 @@ public class PoppingUp {
 		frmEditAirport = new JFrame();
 		frmEditAirport.setResizable(false);
 		frmEditAirport.setTitle("Edit airport");
-		frmEditAirport.setType(Type.POPUP);
+		//frmEditAirport.setType(Type.POPUP);
 		frmEditAirport.setBounds(100, 100, 352, 300);
 		frmEditAirport.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmEditAirport.getContentPane().setLayout(null);
@@ -100,6 +97,11 @@ public class PoppingUp {
 		frmEditAirport.getContentPane().add(btnNewRunway);
 		
 		JButton btnDelete = new JButton("Delete");
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("And it felt so good!");
+			}
+		});
 		btnDelete.setBounds(185, 120, 131, 23);
 		frmEditAirport.getContentPane().add(btnDelete);
 		

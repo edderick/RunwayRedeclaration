@@ -106,7 +106,7 @@ public class EditRunwayFrame extends JFrame {
 		
 		JComboBox comboBox = new JComboBox();
 		panel_1.add(comboBox, "cell 1 0,alignx left,aligny top,grow");
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"27R ", "09L", "27L", "09R"}));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"27R/09L", "09L/27R"}));
 		lblNewLabel.setLabelFor(comboBox);
 		
 		JPanel panel_2 = new JPanel();
