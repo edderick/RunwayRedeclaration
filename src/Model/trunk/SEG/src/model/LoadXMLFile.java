@@ -59,12 +59,12 @@ public class LoadXMLFile {
 
 					Element eElement = (Element) nNode;
 
-					String name = getTagValue("Name", eElement);
-					int tora = Integer.parseInt(getTagValue("TORA", eElement));
-					int asda = Integer.parseInt(getTagValue("ASDA", eElement));
-					int toda = Integer.parseInt(getTagValue("TODA", eElement));
-					int lda = Integer.parseInt(getTagValue("LDA", eElement));
-					int dt = Integer.parseInt(getTagValue("DisplacedThreshold", eElement));
+					String name = getTagValue("RunwayName", eElement);
+					double tora = Double.parseDouble(getTagValue("TORA", eElement));//Integer.parseInt(getTagValue("TORA", eElement));
+					double asda = Double.parseDouble(getTagValue("ASDA", eElement));
+					double toda = Double.parseDouble(getTagValue("TODA", eElement));
+					double lda = Double.parseDouble(getTagValue("LDA", eElement));
+					double dt = Double.parseDouble(getTagValue("DisplacedThreshold", eElement));
 
 					Runway r = new Runway(name, tora, asda, toda, lda, dt);
 					rways.add(r);//arpt.addRunway(r);
@@ -78,7 +78,7 @@ public class LoadXMLFile {
 
 					Element eElement = (Element) nNode;
 
-					String name = getTagValue("RunwayName", eElement);
+					String name = getTagValue("Name", eElement);
 					PhysicalRunway pr = new PhysicalRunway(name, rways.get(index), rways.get(index+1));
 					arpt.addPhysicalRunway(pr);
 					index = index + 2;
