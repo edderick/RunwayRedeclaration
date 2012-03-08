@@ -52,7 +52,7 @@ public class SaveToXMLFile {
 			Element em = document.createElement("Runway");
 
 			//Creating each of the runway's elements and appending to the runway element
-			Element name = document.createElement("Name");
+			Element name = document.createElement("RunwayName");
 			name.appendChild(document.createTextNode(r.getName()));
 			em.appendChild(name);
 
