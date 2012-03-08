@@ -7,7 +7,7 @@ import java.util.Iterator;
 //Airport
 public class Airport {
 	
-	//List of runways
+	//List of physical runways
 	private ArrayList<PhysicalRunway> runways;
 	private String name;
 	
@@ -39,7 +39,7 @@ public class Airport {
 	}
 	
 	//Method that returns the whole list of runways
-	public ArrayList runways(){
+	public ArrayList<PhysicalRunway> runways(){
 		return runways;
 	}
 	
