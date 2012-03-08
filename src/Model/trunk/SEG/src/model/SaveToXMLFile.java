@@ -57,27 +57,27 @@ public class SaveToXMLFile {
 			em.appendChild(name);
 
 			Element tora = document.createElement("TORA");
-			String to = Integer.toString(r.getTORA(1));//getting the tora value that can be modified
+			String to = Double.toString(r.getTORA(1));//getting the tora value that can be modified
 			tora.appendChild(document.createTextNode(to));
 			em.appendChild(tora);
 
 			Element asda = document.createElement("ASDA");
-			String as = Integer.toString(r.getASDA(1));
+			String as = Double.toString(r.getASDA(1));
 			asda.appendChild(document.createTextNode(as));
 			em.appendChild(asda);
 
 			Element toda = document.createElement("TODA");
-			String tod = Integer.toString(r.getTODA(1));
+			String tod = Double.toString(r.getTODA(1));
 			toda.appendChild(document.createTextNode(tod));
 			em.appendChild(toda);
 
 			Element lda = document.createElement("LDA");
-			String ld = Integer.toString(r.getLDA(1));
+			String ld = Double.toString(r.getLDA(1));
 			lda.appendChild(document.createTextNode(ld));
 			em.appendChild(lda);
 			
 			Element displacedThreshold = document.createElement("DisplacedThreshold");
-			String dt = Integer.toString(r.getDisplacedThreshold(1));
+			String dt = Double.toString(r.getDisplacedThreshold(1));
 			displacedThreshold.appendChild(document.createTextNode(dt));
 			em.appendChild(displacedThreshold);
 
