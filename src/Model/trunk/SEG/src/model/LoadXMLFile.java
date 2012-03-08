@@ -9,11 +9,14 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 import java.io.File;
+import java.util.ArrayList;
 
 public class LoadXMLFile {
 
 	File fXmlFile;
 	Airport arpt = null;
+	ArrayList<Runway> rways;
+	int index = 0; //used to iterate over rways
 
 	public LoadXMLFile() {
 		// this.loadFile();
@@ -21,6 +24,8 @@ public class LoadXMLFile {
 
 	public Airport loadFile() throws Exception {
 
+		rways = new ArrayList<Runway>();
+		
 		JFileChooser fc = new JFileChooser();
 		XMLFileFilter ff = new XMLFileFilter();
 		fc.setFileFilter(ff);
@@ -29,8 +34,7 @@ public class LoadXMLFile {
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			fXmlFile = fc.getSelectedFile();
 
-			DocumentBuilderFactory dbFactory = DocumentBuilderFactory
-					.newInstance();
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.parse(fXmlFile);
 			doc.getDocumentElement().normalize();
@@ -63,9 +67,26 @@ public class LoadXMLFile {
 					int dt = Integer.parseInt(getTagValue("DisplacedThreshold", eElement));
 
 					Runway r = new Runway(name, tora, asda, toda, lda, dt);
-					arpt.addRunway(r);
+					rways.add(r);//arpt.addRunway(r);
 				}
 			}
+			
+			NodeList physicalRun = doc.getElementsByTagName("PhysicalRunway");
+			for (int temp = 0; temp < physicalRun.getLength(); temp++){
+				Node nNode = physicalRun.item(temp);
+				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+
+					Element eElement = (Element) nNode;
+
+					String name = getTagValue("RunwayName", eElement);
+					PhysicalRunway pr = new PhysicalRunway(name, rways.get(index), rways.get(index+1));
+					arpt.addPhysicalRunway(pr);
+					index = index + 2;
+				}
+				
+				
+			}
+			
 		} else {
 			System.out.println("Open command cancelled by user.");
 		}
