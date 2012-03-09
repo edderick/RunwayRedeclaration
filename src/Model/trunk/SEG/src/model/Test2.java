@@ -31,7 +31,6 @@ public class Test2 {
 	    one = copyOfpr1.getA();
 	    two = copyOfpr1.getB();
 	    
-	    System.out.println("Original data:");
 	    System.out.println("Physical Runway Name: "+copyOfpr1.getId());
 	    System.out.println("Runway: "+one.getName());
 	    System.out.println("Original TORA: "+one.getTODA(0)+"    New TORA: "+one.getTORA(1));
@@ -44,7 +43,12 @@ public class Test2 {
 	    System.out.println("Original ASDA: "+two.getASDA(0)+"    New ASDA: "+two.getASDA(1));
 	    System.out.println("Original TODA: "+two.getTODA(0)+"    New TODA: "+two.getTODA(1));
 	    System.out.println("Original LDA : "+two.getLDA(0)+"    New LDA: "+two.getLDA(1));
+	    
+	    System.out.println();
+	    System.out.println(copyOfpr1.toCalculation(two.getName()));
 		
+	    System.out.println("Set angle of slope = 40");
+	    System.out.println("Set blast allowance = 400");
 	    copyOfpr1.setAngleOfSlope(40);
 	    copyOfpr1.setBlastAllowance(400);
 	    
@@ -55,6 +59,11 @@ public class Test2 {
 	    System.out.println("Original TODA: "+two.getTODA(0)+"    New TODA: "+two.getTODA(1));
 	    System.out.println("Original LDA : "+two.getLDA(0)+"    New LDA: "+two.getLDA(1));
 	    
+	    System.out.println();
+	    System.out.println(copyOfpr1.toCalculation(two.getName()));
+	    
+	    System.out.println();
+	    System.out.println("Reset parameters");
 	    copyOfpr1.defaultValues();
 	    
 	    System.out.println();
@@ -63,6 +72,9 @@ public class Test2 {
 	    System.out.println("Original ASDA: "+two.getASDA(0)+"    New ASDA: "+two.getASDA(1));
 	    System.out.println("Original TODA: "+two.getTODA(0)+"    New TODA: "+two.getTODA(1));
 	    System.out.println("Original LDA : "+two.getLDA(0)+"    New LDA: "+two.getLDA(1));
+	    
+	    System.out.println();
+	    System.out.println(copyOfpr1.toCalculation(two.getName()));
 	    
 		/*
 		String host = "smtp.gmail.com";
