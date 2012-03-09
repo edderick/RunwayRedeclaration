@@ -45,6 +45,25 @@ public class Test2 {
 	    System.out.println("Original TODA: "+two.getTODA(0)+"    New TODA: "+two.getTODA(1));
 	    System.out.println("Original LDA : "+two.getLDA(0)+"    New LDA: "+two.getLDA(1));
 		
+	    copyOfpr1.setAngleOfSlope(40);
+	    copyOfpr1.setBlastAllowance(400);
+	    
+	    System.out.println();
+	    System.out.println("Runway: "+two.getName());
+	    System.out.println("Original TORA: "+two.getTODA(0)+"    New TORA: "+two.getTORA(1));
+	    System.out.println("Original ASDA: "+two.getASDA(0)+"    New ASDA: "+two.getASDA(1));
+	    System.out.println("Original TODA: "+two.getTODA(0)+"    New TODA: "+two.getTODA(1));
+	    System.out.println("Original LDA : "+two.getLDA(0)+"    New LDA: "+two.getLDA(1));
+	    
+	    copyOfpr1.defaultValues();
+	    
+	    System.out.println();
+	    System.out.println("Runway: "+two.getName());
+	    System.out.println("Original TORA: "+two.getTODA(0)+"    New TORA: "+two.getTORA(1));
+	    System.out.println("Original ASDA: "+two.getASDA(0)+"    New ASDA: "+two.getASDA(1));
+	    System.out.println("Original TODA: "+two.getTODA(0)+"    New TODA: "+two.getTODA(1));
+	    System.out.println("Original LDA : "+two.getLDA(0)+"    New LDA: "+two.getLDA(1));
+	    
 		/*
 		String host = "smtp.gmail.com";
 	    String from = "kelvin.ycchan";

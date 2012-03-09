@@ -73,6 +73,11 @@ public class PhysicalRunway {
 		stopway = 60;
 		blastAllowance = 300;
 	}
+	
+	public void defaultValues(){
+		reset();
+		calculateParameters();
+	}
 
 	private void calculateParameters() {
 		calTORAtoOb();
@@ -91,6 +96,7 @@ public class PhysicalRunway {
 
 	public void setDistanceAwayFromThreshold(double distanceAwayFromThreshold) {
 		this.distanceAwayFromThreshold = distanceAwayFromThreshold;
+		calculateParameters();
 	}
 
 	public double getREZA() {
@@ -99,6 +105,7 @@ public class PhysicalRunway {
 
 	public void setREZA(double REZA) {
 		this.REZA = REZA;
+		calculateParameters();
 	}
 
 	public double getStopway() {
@@ -107,6 +114,7 @@ public class PhysicalRunway {
 
 	public void setStopway(double stopway) {
 		this.stopway = stopway;
+		calculateParameters();
 	}
 
 	public double getBlastAllowance() {
@@ -115,6 +123,7 @@ public class PhysicalRunway {
 
 	public void setBlastAllowance(double blastAllowance) {
 		this.blastAllowance = blastAllowance;
+		calculateParameters();
 	}
 
 	public double getAngleOfSlope() {
@@ -123,6 +132,7 @@ public class PhysicalRunway {
 
 	public void setAngleOfSlope(double angleOfSlope) {
 		this.angleOfSlope = angleOfSlope;
+		calculateParameters();
 	}
 	
 	private void calLDAtoOb() {
