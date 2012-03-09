@@ -8,8 +8,7 @@ public class PhysicalRunway {
 	
 	private double distanceAwayFromThreshold, REZA, stopway, blastAllowance; // In meter
 	private double angleOfSlope;
-	private Runway closeTo;
-	private Runway awayTo;
+	private boolean closeToA;
 	
 	public PhysicalRunway(String identifier, Runway one, Runway two){	
 		id = identifier;
@@ -52,11 +51,9 @@ public class PhysicalRunway {
 	
 	private void setCloserToWhichThreshold (String closeToRunwayName){
 		if(closeToRunwayName.compareTo(a.getName()) == 0){
-			closeTo = a;
-			awayTo = b;
+			closeToA = true;
 		}else{
-			closeTo = b;
-			awayTo = a;
+			closeToA = false;
 		}
 		calculateParameters();
 	}
@@ -136,43 +133,55 @@ public class PhysicalRunway {
 	}
 	
 	private void calLDAtoOb() {
+		Runway closeTo = closeToA? a : b;
+		Runway awayTo = closeToA? b : a;
 		awayTo.setLDA(1, awayTo.getLDA(0) - closeTo.getDisplacedThreshold(1)
 				- distanceAwayFromThreshold - REZA - stopway) ;
 	}
 
 	private void calLDAoverOb() {
+		Runway closeTo = closeToA? a : b;
 		closeTo.setLDA(1, closeTo.getLDA(0) - distanceAwayFromThreshold
 				- (obstacle.getHeight() * angleOfSlope) - stopway);
 	}
 
 	private void calTORAawayOb() {
+		Runway closeTo = closeToA? a : b;
 		closeTo.setTORA(1, closeTo.getTORA(0) - distanceAwayFromThreshold - blastAllowance
 				- closeTo.getDisplacedThreshold(1));
 	}
 
 	private void calTORAtoOb() {
+		Runway closeTo = closeToA? a : b;
+		Runway awayTo = closeToA? b : a;
 		awayTo.setTORA(1, awayTo.getTORA(0) - distanceAwayFromThreshold
 				- (obstacle.getHeight() * angleOfSlope) - stopway
 				- closeTo.getDisplacedThreshold(1));
 	}
 
 	private void calASDAawayOb() {
+		Runway closeTo = closeToA? a : b;
 		closeTo.setASDA(1, closeTo.getASDA(0) - distanceAwayFromThreshold - blastAllowance
 				- closeTo.getDisplacedThreshold(1));
 	}
 
 	private void calASDAtoOb() {
+		Runway closeTo = closeToA? a : b;
+		Runway awayTo = closeToA? b : a;
 		awayTo.setASDA(1, awayTo.getASDA(0) - distanceAwayFromThreshold
 				- (obstacle.getHeight() * angleOfSlope) - stopway
 				- closeTo.getDisplacedThreshold(1));
 	}
 
 	private void calTODAawayOb() {
+		Runway closeTo = closeToA? a : b;
 		closeTo.setTODA(1, closeTo.getTODA(0) - distanceAwayFromThreshold - blastAllowance
 				- closeTo.getDisplacedThreshold(1));
 	}
 
 	private void calTODAtoOb() {
+		Runway closeTo = closeToA? a : b;
+		Runway awayTo = closeToA? b : a;
 		awayTo.setTODA(1, awayTo.getTODA(0) - distanceAwayFromThreshold
 				- (obstacle.getHeight() * angleOfSlope) - stopway
 				- closeTo.getDisplacedThreshold(1));
