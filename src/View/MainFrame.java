@@ -25,6 +25,10 @@ import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.ButtonGroup;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 public class MainFrame extends JFrame {
@@ -87,9 +91,20 @@ public class MainFrame extends JFrame {
 		mnFile.add(mnAirport);
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Airport");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				EditAirportFrame eaf = new EditAirportFrame();
+			}
+		});
+
 		mnAirport.add(mntmNewMenuItem);
 		
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Obstacle");
+		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EditObstacleFrame eaf = new EditObstacleFrame();
+			}
+		});
 		mnAirport.add(mntmNewMenuItem_1);
 		
 		JMenu mnNewMenu = new JMenu("Open");
@@ -123,12 +138,22 @@ public class MainFrame extends JFrame {
 		mnFile.add(separator_1);
 		
 		JMenuItem mntmExit = new JMenuItem("Exit");
+		mntmExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(getDefaultCloseOperation());
+			}
+		});
 		mnFile.add(mntmExit);
 		
 		JMenu mnEdit = new JMenu("Edit");
 		menuBar.add(mnEdit);
 		
 		JMenuItem mntmNewMenuItem_6 = new JMenuItem("Runway");
+		mntmNewMenuItem_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EditRunwayFrame erf = new EditRunwayFrame();
+			}
+		});
 		mnEdit.add(mntmNewMenuItem_6);
 		
 		JMenuItem mntmAirport_1 = new JMenuItem("Airport");

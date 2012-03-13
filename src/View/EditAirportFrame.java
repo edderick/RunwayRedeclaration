@@ -57,7 +57,7 @@ public class EditAirportFrame {
 		frmEditAirport.setTitle("Edit airport");
 		//frmEditAirport.setType(Type.POPUP);
 		frmEditAirport.setBounds(100, 100, 352, 300);
-		frmEditAirport.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmEditAirport.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmEditAirport.getContentPane().setLayout(null);
 		
 		txtLondonHeathrow = new JTextField();
@@ -120,5 +120,7 @@ public class EditAirportFrame {
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(195, 154, 121, 11);
 		frmEditAirport.getContentPane().add(separator_1);
+		
+		frmEditAirport.setVisible(true);
 	}
 }

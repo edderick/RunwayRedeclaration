@@ -43,7 +43,7 @@ public class EditRunwayFrame extends JFrame {
 	 */
 	public EditRunwayFrame() {
 		setTitle("Edit Runway");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 241, 297);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -122,6 +122,7 @@ public class EditRunwayFrame extends JFrame {
 		
 		JButton btnNewButton_1 = new JButton("Cancel");
 		panel_2.add(btnNewButton_1, "cell 2 1");
+		setVisible(true);
 	}
 
 }
