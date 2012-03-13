@@ -6,8 +6,11 @@ package Model{
 	class Runway
 	class Airport
 
-	Airport "1" *-- "*" Runway
-	Runway "1" o-- "1" Obstacle
+	class PhysicalRunway
+
+	Airport "1" *-- "*" PhysicalRunway
+	PhysicalRunway "1" *-- "*" Runway
+	PhysicalRunway "1" o-- "1" Obstacle
 
 	AddressBook "1" *-- "*" Contact
 }
