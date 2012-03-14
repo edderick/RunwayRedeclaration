@@ -157,9 +157,19 @@ public class MainFrame extends JFrame {
 		mnEdit.add(mntmNewMenuItem_6);
 		
 		JMenuItem mntmAirport_1 = new JMenuItem("Airport");
+		mntmAirport_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				EditAirportFrame eaf = new EditAirportFrame();
+			}
+		});
 		mnEdit.add(mntmAirport_1);
 		
 		JMenuItem mntmNewMenuItem_7 = new JMenuItem("Obstacle");
+		mntmNewMenuItem_7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				EditObstacleFrame eaf = new EditObstacleFrame();
+			}
+		});
 		mnEdit.add(mntmNewMenuItem_7);
 		
 		JSeparator separator = new JSeparator();
