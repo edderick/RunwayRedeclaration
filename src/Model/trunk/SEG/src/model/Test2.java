@@ -7,6 +7,8 @@ import javax.mail.internet.*;
 public class Test2 {
 	
 	public static void main(String[] args) throws Exception {
+	    Scanner in = new Scanner(System.in);
+		
 		Airport a = new Airport("Heathrow");
 		PhysicalRunway pr1, pr2;
 		
@@ -27,6 +29,13 @@ public class Test2 {
 		PhysicalRunway copyOfpr1 = (PhysicalRunway) a.runways().get(0);
 	    copyOfpr1.placeNewObstacle(ob, 500, copyOfpr1.getB().getName());
 	    
+	    System.out.println("Placing obstacle on "+copyOfpr1.getId());
+	    System.out.println("Obstacle : "+ob.getName());
+	    System.out.println("Height of the obstacle : "+ob.getHeight());
+	    System.out.println("Close to threshold of  : "+copyOfpr1.closeTo().getName());
+	    System.out.println("Distance away from the threshold : "+copyOfpr1.getDistanceAwayFromThreshold());
+	    System.out.println();
+	    
 	    Runway one, two;
 	    one = copyOfpr1.getA();
 	    two = copyOfpr1.getB();
@@ -44,13 +53,23 @@ public class Test2 {
 	    System.out.println("Original TODA: "+two.getTODA(0)+"    New TODA: "+two.getTODA(1));
 	    System.out.println("Original LDA : "+two.getLDA(0)+"    New LDA: "+two.getLDA(1));
 	    
+	    in.nextLine();
+	    
 	    System.out.println();
+	    System.out.println("Calculation on Runway: "+two.getName());
 	    System.out.println(copyOfpr1.toCalculation(two.getName()));
+	    
+	    in.nextLine();
+	    int angle, blast;
+	    System.out.print("New Angle of Slope : ");
+	    angle = Integer.parseInt(in.nextLine());
+	    System.out.print("New Blast Allowance (300-500) : ");
+	    blast = Integer.parseInt(in.nextLine());
 		
-	    System.out.println("Set angle of slope = 40");
-	    System.out.println("Set blast allowance = 400");
-	    copyOfpr1.setAngleOfSlope(40);
-	    copyOfpr1.setBlastAllowance(400);
+	    System.out.println("Set angle of slope = "+angle);
+	    System.out.println("Set blast allowance = "+blast);
+	    copyOfpr1.setAngleOfSlope(angle);
+	    copyOfpr1.setBlastAllowance(blast);
 	    
 	    System.out.println();
 	    System.out.println("Runway: "+two.getName());
@@ -61,11 +80,15 @@ public class Test2 {
 	    
 	    System.out.println();
 	    System.out.println(copyOfpr1.toCalculation(two.getName()));
+	    
+	    in.nextLine();
 	    
 	    System.out.println();
 	    System.out.println("Reset parameters");
 	    copyOfpr1.defaultValues();
 	    
+	    in.nextLine();
+	    
 	    System.out.println();
 	    System.out.println("Runway: "+two.getName());
 	    System.out.println("Original TORA: "+two.getTODA(0)+"    New TORA: "+two.getTORA(1));
@@ -75,6 +98,31 @@ public class Test2 {
 	    
 	    System.out.println();
 	    System.out.println(copyOfpr1.toCalculation(two.getName()));
+	    
+	    in.nextLine();
+	    int stopway, distanceAwayFromThreshold;
+	    System.out.print("New distance away from threshold : ");
+	    distanceAwayFromThreshold = Integer.parseInt(in.nextLine());
+	    System.out.print("New stopway distance : ");
+	    stopway = Integer.parseInt(in.nextLine());
+		
+	    System.out.println("Set distance away from threshold = "+distanceAwayFromThreshold);
+	    System.out.println("Set stopway = "+stopway);
+	    copyOfpr1.setDistanceAwayFromThreshold(distanceAwayFromThreshold);
+	    copyOfpr1.setStopway(stopway);
+	    
+	    
+	    System.out.println();
+	    System.out.println("Runway: "+two.getName());
+	    System.out.println("Original TORA: "+two.getTODA(0)+"    New TORA: "+two.getTORA(1));
+	    System.out.println("Original ASDA: "+two.getASDA(0)+"    New ASDA: "+two.getASDA(1));
+	    System.out.println("Original TODA: "+two.getTODA(0)+"    New TODA: "+two.getTODA(1));
+	    System.out.println("Original LDA : "+two.getLDA(0)+"    New LDA: "+two.getLDA(1));
+	    
+	    System.out.println();
+	    System.out.println(copyOfpr1.toCalculation(two.getName()));
+	    
+	    in.close();
 	    
 		/*
 		String host = "smtp.gmail.com";
