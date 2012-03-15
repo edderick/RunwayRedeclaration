@@ -229,6 +229,12 @@ public class MainFrame extends JFrame {
 		mnEmail.add(mntmSendEmail);
 		
 		JMenuItem mntmAddressBook = new JMenuItem("Address book");
+		mntmAddressBook.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				AddressBookFrame abf = new AddressBookFrame();
+				abf.setVisible(true);
+			}
+		});
 		mnEmail.add(mntmAddressBook);
 		
 		JMenu mnHelp = new JMenu("Help");
