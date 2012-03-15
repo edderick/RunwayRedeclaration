@@ -1,6 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
+import javax.swing.AbstractListModel;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -8,6 +8,7 @@ import javax.swing.JComboBox;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -21,37 +22,49 @@ public class EditRunwayFrame extends JFrame {
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
+	private JTextField txtl;
+	private JTextField textField_4;
+	private JTextField textField_5;
+	private JTextField textField_6;
+	private JTextField textField_7;
+	private JTextField txtr;
+	private JList listOfPhysicalRunways;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					EditRunwayFrame frame = new EditRunwayFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					EditRunwayFrame frame = new EditRunwayFrame();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the frame.
+	 * @param listOfRunways 
 	 */
-	public EditRunwayFrame() {
+	public EditRunwayFrame(JList listOfRunways) {
+		this.listOfPhysicalRunways = listOfRunways;
+		
+		setResizable(false);
 		setTitle("Edit Runway");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 241, 297);
+		setBounds(100, 100, 501, 268);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[100px:n,grow]", "[15px][24px,grow][grow]"));
+		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		contentPane.add(panel, "cell 0 1,grow");
+		panel.setBounds(12, 50, 212, 113);
+		contentPane.add(panel);
 		panel.setLayout(new MigLayout("", "[37px][37px,grow]", "[15px][][][]"));
 		
 		JLabel lblAsda = new JLabel("ASDA");
@@ -98,31 +111,117 @@ public class EditRunwayFrame extends JFrame {
 		panel.add(lblM_1, "cell 1 3");
 		
 		JPanel panel_1 = new JPanel();
-		contentPane.add(panel_1, "cell 0 0");
-		panel_1.setLayout(new MigLayout("", "[grow][grow]", "[24px]"));
+		panel_1.setBounds(12, 12, 212, 34);
+		contentPane.add(panel_1);
+		panel_1.setLayout(new MigLayout("", "[68.00,grow][129.00,grow]", "[24px]"));
 		
 		JLabel lblNewLabel = new JLabel("Runway");
-		panel_1.add(lblNewLabel, "cell 0 0,alignx left,aligny center");
+		panel_1.add(lblNewLabel, "cell 0 0,alignx center,aligny center");
 		
-		JComboBox comboBox = new JComboBox();
-		panel_1.add(comboBox, "cell 1 0,alignx left,aligny top,grow");
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"27R/09L", "09L/27R"}));
-		lblNewLabel.setLabelFor(comboBox);
+		txtl = new JTextField();
+		txtl.setText("09L");
+		panel_1.add(txtl, "cell 1 0");
+		txtl.setColumns(10);
 		
 		JPanel panel_2 = new JPanel();
-		contentPane.add(panel_2, "cell 0 2,grow");
-		panel_2.setLayout(new MigLayout("", "[grow][][]", "[grow][]"));
+		panel_2.setBounds(12, 174, 463, 45);
+		contentPane.add(panel_2);
 		
 		JButton btnNewButton = new JButton("Apply");
+		btnNewButton.setBounds(328, 11, 59, 23);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			}
+				if(listOfPhysicalRunways != null){
+					final String[] vals = new String[listOfPhysicalRunways.getModel().getSize() + 1];
+					for(int i = 0; i < listOfPhysicalRunways.getModel().getSize(); i++){
+						vals[i] = (String) listOfPhysicalRunways.getModel().getElementAt(i);
+					}
+					vals[vals.length-1] = "newRunway";
+					
+					listOfPhysicalRunways.setModel( new AbstractListModel() {
+						String[] values = vals;
+						public int getSize() {
+							return values.length;
+						}
+						public Object getElementAt(int index) {
+							return values[index];
+						}
+							
+					});
+				}
+				
+				setVisible(false);			
+			}			
 		});
-		panel_2.add(btnNewButton, "cell 1 1");
+		panel_2.setLayout(null);
+		panel_2.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Cancel");
-		panel_2.add(btnNewButton_1, "cell 2 1");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+			}
+		});
+		btnNewButton_1.setBounds(391, 11, 65, 23);
+		panel_2.add(btnNewButton_1);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBounds(246, 50, 212, 113);
+		contentPane.add(panel_3);
+		panel_3.setLayout(new MigLayout("", "[][grow]", "[][][][]"));
+		
+		JLabel label = new JLabel("ASDA");
+		panel_3.add(label, "cell 0 0,alignx trailing");
+		
+		textField_4 = new JTextField();
+		textField_4.setColumns(10);
+		panel_3.add(textField_4, "flowx,cell 1 0,growx");
+		
+		JLabel label_1 = new JLabel("m");
+		panel_3.add(label_1, "cell 1 0");
+		
+		JLabel label_2 = new JLabel("TORA");
+		panel_3.add(label_2, "cell 0 1,alignx trailing");
+		
+		textField_5 = new JTextField();
+		textField_5.setColumns(10);
+		panel_3.add(textField_5, "flowx,cell 1 1,growx");
+		
+		JLabel label_4 = new JLabel("TODA");
+		panel_3.add(label_4, "cell 0 2,alignx trailing");
+		
+		textField_6 = new JTextField();
+		textField_6.setColumns(10);
+		panel_3.add(textField_6, "flowx,cell 1 2,growx");
+		
+		JLabel label_3 = new JLabel("LDA");
+		panel_3.add(label_3, "cell 0 3,alignx trailing");
+		
+		textField_7 = new JTextField();
+		textField_7.setColumns(10);
+		panel_3.add(textField_7, "flowx,cell 1 3,growx");
+		
+		JLabel label_5 = new JLabel("m");
+		panel_3.add(label_5, "cell 1 1");
+		
+		JLabel label_6 = new JLabel("m");
+		panel_3.add(label_6, "cell 1 2");
+		
+		JLabel label_7 = new JLabel("m");
+		panel_3.add(label_7, "cell 1 3");
+		
+		JPanel panel_4 = new JPanel();
+		panel_4.setBounds(246, 12, 212, 34);
+		contentPane.add(panel_4);
+		panel_4.setLayout(new MigLayout("", "[74.00][grow]", "[]"));
+		
+		JLabel label_8 = new JLabel("Runway");
+		panel_4.add(label_8, "cell 0 0,alignx center");
+		
+		txtr = new JTextField();
+		txtr.setText("27R");
+		txtr.setColumns(10);
+		panel_4.add(txtr, "cell 1 0");
 		setVisible(true);
 	}
-
 }
