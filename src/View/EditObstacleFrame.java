@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Dimension;
 
 
 public class EditObstacleFrame extends JFrame {
@@ -21,6 +22,7 @@ public class EditObstacleFrame extends JFrame {
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
+	private JTextField txtEdward;
 
 	/**
 	 * Launch the application.
@@ -42,16 +44,29 @@ public class EditObstacleFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public EditObstacleFrame() {
+		setResizable(false);
 		setTitle("Edit Obstacle");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 241, 297);
+		setBounds(100, 100, 241, 249);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[100px:n,grow]", "[15px][24px,grow][grow]"));
+		contentPane.setLayout(new MigLayout("", "[100px:n,grow]", "[15px][24px,grow][][6.00][]"));
+		
+		JPanel panel_1 = new JPanel();
+		contentPane.add(panel_1, "cell 0 1,grow");
+		
+		JLabel lblName = new JLabel("Name");
+		panel_1.add(lblName);
+		
+		txtEdward = new JTextField();
+		txtEdward.setPreferredSize(new Dimension(10, 20));
+		txtEdward.setText("Edward");
+		panel_1.add(txtEdward);
+		txtEdward.setColumns(15);
 		
 		JPanel panel = new JPanel();
-		contentPane.add(panel, "cell 0 1,grow");
+		contentPane.add(panel, "cell 0 2,grow");
 		panel.setLayout(new MigLayout("", "[37px][37px,grow]", "[15px][][][]"));
 		
 		JLabel lblAsda = new JLabel("Type");
@@ -98,18 +113,24 @@ public class EditObstacleFrame extends JFrame {
 		panel.add(lblM_1, "cell 1 3");
 		
 		JPanel panel_2 = new JPanel();
-		contentPane.add(panel_2, "cell 0 2,grow");
+		contentPane.add(panel_2, "cell 0 4,grow");
 		panel_2.setLayout(new MigLayout("", "[grow][][]", "[grow][]"));
 		
 		JButton btnNewButton = new JButton("Apply");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				setVisible(false);
 			}
 		});
-		panel_2.add(btnNewButton, "cell 1 1");
+		panel_2.add(btnNewButton, "cell 1 0");
 		
 		JButton btnNewButton_1 = new JButton("Cancel");
-		panel_2.add(btnNewButton_1, "cell 2 1");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+			}
+		});
+		panel_2.add(btnNewButton_1, "cell 2 0");
 		setVisible(true);
 	}
 

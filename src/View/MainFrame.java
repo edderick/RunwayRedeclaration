@@ -166,8 +166,17 @@ public class MainFrame extends JFrame {
 		JSeparator separator = new JSeparator();
 		mnEdit.add(separator);
 		
-		JMenuItem mntmSelectRunway = new JMenuItem("Select Runway");
-		mnEdit.add(mntmSelectRunway);
+		JMenu mnSelectRunway = new JMenu("Select Runway");
+		mnEdit.add(mnSelectRunway);
+		
+		JRadioButtonMenuItem rdbtnmntmlr = new JRadioButtonMenuItem("09L/27R");
+		topPanelButtonGroup.add(rdbtnmntmlr);
+		rdbtnmntmlr.setSelected(true);
+		mnSelectRunway.add(rdbtnmntmlr);
+		
+		JRadioButtonMenuItem rdbtnmntmrl = new JRadioButtonMenuItem("09R/27L");
+		topPanelButtonGroup.add(rdbtnmntmrl);
+		mnSelectRunway.add(rdbtnmntmrl);
 		
 		JMenuItem mntmPositionObstacle = new JMenuItem("Position Obstacle");
 		mnEdit.add(mntmPositionObstacle);
