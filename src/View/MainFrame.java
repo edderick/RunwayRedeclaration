@@ -102,9 +102,23 @@ public class MainFrame extends JFrame {
 		mnFile.add(mnNewMenu);
 		
 		JMenuItem mntmAirport = new JMenuItem("Airport");
+		mntmAirport.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				/*
+				 *  Open airport code goes here
+				 */
+			}
+		});
 		mnNewMenu.add(mntmAirport);
 		
 		JMenuItem mntmObstacle = new JMenuItem("Obstacle");
+		mntmObstacle.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				/*
+				 * Open obstacle code goes here
+				 */
+			}
+		});
 		mnNewMenu.add(mntmObstacle);
 		
 		JMenu mnOpenRecent = new JMenu("Open Recent");
@@ -120,9 +134,23 @@ public class MainFrame extends JFrame {
 		mnFile.add(mnSave);
 		
 		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Airport");
+		mntmNewMenuItem_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				/*
+				 *  Save airport code goes here
+				 */
+			}
+		});
 		mnSave.add(mntmNewMenuItem_4);
 		
 		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Obstacle");
+		mntmNewMenuItem_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				/*
+				 *  Save obstacle code goes here
+				 */
+			}
+		});
 		mnSave.add(mntmNewMenuItem_5);
 		
 		JSeparator separator_1 = new JSeparator();
