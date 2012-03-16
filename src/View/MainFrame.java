@@ -84,7 +84,7 @@ public class MainFrame extends JFrame {
 		JMenuItem mntmNewMenuItem = new JMenuItem("Airport");
 		mntmNewMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				EditAirportFrame eaf = new EditAirportFrame();
+				EditAirportDialog ead = new EditAirportDialog();
 			}
 		});
 
@@ -93,7 +93,7 @@ public class MainFrame extends JFrame {
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Obstacle");
 		mntmNewMenuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				EditObstacleFrame eaf = new EditObstacleFrame();
+				EditObstacleDialog ead = new EditObstacleDialog();
 			}
 		});
 		mnAirport.add(mntmNewMenuItem_1);
@@ -142,7 +142,7 @@ public class MainFrame extends JFrame {
 		JMenuItem mntmNewMenuItem_6 = new JMenuItem("Runway");
 		mntmNewMenuItem_6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				EditRunwayFrame erf = new EditRunwayFrame(null);
+				EditRunwayDialog erd = new EditRunwayDialog(null);
 			}
 		});
 		mnEdit.add(mntmNewMenuItem_6);
@@ -150,7 +150,7 @@ public class MainFrame extends JFrame {
 		JMenuItem mntmAirport_1 = new JMenuItem("Airport");
 		mntmAirport_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				EditAirportFrame eaf = new EditAirportFrame();
+				EditAirportDialog ead = new EditAirportDialog();
 			}
 		});
 		mnEdit.add(mntmAirport_1);
@@ -158,7 +158,7 @@ public class MainFrame extends JFrame {
 		JMenuItem mntmNewMenuItem_7 = new JMenuItem("Obstacle");
 		mntmNewMenuItem_7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				EditObstacleFrame eaf = new EditObstacleFrame();
+				EditObstacleDialog ead = new EditObstacleDialog();
 			}
 		});
 		mnEdit.add(mntmNewMenuItem_7);
@@ -231,8 +231,8 @@ public class MainFrame extends JFrame {
 		JMenuItem mntmAddressBook = new JMenuItem("Address book");
 		mntmAddressBook.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				AddressBookFrame abf = new AddressBookFrame();
-				abf.setVisible(true);
+				AddressBookDialog abd = new AddressBookDialog();
+				abd.setVisible(true);
 			}
 		});
 		mnEmail.add(mntmAddressBook);

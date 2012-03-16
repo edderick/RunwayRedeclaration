@@ -1,30 +1,17 @@
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.factories.FormFactory;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.JButton;
-import net.miginfocom.swing.MigLayout;
-import java.awt.Component;
-import javax.swing.Box;
-import javax.swing.JSeparator;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.event.ActionListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
+import net.miginfocom.swing.MigLayout;
 
 
-public class AddressBookFrame extends JFrame {
+public class AddressBookDialog extends JDialog {
 
+	private final JPanel contentPanel = new JPanel();
 	private JPanel contentPane;
 	private JPanel panel_1;
 	private JButton btnNewButton;
@@ -41,22 +28,19 @@ public class AddressBookFrame extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AddressBookFrame frame = new AddressBookFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		try {
+			AddressBookDialog dialog = new AddressBookDialog();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
-	 * Create the frame.
+	 * Create the dialog.
 	 */
-	public AddressBookFrame() {
+	public AddressBookDialog() {
 		setTitle("Address Book");
 		setBounds(100, 100, 481, 300);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -188,5 +172,7 @@ public class AddressBookFrame extends JFrame {
 		gbc_btnCancel.gridx = 0;
 		gbc_btnCancel.gridy = 6;
 		panel_1.add(btnCancel, gbc_btnCancel);
+
 	}
+
 }

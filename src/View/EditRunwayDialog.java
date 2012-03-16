@@ -1,22 +1,24 @@
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.AbstractListModel;
+import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JComboBox;
-import net.miginfocom.swing.MigLayout;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.border.EmptyBorder;
+
+import net.miginfocom.swing.MigLayout;
 
 
-public class EditRunwayFrame extends JFrame {
+public class EditRunwayDialog extends JDialog {
 
+//	private final JPanel contentPanel = new JPanel();
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
@@ -30,27 +32,23 @@ public class EditRunwayFrame extends JFrame {
 	private JTextField txtr;
 	private JList listOfPhysicalRunways;
 
-	/**
-	 * Launch the application.
-	 */
+//	/**
+//	 * Launch the application.
+//	 */
 //	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					EditRunwayFrame frame = new EditRunwayFrame();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
+//		try {
+//			EditRunwayDialog dialog = new EditRunwayDialog();
+//			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+//			dialog.setVisible(true);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 //	}
 
 	/**
-	 * Create the frame.
-	 * @param listOfRunways 
+	 * Create the dialog.
 	 */
-	public EditRunwayFrame(JList listOfRunways) {
+	public EditRunwayDialog(JList listOfRunways) {
 		this.listOfPhysicalRunways = listOfRunways;
 		
 		setResizable(false);
@@ -223,5 +221,7 @@ public class EditRunwayFrame extends JFrame {
 		txtr.setColumns(10);
 		panel_4.add(txtr, "cell 1 0");
 		setVisible(true);
+
 	}
+
 }

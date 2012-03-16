@@ -1,61 +1,53 @@
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import java.awt.BorderLayout;
-import javax.swing.BoxLayout;
-import java.awt.Font;
-import javax.swing.JTabbedPane;
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import java.awt.Color;
 import java.awt.FlowLayout;
-import javax.swing.JTextField;
-import javax.swing.JList;
-import javax.swing.AbstractListModel;
-import java.awt.Component;
-import javax.swing.Box;
-import javax.swing.JSeparator;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.AbstractListModel;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JSeparator;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.border.EmptyBorder;
 
-public class EditAirportFrame {
 
-	private JFrame frmEditAirport;
+public class EditAirportDialog extends JDialog {
+
+	//private final JPanel contentPanel = new JPanel();	
 	private JTextField AirportName;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					EditAirportFrame window = new EditAirportFrame();
-					window.frmEditAirport.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		try {
+			EditAirportDialog dialog = new EditAirportDialog();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
-	 * Create the application.
+	 * Create the dialog.
 	 */
-	public EditAirportFrame() {
-		frmEditAirport = new JFrame();
-		frmEditAirport.setResizable(false);
-		frmEditAirport.setTitle("Edit airport");
-		frmEditAirport.setBounds(100, 100, 352, 300);
-		frmEditAirport.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frmEditAirport.getContentPane().setLayout(null);
+	public EditAirportDialog() {
+		
+		setResizable(false);
+		setTitle("Edit airport");
+		setBounds(100, 100, 352, 300);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		getContentPane().setLayout(null);
 		
 		AirportName = new JTextField();
 		AirportName.setText("London Heathrow");
 		AirportName.setBounds(20, 11, 151, 20);
-		frmEditAirport.getContentPane().add(AirportName);
+		getContentPane().add(AirportName);
 		AirportName.setColumns(10);
 		
 		final JList list = new JList();
@@ -71,58 +63,60 @@ public class EditAirportFrame {
 		});
 		list.setSelectedIndex(0);
 		list.setBounds(20, 42, 141, 202);
-		frmEditAirport.getContentPane().add(list);
+		getContentPane().add(list);
 		
 		JButton btnEdit = new JButton("Edit");
 		btnEdit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				EditRunwayFrame edr = new EditRunwayFrame(list);
-				edr.setVisible(true);
+				EditRunwayDialog edd = new EditRunwayDialog(list);
+				edd.setVisible(true);
 			}
 		});
 		btnEdit.setBounds(185, 76, 131, 23);
-		frmEditAirport.getContentPane().add(btnEdit);
+		getContentPane().add(btnEdit);
 		
 		JButton btnNewRunway = new JButton("New Runway");
 		btnNewRunway.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				EditRunwayFrame edr = new EditRunwayFrame(list);
-				edr.setVisible(true);
+				EditRunwayDialog edd = new EditRunwayDialog(list);
+				edd.setVisible(true);
 			}
 		});
 		btnNewRunway.setBounds(185, 42, 131, 23);
-		frmEditAirport.getContentPane().add(btnNewRunway);
+		getContentPane().add(btnNewRunway);
 		
 		JButton btnDelete = new JButton("Delete");
 		btnDelete.setBounds(185, 120, 131, 23);
-		frmEditAirport.getContentPane().add(btnDelete);
+		getContentPane().add(btnDelete);
 		
 		JButton btnOk = new JButton("OK");
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frmEditAirport.setVisible(false);
+				setVisible(false);
 			}
 		});
 		btnOk.setBounds(185, 178, 131, 23);
-		frmEditAirport.getContentPane().add(btnOk);
+		getContentPane().add(btnOk);
 		
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frmEditAirport.setVisible(false);
+				setVisible(false);
 			}
 		});
 		btnCancel.setBounds(185, 212, 131, 23);
-		frmEditAirport.getContentPane().add(btnCancel);
+		getContentPane().add(btnCancel);
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(195, 110, 121, 11);
-		frmEditAirport.getContentPane().add(separator);
+		getContentPane().add(separator);
 		
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(195, 154, 121, 11);
-		frmEditAirport.getContentPane().add(separator_1);
+		getContentPane().add(separator_1);
 		
-		frmEditAirport.setVisible(true);
+		setVisible(true);
+
 	}
+
 }
