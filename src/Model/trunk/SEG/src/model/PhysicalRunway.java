@@ -3,7 +3,7 @@ package model;
 public class PhysicalRunway {
 
 	private String id;
-	private Runway a, b;
+	private Runway[] runway;
 	private Obstacle obstacle;
 
 	private double distanceAwayFromThreshold, REZA, stopway, blastAllowance; // In
@@ -13,25 +13,14 @@ public class PhysicalRunway {
 
 	public PhysicalRunway(String identifier, Runway one, Runway two) {
 		id = identifier;
-		a = one;
-		b = two;
+		runway = new Runway[2];
+		runway[0] = one;
+		runway[1] = two;
 	}
 
-	public Runway getA() {
-		return a;
-	}
-
-	public void setA(Runway a) {
-		this.a = a;
-	}
-
-	public Runway getB() {
-		return b;
-	}
-
-	public void setB(Runway b) {
-		this.b = b;
-	}
+    public Runway getRunway(int index){
+    	return runway[index];
+    }
 
 	public String getId() {
 		return id;
@@ -51,12 +40,16 @@ public class PhysicalRunway {
 	}
 
 	private void setCloserToWhichThreshold(String closeToRunwayName) {
-		if (closeToRunwayName.compareTo(a.getName()) == 0) {
+		if (closeToRunwayName.compareTo(runway[0].getName()) == 0) {
 			closeToA = true;
 		} else {
 			closeToA = false;
 		}
 		calculateParameters();
+	}
+	
+	public Runway closeTo(){
+		return closeToA? runway[0] : runway[1];
 	}
 
 	public void removeObstacleAndReset() {
@@ -78,8 +71,8 @@ public class PhysicalRunway {
 	}
 
 	private void calculateParameters() {
-		Runway closeTo = closeToA ? a : b;
-		Runway awayFrom = closeToA ? b : a;
+		Runway closeTo = closeToA ? runway[0] : runway[1];
+		Runway awayFrom = closeToA ? runway[1] : runway[0];
 
 		calTORAtoOb(closeTo, awayFrom);
 		calTORAawayOb(closeTo);
@@ -138,40 +131,47 @@ public class PhysicalRunway {
 
 	public String toCalculation(String runwayName) {
 		String result = "";
-		Runway closeTo = closeToA ? a : b;
-		Runway awayFrom = closeToA ? b : a;
+		Runway closeTo = closeToA ? runway[0] : runway[1];
+		Runway awayFrom = closeToA ? runway[1] : runway[0];
 
 		if (runwayName.compareTo(closeTo.getName()) == 0) {
-			result += "New LDA : " + closeTo.getLDA(0) + " - "
-					+ distanceAwayFromThreshold + " - (" + obstacle.getHeight()
-					+ " * " + angleOfSlope + ") - " + stopway + ")\n";
 			result += "New TORA : " + closeTo.getTORA(0) + " - "
 					+ distanceAwayFromThreshold + " - " + blastAllowance
-					+ " - " + closeTo.getDisplacedThreshold(1) + "\n";
+					+ " - " + closeTo.getDisplacedThreshold(1) + " = "
+					+ closeTo.getTORA(1) + "\n";
 			result += "New ASDA : " + closeTo.getASDA(0) + " - "
 					+ distanceAwayFromThreshold + " - " + blastAllowance
-					+ " - " + closeTo.getDisplacedThreshold(1) + "\n";
+					+ " - " + closeTo.getDisplacedThreshold(1) + " = "
+					+ closeTo.getASDA(1) + "\n";
 			result += "New TODA : " + closeTo.getTODA(0) + " - "
 					+ distanceAwayFromThreshold + " - " + blastAllowance
-					+ " - " + closeTo.getDisplacedThreshold(1) + "\n";
+					+ " - " + closeTo.getDisplacedThreshold(1) + " = "
+					+ closeTo.getTODA(1) + "\n";
+			result += "New LDA : " + closeTo.getLDA(0) + " - "
+					+ distanceAwayFromThreshold + " - (" + obstacle.getHeight()
+					+ " * " + angleOfSlope + ") - " + stopway + ") = "
+					+ closeTo.getLDA(1) + "\n";
 
 		} else {
-			result += "New LDA : " + awayFrom.getLDA(0) + " - "
-					+ closeTo.getDisplacedThreshold(1) + " - "
-					+ distanceAwayFromThreshold + " - " + REZA + " - "
-					+ stopway + "\n";
 			result += "New TORA : " + awayFrom.getTORA(0) + " - "
 					+ distanceAwayFromThreshold + " - (" + obstacle.getHeight()
 					+ " * " + angleOfSlope + ") - " + stopway + " - "
-					+ closeTo.getDisplacedThreshold(1) + "\n";
+					+ closeTo.getDisplacedThreshold(1) + " = "
+					+ awayFrom.getTORA(1) + "\n";
 			result += "New ASDA : " + awayFrom.getASDA(0) + " - "
 					+ distanceAwayFromThreshold + " - (" + obstacle.getHeight()
 					+ " * " + angleOfSlope + ") - " + stopway + " - "
-					+ closeTo.getDisplacedThreshold(1) + "\n";
+					+ closeTo.getDisplacedThreshold(1) + " = "
+					+ awayFrom.getASDA(1) + "\n";
 			result += "New TODA : " + awayFrom.getTODA(0) + " - "
 					+ distanceAwayFromThreshold + " - (" + obstacle.getHeight()
 					+ " * " + angleOfSlope + ") - " + stopway + " - "
-					+ closeTo.getDisplacedThreshold(1) + "\n";
+					+ closeTo.getDisplacedThreshold(1) + " = "
+					+ awayFrom.getTODA(1) + "\n";
+			result += "New LDA : " + awayFrom.getLDA(0) + " - "
+					+ closeTo.getDisplacedThreshold(1) + " - "
+					+ distanceAwayFromThreshold + " - " + REZA + " - "
+					+ stopway + " = " + awayFrom.getLDA(1) + "\n";
 		}
 
 		return result;

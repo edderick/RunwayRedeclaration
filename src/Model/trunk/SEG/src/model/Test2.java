@@ -27,7 +27,7 @@ public class Test2 {
 		Obstacle ob = new Obstacle("Boeing 777", "Aeroplane", "Big", 25, 75, 80);
 		
 		PhysicalRunway copyOfpr1 = (PhysicalRunway) a.runways().get(0);
-	    copyOfpr1.placeNewObstacle(ob, 500, copyOfpr1.getB().getName());
+	    copyOfpr1.placeNewObstacle(ob, 500, copyOfpr1.getRunway(1).getName());
 	    
 	    System.out.println("Placing obstacle on "+copyOfpr1.getId());
 	    System.out.println("Obstacle : "+ob.getName());
@@ -37,8 +37,8 @@ public class Test2 {
 	    System.out.println();
 	    
 	    Runway one, two;
-	    one = copyOfpr1.getA();
-	    two = copyOfpr1.getB();
+	    one = copyOfpr1.getRunway(0);
+	    two = copyOfpr1.getRunway(1);
 	    
 	    System.out.println("Physical Runway Name: "+copyOfpr1.getId());
 	    System.out.println("Runway: "+one.getName());
