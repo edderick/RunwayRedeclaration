@@ -68,6 +68,7 @@ public class MainFrame extends JFrame {
 			e.printStackTrace();
 		}
 		
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 636, 524);
 		
@@ -254,6 +255,12 @@ public class MainFrame extends JFrame {
 		menuBar.add(mnEmail);
 		
 		JMenuItem mntmSendEmail = new JMenuItem("Send email");
+		mntmSendEmail.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				SendEmailDialog sed = new SendEmailDialog();
+				sed.setVisible(true);
+			}
+		});
 		mnEmail.add(mntmSendEmail);
 		
 		JMenuItem mntmAddressBook = new JMenuItem("Address book");

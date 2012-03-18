@@ -76,7 +76,7 @@ public class EditEmailDialog extends JDialog {
 				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
+				getRootPane().setDefaultButton(null); // sets the enter key to ok if set to okButton instead of null
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
