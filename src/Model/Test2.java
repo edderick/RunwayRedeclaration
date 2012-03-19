@@ -1,8 +1,6 @@
 package model;
 
 import java.util.*;
-import javax.mail.*;
-import javax.mail.internet.*;
 
 public class Test2 {
 	

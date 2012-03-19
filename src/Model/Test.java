@@ -75,8 +75,9 @@ public class Test {
 			e.printStackTrace();
 		}
 		
-		System.out.println("\nThis is the loaded airport:\n" + a.getName());
+		System.out.println("\nThis is the loaded airport:\n" + a2.getName());
 		//iterate over the runways in the loaded airport and print all values
+		
 		for (Object o : a2.runways()) {
 			System.out.println(((PhysicalRunway) o).getId() 
 					+" "+ ((PhysicalRunway) o).getRunway(0).getName() 

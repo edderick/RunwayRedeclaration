@@ -1,6 +1,6 @@
+package view;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -8,7 +8,7 @@ import javax.swing.JSplitPane;
 import javax.swing.JMenuBar;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-
+import model.*;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.border.TitledBorder;
 import javax.swing.JTable;
@@ -30,6 +30,7 @@ public class MainFrame extends JFrame {
 	private JTable ObstacleDetailsTable;
 	private final ButtonGroup topPanelButtonGroup = new ButtonGroup();
 	private final ButtonGroup bottomPanelButtonGroup = new ButtonGroup();
+	private Airport airport = null;
 
 	/**
 	 * Launch the application.
@@ -107,7 +108,29 @@ public class MainFrame extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				/*
 				 *  Open airport code goes here
-				 */
+				 */				
+				LoadXMLFile lf = new LoadXMLFile();
+				try {
+					airport = lf.loadFile();
+				} catch (Exception e) {}
+				System.out.println("\nThis is the loaded airport:\n" + airport.getName());
+				//iterate over the runways in the loaded airport and print all values
+				for (Object o : airport.runways()) {
+					System.out.println(((PhysicalRunway) o).getId() 
+							+" "+ ((PhysicalRunway) o).getRunway(0).getName() 
+							+" "+ ((PhysicalRunway) o).getRunway(0).getTORA(1)
+							+" "+ ((PhysicalRunway) o).getRunway(0).getASDA(1)
+							+" "+ ((PhysicalRunway) o).getRunway(0).getTODA(1)
+							+" "+ ((PhysicalRunway) o).getRunway(0).getLDA(1)
+			
+							+" "+ ((PhysicalRunway) o).getRunway(1).getName()
+							+" "+ ((PhysicalRunway) o).getRunway(1).getTORA(1)
+							+" "+ ((PhysicalRunway) o).getRunway(1).getASDA(1)
+							+" "+ ((PhysicalRunway) o).getRunway(1).getTODA(1)
+							+" "+ ((PhysicalRunway) o).getRunway(1).getLDA(1)
+							
+							);
+				}
 			}
 		});
 		mnNewMenu.add(mntmAirport);
