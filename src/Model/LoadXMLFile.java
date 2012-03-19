@@ -88,7 +88,7 @@ public class LoadXMLFile {
 			}
 			
 		} else {
-			System.out.println("Open command cancelled by user.");
+//			System.out.println("Open command cancelled by user.");
 		}
 
 		return arpt;

@@ -104,7 +104,7 @@ public class SaveToXMLFile {
     		DOMSource source = new DOMSource(document);
     		transformer.transform(source, result);
         } else {
-            System.out.println("Save command cancelled by user.");
+//            System.out.println("Save command cancelled by user.");
         }
 
 		

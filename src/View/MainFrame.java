@@ -30,7 +30,7 @@ public class MainFrame extends JFrame {
 	private JTable ObstacleDetailsTable;
 	private final ButtonGroup topPanelButtonGroup = new ButtonGroup();
 	private final ButtonGroup bottomPanelButtonGroup = new ButtonGroup();
-	private Airport airport = null;
+	private Airport airport = new Airport("");
 
 	/**
 	 * Launch the application.
@@ -112,25 +112,25 @@ public class MainFrame extends JFrame {
 				LoadXMLFile lf = new LoadXMLFile();
 				try {
 					airport = lf.loadFile();
-				} catch (Exception e) {}
-				System.out.println("\nThis is the loaded airport:\n" + airport.getName());
-				//iterate over the runways in the loaded airport and print all values
-				for (Object o : airport.runways()) {
-					System.out.println(((PhysicalRunway) o).getId() 
-							+" "+ ((PhysicalRunway) o).getRunway(0).getName() 
-							+" "+ ((PhysicalRunway) o).getRunway(0).getTORA(1)
-							+" "+ ((PhysicalRunway) o).getRunway(0).getASDA(1)
-							+" "+ ((PhysicalRunway) o).getRunway(0).getTODA(1)
-							+" "+ ((PhysicalRunway) o).getRunway(0).getLDA(1)
-			
-							+" "+ ((PhysicalRunway) o).getRunway(1).getName()
-							+" "+ ((PhysicalRunway) o).getRunway(1).getTORA(1)
-							+" "+ ((PhysicalRunway) o).getRunway(1).getASDA(1)
-							+" "+ ((PhysicalRunway) o).getRunway(1).getTODA(1)
-							+" "+ ((PhysicalRunway) o).getRunway(1).getLDA(1)
-							
-							);
-				}
+					System.out.println("This is the airport opened: " + airport.getName());
+					//iterate over the runways in the loaded airport and print all values
+					for (Object o : airport.runways()) { // this will show all the physical runways
+						System.out.println(((PhysicalRunway) o).getId() 
+								+" "+ ((PhysicalRunway) o).getRunway(0).getName() 
+								+" "+ ((PhysicalRunway) o).getRunway(0).getTORA(1)
+								+" "+ ((PhysicalRunway) o).getRunway(0).getASDA(1)
+								+" "+ ((PhysicalRunway) o).getRunway(0).getTODA(1)
+								+" "+ ((PhysicalRunway) o).getRunway(0).getLDA(1)
+				
+								+" "+ ((PhysicalRunway) o).getRunway(1).getName()
+								+" "+ ((PhysicalRunway) o).getRunway(1).getTORA(1)
+								+" "+ ((PhysicalRunway) o).getRunway(1).getASDA(1)
+								+" "+ ((PhysicalRunway) o).getRunway(1).getTODA(1)
+								+" "+ ((PhysicalRunway) o).getRunway(1).getLDA(1)
+								
+								);
+					}
+				} catch (Exception e) {}				
 			}
 		});
 		mnNewMenu.add(mntmAirport);
@@ -163,6 +163,7 @@ public class MainFrame extends JFrame {
 				/*
 				 *  Save airport code goes here
 				 */
+				airport.saveToXML();
 			}
 		});
 		mnSave.add(mntmNewMenuItem_4);
