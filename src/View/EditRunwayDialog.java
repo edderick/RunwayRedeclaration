@@ -3,8 +3,10 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.AbstractListModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -14,6 +16,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import model.Airport;
+import model.PhysicalRunway;
+import model.Runway;
 import net.miginfocom.swing.MigLayout;
 
 
@@ -21,17 +26,20 @@ public class EditRunwayDialog extends JDialog {
 
 //	private final JPanel contentPanel = new JPanel();
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField LASDA;
+	private JTextField LTORA;
+	private JTextField LTODA;
+	private JTextField LLDA;
 	private JTextField txtl;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
+	private JTextField RASDA;
+	private JTextField RTORA;
+	private JTextField RTODA;
+	private JTextField RLDA;
 	private JTextField txtr;
-	private JList listOfPhysicalRunways;
+	private Airport airport;
+	private JList physicalRunwayJList;
+	private JTextField LDT;
+	private JTextField RDT;
 
 //	/**
 //	 * Launch the application.
@@ -49,8 +57,10 @@ public class EditRunwayDialog extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public EditRunwayDialog(JList listOfRunways) {
-		this.listOfPhysicalRunways = listOfRunways;
+	public EditRunwayDialog(Airport airport, JList physicalRunwayJList, boolean newRunway) {
+		this.airport = airport;
+		this.physicalRunwayJList = physicalRunwayJList;
+		
 		
 		setResizable(false);
 		setTitle("Edit Runway");
@@ -62,40 +72,40 @@ public class EditRunwayDialog extends JDialog {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(12, 50, 212, 113);
+		panel.setBounds(12, 50, 212, 134);
 		contentPane.add(panel);
-		panel.setLayout(new MigLayout("", "[37px][37px,grow]", "[15px][][][]"));
+		panel.setLayout(new MigLayout("", "[37px][37px,grow]", "[15px][][][][]"));
 		
 		JLabel lblAsda = new JLabel("ASDA");
 		panel.add(lblAsda, "cell 0 0,alignx trailing,aligny top");
 		
-		textField = new JTextField();
-		panel.add(textField, "flowx,cell 1 0,growx");
-		textField.setColumns(10);
+		LASDA = new JTextField();
+		panel.add(LASDA, "flowx,cell 1 0,growx");
+		LASDA.setColumns(10);
 		
 		JLabel lblToda = new JLabel("TORA");
 		panel.add(lblToda, "cell 0 1,alignx trailing,aligny top");
 		
-		textField_1 = new JTextField();
-		lblToda.setLabelFor(textField_1);
-		panel.add(textField_1, "flowx,cell 1 1,growx");
-		textField_1.setColumns(10);
+		LTORA = new JTextField();
+		lblToda.setLabelFor(LTORA);
+		panel.add(LTORA, "flowx,cell 1 1,growx");
+		LTORA.setColumns(10);
 		
 		JLabel lblToda_1 = new JLabel("TODA");
 		panel.add(lblToda_1, "cell 0 2,alignx trailing");
 		
-		textField_2 = new JTextField();
-		lblToda_1.setLabelFor(textField_2);
-		panel.add(textField_2, "flowx,cell 1 2,growx");
-		textField_2.setColumns(10);
+		LTODA = new JTextField();
+		lblToda_1.setLabelFor(LTODA);
+		panel.add(LTODA, "flowx,cell 1 2,growx");
+		LTODA.setColumns(10);
 		
 		JLabel lblLda = new JLabel("LDA");
 		panel.add(lblLda, "cell 0 3,alignx trailing");
 		
-		textField_3 = new JTextField();
-		lblLda.setLabelFor(textField_3);
-		panel.add(textField_3, "flowx,cell 1 3,growx");
-		textField_3.setColumns(10);
+		LLDA = new JTextField();
+		lblLda.setLabelFor(LLDA);
+		panel.add(LLDA, "flowx,cell 1 3,growx");
+		LLDA.setColumns(10);
 		
 		JLabel lblM = new JLabel("m");
 		panel.add(lblM, "cell 1 0");
@@ -109,6 +119,16 @@ public class EditRunwayDialog extends JDialog {
 		JLabel lblM_1 = new JLabel("m");
 		panel.add(lblM_1, "cell 1 3");
 		
+		JLabel lblDisplacementThreshold = new JLabel("Displacement Threshold");
+		panel.add(lblDisplacementThreshold, "cell 0 4,alignx trailing");
+		
+		LDT = new JTextField();
+		LDT.setColumns(10);
+		panel.add(LDT, "flowx,cell 1 4,growx");
+		
+		JLabel label_10 = new JLabel("m");
+		panel.add(label_10, "cell 1 4");
+		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(12, 12, 212, 34);
 		contentPane.add(panel_1);
@@ -117,41 +137,86 @@ public class EditRunwayDialog extends JDialog {
 		JLabel lblNewLabel = new JLabel("Runway");
 		panel_1.add(lblNewLabel, "cell 0 0,alignx center,aligny center");
 		
-		txtl = new JTextField();
-		txtl.setText("09L");
+		txtl = new JTextField();	
 		panel_1.add(txtl, "cell 1 0");
 		txtl.setColumns(10);
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(12, 174, 463, 45);
+		panel_2.setBounds(12, 195, 463, 45);
 		contentPane.add(panel_2);
+		
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBounds(246, 50, 212, 134);
+		contentPane.add(panel_3);
+		panel_3.setLayout(new MigLayout("", "[][grow]", "[][][][][]"));
+		
+		JLabel label = new JLabel("ASDA");
+		panel_3.add(label, "cell 0 0,alignx trailing");
+		
+		RASDA = new JTextField();
+		RASDA.setColumns(10);
+		panel_3.add(RASDA, "flowx,cell 1 0,growx");
+		
+		JLabel label_1 = new JLabel("m");
+		panel_3.add(label_1, "cell 1 0");
+		
+		JLabel label_2 = new JLabel("TORA");
+		panel_3.add(label_2, "cell 0 1,alignx trailing");
+		
+		RTORA = new JTextField();
+		RTORA.setColumns(10);
+		panel_3.add(RTORA, "flowx,cell 1 1,growx");
+		
+		JLabel label_4 = new JLabel("TODA");
+		panel_3.add(label_4, "cell 0 2,alignx trailing");
+		
+		RTODA = new JTextField();
+		RTODA.setColumns(10);
+		panel_3.add(RTODA, "flowx,cell 1 2,growx");
+		
+		JLabel label_3 = new JLabel("LDA");
+		panel_3.add(label_3, "cell 0 3,alignx trailing");
+		
+		RLDA = new JTextField();
+		RLDA.setColumns(10);
+		panel_3.add(RLDA, "flowx,cell 1 3,growx");
+		
+		JLabel label_5 = new JLabel("m");
+		panel_3.add(label_5, "cell 1 1");
+		
+		JLabel label_6 = new JLabel("m");
+		panel_3.add(label_6, "cell 1 2");
+		
+		JLabel label_7 = new JLabel("m");
+		panel_3.add(label_7, "cell 1 3");
+		
+		JLabel label_9 = new JLabel("Displacement Threshold");
+		panel_3.add(label_9, "cell 0 4,alignx trailing");
+		
+		RDT = new JTextField();
+		RDT.setColumns(10);
+		panel_3.add(RDT, "flowx,cell 1 4,growx");
+		
+		JLabel label_11 = new JLabel("m");
+		panel_3.add(label_11, "cell 1 4");
+		
+		JPanel panel_4 = new JPanel();
+		panel_4.setBounds(246, 12, 212, 34);
+		contentPane.add(panel_4);
+		panel_4.setLayout(new MigLayout("", "[74.00][grow]", "[]"));
+		
+		JLabel label_8 = new JLabel("Runway");
+		panel_4.add(label_8, "cell 0 0,alignx center");
+		
+		txtr = new JTextField();
+		txtr.setColumns(10);
+		panel_4.add(txtr, "cell 1 0");
 		
 		JButton btnNewButton = new JButton("Apply");
 		btnNewButton.setBounds(328, 11, 59, 23);
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if(listOfPhysicalRunways != null){
-					final String[] vals = new String[listOfPhysicalRunways.getModel().getSize() + 1];
-					for(int i = 0; i < listOfPhysicalRunways.getModel().getSize(); i++){
-						vals[i] = (String) listOfPhysicalRunways.getModel().getElementAt(i);
-					}
-					vals[vals.length-1] = "newRunway";
-					
-					listOfPhysicalRunways.setModel( new AbstractListModel() {
-						String[] values = vals;
-						public int getSize() {
-							return values.length;
-						}
-						public Object getElementAt(int index) {
-							return values[index];
-						}
-							
-					});
-				}
-				
-				setVisible(false);			
-			}			
-		});
+		btnNewButton.addActionListener(new ERDokListener(airport, LASDA, LTORA, LTODA, 
+				LLDA, LDT, RASDA, RTORA, RTODA, RLDA, RDT, txtr, txtl, physicalRunwayJList, this, newRunway));
 		panel_2.setLayout(null);
 		panel_2.add(btnNewButton);
 		
@@ -164,65 +229,101 @@ public class EditRunwayDialog extends JDialog {
 		btnNewButton_1.setBounds(391, 11, 65, 23);
 		panel_2.add(btnNewButton_1);
 		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(246, 50, 212, 113);
-		contentPane.add(panel_3);
-		panel_3.setLayout(new MigLayout("", "[][grow]", "[][][][]"));
+		if(airport.runways().size() > 0 & !newRunway){			
+			int index = physicalRunwayJList.getSelectedIndex();
+			txtl.setText(airport.runways().get(index).getRunway(0).getName());
+			txtr.setText(airport.runways().get(index).getRunway(1).getName());
+			
+			LASDA.setText(Double.toString(airport.runways().get(index).getRunway(0).getASDA(0)));
+			LTORA.setText(Double.toString(airport.runways().get(index).getRunway(0).getTORA(0)));
+			LTODA.setText(Double.toString(airport.runways().get(index).getRunway(0).getTODA(0)));
+			LLDA.setText(Double.toString(airport.runways().get(index).getRunway(0).getLDA(0)));
+			RASDA.setText(Double.toString(airport.runways().get(index).getRunway(1).getASDA(0)));
+			RTORA.setText(Double.toString(airport.runways().get(index).getRunway(1).getTORA(0)));
+			RTODA.setText(Double.toString(airport.runways().get(index).getRunway(1).getTODA(0)));
+			RLDA.setText(Double.toString(airport.runways().get(index).getRunway(1).getLDA(0)));
+		}		
 		
-		JLabel label = new JLabel("ASDA");
-		panel_3.add(label, "cell 0 0,alignx trailing");
-		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		panel_3.add(textField_4, "flowx,cell 1 0,growx");
-		
-		JLabel label_1 = new JLabel("m");
-		panel_3.add(label_1, "cell 1 0");
-		
-		JLabel label_2 = new JLabel("TORA");
-		panel_3.add(label_2, "cell 0 1,alignx trailing");
-		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		panel_3.add(textField_5, "flowx,cell 1 1,growx");
-		
-		JLabel label_4 = new JLabel("TODA");
-		panel_3.add(label_4, "cell 0 2,alignx trailing");
-		
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		panel_3.add(textField_6, "flowx,cell 1 2,growx");
-		
-		JLabel label_3 = new JLabel("LDA");
-		panel_3.add(label_3, "cell 0 3,alignx trailing");
-		
-		textField_7 = new JTextField();
-		textField_7.setColumns(10);
-		panel_3.add(textField_7, "flowx,cell 1 3,growx");
-		
-		JLabel label_5 = new JLabel("m");
-		panel_3.add(label_5, "cell 1 1");
-		
-		JLabel label_6 = new JLabel("m");
-		panel_3.add(label_6, "cell 1 2");
-		
-		JLabel label_7 = new JLabel("m");
-		panel_3.add(label_7, "cell 1 3");
-		
-		JPanel panel_4 = new JPanel();
-		panel_4.setBounds(246, 12, 212, 34);
-		contentPane.add(panel_4);
-		panel_4.setLayout(new MigLayout("", "[74.00][grow]", "[]"));
-		
-		JLabel label_8 = new JLabel("Runway");
-		panel_4.add(label_8, "cell 0 0,alignx center");
-		
-		txtr = new JTextField();
-		txtr.setText("27R");
-		txtr.setColumns(10);
-		panel_4.add(txtr, "cell 1 0");
 		setVisible(true);
 
 	}
+}
 
+class ERDokListener implements ActionListener{
+	Airport airport; 
+	JTextField LASDA; JTextField LTORA; JTextField LTODA; JTextField LLDA; JTextField LDT;
+	JTextField RASDA; JTextField RTORA; JTextField RTODA; JTextField RLDA; JTextField RDT;
+	JTextField RNAME; JTextField LNAME; 
+	JList physicalRunwayJList;
+	JDialog jd;
+	boolean newRunway;
+	public void actionPerformed(ActionEvent e) {
+		if(airport.runways().size() > 0 & !newRunway){ // get the physical runway and change the values
+			int index = physicalRunwayJList.getSelectedIndex();
+			// set the values to what's in the JTextFields
+			airport.runways().get(index).getRunway(0).setASDA(0, doubleParser.parse(LASDA.getText()));
+			airport.runways().get(index).getRunway(0).setASDA(0, doubleParser.parse(LTORA.getText()));
+			airport.runways().get(index).getRunway(0).setASDA(0, doubleParser.parse(LTODA.getText()));
+			airport.runways().get(index).getRunway(0).setASDA(0, doubleParser.parse(LLDA.getText()));
+			airport.runways().get(index).getRunway(0).setASDA(0, doubleParser.parse(LDT.getText()));
+			airport.runways().get(index).getRunway(1).setASDA(0, doubleParser.parse(RASDA.getText()));
+			airport.runways().get(index).getRunway(1).setASDA(0, doubleParser.parse(RTORA.getText()));
+			airport.runways().get(index).getRunway(1).setASDA(0, doubleParser.parse(RTODA.getText()));
+			airport.runways().get(index).getRunway(1).setASDA(0, doubleParser.parse(RLDA.getText()));
+			airport.runways().get(index).getRunway(1).setASDA(0, doubleParser.parse(RDT.getText()));
+			
+			airport.runways().get(index).getRunway(0).setName(LNAME.getText());
+			airport.runways().get(index).getRunway(1).setName(RNAME.getText());
+			
+		} else { // add a new physical runway and assign the values
+			airport.addPhysicalRunway(new PhysicalRunway(RNAME.getText() + "/" + LNAME.getText(), 
+					new Runway(RNAME.getText(), doubleParser.parse(RTORA.getText()), doubleParser.parse(RASDA.getText()), 
+							doubleParser.parse(RTODA.getText()), doubleParser.parse(RLDA.getText()), doubleParser.parse(RDT.getText())), 
+					new Runway(LNAME.getText(), doubleParser.parse(LTORA.getText()), doubleParser.parse(LASDA.getText()), 
+							doubleParser.parse(LTODA.getText()), doubleParser.parse(LLDA.getText()), doubleParser.parse(LDT.getText()))));						
+		}
+		ArrayList<String> physicalRunwayNames = new ArrayList<String>();
+		for(PhysicalRunway p : airport.runways()){
+			physicalRunwayNames.add(p.getId());
+		}
+		DefaultListModel pr = new DefaultListModel();
+		for(int i = 0; i < physicalRunwayNames.size(); i++){
+			pr.addElement(physicalRunwayNames.get(i));
+		}
+		physicalRunwayJList.setModel(pr);
+		jd.setVisible(false);
+	}
+	public ERDokListener(Airport airport, JTextField lASDA, JTextField lTORA,
+			JTextField lTODA, JTextField lLDA, JTextField lDT,
+			JTextField rASDA, JTextField rTORA, JTextField rTODA,
+			JTextField rLDA, JTextField rDT, JTextField rNAME,
+			JTextField lNAME, JList physicalRunwayJList, JDialog jd, boolean newRunway) {
+//		super();
+		this.airport = airport;
+		LASDA = lASDA;
+		LTORA = lTORA;
+		LTODA = lTODA;
+		LLDA = lLDA;
+		LDT = lDT;
+		RASDA = rASDA;
+		RTORA = rTORA;
+		RTODA = rTODA;
+		RLDA = rLDA;
+		RDT = rDT;
+		RNAME = rNAME;
+		LNAME = lNAME;
+		this.physicalRunwayJList = physicalRunwayJList;
+		this.jd = jd;
+		this.newRunway = newRunway;
+	}
+}
+
+class doubleParser{
+	static double parse(String s){
+		double d = 0;
+		try{
+			d = Double.parseDouble(s);
+		} catch (Exception e) {System.out.println(e);}
+		return d;
+	}
 }

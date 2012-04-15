@@ -21,6 +21,10 @@ public class Airport {
 		return name;
 	}
 	
+	public void setName(String name){
+		this.name = name;
+	}
+	
 	//Method to add runway to the list
 	public void addPhysicalRunway(PhysicalRunway r){
 		runways.add(r);

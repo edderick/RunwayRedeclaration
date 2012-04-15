@@ -13,6 +13,7 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.border.TitledBorder;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
@@ -30,7 +31,7 @@ public class MainFrame extends JFrame {
 	private JTable ObstacleDetailsTable;
 	private final ButtonGroup topPanelButtonGroup = new ButtonGroup();
 	private final ButtonGroup bottomPanelButtonGroup = new ButtonGroup();
-	private Airport airport = new Airport("");
+	private Airport airport;
 
 	/**
 	 * Launch the application.
@@ -52,7 +53,7 @@ public class MainFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public MainFrame() {
-		
+		airport = new Airport("");
 		try {
 		    UIManager.setLookAndFeel(
 		        UIManager.getSystemLookAndFeelClassName());
@@ -86,7 +87,7 @@ public class MainFrame extends JFrame {
 		JMenuItem mntmNewMenuItem = new JMenuItem("Airport");
 		mntmNewMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				EditAirportDialog ead = new EditAirportDialog();
+				EditAirportDialog ead = new EditAirportDialog(airport);
 			}
 		});
 
@@ -107,7 +108,7 @@ public class MainFrame extends JFrame {
 		mntmAirport.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				/*
-				 *  Open airport code goes here
+				 *  Open airport code goes here - need to reset airport if the user decides to cancel
 				 */				
 				LoadXMLFile lf = new LoadXMLFile();
 				try {
@@ -195,7 +196,7 @@ public class MainFrame extends JFrame {
 		JMenuItem mntmNewMenuItem_6 = new JMenuItem("Runway");
 		mntmNewMenuItem_6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				EditRunwayDialog erd = new EditRunwayDialog(null);
+				EditRunwayDialog erd = new EditRunwayDialog(airport, new JList(), false);
 			}
 		});
 		mnEdit.add(mntmNewMenuItem_6);
@@ -203,7 +204,7 @@ public class MainFrame extends JFrame {
 		JMenuItem mntmAirport_1 = new JMenuItem("Airport");
 		mntmAirport_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				EditAirportDialog ead = new EditAirportDialog();
+				EditAirportDialog ead = new EditAirportDialog(airport);
 			}
 		});
 		mnEdit.add(mntmAirport_1);
@@ -386,13 +387,7 @@ public class MainFrame extends JFrame {
 		sideView.setRunwayDimensions(80);
 		sideView.setValues(80, 5, 40, 0, 73, 2, 15, 50, true, 76, 3, 9);
 		rightSplitPane.setRightComponent(sideView);
-		
-		
-		
-		
-	
-		
-		
+				
 	}
 
 }
