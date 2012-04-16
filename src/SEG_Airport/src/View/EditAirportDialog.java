@@ -23,33 +23,19 @@ import javax.swing.JLabel;
 
 public class EditAirportDialog extends JDialog {
 
-	//private final JPanel contentPanel = new JPanel();	
 	private JTextField AirportName;
-	private Airport airport;
+	//private Airport airport;
 	private Airport airport_backup;
-	private boolean newAirport;
+//	private boolean newAirport;
 
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		try {
-//			EditAirportDialog dialog = new EditAirportDialog(airport);
-//			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-//			dialog.setVisible(true);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
-
-	/**
-	 * Create the dialog.
-	 */
-	public EditAirportDialog(Airport apt, boolean newAirport) {
-		airport = apt;
-		airport_backup = apt;
-		this.newAirport = newAirport;
-		if(newAirport) airport = new Airport("");
+	public EditAirportDialog(Airport airport, Airport old) {
+//		airport = apt;
+//		airport_backup = airport;
+//		this.newAirport = newAirport;
+		
+//		System.out.println("new airport: " + newAirport);
+		
+//		if(newAirport) airport = new Airport("");
 		
 		ArrayList<String> physicalRunwayNames = new ArrayList<String>();
 		for(PhysicalRunway p : airport.runways()){
@@ -101,7 +87,7 @@ public class EditAirportDialog extends JDialog {
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				airport = airport_backup;
+//				airport = airport_backup;
 				setVisible(false);
 			}
 		});
@@ -131,6 +117,7 @@ class okListener implements ActionListener{
 	Airport a;
 	public void actionPerformed(ActionEvent e) {
 		a.setName(jt.getText());
+		System.out.println(a.runways().size());
 		jd.setVisible(false);
 	}
 	public okListener(JDialog jd, JTextField jt, Airport a) {

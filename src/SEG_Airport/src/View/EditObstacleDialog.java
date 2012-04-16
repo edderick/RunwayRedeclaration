@@ -16,35 +16,18 @@ public class EditObstacleDialog extends JDialog {
 	private JTextField TF_HEIGHT;
 	private JTextField TF_WIDTH;
 	private JTextField TF_LENGTH;
-	private JTextField NAME;
-	private Obstacle obstacle,obstacle_backup;
-	private boolean newObstacle;
+	private JTextField TF_NAME;
+//	private Obstacle obstacle,obstacle_backup;
+//	private boolean newObstacle;
 
-	/**
-	 * Launch the application.
-//	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					EdObstacleFrame frame = new EdObstacleFrame();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
-	/**
-	 * Create the frame.
-	 */
-	public EditObstacleDialog(Obstacle obstacle, boolean newObstacle) {
-		this.obstacle = obstacle;
-		this.obstacle_backup = obstacle;
-		this.newObstacle = newObstacle;
-		
-		if(newObstacle) obstacle = new Obstacle("", "", 0, 0, 0);
+	public EditObstacleDialog(Obstacle obstacle, Obstacle old) {
+//		this.obstacle = obstacle;
+//		this.obstacle_backup = obstacle;
+//		this.newObstacle = newObstacle;
+//		
+//		System.out.println("new: " + newObstacle);
+//		
+//		if(newObstacle) obstacle = new Obstacle("", "", 0, 0, 0);
 		
 		setResizable(false);
 		setTitle("Edit Obstacle");
@@ -61,10 +44,10 @@ public class EditObstacleDialog extends JDialog {
 		JLabel lblName = new JLabel("Name");
 		panel_1.add(lblName);
 		
-		NAME = new JTextField();
-		NAME.setPreferredSize(new Dimension(10, 20));
-		panel_1.add(NAME);
-		NAME.setColumns(15);
+		TF_NAME = new JTextField();
+		TF_NAME.setPreferredSize(new Dimension(10, 20));
+		panel_1.add(TF_NAME);
+		TF_NAME.setColumns(15);
 		
 		JPanel panel = new JPanel();
 		contentPane.add(panel, "cell 0 2,grow");
@@ -121,26 +104,71 @@ public class EditObstacleDialog extends JDialog {
 		panel_2.setLayout(new MigLayout("", "[grow][][]", "[grow][]"));
 		
 		JButton btnNewButton = new JButton("Apply");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				setVisible(false);
-			}
-		});
+		btnNewButton.addActionListener(new EODapplyListener(obstacle, this, TF_HEIGHT, TF_LENGTH, TF_WIDTH, TF_NAME, comboBox));
 		panel_2.add(btnNewButton, "cell 1 0");
 		
 		JButton btnNewButton_1 = new JButton("Cancel");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-			}
-		});
+		btnNewButton_1.addActionListener(new EODcancelListener(obstacle, old, this));
 		panel_2.add(btnNewButton_1, "cell 2 0");
 		
-		if(!newObstacle){
+//		if(!newObstacle){
 			TF_HEIGHT.setText(Double.toString(obstacle.getHeight()));
-		}
+			TF_LENGTH.setText(Double.toString(obstacle.getLength()));
+			TF_WIDTH.setText(Double.toString(obstacle.getWidth()));
+			TF_NAME.setText(obstacle.getName());
+			comboBox.setSelectedItem(obstacle.getSizeType());
+//		}
 		
 		setVisible(true);
 	}
+}
 
+class EODapplyListener implements ActionListener{
+	Obstacle obstacle;
+	EditObstacleDialog eod;
+	JTextField height, length, width, name;
+	JComboBox size;
+	
+	public void actionPerformed(ActionEvent e) {
+		obstacle.setHeight(doubleParser.parse(height.getText()));
+		obstacle.setLength(doubleParser.parse(length.getText()));
+		obstacle.setWidth(doubleParser.parse(width.getText()));
+		obstacle.setName(name.getText());
+		obstacle.setSizeType((String) size.getSelectedItem());
+		
+		eod.setVisible(false);
+	}
+
+	public EODapplyListener(Obstacle obstacle, EditObstacleDialog eod,
+			JTextField height, JTextField length, JTextField width,
+			JTextField name, JComboBox size) {
+		super();
+		this.obstacle = obstacle;
+		this.eod = eod;
+		this.height = height;
+		this.length = length;
+		this.width = width;
+		this.name = name;
+		this.size = size;
+	}
+}
+
+class EODcancelListener implements ActionListener{
+	Obstacle obstacle, revertTo;
+	EditObstacleDialog eod;
+	
+	public void actionPerformed(ActionEvent e){
+		obstacle = revertTo;
+		eod.setVisible(false);
+	}
+
+	public EODcancelListener(Obstacle obstacle, Obstacle revertTo,
+			EditObstacleDialog eod) {
+		super();
+		this.obstacle = obstacle;
+		this.revertTo = revertTo;
+		this.eod = eod;
+	}
+	
+	
 }

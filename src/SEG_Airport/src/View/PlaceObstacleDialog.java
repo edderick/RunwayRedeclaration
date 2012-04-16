@@ -21,25 +21,6 @@ public class PlaceObstacleDialog extends JDialog {
 	private JTextField TF_BLASTALLOWANCE;
 	private JTextField TF_AOS;
 
-	/**
-	 * Launch the application.
-//	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					EdObstacleFrame frame = new EdObstacleFrame();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
-	/**
-	 * Create the frame.
-	 */
 	public PlaceObstacleDialog(Obstacle obstacle) {
 		this.obstacle = obstacle;
 		this.obstacle_backup = obstacle;

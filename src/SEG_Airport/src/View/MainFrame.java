@@ -50,13 +50,10 @@ public class MainFrame extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public MainFrame() {
 		airport = new Airport("");
 		obstacle = new Obstacle("", "", 0, 0, 0);
-		setTitle("SEG GROUP 9 - AWESOME AIRPORT SYSTEM PROGRAM RUNWAY THING");
+		setTitle("SEG Group 9 - Awesome Airport System Program Runway Thing");
 		
 		try {
 		    UIManager.setLookAndFeel(
@@ -91,7 +88,9 @@ public class MainFrame extends JFrame {
 		JMenuItem mntmNewMenuItem = new JMenuItem("Airport");
 		mntmNewMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				EditAirportDialog ead = new EditAirportDialog(airport, true);
+				Airport old = airport;
+				airport = new Airport("");
+				EditAirportDialog ead = new EditAirportDialog(airport, old);
 			}
 		});
 
@@ -100,7 +99,9 @@ public class MainFrame extends JFrame {
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Obstacle");
 		mntmNewMenuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				EditObstacleDialog ead = new EditObstacleDialog(obstacle,true);
+				Obstacle old = obstacle;
+				obstacle = new Obstacle("", "", 0, 0, 0);
+				EditObstacleDialog ead = new EditObstacleDialog(obstacle, old);
 			}
 		});
 		mnAirport.add(mntmNewMenuItem_1);
@@ -115,6 +116,7 @@ public class MainFrame extends JFrame {
 				 *  Open airport code goes here - need to reset airport if the user decides to cancel
 				 */				
 				LoadXMLFile lf = new LoadXMLFile();
+				Airport ap = airport;
 				try {
 					airport = lf.loadFile();
 					System.out.println("This is the airport opened: " + airport.getName());
@@ -135,7 +137,10 @@ public class MainFrame extends JFrame {
 								
 								);
 					}
-				} catch (Exception e) {}				
+				} catch (Exception e) {}
+				if (airport == null) {
+					airport = ap;
+				}
 			}
 		});
 		mnNewMenu.add(mntmAirport);
@@ -208,7 +213,9 @@ public class MainFrame extends JFrame {
 		JMenuItem mntmAirport_1 = new JMenuItem("Airport");
 		mntmAirport_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				EditAirportDialog ead = new EditAirportDialog(airport, false);
+				System.out.println("airport you are editing: " + airport.getName());
+				Airport old = airport;
+				EditAirportDialog ead = new EditAirportDialog(airport, old);
 			}
 		});
 		mnEdit.add(mntmAirport_1);
@@ -216,7 +223,8 @@ public class MainFrame extends JFrame {
 		JMenuItem mntmNewMenuItem_7 = new JMenuItem("Obstacle");
 		mntmNewMenuItem_7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				EditObstacleDialog ead = new EditObstacleDialog(obstacle, true);
+				Obstacle old = obstacle;
+				EditObstacleDialog ead = new EditObstacleDialog(obstacle, old);
 			}
 		});
 		mnEdit.add(mntmNewMenuItem_7);
