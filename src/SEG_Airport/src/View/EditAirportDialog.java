@@ -27,6 +27,7 @@ public class EditAirportDialog extends JDialog {
 	private JTextField AirportName;
 	private Airport airport;
 	private Airport airport_backup;
+	private boolean newAirport;
 
 	/**
 	 * Launch the application.
@@ -44,9 +45,12 @@ public class EditAirportDialog extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public EditAirportDialog(Airport apt) {
+	public EditAirportDialog(Airport apt, boolean newAirport) {
 		airport = apt;
 		airport_backup = apt;
+		this.newAirport = newAirport;
+		if(newAirport) airport = new Airport("");
+		
 		ArrayList<String> physicalRunwayNames = new ArrayList<String>();
 		for(PhysicalRunway p : airport.runways()){
 			physicalRunwayNames.add(p.getId());

@@ -32,6 +32,7 @@ public class MainFrame extends JFrame {
 	private final ButtonGroup topPanelButtonGroup = new ButtonGroup();
 	private final ButtonGroup bottomPanelButtonGroup = new ButtonGroup();
 	private Airport airport;
+	private Obstacle obstacle;
 
 	/**
 	 * Launch the application.
@@ -54,6 +55,9 @@ public class MainFrame extends JFrame {
 	 */
 	public MainFrame() {
 		airport = new Airport("");
+		obstacle = new Obstacle("", "", 0, 0, 0);
+		setTitle("SEG GROUP 9 - AWESOME AIRPORT SYSTEM PROGRAM RUNWAY THING");
+		
 		try {
 		    UIManager.setLookAndFeel(
 		        UIManager.getSystemLookAndFeelClassName());
@@ -87,7 +91,7 @@ public class MainFrame extends JFrame {
 		JMenuItem mntmNewMenuItem = new JMenuItem("Airport");
 		mntmNewMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				EditAirportDialog ead = new EditAirportDialog(airport);
+				EditAirportDialog ead = new EditAirportDialog(airport, true);
 			}
 		});
 
@@ -96,7 +100,7 @@ public class MainFrame extends JFrame {
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Obstacle");
 		mntmNewMenuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				EditObstacleDialog ead = new EditObstacleDialog();
+				EditObstacleDialog ead = new EditObstacleDialog(obstacle,true);
 			}
 		});
 		mnAirport.add(mntmNewMenuItem_1);
@@ -204,7 +208,7 @@ public class MainFrame extends JFrame {
 		JMenuItem mntmAirport_1 = new JMenuItem("Airport");
 		mntmAirport_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				EditAirportDialog ead = new EditAirportDialog(airport);
+				EditAirportDialog ead = new EditAirportDialog(airport, false);
 			}
 		});
 		mnEdit.add(mntmAirport_1);
@@ -212,7 +216,7 @@ public class MainFrame extends JFrame {
 		JMenuItem mntmNewMenuItem_7 = new JMenuItem("Obstacle");
 		mntmNewMenuItem_7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				EditObstacleDialog ead = new EditObstacleDialog();
+				EditObstacleDialog ead = new EditObstacleDialog(obstacle, true);
 			}
 		});
 		mnEdit.add(mntmNewMenuItem_7);
@@ -233,6 +237,11 @@ public class MainFrame extends JFrame {
 		mnSelectRunway.add(rdbtnmntmrl);
 		
 		JMenuItem mntmPositionObstacle = new JMenuItem("Position Obstacle");
+		mntmPositionObstacle.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				PlaceObstacleDialog pod = new PlaceObstacleDialog(obstacle);
+			}
+		});
 		mnEdit.add(mntmPositionObstacle);
 		
 		JMenu mnView = new JMenu("View");
