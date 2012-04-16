@@ -22,7 +22,7 @@ public class Test2 {
 		a.addPhysicalRunway(pr1);
 		a.addPhysicalRunway(pr2);
 		
-		Obstacle ob = new Obstacle("Boeing 777", "Aeroplane", "Big", 25, 75, 80);
+		Obstacle ob = new Obstacle("Boeing 777", "Big", 25, 75, 80);
 		
 		PhysicalRunway copyOfpr1 = (PhysicalRunway) a.runways().get(0);
 	    copyOfpr1.placeNewObstacle(ob, 500, copyOfpr1.getRunway(1).getName());
