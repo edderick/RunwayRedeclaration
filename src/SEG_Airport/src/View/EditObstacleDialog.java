@@ -17,17 +17,8 @@ public class EditObstacleDialog extends JDialog {
 	private JTextField TF_WIDTH;
 	private JTextField TF_LENGTH;
 	private JTextField TF_NAME;
-//	private Obstacle obstacle,obstacle_backup;
-//	private boolean newObstacle;
-
+	
 	public EditObstacleDialog(Obstacle obstacle, Obstacle old) {
-//		this.obstacle = obstacle;
-//		this.obstacle_backup = obstacle;
-//		this.newObstacle = newObstacle;
-//		
-//		System.out.println("new: " + newObstacle);
-//		
-//		if(newObstacle) obstacle = new Obstacle("", "", 0, 0, 0);
 		
 		setResizable(false);
 		setTitle("Edit Obstacle");
@@ -111,13 +102,12 @@ public class EditObstacleDialog extends JDialog {
 		btnNewButton_1.addActionListener(new EODcancelListener(obstacle, old, this));
 		panel_2.add(btnNewButton_1, "cell 2 0");
 		
-//		if(!newObstacle){
-			TF_HEIGHT.setText(Double.toString(obstacle.getHeight()));
-			TF_LENGTH.setText(Double.toString(obstacle.getLength()));
-			TF_WIDTH.setText(Double.toString(obstacle.getWidth()));
-			TF_NAME.setText(obstacle.getName());
-			comboBox.setSelectedItem(obstacle.getSizeType());
-//		}
+		// Add text to the textfields from the obstacle object
+		TF_HEIGHT.setText(Double.toString(obstacle.getHeight()));
+		TF_LENGTH.setText(Double.toString(obstacle.getLength()));
+		TF_WIDTH.setText(Double.toString(obstacle.getWidth()));
+		TF_NAME.setText(obstacle.getName());
+		comboBox.setSelectedItem(obstacle.getSizeType());
 		
 		setVisible(true);
 	}
@@ -158,12 +148,11 @@ class EODcancelListener implements ActionListener{
 	EditObstacleDialog eod;
 	
 	public void actionPerformed(ActionEvent e){
-		obstacle = revertTo;
+//		obstacle = revertTo;
 		eod.setVisible(false);
 	}
 
-	public EODcancelListener(Obstacle obstacle, Obstacle revertTo,
-			EditObstacleDialog eod) {
+	public EODcancelListener(Obstacle obstacle, Obstacle revertTo, EditObstacleDialog eod) {
 		super();
 		this.obstacle = obstacle;
 		this.revertTo = revertTo;

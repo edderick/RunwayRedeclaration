@@ -18,25 +18,16 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 
 import Model.*;
+
 import javax.swing.JLabel;
 
 
 public class EditAirportDialog extends JDialog {
 
 	private JTextField AirportName;
-	//private Airport airport;
-	private Airport airport_backup;
-//	private boolean newAirport;
 
 	public EditAirportDialog(Airport airport, Airport old) {
-//		airport = apt;
-//		airport_backup = airport;
-//		this.newAirport = newAirport;
-		
-//		System.out.println("new airport: " + newAirport);
-		
-//		if(newAirport) airport = new Airport("");
-		
+		System.out.println("old size: " + old.runways().size());
 		ArrayList<String> physicalRunwayNames = new ArrayList<String>();
 		for(PhysicalRunway p : airport.runways()){
 			physicalRunwayNames.add(p.getId());
@@ -76,30 +67,24 @@ public class EditAirportDialog extends JDialog {
 		getContentPane().add(btnNewRunway);
 		
 		JButton btnDelete = new JButton("Delete");
-		btnDelete.setBounds(185, 120, 131, 23);
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnDelete.setBounds(185, 143, 131, 23);
 		getContentPane().add(btnDelete);
 		
 		JButton btnOk = new JButton("OK");
 		btnOk.addActionListener(new okListener(this, AirportName, airport));
-		btnOk.setBounds(185, 178, 131, 23);
+		btnOk.setBounds(185, 221, 131, 23);
 		getContentPane().add(btnOk);
 		
-		JButton btnCancel = new JButton("Cancel");
-		btnCancel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-//				airport = airport_backup;
-				setVisible(false);
-			}
-		});
-		btnCancel.setBounds(185, 212, 131, 23);
-		getContentPane().add(btnCancel);
-		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(195, 110, 121, 11);
+		separator.setBounds(195, 121, 121, 11);
 		getContentPane().add(separator);
 		
 		JSeparator separator_1 = new JSeparator();
-		separator_1.setBounds(195, 154, 121, 11);
+		separator_1.setBounds(195, 183, 121, 11);
 		getContentPane().add(separator_1);
 		
 		JLabel lblNameOfAirport = new JLabel("Name:");
@@ -124,6 +109,7 @@ class okListener implements ActionListener{
 		this.jd = jd; this.jt = jt; this.a = a;
 	}	
 }
+
 class editListener implements ActionListener{
 	Airport a;
 	JList physicalRunwayJList;
@@ -137,13 +123,22 @@ class editListener implements ActionListener{
 		this.newRunway = newRunway;
 	}	
 }
-//class editListener implements ActionListener{
-//	Airport a;
-//	public void actionPerformed(ActionEvent e) {
-//		
-//		
-//	}
-//	public okListener(Airport a) {
-//		this.a = a;
-//	}	
-//}
+
+class EADcancelListener implements ActionListener{
+	Airport airport, old;
+	EditAirportDialog ead;
+	
+	public void actionPerformed(ActionEvent e) {
+//		System.out.println("old: " + old.runways().size());
+//		airport = old;
+		ead.setVisible(false);
+	}
+
+	public EADcancelListener(Airport airport, Airport old, EditAirportDialog ead) {
+		super();
+		this.airport = airport;
+		this.old = old;
+		this.ead = ead;
+	}
+	
+}
