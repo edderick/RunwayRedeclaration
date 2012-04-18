@@ -54,5 +54,14 @@ public class Obstacle {
 	public void setLength(double length) {
 		this.length = length;
 	}
+	
+public void saveToXML(){
+		
+		try {
+			SaveToXMLFile f = new SaveToXMLFile(this);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 }
