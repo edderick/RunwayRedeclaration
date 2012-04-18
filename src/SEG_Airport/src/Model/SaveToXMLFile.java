@@ -30,7 +30,7 @@ public class SaveToXMLFile {
 		this.createDocBuilderFactory(root);
 		
 		//First element, the airport's name
-		Element airportName = document.createElement("Name");
+		Element airportName = document.createElement("Airport_Name");
 		airportName.appendChild(document.createTextNode(a.getName()));
 		rootElement.appendChild(airportName);
 		
