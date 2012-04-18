@@ -98,6 +98,17 @@ public class Test {
 		Obstacle obs = new Obstacle("boeing 747", "Medium", 56.0, 45.0, 567.0);
 		obs.saveToXML();
 		
+		LoadXMLFile lof = new LoadXMLFile();
+		Obstacle obs1 = null;
+		try {
+			obs1 = lof.loadObstacle();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println(obs1.getName() + obs1.getSizeType() +
+				obs1.getHeight() + obs1.getWidth() + obs1.getLength());
+		
 	}
 
 }
