@@ -95,6 +95,9 @@ public class Test {
 					);
 		}
 		
+		Obstacle obs = new Obstacle("boeing 747", "Medium", 56.0, 45.0, 567.0);
+		obs.saveToXML();
+		
 	}
 
 }
