@@ -15,6 +15,7 @@ public class LoadXMLFile {
 
 	File fXmlFile;
 	Airport arpt = null;
+	Obstacle obst = null;
 	ArrayList<Runway> rways;
 	int index = 0; //used to iterate over rways
 
@@ -22,6 +23,63 @@ public class LoadXMLFile {
 		// this.loadFile();
 	}
 
+	public Obstacle loadObstacle() throws Exception{
+		
+		JFileChooser fc = new JFileChooser();
+		XMLFileFilter ff = new XMLFileFilter();
+		fc.setFileFilter(ff);
+		int returnVal = fc.showOpenDialog(null);
+		
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			fXmlFile = fc.getSelectedFile();
+
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+			Document doc = dBuilder.parse(fXmlFile);
+			doc.getDocumentElement().normalize();
+
+			//String root = doc.getDocumentElement().getNodeName();
+			// can add an if statement here to make sure its the right kind of file
+
+			// Creating an Obstacle object using the name from the xml file
+			NodeList airportName = doc.getElementsByTagName("Obstacle_Name");
+			Node n = airportName.item(0);
+			Element e = (Element) n;
+			String on = e.getTextContent();//Obstacle name (string)
+			
+			NodeList sizeType = doc.getElementsByTagName("Size_Type");
+			Node st = sizeType.item(0);
+			Element e1 = (Element) st;
+			String type = e1.getTextContent();//Obstacle type (string)
+			
+			NodeList height = doc.getElementsByTagName("Height");
+			Node ht = height.item(0);
+			Element e2 = (Element) ht;
+			Double hei = Double.parseDouble(e2.getTextContent());
+			
+			NodeList width = doc.getElementsByTagName("Width");
+			Node wt = width.item(0);
+			Element e3 = (Element) wt;
+			Double wid = Double.parseDouble(e3.getTextContent());
+			
+			NodeList length = doc.getElementsByTagName("Length");
+			Node lt = length.item(0);
+			Element e4 = (Element) lt;
+			Double len = Double.parseDouble(e4.getTextContent());
+			
+			
+			obst = new Obstacle(on, type, hei, wid, len);
+			// System.out.println(arpt.getName());
+
+			
+		} else {
+			System.out.println("Open command cancelled by user.");
+		}
+		
+		return obst;
+	}
+	
+	
 	public Airport loadFile() throws Exception {
 
 		rways = new ArrayList<Runway>();
@@ -43,7 +101,7 @@ public class LoadXMLFile {
 			// can add an if statement here to make sure its the right kind of file
 
 			// Creating an Airport object using the name from the xml file
-			NodeList airportName = doc.getElementsByTagName("AirportName");
+			NodeList airportName = doc.getElementsByTagName("Airport_Name");
 			Node n = airportName.item(0);
 			Element e = (Element) n;
 			String an = e.getTextContent();
@@ -95,12 +153,11 @@ public class LoadXMLFile {
 	}
 
 	private static String getTagValue(String sTag, Element eElement) {
-		NodeList nlList = eElement.getElementsByTagName(sTag).item(0)
-				.getChildNodes();
-
+		
+		NodeList nlList = eElement.getElementsByTagName(sTag).item(0).getChildNodes();
 		Node nValue = (Node) nlList.item(0);
-
 		return nValue.getNodeValue();
+		
 	}
 
 }
