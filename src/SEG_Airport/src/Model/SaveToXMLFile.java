@@ -16,29 +16,23 @@ import org.w3c.dom.*;
 //testing
 public class SaveToXMLFile {
 
-	File file;
-	DocumentBuilderFactory documentBuilderFactory;
-	DocumentBuilder documentBuilder;
-	Document document;
-	Element rootElement;
+	private File file;
+	private DocumentBuilderFactory documentBuilderFactory;
+	private DocumentBuilder documentBuilder;
+	private Document document;
+	private Element rootElement;
+	
 	
 	//constructor for Airport
 	public SaveToXMLFile(Airport a) throws Exception {
-
-		
 		
 		String root = "Airport";
-		documentBuilderFactory = DocumentBuilderFactory.newInstance();
-		documentBuilder = documentBuilderFactory.newDocumentBuilder();
-		document = documentBuilder.newDocument();
-		rootElement = document.createElement(root);
-		document.appendChild(rootElement);
+		this.createDocBuilderFactory(root);
 		
 		//First element, the airport's name
-		Element airportName = document.createElement("AirportName");
+		Element airportName = document.createElement("Name");
 		airportName.appendChild(document.createTextNode(a.getName()));
 		rootElement.appendChild(airportName);
-		
 		
 		this.addNodesAndElements(a);
 		
@@ -46,6 +40,37 @@ public class SaveToXMLFile {
 		this.createFChooserAndStore();
 		
 	}//end of constructor
+	
+	// construcor for Obstacle
+	public SaveToXMLFile(Obstacle a) throws Exception{
+		
+		String root = "Obstacle";
+		this.createDocBuilderFactory(root);
+		
+		//First element, the obstacle's name
+		Element obstacleName = document.createElement("Obstacle_Name");
+		obstacleName.appendChild(document.createTextNode(a.getName()));
+		rootElement.appendChild(obstacleName);
+		
+		this.addNodesAndElementsObstacle(a);
+		
+		//Creating JFileChooser object and storing its return value
+		this.createFChooserAndStore();
+	}
+	
+	
+	
+	public void createDocBuilderFactory(String r) throws ParserConfigurationException{
+		
+		documentBuilderFactory = DocumentBuilderFactory.newInstance();
+		documentBuilder = documentBuilderFactory.newDocumentBuilder();
+		document = documentBuilder.newDocument();
+		rootElement = document.createElement(r);
+		document.appendChild(rootElement);
+		
+	}
+	
+	
 	
 	public void addNodesAndElements(Airport a) {
 		
@@ -107,6 +132,31 @@ public class SaveToXMLFile {
 		}// end of loop
 
 	}
+	
+	public void addNodesAndElementsObstacle(Obstacle a) {
+
+				Element size_Type = document.createElement("Size_Type");
+				String st = a.getSizeType();
+				size_Type.appendChild(document.createTextNode(st));
+				rootElement.appendChild(size_Type);
+
+				Element height = document.createElement("Height");
+				String h = Double.toString(a.getHeight());
+				height.appendChild(document.createTextNode(h));
+				rootElement.appendChild(height);
+
+				Element width = document.createElement("Width");
+				String w = Double.toString(a.getWidth());
+				width.appendChild(document.createTextNode(w));
+				rootElement.appendChild(width);
+
+				Element length = document.createElement("Length");
+				String l = Double.toString(a.getLength());
+				length.appendChild(document.createTextNode(l));
+				rootElement.appendChild(length);
+
+	}
+	
 	
 	public void createFChooserAndStore() throws IOException, TransformerException {
 
