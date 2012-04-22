@@ -5,7 +5,6 @@ import java.util.ArrayList;
 /**
  * Represents an airport, contains runways
  * @author Oscar
- *
  */
 public class Airport {
 
