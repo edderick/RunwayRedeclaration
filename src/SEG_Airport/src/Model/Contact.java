@@ -2,6 +2,7 @@ package Model;
 
 public class Contact {
 	
+	//Member variables
 	private String firstName;
 	private String lastName;
 	private String email;
