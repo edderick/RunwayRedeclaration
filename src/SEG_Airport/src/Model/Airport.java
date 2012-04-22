@@ -1,8 +1,6 @@
 package Model;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-
 
 /**
  * Represents an airport, contains runways
@@ -70,7 +68,7 @@ public class Airport {
 	 */
 	public void saveToXML(){
 		try {
-			SaveToXMLFile f = new SaveToXMLFile(this);
+			new SaveToXMLFile(this);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

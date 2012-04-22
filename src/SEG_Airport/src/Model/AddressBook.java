@@ -1,15 +1,6 @@
 package Model;
 
 import java.util.ArrayList;
-import java.util.Properties;
-
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 
 /**
  * This class contains a list of contact details 
@@ -89,7 +80,7 @@ public class AddressBook {
 		}
 	}
 
-	 /** Removes a contact from the Address book
+	/** Removes a contact from the Address book
 	 * @param email Email Address of contact to remove
 	 */
 	public void removeContactByEmail(String email) {
@@ -100,7 +91,4 @@ public class AddressBook {
 			}
 		}
 	}
-	
-	
-
 }
