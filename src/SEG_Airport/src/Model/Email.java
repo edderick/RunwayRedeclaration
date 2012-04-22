@@ -22,6 +22,7 @@ public class Email {
 	private Properties props = System.getProperties(); 
 	private Session session;
 	
+	//TODO: Maybe stored these settings in an xml file to be read in.
 	private String host = "smtp.gmail.com";
 	private String from = "seg2012gp9@gmail.com";
 	private String password = "SasanMaleki";
@@ -30,7 +31,10 @@ public class Email {
 	private String body = "";
 	private ArrayList<Contact> recipients = new ArrayList<Contact>();
 	
-
+	/**
+	 * Default constructor for email class
+	 * Sets up the properties for a message to be sent
+	 */
 	public Email(){
 		props.put("mail.smtp.starttls.enable", "true");
 		props.put("mail.smtp.host", host);
@@ -41,24 +45,41 @@ public class Email {
 		session = Session.getDefaultInstance(props, null);
 	}
 
+	/**
+	 * Sets the subject of the email to be sent
+	 * @param subject The subject of the email
+	 */
 	public void setSubject(String subject){
 		this.subject = subject;
 	}
 	
+	/**
+	 * Sets the body text of the email to be sent
+	 * @param subject The body text of the email
+	 */
 	public void setBody(String body){
 		this.body = body;
 	}
 	
+	/**
+	 * @param contact Contact to add to recipients
+	 */
 	public void addRecipient(Contact contact){
 		recipients.add(contact);
 	}
 	
+	/**
+	 * @param contacts List of contact to add to recipients
+	 */
 	public void addRecipients(ArrayList<Contact> contacts){
 		for(Contact c : contacts){
 			recipients.add(c);
 		}
 	}
 	
+	/**
+	 * Sends the email
+	 */
 	public void send(){
 		Message message = new MimeMessage(session);
 		try {
