@@ -1,27 +1,20 @@
 package View;
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
-import javax.swing.AbstractListModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JList;
-import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
-import javax.swing.border.EmptyBorder;
-
 import Model.*;
-
 import javax.swing.JLabel;
 
 
+@SuppressWarnings("serial")
 public class EditAirportDialog extends JDialog {
 
 	private JTextField AirportName;
@@ -45,9 +38,9 @@ public class EditAirportDialog extends JDialog {
 		getContentPane().add(AirportName);
 		AirportName.setColumns(10);
 		
-		JList list = new JList();
+		JList<String> list = new JList<String>();
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		DefaultListModel pr = new DefaultListModel();
+		DefaultListModel<String> pr = new DefaultListModel<String>();
 		for(int i = 0; i < physicalRunwayNames.size(); i++){
 			pr.addElement(physicalRunwayNames.get(i));
 		}
@@ -109,12 +102,13 @@ class okListener implements ActionListener{
 
 class editListener implements ActionListener{
 	Airport a;
-	JList physicalRunwayJList;
+	JList<String> physicalRunwayJList;
 	boolean newRunway;
 	public void actionPerformed(ActionEvent e) {
+		@SuppressWarnings("unused")
 		EditRunwayDialog erd = new EditRunwayDialog(a,physicalRunwayJList,newRunway);		
 	}
-	public editListener(Airport a, JList physicalRunwayJList, boolean newRunway) {
+	public editListener(Airport a, JList<String> physicalRunwayJList, boolean newRunway) {
 		this.a = a;
 		this.physicalRunwayJList = physicalRunwayJList;
 		this.newRunway = newRunway;
@@ -139,7 +133,7 @@ class EADcancelListener implements ActionListener{
 }
 
 class EADdeleteListener implements ActionListener{
-	JList physicalRunwayJList;
+	JList<String> physicalRunwayJList;
 	Airport a;
 	public void actionPerformed(ActionEvent arg0) {
 		int index = physicalRunwayJList.getSelectedIndex();
@@ -148,14 +142,14 @@ class EADdeleteListener implements ActionListener{
 		for(PhysicalRunway p : a.runways()){
 			physicalRunwayNames.add(p.getId());
 		}
-		DefaultListModel pr = new DefaultListModel();
+		DefaultListModel<String> pr = new DefaultListModel<String>();
 		for(int i = 0; i < physicalRunwayNames.size(); i++){
 			pr.addElement(physicalRunwayNames.get(i));
 		}
 		physicalRunwayJList.setModel(pr);
 		physicalRunwayJList.setSelectedIndex(0);
 	}
-	public EADdeleteListener(JList physicalRunwayJList, Airport a) {
+	public EADdeleteListener(JList<String> physicalRunwayJList, Airport a) {
 		super();
 		this.physicalRunwayJList = physicalRunwayJList;
 		this.a = a;

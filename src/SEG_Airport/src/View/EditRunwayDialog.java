@@ -1,11 +1,8 @@
 package View;
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.AbstractListModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -22,6 +19,7 @@ import Model.Runway;
 import net.miginfocom.swing.MigLayout;
 
 
+@SuppressWarnings("serial")
 public class EditRunwayDialog extends JDialog {
 
 	private JPanel contentPane;
@@ -35,12 +33,14 @@ public class EditRunwayDialog extends JDialog {
 	private JTextField RTODA;
 	private JTextField RLDA;
 	private JTextField txtr;
+	@SuppressWarnings("unused")
 	private Airport airport;
-	private JList physicalRunwayJList;
+	@SuppressWarnings("unused")
+	private JList<String> physicalRunwayJList;
 	private JTextField LDT;
 	private JTextField RDT;
 
-	public EditRunwayDialog(Airport airport, JList physicalRunwayJList, boolean newRunway) {
+	public EditRunwayDialog(Airport airport, JList<String> physicalRunwayJList, boolean newRunway) {
 		this.airport = airport;
 		this.physicalRunwayJList = physicalRunwayJList;
 		
@@ -239,7 +239,7 @@ class ERDokListener implements ActionListener{
 	JTextField LASDA; JTextField LTORA; JTextField LTODA; JTextField LLDA; JTextField LDT;
 	JTextField RASDA; JTextField RTORA; JTextField RTODA; JTextField RLDA; JTextField RDT;
 	JTextField RNAME; JTextField LNAME; 
-	JList physicalRunwayJList;
+	JList<String> physicalRunwayJList;
 	JDialog jd;
 	boolean newRunway;
 	public void actionPerformed(ActionEvent e) {
@@ -273,7 +273,7 @@ class ERDokListener implements ActionListener{
 		for(PhysicalRunway p : airport.runways()){
 			physicalRunwayNames.add(p.getId());
 		}
-		DefaultListModel pr = new DefaultListModel();
+		DefaultListModel<String> pr = new DefaultListModel<String>();
 		for(int i = 0; i < physicalRunwayNames.size(); i++){
 			pr.addElement(physicalRunwayNames.get(i));
 		}
@@ -285,7 +285,7 @@ class ERDokListener implements ActionListener{
 			JTextField lTODA, JTextField lLDA, JTextField lDT,
 			JTextField rASDA, JTextField rTORA, JTextField rTODA,
 			JTextField rLDA, JTextField rDT, JTextField rNAME,
-			JTextField lNAME, JList physicalRunwayJList, JDialog jd, boolean newRunway) {
+			JTextField lNAME, JList<String> physicalRunwayJList, JDialog jd, boolean newRunway) {
 		this.airport = airport;
 		LASDA = lASDA;
 		LTORA = lTORA;

@@ -23,6 +23,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 
+@SuppressWarnings("serial")
 public class MainFrame extends JFrame {
 
 	private JPanel contentPane;
@@ -90,6 +91,7 @@ public class MainFrame extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				Airport old = airport;
 				airport = new Airport("");
+				@SuppressWarnings("unused")
 				EditAirportDialog ead = new EditAirportDialog(airport, old);
 			}
 		});
@@ -101,6 +103,7 @@ public class MainFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Obstacle old = obstacle;
 				obstacle = new Obstacle("", "", 0, 0, 0);
+				@SuppressWarnings("unused")
 				EditObstacleDialog ead = new EditObstacleDialog(obstacle, old);
 			}
 		});
@@ -205,7 +208,8 @@ public class MainFrame extends JFrame {
 		JMenuItem mntmNewMenuItem_6 = new JMenuItem("Runway");
 		mntmNewMenuItem_6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				EditRunwayDialog erd = new EditRunwayDialog(airport, new JList(), false);
+				@SuppressWarnings("unused")
+				EditRunwayDialog erd = new EditRunwayDialog(airport, new JList<String>(), false);
 			}
 		});
 		mnEdit.add(mntmNewMenuItem_6);
@@ -215,6 +219,7 @@ public class MainFrame extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				System.out.println("airport you are editing: " + airport.getName());
 				Airport old = airport;
+				@SuppressWarnings("unused")
 				EditAirportDialog ead = new EditAirportDialog(airport, old);
 			}
 		});
@@ -224,6 +229,7 @@ public class MainFrame extends JFrame {
 		mntmNewMenuItem_7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Obstacle old = obstacle;
+				@SuppressWarnings("unused")
 				EditObstacleDialog ead = new EditObstacleDialog(obstacle, old);
 			}
 		});
@@ -247,6 +253,7 @@ public class MainFrame extends JFrame {
 		JMenuItem mntmPositionObstacle = new JMenuItem("Position Obstacle");
 		mntmPositionObstacle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				@SuppressWarnings("unused")
 				PlaceObstacleDialog pod = new PlaceObstacleDialog(obstacle);
 			}
 		});

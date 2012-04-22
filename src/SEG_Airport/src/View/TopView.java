@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
 
+@SuppressWarnings("serial")
 public class TopView extends JPanel {
 	
 	
@@ -19,7 +20,8 @@ public class TopView extends JPanel {
 	//this value determines how much of the width of the runway the runwayTag takes up.
 	final double fontRatio = 0.5;
 	
-	final double tagRotate = 1;
+	//final removed to prevent warning
+	double tagRotate = 1;
 	
 	double r;
 	int TORA;
@@ -95,7 +97,7 @@ public class TopView extends JPanel {
 			if(g2d.getFontMetrics().stringWidth(leftTag)<=(fontRatio*height))break;
 		}
 		
-		if(tagRotate==1){
+		if(tagRotate == 1){
 			g2d.rotate(0.5 * Math.PI,  xRunway+tagBorder, yRunway+(height/4));
 			g2d.drawString(leftTag, xRunway+ tagBorder, yRunway+(height/4));
 			g2d.rotate(-0.5 * Math.PI,  xRunway + tagBorder, yRunway+(height/4));
@@ -117,7 +119,6 @@ public class TopView extends JPanel {
 	
 	public void obstacleCreation(Graphics2D g2d){
 		g2d.setColor(Color.RED);
-		int pWidth = this.getWidth();
 		g2d.fillRect((int) ((r*xObstacle)+xRunway), (int)((r*yObstacle)+yRunway), (int)(r*obstacleLength), (int)(r*obstacleWidth));
 		
 	}
@@ -150,6 +151,7 @@ public class TopView extends JPanel {
 		this.rightTag=right;
 	}
 	
+	//YUMMM
 	public void setValues(int tora, int toraStart, int toda, int todaStart, int asda, int asdaStart, int lda, int ldaStart, boolean obstacle, int x, int y, int length, int width){
 		this.TORA = tora;
 		this.TODA = toda;

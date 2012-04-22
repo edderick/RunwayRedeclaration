@@ -10,8 +10,10 @@ import javax.swing.table.DefaultTableModel;
 import net.miginfocom.swing.MigLayout;
 
 
+@SuppressWarnings("serial")
 public class AddressBookDialog extends JDialog {
-
+	
+	@SuppressWarnings("unused")
 	private final JPanel contentPanel = new JPanel();
 	private JPanel contentPane;
 	private JPanel panel_1;

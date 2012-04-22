@@ -11,20 +11,19 @@ import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
 import net.miginfocom.swing.MigLayout;
-import javax.swing.ListSelectionModel;
 
 
+@SuppressWarnings("serial")
 public class SendEmailDialog extends JDialog {
 
+	@SuppressWarnings("unused")
 	private final JPanel contentPanel = new JPanel();
 
 	private JPanel contentPane;
@@ -66,6 +65,7 @@ public class SendEmailDialog extends JDialog {
 		 * then the last column would contain text ("true"/"false"),
 		 * rather than a check box.
 		 */
+		@SuppressWarnings({ "unchecked", "rawtypes" })
 		public Class getColumnClass(int c) {
 			return getValueAt(0, c).getClass();
 		}
@@ -125,9 +125,8 @@ public class SendEmailDialog extends JDialog {
 		scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, "cell 0 0,grow");
 
+		@SuppressWarnings("unused")
 		JCheckBox jc1 = new JCheckBox();
-		Boolean value = false;
-		Boolean value2 = true;
 		table = new JTable(){
 			public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
 				Component component = super.prepareRenderer(renderer, row, column);

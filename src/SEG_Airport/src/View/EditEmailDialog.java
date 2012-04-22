@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 
+@SuppressWarnings("serial")
 public class EditEmailDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();

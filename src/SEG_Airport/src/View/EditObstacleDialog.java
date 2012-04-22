@@ -10,6 +10,7 @@ import Model.*;
 import net.miginfocom.swing.MigLayout;
 
 
+@SuppressWarnings("serial")
 public class EditObstacleDialog extends JDialog {
 
 	private JPanel contentPane;
@@ -80,8 +81,8 @@ public class EditObstacleDialog extends JDialog {
 		JLabel lblNewLabel_2 = new JLabel("m");
 		panel.add(lblNewLabel_2, "cell 1 2");
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Small", "Medium", "Large"}));
+		JComboBox<String> comboBox = new JComboBox<String>();
+		comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Small", "Medium", "Large"}));
 		panel.add(comboBox, "cell 1 0,growx");
 		
 		JLabel label = new JLabel("m");
@@ -117,7 +118,7 @@ class EODapplyListener implements ActionListener{
 	Obstacle obstacle;
 	EditObstacleDialog eod;
 	JTextField height, length, width, name;
-	JComboBox size;
+	JComboBox<String> size;
 	
 	public void actionPerformed(ActionEvent e) {
 		obstacle.setHeight(doubleParser.parse(height.getText()));
@@ -131,7 +132,7 @@ class EODapplyListener implements ActionListener{
 
 	public EODapplyListener(Obstacle obstacle, EditObstacleDialog eod,
 			JTextField height, JTextField length, JTextField width,
-			JTextField name, JComboBox size) {
+			JTextField name, JComboBox<String> size) {
 		super();
 		this.obstacle = obstacle;
 		this.eod = eod;

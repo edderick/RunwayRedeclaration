@@ -1,5 +1,4 @@
 package View;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,10 +9,12 @@ import Model.Obstacle;
 import net.miginfocom.swing.MigLayout;
 
 
+@SuppressWarnings("serial")
 public class PlaceObstacleDialog extends JDialog {
 
 	private JPanel contentPane;
-	private Obstacle obstacle,obstacle_backup;
+	@SuppressWarnings("unused")
+	private Obstacle obstacle, obstacle_backup;
 	private boolean newObstacle;
 	private JTextField TF_DFT;
 	private JTextField TF_REZA;
@@ -24,7 +25,6 @@ public class PlaceObstacleDialog extends JDialog {
 	public PlaceObstacleDialog(Obstacle obstacle) {
 		this.obstacle = obstacle;
 		this.obstacle_backup = obstacle;
-		this.newObstacle = newObstacle;
 		
 		if(newObstacle) obstacle = new Obstacle("", "", 0, 0, 0);
 		
@@ -94,8 +94,8 @@ public class PlaceObstacleDialog extends JDialog {
 		JLabel lblClosetoa = new JLabel("Closer to");
 		panel.add(lblClosetoa, "cell 0 5,alignx trailing");
 		
-		JComboBox CB_CTA = new JComboBox();
-		CB_CTA.setModel(new DefaultComboBoxModel(new String[] {"runway0", "runway1"}));
+		JComboBox<String> CB_CTA = new JComboBox<String>();
+		CB_CTA.setModel(new DefaultComboBoxModel<String>(new String[] {"runway0", "runway1"}));
 		panel.add(CB_CTA, "cell 1 5,growx");
 		
 		JPanel panel_2 = new JPanel();

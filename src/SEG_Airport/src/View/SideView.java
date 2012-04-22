@@ -1,12 +1,12 @@
 package View;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
 
+@SuppressWarnings("serial")
 public class SideView extends JPanel {
 	
 	
@@ -79,7 +79,6 @@ public class SideView extends JPanel {
 	
 	public void obstacleCreation(Graphics2D g2d){
 		g2d.setColor(Color.RED);
-		int pWidth = this.getWidth();
 		g2d.fillRect((int) ((r*xObstacle)+xRunway), (int) (yRunway-(r*obstacleHeight)), (int)(r*obstacleLength), (int)(r*obstacleHeight));
 		
 	}
