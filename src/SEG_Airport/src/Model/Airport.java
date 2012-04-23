@@ -67,7 +67,8 @@ public class Airport {
 	 */
 	public void saveToXML(){
 		try {
-			new SaveToXMLFile(this);
+			@SuppressWarnings("unused")
+			SaveToXMLFile xmlFile = new SaveToXMLFile(this);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
