@@ -209,7 +209,7 @@ public class MainFrame extends JFrame {
 		mntmNewMenuItem_6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				@SuppressWarnings("unused")
-				EditRunwayDialog erd = new EditRunwayDialog(airport, new JList<String>(), false);
+				EditRunwayDialog erd = new EditRunwayDialog(airport, new JList(), false);
 			}
 		});
 		mnEdit.add(mntmNewMenuItem_6);

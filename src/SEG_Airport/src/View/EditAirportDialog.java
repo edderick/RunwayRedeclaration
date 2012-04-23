@@ -38,9 +38,9 @@ public class EditAirportDialog extends JDialog {
 		getContentPane().add(AirportName);
 		AirportName.setColumns(10);
 		
-		JList<String> list = new JList<String>();
+		JList list = new JList();
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		DefaultListModel<String> pr = new DefaultListModel<String>();
+		DefaultListModel pr = new DefaultListModel();
 		for(int i = 0; i < physicalRunwayNames.size(); i++){
 			pr.addElement(physicalRunwayNames.get(i));
 		}
@@ -102,13 +102,13 @@ class okListener implements ActionListener{
 
 class editListener implements ActionListener{
 	Airport a;
-	JList<String> physicalRunwayJList;
+	JList physicalRunwayJList;
 	boolean newRunway;
 	public void actionPerformed(ActionEvent e) {
 		@SuppressWarnings("unused")
 		EditRunwayDialog erd = new EditRunwayDialog(a,physicalRunwayJList,newRunway);		
 	}
-	public editListener(Airport a, JList<String> physicalRunwayJList, boolean newRunway) {
+	public editListener(Airport a, JList physicalRunwayJList, boolean newRunway) {
 		this.a = a;
 		this.physicalRunwayJList = physicalRunwayJList;
 		this.newRunway = newRunway;
@@ -133,7 +133,7 @@ class EADcancelListener implements ActionListener{
 }
 
 class EADdeleteListener implements ActionListener{
-	JList<String> physicalRunwayJList;
+	JList physicalRunwayJList;
 	Airport a;
 	public void actionPerformed(ActionEvent arg0) {
 		int index = physicalRunwayJList.getSelectedIndex();
@@ -142,14 +142,14 @@ class EADdeleteListener implements ActionListener{
 		for(PhysicalRunway p : a.runways()){
 			physicalRunwayNames.add(p.getId());
 		}
-		DefaultListModel<String> pr = new DefaultListModel<String>();
+		DefaultListModel pr = new DefaultListModel();
 		for(int i = 0; i < physicalRunwayNames.size(); i++){
 			pr.addElement(physicalRunwayNames.get(i));
 		}
 		physicalRunwayJList.setModel(pr);
 		physicalRunwayJList.setSelectedIndex(0);
 	}
-	public EADdeleteListener(JList<String> physicalRunwayJList, Airport a) {
+	public EADdeleteListener(JList physicalRunwayJList, Airport a) {
 		super();
 		this.physicalRunwayJList = physicalRunwayJList;
 		this.a = a;

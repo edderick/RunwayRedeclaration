@@ -94,8 +94,8 @@ public class PlaceObstacleDialog extends JDialog {
 		JLabel lblClosetoa = new JLabel("Closer to");
 		panel.add(lblClosetoa, "cell 0 5,alignx trailing");
 		
-		JComboBox<String> CB_CTA = new JComboBox<String>();
-		CB_CTA.setModel(new DefaultComboBoxModel<String>(new String[] {"runway0", "runway1"}));
+		JComboBox CB_CTA = new JComboBox();
+		CB_CTA.setModel(new DefaultComboBoxModel(new String[] {"runway0", "runway1"}));
 		panel.add(CB_CTA, "cell 1 5,growx");
 		
 		JPanel panel_2 = new JPanel();

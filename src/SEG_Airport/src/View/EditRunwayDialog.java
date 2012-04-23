@@ -36,11 +36,11 @@ public class EditRunwayDialog extends JDialog {
 	@SuppressWarnings("unused")
 	private Airport airport;
 	@SuppressWarnings("unused")
-	private JList<String> physicalRunwayJList;
+	private JList physicalRunwayJList;
 	private JTextField LDT;
 	private JTextField RDT;
 
-	public EditRunwayDialog(Airport airport, JList<String> physicalRunwayJList, boolean newRunway) {
+	public EditRunwayDialog(Airport airport, JList physicalRunwayJList, boolean newRunway) {
 		this.airport = airport;
 		this.physicalRunwayJList = physicalRunwayJList;
 		
@@ -239,7 +239,7 @@ class ERDokListener implements ActionListener{
 	JTextField LASDA; JTextField LTORA; JTextField LTODA; JTextField LLDA; JTextField LDT;
 	JTextField RASDA; JTextField RTORA; JTextField RTODA; JTextField RLDA; JTextField RDT;
 	JTextField RNAME; JTextField LNAME; 
-	JList<String> physicalRunwayJList;
+	JList physicalRunwayJList;
 	JDialog jd;
 	boolean newRunway;
 	public void actionPerformed(ActionEvent e) {
@@ -273,7 +273,7 @@ class ERDokListener implements ActionListener{
 		for(PhysicalRunway p : airport.runways()){
 			physicalRunwayNames.add(p.getId());
 		}
-		DefaultListModel<String> pr = new DefaultListModel<String>();
+		DefaultListModel pr = new DefaultListModel();
 		for(int i = 0; i < physicalRunwayNames.size(); i++){
 			pr.addElement(physicalRunwayNames.get(i));
 		}
@@ -285,7 +285,7 @@ class ERDokListener implements ActionListener{
 			JTextField lTODA, JTextField lLDA, JTextField lDT,
 			JTextField rASDA, JTextField rTORA, JTextField rTODA,
 			JTextField rLDA, JTextField rDT, JTextField rNAME,
-			JTextField lNAME, JList<String> physicalRunwayJList, JDialog jd, boolean newRunway) {
+			JTextField lNAME, JList physicalRunwayJList, JDialog jd, boolean newRunway) {
 		this.airport = airport;
 		LASDA = lASDA;
 		LTORA = lTORA;
