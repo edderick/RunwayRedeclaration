@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * @author Kelvin
  */
 public class AddressBook {
-
+	
 	private ArrayList<Contact> contacts;
 
 	/**

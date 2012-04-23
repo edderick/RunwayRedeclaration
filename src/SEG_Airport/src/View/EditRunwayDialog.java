@@ -48,25 +48,27 @@ public class EditRunwayDialog extends JDialog {
 		setResizable(false);
 		setTitle("Edit Runway");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 501, 268);
+		setBounds(100, 100, 490, 354);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(12, 50, 212, 134);
+		panel.setBounds(12, 50, 212, 185);
 		contentPane.add(panel);
 		panel.setLayout(new MigLayout("", "[37px][37px,grow]", "[15px][][][][]"));
 		
 		JLabel lblAsda = new JLabel("ASDA");
+		lblAsda.setToolTipText("Accelerate Stop Distance Available");
 		panel.add(lblAsda, "cell 0 0,alignx trailing,aligny top");
 		
 		LASDA = new JTextField();
-		panel.add(LASDA, "flowx,cell 1 0,growx");
+		panel.add(LASDA, "cell 1 0,growx");
 		LASDA.setColumns(10);
 		
 		JLabel lblToda = new JLabel("TORA");
+		lblToda.setToolTipText("Take-Off Run Available ");
 		panel.add(lblToda, "cell 0 1,alignx trailing,aligny top");
 		
 		LTORA = new JTextField();
@@ -75,6 +77,7 @@ public class EditRunwayDialog extends JDialog {
 		LTORA.setColumns(10);
 		
 		JLabel lblToda_1 = new JLabel("TODA");
+		lblToda_1.setToolTipText("Take-Off Distance Available");
 		panel.add(lblToda_1, "cell 0 2,alignx trailing");
 		
 		LTODA = new JTextField();
@@ -83,6 +86,7 @@ public class EditRunwayDialog extends JDialog {
 		LTODA.setColumns(10);
 		
 		JLabel lblLda = new JLabel("LDA");
+		lblLda.setToolTipText("Landing Distance Available");
 		panel.add(lblLda, "cell 0 3,alignx trailing");
 		
 		LLDA = new JTextField();
@@ -102,7 +106,8 @@ public class EditRunwayDialog extends JDialog {
 		JLabel lblM_1 = new JLabel("m");
 		panel.add(lblM_1, "cell 1 3");
 		
-		JLabel lblDisplacementThreshold = new JLabel("Displacement Threshold");
+		JLabel lblDisplacementThreshold = new JLabel("DT");
+		lblDisplacementThreshold.setToolTipText("Displacement Threshold");
 		panel.add(lblDisplacementThreshold, "cell 0 4,alignx trailing");
 		
 		LDT = new JTextField();
@@ -125,16 +130,17 @@ public class EditRunwayDialog extends JDialog {
 		txtl.setColumns(10);
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(12, 195, 463, 45);
+		panel_2.setBounds(12, 267, 463, 45);
 		contentPane.add(panel_2);
 		
 		
 		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(246, 50, 212, 134);
+		panel_3.setBounds(246, 50, 212, 185);
 		contentPane.add(panel_3);
 		panel_3.setLayout(new MigLayout("", "[][grow]", "[][][][][]"));
 		
 		JLabel label = new JLabel("ASDA");
+		label.setToolTipText("Accelerate Stop Distance Available");
 		panel_3.add(label, "cell 0 0,alignx trailing");
 		
 		RASDA = new JTextField();
@@ -145,6 +151,7 @@ public class EditRunwayDialog extends JDialog {
 		panel_3.add(label_1, "cell 1 0");
 		
 		JLabel label_2 = new JLabel("TORA");
+		label_2.setToolTipText("Take-Off Run Available ");
 		panel_3.add(label_2, "cell 0 1,alignx trailing");
 		
 		RTORA = new JTextField();
@@ -152,6 +159,7 @@ public class EditRunwayDialog extends JDialog {
 		panel_3.add(RTORA, "flowx,cell 1 1,growx");
 		
 		JLabel label_4 = new JLabel("TODA");
+		label_4.setToolTipText("Take-Off Distance Available");
 		panel_3.add(label_4, "cell 0 2,alignx trailing");
 		
 		RTODA = new JTextField();
@@ -159,6 +167,7 @@ public class EditRunwayDialog extends JDialog {
 		panel_3.add(RTODA, "flowx,cell 1 2,growx");
 		
 		JLabel label_3 = new JLabel("LDA");
+		label_3.setToolTipText("Landing Distance Available");
 		panel_3.add(label_3, "cell 0 3,alignx trailing");
 		
 		RLDA = new JTextField();
@@ -174,8 +183,9 @@ public class EditRunwayDialog extends JDialog {
 		JLabel label_7 = new JLabel("m");
 		panel_3.add(label_7, "cell 1 3");
 		
-		JLabel label_9 = new JLabel("Displacement Threshold");
-		panel_3.add(label_9, "cell 0 4,alignx trailing");
+		JLabel lblDt = new JLabel("DT");
+		lblDt.setToolTipText("Displacement Threshold");
+		panel_3.add(lblDt, "cell 0 4,alignx trailing");
 		
 		RDT = new JTextField();
 		RDT.setColumns(10);
@@ -197,7 +207,7 @@ public class EditRunwayDialog extends JDialog {
 		panel_4.add(txtr, "cell 1 0");
 		
 		JButton btnNewButton = new JButton("Apply");
-		btnNewButton.setBounds(328, 11, 59, 23);
+		btnNewButton.setBounds(290, 11, 80, 23);
 		btnNewButton.addActionListener(new ERDokListener(airport, LASDA, LTORA, LTODA, 
 				LLDA, LDT, RASDA, RTORA, RTODA, RLDA, RDT, txtr, txtl, physicalRunwayJList, this, newRunway));
 		panel_2.setLayout(null);
@@ -209,7 +219,7 @@ public class EditRunwayDialog extends JDialog {
 				setVisible(false);
 			}
 		});
-		btnNewButton_1.setBounds(391, 11, 65, 23);
+		btnNewButton_1.setBounds(376, 11, 80, 23);
 		panel_2.add(btnNewButton_1);
 		
 		if(airport.runways().size() > 0 & !newRunway){			

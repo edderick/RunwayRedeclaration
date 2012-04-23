@@ -65,7 +65,7 @@ public class SendEmailDialog extends JDialog {
 		 * then the last column would contain text ("true"/"false"),
 		 * rather than a check box.
 		 */
-		@SuppressWarnings({ "unchecked", "rawtypes" })
+		@SuppressWarnings("unchecked")
 		public Class getColumnClass(int c) {
 			return getValueAt(0, c).getClass();
 		}
