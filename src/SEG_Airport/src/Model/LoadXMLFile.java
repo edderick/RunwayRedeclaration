@@ -112,7 +112,7 @@ public class LoadXMLFile {
 	 * @return Airport that was contained in XML
 	 * @throws Exception Exceptions to do with reading files and parsing XML
 	 */
-	public Airport loadFile() throws Exception {
+	public Airport loadAirport() throws Exception {
 
 		rways = new ArrayList<Runway>();
 

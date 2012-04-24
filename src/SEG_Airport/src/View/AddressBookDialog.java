@@ -176,6 +176,7 @@ public class AddressBookDialog extends JDialog {
 		gbc_btnCancel.gridy = 6;
 		panel_1.add(btnCancel, gbc_btnCancel);
 
+		setVisible(true);
 	}
 
 }

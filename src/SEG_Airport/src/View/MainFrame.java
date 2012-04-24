@@ -93,12 +93,12 @@ public class MainFrame extends JFrame {
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Airport");
 		mntmNewMenuItem.setMnemonic('a');
-		mntmNewMenuItem.addActionListener(new NewAirportListener());
+		mntmNewMenuItem.addActionListener(new NewAirportListener(this));
 		mnAirport.add(mntmNewMenuItem);
 		
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Obstacle");
 		mntmNewMenuItem_1.setMnemonic('o');
-		mntmNewMenuItem_1.addActionListener(new NewObstacleListener());
+		mntmNewMenuItem_1.addActionListener(new NewObstacleListener(this));
 		mnAirport.add(mntmNewMenuItem_1);
 		
 		JMenu mnNewMenu = new JMenu("Open");
@@ -107,7 +107,7 @@ public class MainFrame extends JFrame {
 		
 		JMenuItem mntmAirport = new JMenuItem("Airport");
 		mntmAirport.setMnemonic('a');
-		mntmAirport.addActionListener(new OpenAirportListener());
+		mntmAirport.addActionListener(new OpenAirportListener(this));
 		mnNewMenu.add(mntmAirport);
 		
 		JMenuItem mntmObstacle = new JMenuItem("Obstacle");
@@ -157,7 +157,7 @@ public class MainFrame extends JFrame {
 		
 		JMenuItem mntmNewMenuItem_6 = new JMenuItem("Runway");
 		mntmNewMenuItem_6.setMnemonic('r');
-		mntmNewMenuItem_6.addActionListener(new EditRunwayListener());
+		mntmNewMenuItem_6.addActionListener(new EditRunwayListener(this));
 		mnEdit.add(mntmNewMenuItem_6);
 		
 		JMenuItem mntmAirport_1 = new JMenuItem("Airport");
@@ -167,7 +167,7 @@ public class MainFrame extends JFrame {
 		
 		JMenuItem mntmNewMenuItem_7 = new JMenuItem("Obstacle");
 		mntmNewMenuItem_7.setMnemonic('o');
-		mntmNewMenuItem_7.addActionListener(new EditObstacleListener());
+		mntmNewMenuItem_7.addActionListener(new EditObstacleListener(this));
 		mnEdit.add(mntmNewMenuItem_7);
 		
 		JSeparator separator = new JSeparator();
@@ -368,9 +368,19 @@ public class MainFrame extends JFrame {
 
 	public void setAirport(Airport airport){
 		this.airport = airport;
+		lblCurrentAirport.setText("Current Airport: " + airport.getName());
+		
 	}
 	
 	public Airport getAirport(){
 		return airport;
+	}
+	
+	public void setObstacle(Obstacle obstacle){
+		this.obstacle = obstacle;
+	}
+	
+	public Obstacle getObstacle(){
+		return obstacle;
 	}
 }

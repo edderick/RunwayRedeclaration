@@ -70,7 +70,7 @@ public class Test {
 		Airport a2 = null;
 		LoadXMLFile lf = new LoadXMLFile();
 		try {
-			a2 = lf.loadFile();
+			a2 = lf.loadAirport();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
