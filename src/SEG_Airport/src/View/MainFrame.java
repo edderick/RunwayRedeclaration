@@ -8,6 +8,22 @@ import javax.swing.JSplitPane;
 import javax.swing.JMenuBar;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+
+import Controller.EditAirportListener;
+import Controller.EditObstacleListener;
+import Controller.EditRunwayListener;
+import Controller.ExitListener;
+import Controller.NewAirportListener;
+import Controller.NewObstacleListener;
+import Controller.ObstaclePositionListener;
+import Controller.OpenAirportListener;
+import Controller.OpenObstacleListener;
+import Controller.SaveAirportListener;
+import Controller.SaveObstacleListener;
+import Controller.SendEmailListener;
+import Controller.ShowAboutListener;
+import Controller.ShowAddressBookListener;
+import Controller.ShowHelpListener;
 import Model.*;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.border.TitledBorder;
@@ -21,6 +37,8 @@ import javax.swing.JRadioButtonMenuItem;
 import javax.swing.ButtonGroup;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 
 @SuppressWarnings("serial")
@@ -30,6 +48,8 @@ public class MainFrame extends JFrame {
 	private JTable OriginalParametersTable;
 	private JTable RedeclaredParametersTable;
 	private JTable ObstacleDetailsTable;
+	private JLabel lblCurrentAirport;
+	private JLabel lblCurrentRunway;
 	private final ButtonGroup topPanelButtonGroup = new ButtonGroup();
 	private final ButtonGroup bottomPanelButtonGroup = new ButtonGroup();
 	private Airport airport;
@@ -54,7 +74,7 @@ public class MainFrame extends JFrame {
 	public MainFrame() {
 		airport = new Airport("");
 		obstacle = new Obstacle("", "", 0, 0, 0);
-		setTitle("SEG Group 9 - Awesome Airport System Program Runway Thing");
+		setTitle("SEG Group 9 - Runway Redeclaration System");
 		
 		try {
 		    UIManager.setLookAndFeel(
@@ -87,76 +107,26 @@ public class MainFrame extends JFrame {
 		mnFile.add(mnAirport);
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Airport");
-		mntmNewMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Airport old = airport;
-				airport = new Airport("");
-				@SuppressWarnings("unused")
-				EditAirportDialog ead = new EditAirportDialog(airport, old);
-			}
-		});
+		mntmNewMenuItem.addActionListener(new NewAirportListener());
 
 		mnAirport.add(mntmNewMenuItem);
 		
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Obstacle");
-		mntmNewMenuItem_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Obstacle old = obstacle;
-				obstacle = new Obstacle("", "", 0, 0, 0);
-				@SuppressWarnings("unused")
-				EditObstacleDialog ead = new EditObstacleDialog(obstacle, old);
-			}
-		});
+		mntmNewMenuItem_1.addActionListener(new NewObstacleListener());
 		mnAirport.add(mntmNewMenuItem_1);
 		
 		JMenu mnNewMenu = new JMenu("Open");
 		mnFile.add(mnNewMenu);
 		
 		JMenuItem mntmAirport = new JMenuItem("Airport");
-		mntmAirport.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				/*
-				 *  Open airport code goes here - need to reset airport if the user decides to cancel
-				 */				
-				LoadXMLFile lf = new LoadXMLFile();
-				Airport ap = airport;
-				try {
-					airport = lf.loadFile();
-					System.out.println("This is the airport opened: " + airport.getName());
-					//iterate over the runways in the loaded airport and print all values
-					for (Object o : airport.runways()) { // this will show all the physical runways
-						System.out.println(((PhysicalRunway) o).getId() 
-								+" "+ ((PhysicalRunway) o).getRunway(0).getName() 
-								+" "+ ((PhysicalRunway) o).getRunway(0).getTORA(1)
-								+" "+ ((PhysicalRunway) o).getRunway(0).getASDA(1)
-								+" "+ ((PhysicalRunway) o).getRunway(0).getTODA(1)
-								+" "+ ((PhysicalRunway) o).getRunway(0).getLDA(1)
-				
-								+" "+ ((PhysicalRunway) o).getRunway(1).getName()
-								+" "+ ((PhysicalRunway) o).getRunway(1).getTORA(1)
-								+" "+ ((PhysicalRunway) o).getRunway(1).getASDA(1)
-								+" "+ ((PhysicalRunway) o).getRunway(1).getTODA(1)
-								+" "+ ((PhysicalRunway) o).getRunway(1).getLDA(1)
-								
-								);
-					}
-				} catch (Exception e) {}
-				if (airport == null) {
-					airport = ap;
-				}
-			}
-		});
+		mntmAirport.addActionListener(new OpenAirportListener());
 		mnNewMenu.add(mntmAirport);
 		
 		JMenuItem mntmObstacle = new JMenuItem("Obstacle");
-		mntmObstacle.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				/*
-				 * Open obstacle code goes here
-				 */
-			}
-		});
+		mntmObstacle.addActionListener(new OpenObstacleListener());
 		mnNewMenu.add(mntmObstacle);
+		
+		//TODO: Create a way to list recent opening and persistently store them
 		
 		JMenu mnOpenRecent = new JMenu("Open Recent");
 		mnFile.add(mnOpenRecent);
@@ -171,68 +141,33 @@ public class MainFrame extends JFrame {
 		mnFile.add(mnSave);
 		
 		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Airport");
-		mntmNewMenuItem_4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				/*
-				 *  Save airport code goes here
-				 */
-				airport.saveToXML();
-			}
-		});
+		mntmNewMenuItem_4.addActionListener(new SaveAirportListener());
 		mnSave.add(mntmNewMenuItem_4);
 		
 		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Obstacle");
-		mntmNewMenuItem_5.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				/*
-				 *  Save obstacle code goes here
-				 */
-			}
-		});
+		mntmNewMenuItem_5.addActionListener(new SaveObstacleListener());
 		mnSave.add(mntmNewMenuItem_5);
 		
 		JSeparator separator_1 = new JSeparator();
 		mnFile.add(separator_1);
 		
 		JMenuItem mntmExit = new JMenuItem("Exit");
-		mntmExit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.exit(getDefaultCloseOperation());
-			}
-		});
+		mntmExit.addActionListener(new ExitListener());
 		mnFile.add(mntmExit);
 		
 		JMenu mnEdit = new JMenu("Edit");
 		menuBar.add(mnEdit);
 		
 		JMenuItem mntmNewMenuItem_6 = new JMenuItem("Runway");
-		mntmNewMenuItem_6.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				@SuppressWarnings("unused")
-				EditRunwayDialog erd = new EditRunwayDialog(airport, new JList(), false);
-			}
-		});
+		mntmNewMenuItem_6.addActionListener(new EditRunwayListener());
 		mnEdit.add(mntmNewMenuItem_6);
 		
 		JMenuItem mntmAirport_1 = new JMenuItem("Airport");
-		mntmAirport_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("airport you are editing: " + airport.getName());
-				Airport old = airport;
-				@SuppressWarnings("unused")
-				EditAirportDialog ead = new EditAirportDialog(airport, old);
-			}
-		});
+		mntmAirport_1.addActionListener(new  EditAirportListener());
 		mnEdit.add(mntmAirport_1);
 		
 		JMenuItem mntmNewMenuItem_7 = new JMenuItem("Obstacle");
-		mntmNewMenuItem_7.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Obstacle old = obstacle;
-				@SuppressWarnings("unused")
-				EditObstacleDialog ead = new EditObstacleDialog(obstacle, old);
-			}
-		});
+		mntmNewMenuItem_7.addActionListener(new EditObstacleListener());
 		mnEdit.add(mntmNewMenuItem_7);
 		
 		JSeparator separator = new JSeparator();
@@ -240,6 +175,8 @@ public class MainFrame extends JFrame {
 		
 		JMenu mnSelectRunway = new JMenu("Select Runway");
 		mnEdit.add(mnSelectRunway);
+		
+		//TODO: Replace these place holders with some generated stuff
 		
 		JRadioButtonMenuItem rdbtnmntmlr = new JRadioButtonMenuItem("09L/27R");
 		topPanelButtonGroup.add(rdbtnmntmlr);
@@ -250,18 +187,16 @@ public class MainFrame extends JFrame {
 		topPanelButtonGroup.add(rdbtnmntmrl);
 		mnSelectRunway.add(rdbtnmntmrl);
 		
+		//End place holders
+		
 		JMenuItem mntmPositionObstacle = new JMenuItem("Position Obstacle");
-		mntmPositionObstacle.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				@SuppressWarnings("unused")
-				PlaceObstacleDialog pod = new PlaceObstacleDialog(obstacle);
-			}
-		});
+		mntmPositionObstacle.addActionListener(new ObstaclePositionListener(obstacle));
 		mnEdit.add(mntmPositionObstacle);
 		
 		JMenu mnView = new JMenu("View");
 		menuBar.add(mnView);
 		
+		//TODO: Fill in the appropriate Listeners here ======================================================================================
 		JMenu mnTopPanel = new JMenu("Top Panel");
 		mnView.add(mnTopPanel);
 		
@@ -300,25 +235,17 @@ public class MainFrame extends JFrame {
 		bottomPanelButtonGroup.add(rdbtnmntmNone);
 		mnNewMenu_1.add(rdbtnmntmNone);
 		
+		//TODO: All the way down to here ======================================================================================
+		
 		JMenu mnEmail = new JMenu("Email");
 		menuBar.add(mnEmail);
 		
 		JMenuItem mntmSendEmail = new JMenuItem("Send email");
-		mntmSendEmail.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				SendEmailDialog sed = new SendEmailDialog();
-				sed.setVisible(true);
-			}
-		});
+		mntmSendEmail.addActionListener(new SendEmailListener());
 		mnEmail.add(mntmSendEmail);
 		
 		JMenuItem mntmAddressBook = new JMenuItem("Address book");
-		mntmAddressBook.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				AddressBookDialog abd = new AddressBookDialog();
-				abd.setVisible(true);
-			}
-		});
+		mntmAddressBook.addActionListener(new ShowAddressBookListener());
 		mnEmail.add(mntmAddressBook);
 		
 		JMenu mnHelp = new JMenu("Help");
@@ -326,9 +253,12 @@ public class MainFrame extends JFrame {
 		
 		JMenuItem mntmShowHelp = new JMenuItem("Show help");
 		mnHelp.add(mntmShowHelp);
+		mntmShowHelp.addActionListener(new ShowHelpListener());
 		
 		JMenuItem mntmAbout = new JMenuItem("About ");
 		mnHelp.add(mntmAbout);
+		mntmAbout.addActionListener(new ShowAboutListener());
+		
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -337,11 +267,22 @@ public class MainFrame extends JFrame {
 		
 		JPanel leftPanel = new JPanel();
 		contentPane.add(leftPanel, "cell 0 0,alignx center,aligny top");
-		leftPanel.setLayout(new MigLayout("", "[275px,grow]", "[][][][grow]"));
+		leftPanel.setLayout(new MigLayout("", "[275px,grow]", "[grow][][][][grow]"));
+		
+		JPanel panel = new JPanel();
+		leftPanel.add(panel, "cell 0 0,grow");
+		panel.setLayout(new MigLayout("", "[77px]", "[14px][]"));
+		
+		lblCurrentAirport = new JLabel("Current Airport:");
+		lblCurrentAirport.setHorizontalAlignment(SwingConstants.RIGHT);
+		panel.add(lblCurrentAirport, "cell 0 0,alignx left,aligny top");
+		
+		lblCurrentRunway = new JLabel("Current Runway:");
+		panel.add(lblCurrentRunway, "cell 0 1");
 		
 		JPanel leftTopPanel = new JPanel();
 		leftTopPanel.setBorder(new TitledBorder(null, "Original Parameters", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		leftPanel.add(leftTopPanel, "cell 0 0,grow");
+		leftPanel.add(leftTopPanel, "cell 0 1,grow");
 		leftTopPanel.setLayout(new BorderLayout(0, 0));
 		
 		OriginalParametersTable = new JTable();
@@ -360,7 +301,7 @@ public class MainFrame extends JFrame {
 		
 		JPanel leftMiddlePanel = new JPanel();
 		leftMiddlePanel.setBorder(new TitledBorder(null, "Redeclared Parameters", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		leftPanel.add(leftMiddlePanel, "cell 0 1,grow");
+		leftPanel.add(leftMiddlePanel, "cell 0 2,grow");
 		leftMiddlePanel.setLayout(new BorderLayout(0, 0));
 		
 		RedeclaredParametersTable = new JTable();
@@ -379,7 +320,7 @@ public class MainFrame extends JFrame {
 		
 		JPanel letBottomPanel = new JPanel();
 		letBottomPanel.setBorder(new TitledBorder(null, "Obstacle Details", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		leftPanel.add(letBottomPanel, "cell 0 2,grow");
+		leftPanel.add(letBottomPanel, "cell 0 3,grow");
 		letBottomPanel.setLayout(new BorderLayout(0, 0));
 		
 		ObstacleDetailsTable = new JTable();

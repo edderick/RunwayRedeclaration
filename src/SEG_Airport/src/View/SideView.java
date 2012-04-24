@@ -1,6 +1,9 @@
 //TODO: If this is the latest version then this needs a large refactor!
 //This class should contain a runway and draw using that.
 
+
+//This class and it's bro need to have a common parent that is more specific that JPanel ;)
+
 package View;
 
 
