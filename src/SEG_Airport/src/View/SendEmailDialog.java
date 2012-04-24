@@ -178,6 +178,7 @@ public class SendEmailDialog extends JDialog {
 		gbc_btnCancel.gridx = 0;
 		gbc_btnCancel.gridy = 6;
 		panel_1.add(btnCancel, gbc_btnCancel);
+		setVisible(true);
 	}
 
 }

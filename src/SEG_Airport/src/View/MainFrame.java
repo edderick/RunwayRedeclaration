@@ -112,7 +112,7 @@ public class MainFrame extends JFrame {
 		
 		JMenuItem mntmObstacle = new JMenuItem("Obstacle");
 		mntmObstacle.setMnemonic('o');
-		mntmObstacle.addActionListener(new OpenObstacleListener());
+		mntmObstacle.addActionListener(new OpenObstacleListener(this));
 		mnNewMenu.add(mntmObstacle);
 		
 		//TODO: Create a way to list recent opening and persistently store them
@@ -135,12 +135,12 @@ public class MainFrame extends JFrame {
 		
 		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Airport");
 		mntmNewMenuItem_4.setMnemonic('a');
-		mntmNewMenuItem_4.addActionListener(new SaveAirportListener());
+		mntmNewMenuItem_4.addActionListener(new SaveAirportListener(this));
 		mnSave.add(mntmNewMenuItem_4);
 		
 		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Obstacle");
 		mntmNewMenuItem_5.setMnemonic('o');
-		mntmNewMenuItem_5.addActionListener(new SaveObstacleListener());
+		mntmNewMenuItem_5.addActionListener(new SaveObstacleListener(this));
 		mnSave.add(mntmNewMenuItem_5);
 		
 		JSeparator separator_1 = new JSeparator();
@@ -248,7 +248,7 @@ public class MainFrame extends JFrame {
 		
 		JMenuItem mntmSendEmail = new JMenuItem("Send email");
 		mntmSendEmail.setMnemonic('s');
-		mntmSendEmail.addActionListener(new SendEmailListener());
+		mntmSendEmail.addActionListener(new ShowEmailDialogListener());
 		mnEmail.add(mntmSendEmail);
 		
 		JMenuItem mntmAddressBook = new JMenuItem("Address book");

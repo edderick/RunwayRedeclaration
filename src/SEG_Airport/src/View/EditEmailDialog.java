@@ -91,6 +91,7 @@ public class EditEmailDialog extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+		setVisible(true);
 	}
 
 }
