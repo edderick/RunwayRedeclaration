@@ -1,4 +1,5 @@
 package View;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
@@ -8,38 +9,20 @@ import javax.swing.JSplitPane;
 import javax.swing.JMenuBar;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-
-import Controller.EditAirportListener;
-import Controller.EditObstacleListener;
-import Controller.EditRunwayListener;
-import Controller.ExitListener;
-import Controller.NewAirportListener;
-import Controller.NewObstacleListener;
-import Controller.ObstaclePositionListener;
-import Controller.OpenAirportListener;
-import Controller.OpenObstacleListener;
-import Controller.SaveAirportListener;
-import Controller.SaveObstacleListener;
-import Controller.SendEmailListener;
-import Controller.ShowAboutListener;
-import Controller.ShowAddressBookListener;
-import Controller.ShowHelpListener;
-import Model.*;
-import net.miginfocom.swing.MigLayout;
 import javax.swing.border.TitledBorder;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.ButtonGroup;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import net.miginfocom.swing.MigLayout;
 
+import Controller.*;
+import Model.*;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
@@ -52,6 +35,7 @@ public class MainFrame extends JFrame {
 	private JLabel lblCurrentRunway;
 	private final ButtonGroup topPanelButtonGroup = new ButtonGroup();
 	private final ButtonGroup bottomPanelButtonGroup = new ButtonGroup();
+	
 	private Airport airport;
 	private Obstacle obstacle;
 
@@ -94,12 +78,13 @@ public class MainFrame extends JFrame {
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 636, 524);
+		setBounds(100, 100, 798, 524);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
 		JMenu mnFile = new JMenu("File");
+		mnFile.setMnemonic('f');
 		menuBar.add(mnFile);
 		
 		JMenu mnAirport = new JMenu("New");
@@ -107,44 +92,54 @@ public class MainFrame extends JFrame {
 		mnFile.add(mnAirport);
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Airport");
+		mntmNewMenuItem.setMnemonic('a');
 		mntmNewMenuItem.addActionListener(new NewAirportListener());
-
 		mnAirport.add(mntmNewMenuItem);
 		
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Obstacle");
+		mntmNewMenuItem_1.setMnemonic('o');
 		mntmNewMenuItem_1.addActionListener(new NewObstacleListener());
 		mnAirport.add(mntmNewMenuItem_1);
 		
 		JMenu mnNewMenu = new JMenu("Open");
+		mnNewMenu.setMnemonic('o');
 		mnFile.add(mnNewMenu);
 		
 		JMenuItem mntmAirport = new JMenuItem("Airport");
+		mntmAirport.setMnemonic('a');
 		mntmAirport.addActionListener(new OpenAirportListener());
 		mnNewMenu.add(mntmAirport);
 		
 		JMenuItem mntmObstacle = new JMenuItem("Obstacle");
+		mntmObstacle.setMnemonic('o');
 		mntmObstacle.addActionListener(new OpenObstacleListener());
 		mnNewMenu.add(mntmObstacle);
 		
 		//TODO: Create a way to list recent opening and persistently store them
 		
 		JMenu mnOpenRecent = new JMenu("Open Recent");
+		mnOpenRecent.setMnemonic('r');
 		mnFile.add(mnOpenRecent);
 		
 		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Airport");
+		mntmNewMenuItem_2.setMnemonic('a');
 		mnOpenRecent.add(mntmNewMenuItem_2);
 		
 		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Obstacle");
+		mntmNewMenuItem_3.setMnemonic('o');
 		mnOpenRecent.add(mntmNewMenuItem_3);
 		
 		JMenu mnSave = new JMenu("Save");
+		mnSave.setMnemonic('s');
 		mnFile.add(mnSave);
 		
 		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Airport");
+		mntmNewMenuItem_4.setMnemonic('a');
 		mntmNewMenuItem_4.addActionListener(new SaveAirportListener());
 		mnSave.add(mntmNewMenuItem_4);
 		
 		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Obstacle");
+		mntmNewMenuItem_5.setMnemonic('o');
 		mntmNewMenuItem_5.addActionListener(new SaveObstacleListener());
 		mnSave.add(mntmNewMenuItem_5);
 		
@@ -152,21 +147,26 @@ public class MainFrame extends JFrame {
 		mnFile.add(separator_1);
 		
 		JMenuItem mntmExit = new JMenuItem("Exit");
+		mntmExit.setMnemonic('x');
 		mntmExit.addActionListener(new ExitListener());
 		mnFile.add(mntmExit);
 		
 		JMenu mnEdit = new JMenu("Edit");
+		mnEdit.setMnemonic('e');
 		menuBar.add(mnEdit);
 		
 		JMenuItem mntmNewMenuItem_6 = new JMenuItem("Runway");
+		mntmNewMenuItem_6.setMnemonic('r');
 		mntmNewMenuItem_6.addActionListener(new EditRunwayListener());
 		mnEdit.add(mntmNewMenuItem_6);
 		
 		JMenuItem mntmAirport_1 = new JMenuItem("Airport");
+		mntmAirport_1.setMnemonic('a');
 		mntmAirport_1.addActionListener(new  EditAirportListener());
 		mnEdit.add(mntmAirport_1);
 		
 		JMenuItem mntmNewMenuItem_7 = new JMenuItem("Obstacle");
+		mntmNewMenuItem_7.setMnemonic('o');
 		mntmNewMenuItem_7.addActionListener(new EditObstacleListener());
 		mnEdit.add(mntmNewMenuItem_7);
 		
@@ -174,6 +174,7 @@ public class MainFrame extends JFrame {
 		mnEdit.add(separator);
 		
 		JMenu mnSelectRunway = new JMenu("Select Runway");
+		mnSelectRunway.setMnemonic('s');
 		mnEdit.add(mnSelectRunway);
 		
 		//TODO: Replace these place holders with some generated stuff
@@ -190,14 +191,17 @@ public class MainFrame extends JFrame {
 		//End place holders
 		
 		JMenuItem mntmPositionObstacle = new JMenuItem("Position Obstacle");
+		mntmPositionObstacle.setMnemonic('p');
 		mntmPositionObstacle.addActionListener(new ObstaclePositionListener(obstacle));
 		mnEdit.add(mntmPositionObstacle);
 		
 		JMenu mnView = new JMenu("View");
+		mnView.setMnemonic('v');
 		menuBar.add(mnView);
 		
 		//TODO: Fill in the appropriate Listeners here ======================================================================================
 		JMenu mnTopPanel = new JMenu("Top Panel");
+		mnTopPanel.setMnemonic('t');
 		mnView.add(mnTopPanel);
 		
 		JRadioButtonMenuItem rdbtnmntmNewRadioItem = new JRadioButtonMenuItem("Top View");
@@ -217,6 +221,7 @@ public class MainFrame extends JFrame {
 		mnTopPanel.add(rdbtnmntmNewRadioItem_3);
 		
 		JMenu mnNewMenu_1 = new JMenu("Bottom Panel");
+		mnNewMenu_1.setMnemonic('b');
 		mnView.add(mnNewMenu_1);
 		
 		JRadioButtonMenuItem rdbtnmntmTopView = new JRadioButtonMenuItem("Top View");
@@ -238,24 +243,30 @@ public class MainFrame extends JFrame {
 		//TODO: All the way down to here ======================================================================================
 		
 		JMenu mnEmail = new JMenu("Email");
+		mnEmail.setMnemonic('m');
 		menuBar.add(mnEmail);
 		
 		JMenuItem mntmSendEmail = new JMenuItem("Send email");
+		mntmSendEmail.setMnemonic('s');
 		mntmSendEmail.addActionListener(new SendEmailListener());
 		mnEmail.add(mntmSendEmail);
 		
 		JMenuItem mntmAddressBook = new JMenuItem("Address book");
+		mntmAddressBook.setMnemonic('a');
 		mntmAddressBook.addActionListener(new ShowAddressBookListener());
 		mnEmail.add(mntmAddressBook);
 		
 		JMenu mnHelp = new JMenu("Help");
+		mnHelp.setMnemonic('h');
 		menuBar.add(mnHelp);
 		
 		JMenuItem mntmShowHelp = new JMenuItem("Show help");
+		mntmShowHelp.setMnemonic('s');
 		mnHelp.add(mntmShowHelp);
 		mntmShowHelp.addActionListener(new ShowHelpListener());
 		
 		JMenuItem mntmAbout = new JMenuItem("About ");
+		mntmAbout.setMnemonic('a');
 		mnHelp.add(mntmAbout);
 		mntmAbout.addActionListener(new ShowAboutListener());
 		
