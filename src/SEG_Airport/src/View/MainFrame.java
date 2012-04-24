@@ -36,6 +36,9 @@ import Model.*;
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
 
+	private static final int MAX_HISTORY = 10;
+	private static final int HISTORY_TO_SHOW = 5;
+	
 	private JPanel contentPane;
 	private JTable OriginalParametersTable;
 	private JTable RedeclaredParametersTable;
@@ -135,7 +138,7 @@ public class MainFrame extends JFrame {
 
 		//Reads in persistent recent files
 		try {
-			this.loadRecentFiles(5);
+			this.loadRecentFiles(HISTORY_TO_SHOW);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -445,7 +448,7 @@ public class MainFrame extends JFrame {
 			recentAirports.add(0, filename);
 		}else{
 			recentAirports.add(0, filename);
-			if(recentAirports.size() > 10) recentAirports.remove(11);
+			if(recentAirports.size() > MAX_HISTORY) recentAirports.remove(MAX_HISTORY + 1);
 		}
 		
 		FileWriter fw = new FileWriter("data/recentAirports");
@@ -463,7 +466,7 @@ public class MainFrame extends JFrame {
 			recentObstacles.add(0, filename);
 		}else{
 			recentObstacles.add(0, filename);
-			if(recentObstacles.size() > 10) recentObstacles.remove(11);
+			if(recentObstacles.size() > MAX_HISTORY) recentObstacles.remove(MAX_HISTORY + 1);
 		}
 		
 		FileWriter fw = new FileWriter("data/recentObstacles");
