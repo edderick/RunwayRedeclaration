@@ -162,7 +162,7 @@ public class MainFrame extends JFrame {
 		
 		JMenuItem mntmAirport_1 = new JMenuItem("Airport");
 		mntmAirport_1.setMnemonic('a');
-		mntmAirport_1.addActionListener(new  EditAirportListener());
+		mntmAirport_1.addActionListener(new  EditAirportListener(this));
 		mnEdit.add(mntmAirport_1);
 		
 		JMenuItem mntmNewMenuItem_7 = new JMenuItem("Obstacle");
@@ -366,4 +366,11 @@ public class MainFrame extends JFrame {
 				
 	}
 
+	public void setAirport(Airport airport){
+		this.airport = airport;
+	}
+	
+	public Airport getAirport(){
+		return airport;
+	}
 }
