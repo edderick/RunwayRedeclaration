@@ -194,5 +194,9 @@ public class LoadXMLFile {
 		return nValue.getNodeValue();
 
 	}
+	
+	public String getFilename(){
+		return fXmlFile.getPath();
+	}
 
 }

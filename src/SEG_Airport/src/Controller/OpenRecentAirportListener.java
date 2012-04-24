@@ -13,8 +13,7 @@ public class OpenRecentAirportListener implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Opening: " + filename);		
 	}
  
 }

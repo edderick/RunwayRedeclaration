@@ -2,6 +2,7 @@ package Controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import Model.LoadXMLFile;
 import Model.Obstacle;
@@ -22,6 +23,14 @@ public class OpenObstacleListener implements ActionListener{
 		try {
 			Obstacle o = lf.loadObstacle();
 			mf.setObstacle(o);
+			
+			try {
+				mf.saveRecentFile(o, lf.getFilename());
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
 			System.out.println("Obstacle Opened");
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block

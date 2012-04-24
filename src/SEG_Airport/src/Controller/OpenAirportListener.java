@@ -2,6 +2,7 @@ package Controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import Model.Airport;
 import Model.LoadXMLFile;
@@ -48,6 +49,12 @@ public class OpenAirportListener implements ActionListener{
 	} catch (Exception ex) {}
 	if (ap != null) {
 		mf.setAirport(ap);
+		try {
+			mf.saveRecentFile(ap, lf.getFilename());
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 	
 		
