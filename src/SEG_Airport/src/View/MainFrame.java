@@ -21,6 +21,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.TitledBorder;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JComponent;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
@@ -40,6 +41,7 @@ public class MainFrame extends JFrame {
 	private static final int HISTORY_TO_SHOW = 5;
 	
 	private JPanel contentPane;
+	private JSplitPane rightSplitPane;
 	private JTable OriginalParametersTable;
 	private JTable RedeclaredParametersTable;
 	private JTable ObstacleDetailsTable;
@@ -71,6 +73,9 @@ public class MainFrame extends JFrame {
 	}
 
 	public MainFrame() {
+		TopView topView = new TopView();
+		SideView sideView = new SideView();
+		
 		airport = new Airport("");
 		obstacle = new Obstacle("", "", 0, 0, 0);
 		setTitle("SEG Group 9 - Runway Redeclaration System");
@@ -241,41 +246,46 @@ public class MainFrame extends JFrame {
 		mnTopPanel.setMnemonic('t');
 		mnView.add(mnTopPanel);
 
-		JRadioButtonMenuItem rdbtnmntmNewRadioItem = new JRadioButtonMenuItem("Top View");
-		topPanelButtonGroup.add(rdbtnmntmNewRadioItem);
-		mnTopPanel.add(rdbtnmntmNewRadioItem);
+		JRadioButtonMenuItem rdbtnmntmTopPanelTopView = new JRadioButtonMenuItem("Top View");
+		topPanelButtonGroup.add(rdbtnmntmTopPanelTopView);
+		mnTopPanel.add(rdbtnmntmTopPanelTopView);
+		
 
-		JRadioButtonMenuItem rdbtnmntmNewRadioItem_1 = new JRadioButtonMenuItem("Side View");
-		topPanelButtonGroup.add(rdbtnmntmNewRadioItem_1);
-		mnTopPanel.add(rdbtnmntmNewRadioItem_1);
+		JRadioButtonMenuItem rdbtnmntmTopPanelSideView = new JRadioButtonMenuItem("Side View");
+		topPanelButtonGroup.add(rdbtnmntmTopPanelSideView);
+		mnTopPanel.add(rdbtnmntmTopPanelSideView);
 
-		JRadioButtonMenuItem rdbtnmntmNewRadioItem_2 = new JRadioButtonMenuItem("Calculations");
-		topPanelButtonGroup.add(rdbtnmntmNewRadioItem_2);
-		mnTopPanel.add(rdbtnmntmNewRadioItem_2);
 
-		JRadioButtonMenuItem rdbtnmntmNewRadioItem_3 = new JRadioButtonMenuItem("None");
-		topPanelButtonGroup.add(rdbtnmntmNewRadioItem_3);
-		mnTopPanel.add(rdbtnmntmNewRadioItem_3);
+		JRadioButtonMenuItem rdbtnmntmTopPanelCalculations = new JRadioButtonMenuItem("Calculations");
+		topPanelButtonGroup.add(rdbtnmntmTopPanelCalculations);
+		mnTopPanel.add(rdbtnmntmTopPanelCalculations);
 
+		JRadioButtonMenuItem rdbtnmntmTopPanelNone_3 = new JRadioButtonMenuItem("None");
+		topPanelButtonGroup.add(rdbtnmntmTopPanelNone_3);
+		mnTopPanel.add(rdbtnmntmTopPanelNone_3);
+		
+		rdbtnmntmTopPanelTopView.setSelected(true);
+		
 		JMenu mnNewMenu_1 = new JMenu("Bottom Panel");
 		mnNewMenu_1.setMnemonic('b');
 		mnView.add(mnNewMenu_1);
 
-		JRadioButtonMenuItem rdbtnmntmTopView = new JRadioButtonMenuItem("Top View");
-		bottomPanelButtonGroup.add(rdbtnmntmTopView);
-		mnNewMenu_1.add(rdbtnmntmTopView);
+		JRadioButtonMenuItem rdbtnmntmBottomPanelTopView = new JRadioButtonMenuItem("Top View");
+		bottomPanelButtonGroup.add(rdbtnmntmBottomPanelTopView);
+		mnNewMenu_1.add(rdbtnmntmBottomPanelTopView);
 
-		JRadioButtonMenuItem rdbtnmntmSideView = new JRadioButtonMenuItem("Side View");
-		bottomPanelButtonGroup.add(rdbtnmntmSideView);
-		mnNewMenu_1.add(rdbtnmntmSideView);
+		JRadioButtonMenuItem rdbtnmntmBottomPanelSideView = new JRadioButtonMenuItem("Side View");
+		rdbtnmntmBottomPanelSideView.setSelected(true);
+		bottomPanelButtonGroup.add(rdbtnmntmBottomPanelSideView);
+		mnNewMenu_1.add(rdbtnmntmBottomPanelSideView);
 
-		JRadioButtonMenuItem rdbtnmntmCalculations = new JRadioButtonMenuItem("Calculations");
-		bottomPanelButtonGroup.add(rdbtnmntmCalculations);
-		mnNewMenu_1.add(rdbtnmntmCalculations);
+		JRadioButtonMenuItem rdbtnmntmBottomPanelCalculations = new JRadioButtonMenuItem("Calculations");
+		bottomPanelButtonGroup.add(rdbtnmntmBottomPanelCalculations);
+		mnNewMenu_1.add(rdbtnmntmBottomPanelCalculations);
 
-		JRadioButtonMenuItem rdbtnmntmNone = new JRadioButtonMenuItem("None");
-		bottomPanelButtonGroup.add(rdbtnmntmNone);
-		mnNewMenu_1.add(rdbtnmntmNone);
+		JRadioButtonMenuItem rdbtnmntmBottomPanelNone = new JRadioButtonMenuItem("None");
+		bottomPanelButtonGroup.add(rdbtnmntmBottomPanelNone);
+		mnNewMenu_1.add(rdbtnmntmBottomPanelNone);
 
 		//TODO: All the way down to here ======================================================================================
 
@@ -386,17 +396,15 @@ public class MainFrame extends JFrame {
 				));
 		letBottomPanel.add(ObstacleDetailsTable);
 
-		JSplitPane rightSplitPane = new JSplitPane();
+		rightSplitPane = new JSplitPane();
 		contentPane.add(rightSplitPane, "cell 1 0,grow");
 		rightSplitPane.setResizeWeight(0.5);
 		rightSplitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
 
-		TopView topView = new TopView();
 		topView.setRunwayDimensions(100, 20, "08L", "27R");
 		topView.setValues(80, 5, 40, 0, 73, 2, 15, 50, true, 76, 3, 9, 4);
 		rightSplitPane.setLeftComponent(topView);
 
-		SideView sideView = new SideView();
 		sideView.setRunwayDimensions(80);
 		sideView.setValues(80, 5, 40, 0, 73, 2, 15, 50, true, 76, 3, 9);
 		rightSplitPane.setRightComponent(sideView);
@@ -409,7 +417,7 @@ public class MainFrame extends JFrame {
 		}
 
 	}
-
+	
 	public void loadRecentFiles(int numberToRead) throws IOException{
 		recentAirports = new ArrayList<String>();
 
