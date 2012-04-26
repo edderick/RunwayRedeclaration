@@ -261,7 +261,7 @@ public class MainFrame extends JFrame {
 		JRadioButtonMenuItem rdbtnmntmTopPanelCalculations = new JRadioButtonMenuItem("Calculations");
 		topPanelButtonGroup.add(rdbtnmntmTopPanelCalculations);
 		mnTopPanel.add(rdbtnmntmTopPanelCalculations);
-		rdbtnmntmTopPanelCalculations.addActionListener(new SelectViewListener(rightSplitPane, new CalculationsView(), true));
+		rdbtnmntmTopPanelCalculations.addActionListener(new SelectViewListener(rightSplitPane, new CalculationsView(null), true));
 
 		JRadioButtonMenuItem rdbtnmntmTopPanelNone = new JRadioButtonMenuItem("None");
 		topPanelButtonGroup.add(rdbtnmntmTopPanelNone);
@@ -288,7 +288,7 @@ public class MainFrame extends JFrame {
 		JRadioButtonMenuItem rdbtnmntmBottomPanelCalculations = new JRadioButtonMenuItem("Calculations");
 		bottomPanelButtonGroup.add(rdbtnmntmBottomPanelCalculations);
 		mnNewMenu_1.add(rdbtnmntmBottomPanelCalculations);
-		rdbtnmntmBottomPanelCalculations.addActionListener(new SelectViewListener(rightSplitPane, new CalculationsView(), false));
+		rdbtnmntmBottomPanelCalculations.addActionListener(new SelectViewListener(rightSplitPane, new CalculationsView(null), false));
 
 		JRadioButtonMenuItem rdbtnmntmBottomPanelNone = new JRadioButtonMenuItem("None");
 		bottomPanelButtonGroup.add(rdbtnmntmBottomPanelNone);
