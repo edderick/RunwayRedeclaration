@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.ArrayList;
+
 public class Test {
 
 	//Just a class to unit test functionality of the other classes
@@ -111,6 +113,18 @@ public class Test {
 		
 		System.out.println(obs1.getName() + obs1.getSizeType() +
 				obs1.getHeight() + obs1.getWidth() + obs1.getLength());
+		
+		Contact cont1 = new Contact("oscar", "mariani", "mariani.oscar@gmail.com");
+		Contact cont2 = new Contact("bob", "squarepants", "squarepants@gmail.com");
+		ArrayList<Contact> contactsList = new ArrayList<Contact>();
+		contactsList.add(cont1);
+		contactsList.add(cont2);
+		
+		try {
+			SaveToXMLFile saveTo = new SaveToXMLFile(contactsList);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 
