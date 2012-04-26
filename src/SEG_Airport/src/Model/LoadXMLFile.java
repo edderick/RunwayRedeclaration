@@ -41,12 +41,23 @@ public class LoadXMLFile {
 	Obstacle obstacle = null;
 	ArrayList<Runway> runways;
 	int index = 0; //used to iterate over runways
+	boolean toPromtOrNotToPromt = true;//says whether to open a prompt when opening a file or not.
+	String fileAddress = "";
 
 	/**
 	 * TODO: this
 	 */
 	public LoadXMLFile() {
 		// this.loadFile();
+	}
+	
+	/**
+	 * @param String representing address of file to be loaded.
+	 */
+	public void switchPromtOff(String address){
+		toPromtOrNotToPromt = false;
+		fileAddress = address;
+		
 	}
 
 	/**
@@ -55,14 +66,20 @@ public class LoadXMLFile {
 	 */
 	public Obstacle loadObstacle() throws Exception{
 
-		JFileChooser fileChooser = new JFileChooser();
-		XMLFileFilter fileFilter = new XMLFileFilter();
-		fileChooser.setFileFilter(fileFilter);
-		int returnValue = fileChooser.showOpenDialog(null);
-
-		if (returnValue == JFileChooser.APPROVE_OPTION) {
-			xmlFile = fileChooser.getSelectedFile();
-
+		if (toPromtOrNotToPromt == true){
+			JFileChooser fileChooser = new JFileChooser();
+			XMLFileFilter fileFilter = new XMLFileFilter();
+			fileChooser.setFileFilter(fileFilter);
+			int returnValue = fileChooser.showOpenDialog(null);
+		
+			if (returnValue == JFileChooser.APPROVE_OPTION) {
+				xmlFile = fileChooser.getSelectedFile();
+			} else {
+				System.out.println("Open command cancelled by user.");
+			}
+		}else{
+			xmlFile = new File(fileAddress);
+		}
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			Document document = dBuilder.parse(xmlFile);
@@ -101,9 +118,8 @@ public class LoadXMLFile {
 			obstacle = new Obstacle(obstacleName, sizeTypeString, heightValue, widthValue, lengthValue);
 			// System.out.println(arpt.getName());
 
-		} else {
-			System.out.println("Open command cancelled by user.");
-		}
+			fileAddress = "";
+			toPromtOrNotToPromt = true;
 
 		return obstacle;
 	}
@@ -116,14 +132,22 @@ public class LoadXMLFile {
 
 		runways = new ArrayList<Runway>();
 
-		JFileChooser fileChooser = new JFileChooser();
-		XMLFileFilter fileFilter = new XMLFileFilter();
-		fileChooser.setFileFilter(fileFilter);
-		int returnValue = fileChooser.showOpenDialog(null);
+		if (toPromtOrNotToPromt == true){
+			JFileChooser fileChooser = new JFileChooser();
+			XMLFileFilter fileFilter = new XMLFileFilter();
+			fileChooser.setFileFilter(fileFilter);
+			int returnValue = fileChooser.showOpenDialog(null);
 
-		if (returnValue == JFileChooser.APPROVE_OPTION) {
-			xmlFile = fileChooser.getSelectedFile();
-
+			if (returnValue == JFileChooser.APPROVE_OPTION) {
+				xmlFile = fileChooser.getSelectedFile();
+			} else {
+			//			System.out.println("Open command cancelled by user.");
+			}
+		}
+		else{
+			xmlFile = new File(fileAddress);
+		}
+		
 			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 			Document document = documentBuilder.parse(xmlFile);
@@ -177,9 +201,8 @@ public class LoadXMLFile {
 
 			}
 
-		} else {
-			//			System.out.println("Open command cancelled by user.");
-		}
+			fileAddress = "";
+			toPromtOrNotToPromt = true;
 
 		return airport;
 	}
