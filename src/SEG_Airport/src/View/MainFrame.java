@@ -76,6 +76,8 @@ public class MainFrame extends JFrame {
 		TopView topView = new TopView();
 		SideView sideView = new SideView();
 		
+		rightSplitPane = new JSplitPane();
+		
 		airport = new Airport("");
 		obstacle = new Obstacle("", "", 0, 0, 0);
 		setTitle("SEG Group 9 - Runway Redeclaration System");
@@ -249,20 +251,22 @@ public class MainFrame extends JFrame {
 		JRadioButtonMenuItem rdbtnmntmTopPanelTopView = new JRadioButtonMenuItem("Top View");
 		topPanelButtonGroup.add(rdbtnmntmTopPanelTopView);
 		mnTopPanel.add(rdbtnmntmTopPanelTopView);
-		
+		rdbtnmntmTopPanelTopView.addActionListener(new SelectViewListener(rightSplitPane, new TopView(), true));
 
 		JRadioButtonMenuItem rdbtnmntmTopPanelSideView = new JRadioButtonMenuItem("Side View");
 		topPanelButtonGroup.add(rdbtnmntmTopPanelSideView);
 		mnTopPanel.add(rdbtnmntmTopPanelSideView);
-
+		rdbtnmntmTopPanelSideView.addActionListener(new SelectViewListener(rightSplitPane, new SideView(), true));
 
 		JRadioButtonMenuItem rdbtnmntmTopPanelCalculations = new JRadioButtonMenuItem("Calculations");
 		topPanelButtonGroup.add(rdbtnmntmTopPanelCalculations);
 		mnTopPanel.add(rdbtnmntmTopPanelCalculations);
+		rdbtnmntmTopPanelCalculations.addActionListener(new SelectViewListener(rightSplitPane, new CalculationsView(), true));
 
-		JRadioButtonMenuItem rdbtnmntmTopPanelNone_3 = new JRadioButtonMenuItem("None");
-		topPanelButtonGroup.add(rdbtnmntmTopPanelNone_3);
-		mnTopPanel.add(rdbtnmntmTopPanelNone_3);
+		JRadioButtonMenuItem rdbtnmntmTopPanelNone = new JRadioButtonMenuItem("None");
+		topPanelButtonGroup.add(rdbtnmntmTopPanelNone);
+		mnTopPanel.add(rdbtnmntmTopPanelNone);
+		rdbtnmntmTopPanelNone.addActionListener(new SelectViewListener(rightSplitPane, null, true));
 		
 		rdbtnmntmTopPanelTopView.setSelected(true);
 		
@@ -273,19 +277,23 @@ public class MainFrame extends JFrame {
 		JRadioButtonMenuItem rdbtnmntmBottomPanelTopView = new JRadioButtonMenuItem("Top View");
 		bottomPanelButtonGroup.add(rdbtnmntmBottomPanelTopView);
 		mnNewMenu_1.add(rdbtnmntmBottomPanelTopView);
+		rdbtnmntmBottomPanelTopView.addActionListener(new SelectViewListener(rightSplitPane, new TopView(), false));
 
 		JRadioButtonMenuItem rdbtnmntmBottomPanelSideView = new JRadioButtonMenuItem("Side View");
 		rdbtnmntmBottomPanelSideView.setSelected(true);
 		bottomPanelButtonGroup.add(rdbtnmntmBottomPanelSideView);
 		mnNewMenu_1.add(rdbtnmntmBottomPanelSideView);
+		rdbtnmntmBottomPanelSideView.addActionListener(new SelectViewListener(rightSplitPane, new SideView(), false));
 
 		JRadioButtonMenuItem rdbtnmntmBottomPanelCalculations = new JRadioButtonMenuItem("Calculations");
 		bottomPanelButtonGroup.add(rdbtnmntmBottomPanelCalculations);
 		mnNewMenu_1.add(rdbtnmntmBottomPanelCalculations);
+		rdbtnmntmBottomPanelCalculations.addActionListener(new SelectViewListener(rightSplitPane, new CalculationsView(), false));
 
 		JRadioButtonMenuItem rdbtnmntmBottomPanelNone = new JRadioButtonMenuItem("None");
 		bottomPanelButtonGroup.add(rdbtnmntmBottomPanelNone);
 		mnNewMenu_1.add(rdbtnmntmBottomPanelNone);
+		rdbtnmntmBottomPanelNone.addActionListener(new SelectViewListener(rightSplitPane, null, false));
 
 		//TODO: All the way down to here ======================================================================================
 
@@ -396,7 +404,6 @@ public class MainFrame extends JFrame {
 				));
 		letBottomPanel.add(ObstacleDetailsTable);
 
-		rightSplitPane = new JSplitPane();
 		contentPane.add(rightSplitPane, "cell 1 0,grow");
 		rightSplitPane.setResizeWeight(0.5);
 		rightSplitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);

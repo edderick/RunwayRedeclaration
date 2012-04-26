@@ -3,23 +3,26 @@ package Controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JSplitPane;
 
+import View.TopView;
+
 public class SelectViewListener implements ActionListener{
 
-	JSplitPane pane;
+	JSplitPane splitPane;
 	JComponent view;
 	boolean top;
 	JRadioButtonMenuItem menuItem;
 	
 	//TODO: Change the type of view to sommat else
-	public SelectViewListener(JRadioButtonMenuItem menuItem, JSplitPane pane, JComponent view, boolean top){
+	public SelectViewListener(JSplitPane splitPane, JComponent view, boolean top){
 
-		this.menuItem = menuItem;
-		this.pane = pane;
+
+		this.splitPane = splitPane;
 		this.view = view;
 		this.top = top;
 		
@@ -28,13 +31,17 @@ public class SelectViewListener implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		
 		if(top){
-			pane.setTopComponent(view);			
+			splitPane.setLeftComponent(view);			
 		}
 		else {
-			pane.setBottomComponent(view);
+			splitPane.setRightComponent(view);
 		}
-		menuItem.setSelected(true);
+
+		
+		
+		
 	}
 
 	
