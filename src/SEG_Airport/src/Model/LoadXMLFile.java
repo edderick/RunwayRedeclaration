@@ -39,6 +39,7 @@ public class LoadXMLFile {
 	File xmlFile;
 	Airport airport = null;
 	Obstacle obstacle = null;
+	ArrayList<Contact> contacts;
 	ArrayList<Runway> runways;
 	int index = 0; //used to iterate over runways
 	boolean toPromtOrNotToPromt = true;//says whether to open a prompt when opening a file or not.
@@ -73,6 +74,20 @@ public class LoadXMLFile {
 		fileAddress = address;
 		try {
 			this.loadAirport();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	/**
+	 * @param String representing address of file to be loaded.
+	 */
+	public void silentLoadContacts(String address){
+		toPromtOrNotToPromt = false;
+		fileAddress = address;
+		try {
+			this.loadContacts();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -224,6 +239,63 @@ public class LoadXMLFile {
 			toPromtOrNotToPromt = true;
 
 		return airport;
+	}
+	
+	/**
+	 * @return ArrayList<Contact> that was contained in XML
+	 * @throws Exception Exceptions to do with reading files and parsing XML
+	 */
+	public ArrayList<Contact> loadContacts() throws Exception {
+
+		contacts = new ArrayList<Contact>();
+
+		if (toPromtOrNotToPromt == true){
+			JFileChooser fileChooser = new JFileChooser();
+			XMLFileFilter fileFilter = new XMLFileFilter();
+			fileChooser.setFileFilter(fileFilter);
+			int returnValue = fileChooser.showOpenDialog(null);
+
+			if (returnValue == JFileChooser.APPROVE_OPTION) {
+				xmlFile = fileChooser.getSelectedFile();
+			} else {
+			//			System.out.println("Open command cancelled by user.");
+			}
+		}
+		else{
+			xmlFile = new File(fileAddress);
+		}
+		
+			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+			Document document = documentBuilder.parse(xmlFile);
+			document.getDocumentElement().normalize();
+
+			//String root = doc.getDocumentElement().getNodeName(); This line seems unneeded
+			// can add an if statement here to make sure its the right kind of file
+
+
+			NodeList nodeList = document.getElementsByTagName("Contact");
+
+			for (int temp = 0; temp < nodeList.getLength(); temp++) {
+
+				Node nNode = nodeList.item(temp);
+				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+
+					Element eElement = (Element) nNode;
+
+					String firstName = getTagValue("First_Name", eElement);
+					String lastName = getTagValue("Last_Name", eElement);
+					String email = getTagValue("Email_Address", eElement);
+				
+					Contact contact = new Contact(firstName, lastName, email);
+					contacts.add(contact);
+				}
+			}
+
+			fileAddress = "";
+			toPromtOrNotToPromt = true;
+
+		return contacts;
 	}
 
 	/**
