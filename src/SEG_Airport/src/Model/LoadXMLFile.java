@@ -36,10 +36,10 @@ import java.util.ArrayList;
  */
 public class LoadXMLFile {
 
-	File fXmlFile;
-	Airport arpt = null;
-	Obstacle obst = null;
-	ArrayList<Runway> rways;
+	File xmlFile;
+	Airport airport = null;
+	Obstacle obstacle = null;
+	ArrayList<Runway> runways;
 	int index = 0; //used to iterate over runways
 
 	/**
@@ -55,57 +55,57 @@ public class LoadXMLFile {
 	 */
 	public Obstacle loadObstacle() throws Exception{
 
-		JFileChooser fc = new JFileChooser();
-		XMLFileFilter ff = new XMLFileFilter();
-		fc.setFileFilter(ff);
-		int returnVal = fc.showOpenDialog(null);
+		JFileChooser fileChooser = new JFileChooser();
+		XMLFileFilter fileFilter = new XMLFileFilter();
+		fileChooser.setFileFilter(fileFilter);
+		int returnValue = fileChooser.showOpenDialog(null);
 
-		if (returnVal == JFileChooser.APPROVE_OPTION) {
-			fXmlFile = fc.getSelectedFile();
+		if (returnValue == JFileChooser.APPROVE_OPTION) {
+			xmlFile = fileChooser.getSelectedFile();
 
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-			Document doc = dBuilder.parse(fXmlFile);
-			doc.getDocumentElement().normalize();
+			Document document = dBuilder.parse(xmlFile);
+			document.getDocumentElement().normalize();
 
 			//String root = doc.getDocumentElement().getNodeName();
 			// can add an if statement here to make sure its the right kind of file
 
 			// Creating an Obstacle object using the name from the xml file
-			NodeList airportName = doc.getElementsByTagName("Obstacle_Name");
-			Node n = airportName.item(0);
-			Element e = (Element) n;
-			String on = e.getTextContent();//Obstacle name (string)
+			NodeList airportName = document.getElementsByTagName("Obstacle_Name");
+			Node node = airportName.item(0);
+			Element element = (Element) node;
+			String obstacleName = element.getTextContent();//Obstacle name (string)
 
-			NodeList sizeType = doc.getElementsByTagName("Size_Type");
-			Node st = sizeType.item(0);
-			Element e1 = (Element) st;
-			String type = e1.getTextContent();//Obstacle type (string)
+			NodeList sizeType = document.getElementsByTagName("Size_Type");
+			Node sizeTypeNode = sizeType.item(0);
+			Element element1 = (Element) sizeTypeNode;
+			String sizeTypeString = element1.getTextContent();//Obstacle type (string)
 
-			NodeList height = doc.getElementsByTagName("Height");
-			Node ht = height.item(0);
-			Element e2 = (Element) ht;
-			Double hei = Double.parseDouble(e2.getTextContent());
+			NodeList height = document.getElementsByTagName("Height");
+			Node heightNode = height.item(0);
+			Element element2 = (Element) heightNode;
+			Double heightValue = Double.parseDouble(element2.getTextContent());
 
-			NodeList width = doc.getElementsByTagName("Width");
-			Node wt = width.item(0);
-			Element e3 = (Element) wt;
-			Double wid = Double.parseDouble(e3.getTextContent());
+			NodeList width = document.getElementsByTagName("Width");
+			Node widthNode = width.item(0);
+			Element element3 = (Element) widthNode;
+			Double widthValue = Double.parseDouble(element3.getTextContent());
 
-			NodeList length = doc.getElementsByTagName("Length");
-			Node lt = length.item(0);
-			Element e4 = (Element) lt;
-			Double len = Double.parseDouble(e4.getTextContent());
+			NodeList length = document.getElementsByTagName("Length");
+			Node lengthNode = length.item(0);
+			Element element4 = (Element) lengthNode;
+			Double lengthValue = Double.parseDouble(element4.getTextContent());
 
 
-			obst = new Obstacle(on, type, hei, wid, len);
+			obstacle = new Obstacle(obstacleName, sizeTypeString, heightValue, widthValue, lengthValue);
 			// System.out.println(arpt.getName());
 
 		} else {
 			System.out.println("Open command cancelled by user.");
 		}
 
-		return obst;
+		return obstacle;
 	}
 
 	/**
@@ -114,37 +114,37 @@ public class LoadXMLFile {
 	 */
 	public Airport loadAirport() throws Exception {
 
-		rways = new ArrayList<Runway>();
+		runways = new ArrayList<Runway>();
 
-		JFileChooser fc = new JFileChooser();
-		XMLFileFilter ff = new XMLFileFilter();
-		fc.setFileFilter(ff);
-		int returnVal = fc.showOpenDialog(null);
+		JFileChooser fileChooser = new JFileChooser();
+		XMLFileFilter fileFilter = new XMLFileFilter();
+		fileChooser.setFileFilter(fileFilter);
+		int returnValue = fileChooser.showOpenDialog(null);
 
-		if (returnVal == JFileChooser.APPROVE_OPTION) {
-			fXmlFile = fc.getSelectedFile();
+		if (returnValue == JFileChooser.APPROVE_OPTION) {
+			xmlFile = fileChooser.getSelectedFile();
 
-			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-			Document doc = dBuilder.parse(fXmlFile);
-			doc.getDocumentElement().normalize();
+			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+			Document document = documentBuilder.parse(xmlFile);
+			document.getDocumentElement().normalize();
 
 			//String root = doc.getDocumentElement().getNodeName(); This line seems unneeded
 			// can add an if statement here to make sure its the right kind of file
 
 			// Creating an Airport object using the name from the xml file
-			NodeList airportName = doc.getElementsByTagName("Airport_Name");
-			Node n = airportName.item(0);
-			Element e = (Element) n;
-			String an = e.getTextContent();
-			arpt = new Airport(an);
+			NodeList airportName = document.getElementsByTagName("Airport_Name");
+			Node airportNameNode = airportName.item(0);
+			Element element = (Element) airportNameNode;
+			String airportNameString = element.getTextContent();
+			airport = new Airport(airportNameString);
 			// System.out.println(arpt.getName());
 
-			NodeList nList = doc.getElementsByTagName("Runway");
+			NodeList nodeList = document.getElementsByTagName("Runway");
 
-			for (int temp = 0; temp < nList.getLength(); temp++) {
+			for (int temp = 0; temp < nodeList.getLength(); temp++) {
 
-				Node nNode = nList.item(temp);
+				Node nNode = nodeList.item(temp);
 				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 
 					Element eElement = (Element) nNode;
@@ -154,23 +154,23 @@ public class LoadXMLFile {
 					double asda = Double.parseDouble(getTagValue("ASDA", eElement));
 					double toda = Double.parseDouble(getTagValue("TODA", eElement));
 					double lda = Double.parseDouble(getTagValue("LDA", eElement));
-					double dt = Double.parseDouble(getTagValue("DisplacedThreshold", eElement));
+					double displacedThreshold = Double.parseDouble(getTagValue("DisplacedThreshold", eElement));
 
-					Runway r = new Runway(name, tora, asda, toda, lda, dt);
-					rways.add(r);//arpt.addRunway(r);
+					Runway runway = new Runway(name, tora, asda, toda, lda, displacedThreshold);
+					runways.add(runway);//arpt.addRunway(r);
 				}
 			}
 
-			NodeList physicalRun = doc.getElementsByTagName("PhysicalRunway");
-			for (int temp = 0; temp < physicalRun.getLength(); temp++){
-				Node nNode = physicalRun.item(temp);
+			NodeList physicalRunway = document.getElementsByTagName("PhysicalRunway");
+			for (int temp = 0; temp < physicalRunway.getLength(); temp++){
+				Node nNode = physicalRunway.item(temp);
 				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 
 					Element eElement = (Element) nNode;
 
 					String name = getTagValue("Name", eElement);
-					PhysicalRunway pr = new PhysicalRunway(name, rways.get(index), rways.get(index+1));
-					arpt.addPhysicalRunway(pr);
+					PhysicalRunway physicalRunwayObject = new PhysicalRunway(name, runways.get(index), runways.get(index+1));
+					airport.addPhysicalRunway(physicalRunwayObject);
 					index = index + 2;
 				}
 
@@ -181,11 +181,11 @@ public class LoadXMLFile {
 			//			System.out.println("Open command cancelled by user.");
 		}
 
-		return arpt;
+		return airport;
 	}
 
 	/**
-	 * TODO: Javadoc me!
+	 * @return Value of the node in the XML file given a tag and an element.
 	 */
 	private static String getTagValue(String sTag, Element eElement) {
 
@@ -196,7 +196,7 @@ public class LoadXMLFile {
 	}
 	
 	public String getFilename(){
-		return fXmlFile.getPath();
+		return xmlFile.getPath();
 	}
 
 }
