@@ -185,7 +185,8 @@ public class LoadXMLFile {
 	}
 
 	/**
-	 * @return Value of the node in the XML file given a tag and an element.
+	 * @return Value of the node in the XML file.
+	 * @param String representing the tag name and an Element object.
 	 */
 	private static String getTagValue(String sTag, Element eElement) {
 
