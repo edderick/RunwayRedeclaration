@@ -91,51 +91,51 @@ public class SaveToXMLFile {
 
 
 			Element physicalRunway = document.createElement("PhysicalRunway");
-			String nam = runway.getId();
+			String namePhysicalRunwayString = runway.getId();
 			// physicalRunway.appendChild(document.createTextNode(nam));
 
-			Element prName = document.createElement("Name");
-			prName.appendChild(document.createTextNode(nam));
-			physicalRunway.appendChild(prName);
+			Element physicalRunwayName = document.createElement("Name");
+			physicalRunwayName.appendChild(document.createTextNode(namePhysicalRunwayString));
+			physicalRunway.appendChild(physicalRunwayName);
 
 			for (int i = 0; i < 2; i++) { // looping through each actual runway (2)
-				Runway r = runway.getRunway(i);// getting a runway
+				Runway runwayObject = runway.getRunway(i);// getting a runway
 
 				// Creating runway element and appending to root element
-				Element em = document.createElement("Runway");
+				Element element = document.createElement("Runway");
 
 				// Creating each of the runway's elements and appending to the runway element
 				Element name = document.createElement("RunwayName");
-				name.appendChild(document.createTextNode(r.getName()));
-				em.appendChild(name);
+				name.appendChild(document.createTextNode(runwayObject.getName()));
+				element.appendChild(name);
 
 				Element tora = document.createElement("TORA");
-				String to = Double.toString(r.getTORA(1));// getting the tora value that can be modified
-				tora.appendChild(document.createTextNode(to));
-				em.appendChild(tora);
+				String toraString = Double.toString(runwayObject.getTORA(1));// getting the tora value that can be modified
+				tora.appendChild(document.createTextNode(toraString));
+				element.appendChild(tora);
 
 				Element asda = document.createElement("ASDA");
-				String as = Double.toString(r.getASDA(1));
-				asda.appendChild(document.createTextNode(as));
-				em.appendChild(asda);
+				String asdaString = Double.toString(runwayObject.getASDA(1));
+				asda.appendChild(document.createTextNode(asdaString));
+				element.appendChild(asda);
 
 				Element toda = document.createElement("TODA");
-				String tod = Double.toString(r.getTODA(1));
-				toda.appendChild(document.createTextNode(tod));
-				em.appendChild(toda);
+				String todaString = Double.toString(runwayObject.getTODA(1));
+				toda.appendChild(document.createTextNode(todaString));
+				element.appendChild(toda);
 
 				Element lda = document.createElement("LDA");
-				String ld = Double.toString(r.getLDA(1));
-				lda.appendChild(document.createTextNode(ld));
-				em.appendChild(lda);
+				String ldaString = Double.toString(runwayObject.getLDA(1));
+				lda.appendChild(document.createTextNode(ldaString));
+				element.appendChild(lda);
 
 				Element displacedThreshold = document
 						.createElement("DisplacedThreshold");
-				String dt = Double.toString(r.getDisplacedThreshold(1));
-				displacedThreshold.appendChild(document.createTextNode(dt));
-				em.appendChild(displacedThreshold);
+				String displacedThresholdString = Double.toString(runwayObject.getDisplacedThreshold(1));
+				displacedThreshold.appendChild(document.createTextNode(displacedThresholdString));
+				element.appendChild(displacedThreshold);
 
-				physicalRunway.appendChild(em);
+				physicalRunway.appendChild(element);
 				// rootElement.appendChild(em);
 			}
 
@@ -151,23 +151,23 @@ public class SaveToXMLFile {
 	public void addNodesAndElementsObstacle(Obstacle obstacle) {
 
 		Element size_Type = document.createElement("Size_Type");
-		String st = obstacle.getSizeType();
-		size_Type.appendChild(document.createTextNode(st));
+		String sizeTypeString = obstacle.getSizeType();
+		size_Type.appendChild(document.createTextNode(sizeTypeString));
 		rootElement.appendChild(size_Type);
 
 		Element height = document.createElement("Height");
-		String h = Double.toString(obstacle.getHeight());
-		height.appendChild(document.createTextNode(h));
+		String heightString = Double.toString(obstacle.getHeight());
+		height.appendChild(document.createTextNode(heightString));
 		rootElement.appendChild(height);
 
 		Element width = document.createElement("Width");
-		String w = Double.toString(obstacle.getWidth());
-		width.appendChild(document.createTextNode(w));
+		String widthString = Double.toString(obstacle.getWidth());
+		width.appendChild(document.createTextNode(widthString));
 		rootElement.appendChild(width);
 
 		Element length = document.createElement("Length");
-		String l = Double.toString(obstacle.getLength());
-		length.appendChild(document.createTextNode(l));
+		String lengthString = Double.toString(obstacle.getLength());
+		length.appendChild(document.createTextNode(lengthString));
 		rootElement.appendChild(length);
 
 	}
@@ -180,12 +180,12 @@ public class SaveToXMLFile {
 	 */
 	public void createFChooserAndStore() throws IOException, TransformerException {
 
-		JFileChooser fc = new JFileChooser();
+		JFileChooser fileChooser = new JFileChooser();
 
-		int returnVal = fc.showSaveDialog(null);
+		int returnValue = fileChooser.showSaveDialog(null);
 
-		if (returnVal == JFileChooser.APPROVE_OPTION) {
-			file = fc.getSelectedFile();
+		if (returnValue == JFileChooser.APPROVE_OPTION) {
+			file = fileChooser.getSelectedFile();
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
