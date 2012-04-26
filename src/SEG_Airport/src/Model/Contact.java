@@ -71,5 +71,12 @@ public class Contact {
 	public String getFullName(){
 		return getFirstName() + " " + getLastName();
 	}
+	
+	/**
+	 * @return The full name and the email of the contact
+	 */
+	public String toString(){
+		return "Name: "+getFullName()+"\nEmail: "+getEmail()+"\n";
+	}
 
 }

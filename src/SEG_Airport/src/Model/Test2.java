@@ -6,7 +6,50 @@ public class Test2 {
 	
 	public static void main(String[] args) throws Exception {
 	    Scanner in = new Scanner(System.in);
-		
+	    
+	    AddressBook ab = new AddressBook();
+	    Contact c1 = new Contact("Kelvin", "Chan", "ycc1g11@soton.ac.uk");
+	    System.out.println(c1);
+	    Contact c2 = new Contact("Brian", "Yu", "by1g10@soton.ac.uk");
+	    System.out.println(c2);
+	    Contact c3 = new Contact("Cathy", "Yu", "cy1g10@soton.ac.uk");
+	    System.out.println(c3);
+	    
+	    if(ab.addContact(c1)){
+	    	System.out.println("Contact added.");
+	    }else{
+	    	System.out.println("Duplicated contact found.");
+	    }
+	    if(ab.addContact(c2)){
+	    	System.out.println("Contact added.");
+	    }else{
+	    	System.out.println("Duplicated contact found.");
+	    }
+	    if(ab.addContact(c3)){
+	    	System.out.println("Contact added.");
+	    }else{
+	    	System.out.println("Duplicated contact found.");
+	    }
+	    
+	    in.nextLine();
+
+	    ArrayList<Contact> l1 = ab.searchContactsByFirstName("Kelvin");
+	    for(Contact cl1 : l1){
+	    	System.out.println(cl1);
+	    }
+	    
+	    ArrayList<Contact> l2 = ab.searchContactsByLastName("Yu");
+	    for(Contact cl2 : l2){
+	    	System.out.println(cl2);
+	    }
+	    
+	    ArrayList<Contact> l3 = ab.searchContactsByLastName("ABC");
+	    for(Contact cl2 : l3){
+	    	System.out.println(cl2);
+	    }
+	    
+	    in.nextLine();
+	    
 		Airport a = new Airport("Heathrow");
 		PhysicalRunway pr1, pr2;
 		

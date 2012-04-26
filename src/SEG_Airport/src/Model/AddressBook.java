@@ -27,9 +27,19 @@ public class AddressBook {
 	/**
 	 * Adds a new contact to the Address Book
 	 * @param newContact The contact to be added
+	 * @return result of adding contact
+	 * @return true if contact added successfully, false if duplicated contact found
 	 */
-	public void addContact(Contact newContact) {
+	public boolean addContact(Contact newContact) {
+		for(Contact c : contacts){
+			if(c.getFirstName().equals(newContact.getFirstName())
+					&& c.getLastName().equals(newContact.getLastName())
+					&& c.getEmail().equals(newContact.getEmail())){
+				return false;
+			}
+		}
 		contacts.add(newContact);
+		return true;
 	}
 
 	/**
@@ -70,25 +80,29 @@ public class AddressBook {
 	/**
 	 * Removes a contact from the Address book
 	 * @param name Name of contact to remove
+	 * @return Result of removal : true for successful false for failure
 	 */
-	public void removeContactByName(String name) {
+	public boolean removeContactByName(String name) {
 		for(Contact c : contacts){
 			if(c.getFullName().equals(name)){
 				contacts.remove(c);
-				break;
+				return true;
 			}
 		}
+		return false;
 	}
 
 	/** Removes a contact from the Address book
 	 * @param email Email Address of contact to remove
+	 * @return Result of removal : true for successful false for failure
 	 */
-	public void removeContactByEmail(String email) {
+	public boolean removeContactByEmail(String email) {
 		for(Contact c : contacts){
 			if(c.getEmail().equals(email)){
 				contacts.remove(c);
-				break;
+				return true;
 			}
 		}
+		return false;
 	}
 }
