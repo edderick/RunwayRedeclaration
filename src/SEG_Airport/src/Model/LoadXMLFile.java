@@ -54,9 +54,28 @@ public class LoadXMLFile {
 	/**
 	 * @param String representing address of file to be loaded.
 	 */
-	public void switchPromtOff(String address){
+	public void silentLoadObstacle(String address){
 		toPromtOrNotToPromt = false;
 		fileAddress = address;
+		try {
+			this.loadObstacle();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	/**
+	 * @param String representing address of file to be loaded.
+	 */
+	public void silentLoadAirport(String address){
+		toPromtOrNotToPromt = false;
+		fileAddress = address;
+		try {
+			this.loadAirport();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 
