@@ -1,6 +1,7 @@
 package Model;
 
 import java.io.*;
+import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
 import javax.xml.parsers.*;
@@ -64,6 +65,22 @@ public class SaveToXMLFile {
 		//Creating JFileChooser object and storing its return value
 		this.createFChooserAndStore();
 	}
+	
+	/**
+	 * Constructor for contacts
+	 * @param contacts The list of contacts to save
+	 * @throws Exception Relating to reading files or generating xml
+	 */
+	public SaveToXMLFile(ArrayList<Contact> contacts) throws Exception{
+
+		String root = "Contacts";
+		this.createDocBuilderFactory(root);
+
+		this.addNodesAndElementsContacts(contacts);
+
+		//Creating JFileChooser object and storing its return value
+		this.createFChooserAndStore();
+	}
 
 	/**
 	 * Creates DocumentBuilderFactory using string for root element
@@ -78,7 +95,55 @@ public class SaveToXMLFile {
 		document.appendChild(rootElement);
 	}
 
+	/**
+	 * Adds the nodes and elements to the xml
+	 * @param contacts The list of contacts to be saved
+	 */
+	public void addNodesAndElementsContacts(ArrayList<Contact> contactList) {
 
+		//int numberOfRunways = airport.runways().size(); //number of physical runways
+
+		//for (PhysicalRunway runway: airport.runways()) { 
+
+
+			/*Element physicalRunway = document.createElement("PhysicalRunway");
+			String namePhysicalRunwayString = runway.getId();
+			// physicalRunway.appendChild(document.createTextNode(nam));
+
+			Element physicalRunwayName = document.createElement("Name");
+			physicalRunwayName.appendChild(document.createTextNode(namePhysicalRunwayString));
+			physicalRunway.appendChild(physicalRunwayName);*/
+
+			for (int i = 0; i < contactList.size(); i++) { // looping through each contact
+				
+				Contact thisContact = contactList.get(i);// grabbing a contact
+
+				// Creating contact element and appending to root element
+				Element element = document.createElement("Contact");
+
+				// Creating each of the contact's elements and appending to the contact element
+				Element firstName = document.createElement("First_Name");
+				firstName.appendChild(document.createTextNode(thisContact.getFirstName()));
+				element.appendChild(firstName);
+
+				Element lastName = document.createElement("Last_Name");
+				lastName.appendChild(document.createTextNode(thisContact.getLastName()));
+				element.appendChild(lastName);
+
+				Element email = document.createElement("Email_Address");
+				email.appendChild(document.createTextNode(thisContact.getEmail()));
+				element.appendChild(email);
+
+
+				rootElement.appendChild(element);
+				// rootElement.appendChild(em);
+			}
+
+		
+
+	}
+	
+	
 	/**
 	 * Adds the nodes and elements to the xml
 	 * @param airport The airport to be saved
