@@ -106,7 +106,7 @@ public class EditRunwayDialog extends JDialog {
 		JLabel lblM_1 = new JLabel("m");
 		panel.add(lblM_1, "cell 1 3");
 		
-		JLabel lblDisplacementThreshold = new JLabel("DT");
+		JLabel lblDisplacementThreshold = new JLabel("Distance Threshold");
 		lblDisplacementThreshold.setToolTipText("Displacement Threshold");
 		panel.add(lblDisplacementThreshold, "cell 0 4,alignx trailing");
 		
