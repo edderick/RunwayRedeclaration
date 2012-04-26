@@ -100,6 +100,9 @@ public class Test {
 		
 		LoadXMLFile lof = new LoadXMLFile();
 		Obstacle obs1 = null;
+		
+		lof.switchPromtOff("/Users/oscarmariani/Desktop/obstacle.xml");
+		
 		try {
 			obs1 = lof.loadObstacle();
 		} catch (Exception e) {
