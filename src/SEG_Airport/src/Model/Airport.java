@@ -11,6 +11,9 @@ public class Airport {
 	//List of physical runways
 	private ArrayList<PhysicalRunway> runways;
 	private String name;
+	
+	Runway currentRunway;
+	PhysicalRunway currentPhysicalRunway;
 
 	/**
 	 * The default constructor for Airport class
@@ -55,6 +58,37 @@ public class Airport {
 		}
 	}
 
+	/**
+	 * Sets the current runway, the runway that is drawn on screen etc
+	 * @param runway New current runway
+	 */
+	public void setCurrentRunway(Runway runway){
+		currentRunway = runway;
+	}
+	
+	/**
+	 * @return The current runway calculations should be about
+	 */
+	public Runway getCurrentRunway(){
+		return currentRunway;
+	}
+	
+	
+	/**
+	 * Sets the current physical runway, the physical runway that is drawn on screen etc
+	 * @param runway New current physical runway
+	 */
+	public void setCurrentPhysicalRunway(PhysicalRunway runway){
+		currentPhysicalRunway = runway;
+	}
+	
+	/**
+	 * @return The current physical runway calculations should be about
+	 */
+	public PhysicalRunway getCurrentPhysicalRunway(){
+		return currentPhysicalRunway;
+	}
+	
 	/**
 	 * @return List of runways
 	 */

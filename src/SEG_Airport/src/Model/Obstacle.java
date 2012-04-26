@@ -2,7 +2,7 @@ package Model;
 
 /**
  * Represents an obstacle that can be placed on a runway
- * @author Edward
+ * @author Kelvin
  */
 public class Obstacle {
 

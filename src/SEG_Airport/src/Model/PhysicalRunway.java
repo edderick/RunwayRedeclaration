@@ -66,7 +66,15 @@ public class PhysicalRunway {
 		setCloserToWhichThreshold(closeToRunwayName);
 		calculateParameters();
 	}
+	
+	public Obstacle getObstacle(){
+		return obstacle;
+	}
 
+	public void setObstacle(Obstacle obstacle) {
+		this.obstacle = obstacle;
+	}
+	
 	/**
 	 * Specified which end the obstacle's distance is measured from
 	 * @param closeToRunwayName The runway the obstacle is closest to

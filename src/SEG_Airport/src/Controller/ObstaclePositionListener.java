@@ -3,14 +3,16 @@ package Controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import Model.Airport;
 import Model.Obstacle;
+import View.MainFrame;
 
 public class ObstaclePositionListener implements ActionListener{
 	
-	Obstacle obstacle;
+	MainFrame mf;
 	
-	public ObstaclePositionListener(Obstacle obstacle){
-		this.obstacle = obstacle;
+	public ObstaclePositionListener(MainFrame mf){
+		this.mf = mf;
 	}
 	
 	@Override

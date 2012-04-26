@@ -19,12 +19,12 @@ public class NewObstacleListener implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		Obstacle old = mf.getObstacle();
+		Obstacle old = mf.getAirport().getCurrentPhysicalRunway().getObstacle();
 		Obstacle obstacle = new Obstacle(null, null, 0, 0, 0);
 		System.out.println("Editing Obstacle: " + old.getName());
 		@SuppressWarnings("unused")
 		EditObstacleDialog eod = new EditObstacleDialog(obstacle, old);
-		mf.setObstacle(obstacle);
+		mf.getAirport().getCurrentPhysicalRunway().setObstacle(obstacle);
 		
 	}
 

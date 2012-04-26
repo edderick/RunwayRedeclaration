@@ -17,7 +17,7 @@ public class SaveObstacleListener implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		try {
-			new SaveToXMLFile(mf.getObstacle());
+			new SaveToXMLFile(mf.getAirport().getCurrentPhysicalRunway().getObstacle());
 			System.out.println("Saved Obstacle ");
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block

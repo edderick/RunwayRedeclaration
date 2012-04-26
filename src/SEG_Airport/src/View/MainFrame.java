@@ -51,7 +51,7 @@ public class MainFrame extends JFrame {
 	private final ButtonGroup bottomPanelButtonGroup = new ButtonGroup();
 
 	private Airport airport;
-	private Obstacle obstacle;
+
 
 	private ArrayList<String> recentAirports;
 	private ArrayList<String> recentObstacles;
@@ -79,7 +79,7 @@ public class MainFrame extends JFrame {
 		rightSplitPane = new JSplitPane();
 		
 		airport = new Airport("");
-		obstacle = new Obstacle("", "", 0, 0, 0);
+
 		setTitle("SEG Group 9 - Runway Redeclaration System");
 
 		try {
@@ -236,7 +236,7 @@ public class MainFrame extends JFrame {
 
 		JMenuItem mntmPositionObstacle = new JMenuItem("Position Obstacle");
 		mntmPositionObstacle.setMnemonic('p');
-		mntmPositionObstacle.addActionListener(new ObstaclePositionListener(obstacle));
+		mntmPositionObstacle.addActionListener(new ObstaclePositionListener(this));
 		mnEdit.add(mntmPositionObstacle);
 
 		JMenu mnView = new JMenu("View");
@@ -503,11 +503,4 @@ public class MainFrame extends JFrame {
 		return airport;
 	}
 
-	public void setObstacle(Obstacle obstacle){
-		this.obstacle = obstacle;
-	}
-
-	public Obstacle getObstacle(){
-		return obstacle;
-	}
 }

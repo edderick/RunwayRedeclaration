@@ -22,7 +22,7 @@ public class OpenObstacleListener implements ActionListener{
 		LoadXMLFile lf = new LoadXMLFile();
 		try {
 			Obstacle o = lf.loadObstacle();
-			mf.setObstacle(o);
+			mf.getAirport().getCurrentPhysicalRunway().setObstacle(o);
 			
 			try {
 				mf.saveRecentFile(o, lf.getFilename());
