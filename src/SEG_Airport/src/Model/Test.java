@@ -125,6 +125,16 @@ public class Test {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		ArrayList<Contact> conts = null;
+		LoadXMLFile lof1 = new LoadXMLFile();
+		try {
+			conts = lof1.loadContacts();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(conts.get(0).getFirstName() + conts.get(0).getLastName() + conts.get(0).getEmail());
+		System.out.println(conts.get(1).getFirstName() + conts.get(1).getLastName() + conts.get(1).getEmail());
 		
 	}
 
