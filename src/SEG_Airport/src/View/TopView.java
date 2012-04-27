@@ -63,8 +63,9 @@ public class TopView extends JPanel {
 		this.setBackground(Color.WHITE);
 		setVisible(true);
 		this.airport=airport;
-		runway=airport.getCurrentPhysicalRunway().getRunway(0);
-		obstacle=airport.getCurrentPhysicalRunway().getObstacle();
+		//TODO: Decide a way of doing this
+		//runway=airport.getCurrentPhysicalRunway().getRunway(0);
+		//obstacle=airport.getCurrentPhysicalRunway().getObstacle();
 		setRunwayDimensions(0, 0, "", "");
 		
 		
@@ -74,7 +75,7 @@ public class TopView extends JPanel {
 		super.paint(g);
 		Graphics2D g2d = (Graphics2D)g;
 		runwayCreation(g2d);
-		if(obstacle)obstacleCreation(g2d);
+		if(obstacle != null)obstacleCreation(g2d);
 		declaredRunwaysCreation(g2d);
 			
 	}
@@ -177,13 +178,13 @@ public class TopView extends JPanel {
 		
 		this.obstacle = obstacle;
 		this.xObstacle = (int) airport.getCurrentPhysicalRunway().getDistanceAwayFromThreshold();
-		this.yObstacle = y;
+		this.yObstacle = 1; //TODO: Change this back to y
 		this.obstacleLength =(int) obstacle.getLength();
 		this.obstacleWidth = (int) obstacle.getWidth();
-		this.TORAStart = toraStart;
-		this.TODAStart = todaStart;
-		this.ASDAStart = asdaStart;
-		this.LDAStart = ldaStart;
+		this.TORAStart = TORAStart;
+		this.TODAStart = TODAStart;
+		this.ASDAStart = ASDAStart;
+		this.LDAStart = LDAStart;
 		
 		
 	}

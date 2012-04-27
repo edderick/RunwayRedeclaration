@@ -72,7 +72,7 @@ public class MainFrame extends JFrame {
 	}
 
 	public MainFrame() {
-		TopView topView = new TopView();
+		TopView topView = new TopView(airport);
 		SideView sideView = new SideView();
 		
 		rightSplitPane = new JSplitPane();
@@ -250,7 +250,7 @@ public class MainFrame extends JFrame {
 		JRadioButtonMenuItem rdbtnmntmTopPanelTopView = new JRadioButtonMenuItem("Top View");
 		topPanelButtonGroup.add(rdbtnmntmTopPanelTopView);
 		mnTopPanel.add(rdbtnmntmTopPanelTopView);
-		rdbtnmntmTopPanelTopView.addActionListener(new SelectViewListener(rightSplitPane, new TopView(), true));
+		rdbtnmntmTopPanelTopView.addActionListener(new SelectViewListener(rightSplitPane, new TopView(airport), true));
 
 		JRadioButtonMenuItem rdbtnmntmTopPanelSideView = new JRadioButtonMenuItem("Side View");
 		topPanelButtonGroup.add(rdbtnmntmTopPanelSideView);
@@ -276,7 +276,7 @@ public class MainFrame extends JFrame {
 		JRadioButtonMenuItem rdbtnmntmBottomPanelTopView = new JRadioButtonMenuItem("Top View");
 		bottomPanelButtonGroup.add(rdbtnmntmBottomPanelTopView);
 		mnNewMenu_1.add(rdbtnmntmBottomPanelTopView);
-		rdbtnmntmBottomPanelTopView.addActionListener(new SelectViewListener(rightSplitPane, new TopView(), false));
+		rdbtnmntmBottomPanelTopView.addActionListener(new SelectViewListener(rightSplitPane, new TopView(airport), false));
 
 		JRadioButtonMenuItem rdbtnmntmBottomPanelSideView = new JRadioButtonMenuItem("Side View");
 		rdbtnmntmBottomPanelSideView.setSelected(true);
@@ -408,7 +408,8 @@ public class MainFrame extends JFrame {
 		rightSplitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
 
 		topView.setRunwayDimensions(100, 20, "08L", "27R");
-		topView.setValues(80, 5, 40, 0, 73, 2, 15, 50, true, 76, 3, 9, 4);
+		//TODO: Uncomment this once it's fixed
+		//topView.setValues();
 		rightSplitPane.setLeftComponent(topView);
 
 		sideView.setRunwayDimensions(80);
