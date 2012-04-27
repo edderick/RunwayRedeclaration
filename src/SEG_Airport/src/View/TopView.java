@@ -176,10 +176,10 @@ public class TopView extends JPanel {
 		this.LDA = (int) runway.getLDA(runway.REDECLARED);
 		
 		this.obstacle = obstacle;
-		this.xObstacle = x;
+		this.xObstacle = (int) airport.getCurrentPhysicalRunway().getDistanceAwayFromThreshold();
 		this.yObstacle = y;
-		this.obstacleLength = length;
-		this.obstacleWidth = width;
+		this.obstacleLength =(int) obstacle.getLength();
+		this.obstacleWidth = (int) obstacle.getWidth();
 		this.TORAStart = toraStart;
 		this.TODAStart = todaStart;
 		this.ASDAStart = asdaStart;
