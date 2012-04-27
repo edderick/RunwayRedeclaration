@@ -8,6 +8,8 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
+import Model.Airport;
+import Model.Obstacle;
 import Model.Runway;
 
 
@@ -42,8 +44,9 @@ public class TopView extends JPanel {
 	int obstacleWidth;
 	String leftTag;
 	String rightTag;
-	boolean obstacle;
+	Airport airport;
 	Runway runway;
+	Obstacle obstacle;
 	
 	//relative to panel
 	int xRunway;
@@ -54,14 +57,16 @@ public class TopView extends JPanel {
 	int yObstacle;
 	
 		
-	public TopView(Runway r){
+	public TopView(Airport airport){
 		super();
 		setSize(300,200);
 		this.setBackground(Color.WHITE);
 		setVisible(true);
-		this.runway=r;
+		this.airport=airport;
+		runway=airport.getCurrentPhysicalRunway().getRunway(0);
+		obstacle=airport.getCurrentPhysicalRunway().getObstacle();
 		setRunwayDimensions(0, 0, "", "");
-		setValues(0, 0, 0, 0, 0, 0, 0, 0, true, 0, 0, 0, 0);
+		
 		
 	}
 	
@@ -163,11 +168,13 @@ public class TopView extends JPanel {
 	}
 	
 	//YUMMM
-	public void setValues(int tora, int toraStart, int toda, int todaStart, int asda, int asdaStart, int lda, int ldaStart, boolean obstacle, int x, int y, int length, int width){
-		this.TORA = tora;
-		this.TODA = toda;
-		this.ASDA = asda;
-		this.LDA = lda;
+	public void setValues(){
+		
+		this.TORA = (int) runway.getTORA(runway.REDECLARED);
+		this.TODA = (int) runway.getTODA(runway.REDECLARED);
+		this.ASDA = (int) runway.getASDA(runway.REDECLARED);
+		this.LDA = (int) runway.getLDA(runway.REDECLARED);
+		
 		this.obstacle = obstacle;
 		this.xObstacle = x;
 		this.yObstacle = y;
