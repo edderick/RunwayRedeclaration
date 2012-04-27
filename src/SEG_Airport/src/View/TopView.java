@@ -64,7 +64,7 @@ public class TopView extends JPanel {
 		setVisible(true);
 		this.airport=airport;
 		//TODO: Decide a way of doing this
-		//runway=airport.getCurrentPhysicalRunway().getRunway(0);
+		//runway=airport.getCurrentRunway();
 		//obstacle=airport.getCurrentPhysicalRunway().getObstacle();
 		setRunwayDimensions(0, 0, "", "");
 		
@@ -176,7 +176,7 @@ public class TopView extends JPanel {
 		this.ASDA = (int) runway.getASDA(runway.REDECLARED);
 		this.LDA = (int) runway.getLDA(runway.REDECLARED);
 		
-		this.obstacle = obstacle;
+//		this.obstacle = obstacle;
 		this.xObstacle = (int) airport.getCurrentPhysicalRunway().getDistanceAwayFromThreshold();
 		this.yObstacle = 1; //TODO: Change this back to y
 		this.obstacleLength =(int) obstacle.getLength();
