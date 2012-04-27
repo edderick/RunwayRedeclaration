@@ -18,30 +18,33 @@ public class Contact {
 	 * @param email Email address of contact
 	 */
 	public Contact(String firstName, String lastName, String email) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
+		this.firstName = firstName == null? "" : firstName;
+		this.lastName = lastName == null? "" : lastName;
+		this.email = email == null? "" : email;
 	}
 	
 	/**
 	 * @param email The email address of the contact
 	 */
 	public void setEmail(String email) {
-		this.email = email;
+		if(email != null)
+		  this.email = email;
 	}
 	
 	/**
 	 * @param firstName The first name of the contact
 	 */
 	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+		if(firstName != null)
+		  this.firstName = firstName;
 	}
 	
 	/**
 	 * @param lastName The last name of the contact
 	 */
 	public void setLastName(String lastName) {
-		this.lastName = lastName;
+		if(lastName != null)
+			  this.lastName = lastName;
 	}
 	
 	/**
