@@ -125,14 +125,14 @@ public class PhysicalRunway {
 		Runway closeTo = closeToA ? runway[0] : runway[1];
 		Runway awayFrom = closeToA ? runway[1] : runway[0];
 
-		calTORAtoOb(closeTo, awayFrom);
-		calTORAawayOb(closeTo);
-		calASDAtoOb(closeTo, awayFrom);
-		calASDAawayOb(closeTo);
-		calTODAtoOb(closeTo, awayFrom);
-		calTODAawayOb(closeTo);
-		calLDAtoOb(closeTo, awayFrom);
-		calLDAoverOb(closeTo);
+		calculateTORATowardsObstacle(closeTo, awayFrom);
+		calculateTORAAwayFromObstacle(closeTo);
+		calculateASDATowardsObstacle(closeTo, awayFrom);
+		calculateASDAAwayFromObstacle(closeTo);
+		calculateTODATowardsObstacle(closeTo, awayFrom);
+		calculateTODAAwayFromObstacle(closeTo);
+		calculateLDATowardsObstacle(closeTo, awayFrom);
+		calculateLDAOverObstacle(closeTo);
 	}
 
 	/**
@@ -262,26 +262,41 @@ public class PhysicalRunway {
 		return result.toString();
 	}
 
-	//TODO: Javadoc these methods, and maybe give them clearer names
-	
-	
-	private void calLDAtoOb(Runway closeTo, Runway awayFrom) {
+	/**
+	 * Calculate the LDA for landing towards the obstacle
+	 * @param closeTo The runway with threshold closer to the obstacle
+	 * @param awayFrom The runway at the other end on the same physical runway
+	 */
+	private void calculateLDATowardsObstacle(Runway closeTo, Runway awayFrom) {
 		awayFrom.setLDA(1,
 				awayFrom.getLDA(Runway.DEFAULT) - closeTo.getDisplacedThreshold(Runway.REDECLARED)
 						- distanceAwayFromThreshold - RESA - stopway);
 	}
 
-	private void calLDAoverOb(Runway closeTo) {
+	/**
+	 * Calculate the LDA for landing over the obstacle
+	 * @param closeTo The runway with threshold closer to the obstacle
+	 */
+	private void calculateLDAOverObstacle(Runway closeTo) {
 		closeTo.setLDA(1, closeTo.getLDA(Runway.DEFAULT) - distanceAwayFromThreshold
 				- (obstacle.getHeight() * angleOfSlope) - stopway);
 	}
 
-	private void calTORAawayOb(Runway closeTo) {
+	/**
+	 * Calculate the TORA away from the obstacle
+	 * @param closeTo The runway with threshold closer to the obstacle
+	 */
+	private void calculateTORAAwayFromObstacle(Runway closeTo) {
 		closeTo.setTORA(1, closeTo.getTORA(Runway.DEFAULT) - distanceAwayFromThreshold
 				- blastAllowance - closeTo.getDisplacedThreshold(Runway.REDECLARED));
 	}
 
-	private void calTORAtoOb(Runway closeTo, Runway awayFrom) {
+	/**
+	 * Calculate the TORA towards the obstacle
+	 * @param closeTo The runway with threshold closer to the obstacle
+	 * @param awayFrom The runway at the other end on the same physical runway
+	 */
+	private void calculateTORATowardsObstacle(Runway closeTo, Runway awayFrom) {
 		awayFrom.setTORA(
 				1,
 				awayFrom.getTORA(Runway.DEFAULT) - distanceAwayFromThreshold
@@ -289,12 +304,21 @@ public class PhysicalRunway {
 						- closeTo.getDisplacedThreshold(Runway.REDECLARED));
 	}
 
-	private void calASDAawayOb(Runway closeTo) {
+	/**
+	 * Calculate the ASDA away from the obstacle
+	 * @param closeTo The runway with threshold closer to the obstacle
+	 */
+	private void calculateASDAAwayFromObstacle(Runway closeTo) {
 		closeTo.setASDA(1, closeTo.getASDA(Runway.DEFAULT) - distanceAwayFromThreshold
 				- blastAllowance - closeTo.getDisplacedThreshold(Runway.REDECLARED));
 	}
 
-	private void calASDAtoOb(Runway closeTo, Runway awayFrom) {
+	/**
+	 * Calculate the ASDA towards the obstacle
+	 * @param closeTo The runway with threshold closer to the obstacle
+	 * @param awayFrom The runway at the other end on the same physical runway
+	 */
+	private void calculateASDATowardsObstacle(Runway closeTo, Runway awayFrom) {
 		awayFrom.setASDA(
 				1,
 				awayFrom.getASDA(Runway.DEFAULT) - distanceAwayFromThreshold
@@ -302,12 +326,21 @@ public class PhysicalRunway {
 						- closeTo.getDisplacedThreshold(Runway.REDECLARED));
 	}
 
-	private void calTODAawayOb(Runway closeTo) {
+	/**
+	 * Calculate the TODA away from the obstacle
+	 * @param closeTo The runway with threshold closer to the obstacle
+	 */
+	private void calculateTODAAwayFromObstacle(Runway closeTo) {
 		closeTo.setTODA(1, closeTo.getTODA(Runway.DEFAULT) - distanceAwayFromThreshold
 				- blastAllowance - closeTo.getDisplacedThreshold(Runway.REDECLARED));
 	}
 
-	private void calTODAtoOb(Runway closeTo, Runway awayFrom) {
+	/**
+	 * Calculate the TODA towards the obstacle
+	 * @param closeTo The runway with threshold closer to the obstacle
+	 * @param awayFrom The runway at the other end on the same physical runway
+	 */
+	private void calculateTODATowardsObstacle(Runway closeTo, Runway awayFrom) {
 		awayFrom.setTODA(
 				1,
 				awayFrom.getTODA(Runway.DEFAULT) - distanceAwayFromThreshold
