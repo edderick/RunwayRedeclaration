@@ -83,6 +83,12 @@ public class TopView extends JPanel {
 				
 		int height = (int) (runwayHeight * r);
 		
+		if(2*height>pHeight){
+			height = (int) (pHeight/2);
+			r=height/(double)runwayHeight;
+			width=(int) (runwayWidth*r);
+		}
+		
 			
 		//calculates the x and y values to position the runway on the view
 		xRunway = (int) (((1.0-ratio)/2) *pWidth);
