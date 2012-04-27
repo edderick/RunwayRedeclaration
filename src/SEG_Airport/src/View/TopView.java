@@ -8,6 +8,8 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
+import Model.Runway;
+
 
 @SuppressWarnings("serial")
 public class TopView extends JPanel {
@@ -41,6 +43,7 @@ public class TopView extends JPanel {
 	String leftTag;
 	String rightTag;
 	boolean obstacle;
+	Runway runway;
 	
 	//relative to panel
 	int xRunway;
@@ -51,12 +54,12 @@ public class TopView extends JPanel {
 	int yObstacle;
 	
 		
-	public TopView(){
+	public TopView(Runway r){
 		super();
 		setSize(300,200);
 		this.setBackground(Color.WHITE);
 		setVisible(true);
-			
+		this.runway=r;
 		setRunwayDimensions(0, 0, "", "");
 		setValues(0, 0, 0, 0, 0, 0, 0, 0, true, 0, 0, 0, 0);
 		
