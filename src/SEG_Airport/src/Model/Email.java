@@ -1,6 +1,7 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 import javax.mail.AuthenticationFailedException;
 import javax.mail.Message;
@@ -71,7 +72,7 @@ public class Email {
 	/**
 	 * @param contacts List of contact to add to recipients
 	 */
-	public void addRecipients(ArrayList<Contact> contacts){
+	public void addRecipients(List<Contact> contacts){
 		for(Contact c : contacts){
 			recipients.add(c);
 		}
