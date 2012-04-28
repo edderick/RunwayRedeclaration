@@ -43,6 +43,7 @@ public class TopView extends JPanel implements AirportObserver{
 	int runwayHeight;
 	int obstacleLength;
 	int obstacleWidth;
+	boolean obstacleLeft;
 	String leftTag;
 	String rightTag;
 	Airport airport;
@@ -64,15 +65,8 @@ public class TopView extends JPanel implements AirportObserver{
 		setSize(300,200);
 		this.setBackground(Color.WHITE);
 		setVisible(true);
-		this.airport=airport;
-		//TODO: Decide a way of doing this
-		//runway=airport.getCurrentRunway();
-		//obstacle=airport.getCurrentPhysicalRunway().getObstacle();
-		
-		//TODO: Uncomment when working!
-		//setRunwayDimensions();
-		
-		
+		updateAirport(airport);
+		setValues();		
 	}
 	
 	public void paint (Graphics g){
@@ -150,55 +144,63 @@ public class TopView extends JPanel implements AirportObserver{
 		Color todaColor = new Color(0, 255, 0, 125);
 		Color asdaColor = new Color(0, 0, 255, 125);
 		Color ldaColor = new Color(255, 0, 255, 125);
-		g2d.setColor(toraColor);
-		g2d.fillRect(xRunway+TORAStart, yRunway, (int) (TORA*r), (int) (((runwayHeight*r)/2)-(r*runwayHeight *0.05)));
-		g2d.setColor(todaColor);
-		g2d.fillRect(xRunway+TODAStart, (int) (yRunway -((runwayHeight*r)/2)), (int) (TODA*r), (int) (((runwayHeight*r)/2)-(r*runwayHeight *0.05)));
-		g2d.setColor(asdaColor);
-		g2d.fillRect(xRunway+ASDAStart, (int) (yRunway +((runwayHeight*r)/2)), (int) (ASDA*r), (int) (((runwayHeight*r)/2)-(r*runwayHeight *0.05)));
-		g2d.setColor(ldaColor);
-		g2d.fillRect(xRunway+LDAStart, (int) (yRunway + (2* ((runwayHeight*r)/2))), (int) (LDA*r), (int) (((runwayHeight*r)/2)-(r*runwayHeight *0.05)));
+		if(obstacleLeft){
+			g2d.setColor(toraColor);
+			g2d.fillRect(xRunway+TORAStart-(int) (TORA*r), yRunway, (int) (TORA*r), (int) (((runwayHeight*r)/2)-(r*runwayHeight *0.05)));
+			g2d.setColor(todaColor);
+			g2d.fillRect(xRunway+TODAStart-(int) (TODA*r), (int) (yRunway -((runwayHeight*r)/2)), (int) (TODA*r), (int) (((runwayHeight*r)/2)-(r*runwayHeight *0.05)));
+			g2d.setColor(asdaColor);
+			g2d.fillRect(xRunway+ASDAStart-(int) (ASDA*r), (int) (yRunway +((runwayHeight*r)/2)), (int) (ASDA*r), (int) (((runwayHeight*r)/2)-(r*runwayHeight *0.05)));
+			g2d.setColor(ldaColor);
+			g2d.fillRect(xRunway+LDAStart-(int) (LDA*r), (int) (yRunway + (2* ((runwayHeight*r)/2))), (int) (LDA*r), (int) (((runwayHeight*r)/2)-(r*runwayHeight *0.05)));
+			
+		}else{	
+			g2d.setColor(toraColor);
+			g2d.fillRect(xRunway+TORAStart, yRunway, (int) (TORA*r), (int) (((runwayHeight*r)/2)-(r*runwayHeight *0.05)));
+			g2d.setColor(todaColor);
+			g2d.fillRect(xRunway+TODAStart, (int) (yRunway -((runwayHeight*r)/2)), (int) (TODA*r), (int) (((runwayHeight*r)/2)-(r*runwayHeight *0.05)));
+			g2d.setColor(asdaColor);
+			g2d.fillRect(xRunway+ASDAStart, (int) (yRunway +((runwayHeight*r)/2)), (int) (ASDA*r), (int) (((runwayHeight*r)/2)-(r*runwayHeight *0.05)));
+			g2d.setColor(ldaColor);
+			g2d.fillRect(xRunway+LDAStart, (int) (yRunway + (2* ((runwayHeight*r)/2))), (int) (LDA*r), (int) (((runwayHeight*r)/2)-(r*runwayHeight *0.05)));
+		}
 		
 		g2d.setColor(Color.BLACK);
 		g2d.drawString("TORA", (int) (xRunway+((TORA*r)/2)), (yRunway+g2d.getFontMetrics().getHeight()));
 		g2d.drawString("TODA", (int) (xRunway+((TODA*r)/2)), (int) ((yRunway -((runwayHeight*r)/2)) +g2d.getFontMetrics().getHeight()));
 		g2d.drawString("ASDA", (int) (xRunway+((ASDA*r)/2)), (int) ((yRunway +((runwayHeight*r)/2) +g2d.getFontMetrics().getHeight())));
 		g2d.drawString("LDA", (int) (xRunway+((LDA*r)/2)), (int) ((yRunway + (2* ((runwayHeight*r)/2)) +g2d.getFontMetrics().getHeight())));
-		}
 	
-	public void setRunwayDimensions(){
+	}
+	
+	
+	public void setValues(){
 		this.runwayWidth = (int) runway.getTORA(runway.DEFAULT);
 		this.runwayHeight = runwayWidth/20;
 		this.leftTag=airport.getCurrentPhysicalRunway().getRunway(0).getName();
 		this.rightTag=airport.getCurrentPhysicalRunway().getRunway(1).getName();
-	}
-	
-
-	public void setValues(){
-		
 		this.TORA = (int) runway.getTORA(runway.REDECLARED);
 		this.TODA = (int) runway.getTODA(runway.REDECLARED);
 		this.ASDA = (int) runway.getASDA(runway.REDECLARED);
 		this.LDA = (int) runway.getLDA(runway.REDECLARED);
-		
-//		this.obstacle = obstacle;
 		int distance = (int) airport.getCurrentPhysicalRunway().getDistanceAwayFromThreshold();
 		this.threshold=airport.getCurrentPhysicalRunway().closeTo().getName(); 
-		if(threshold.equals(leftTag)){this.xObstacle = distance;}else{this.xObstacle=runwayWidth-distance;}
+		obstacleLeft=threshold.equals(leftTag);
+		if(obstacleLeft){this.xObstacle = distance;}else{this.xObstacle=runwayWidth-distance;}
 		this.yObstacle = runwayHeight/2;
 		this.obstacleLength =(int) obstacle.getLength();
 		this.obstacleWidth = (int) obstacle.getWidth();
-		if(threshold.equals(leftTag)){this.LDAStart = xObstacle;}else{this.LDAStart=0;}
-		//TODO: Put this line back in!
-		//if(threshold.equals(leftTag)){this.TORAStart = (int) (xObstacle-airport.getCurrentPhysicalRunway().getRESA()-airport.getCurrentPhysicalRunway().;}else{this.TORAStart=0;}
-		if(threshold.equals(leftTag)){this.TODAStart = distance;}else{this.TODAStart=0;}
-		if(threshold.equals(leftTag)){this.ASDAStart = distance;}else{this.ASDAStart=0;}
+		if(obstacleLeft){this.LDAStart = runwayWidth;}else{this.LDAStart=0;}
+		if(obstacleLeft){this.TORAStart = runwayWidth;}else{this.TORAStart=0;}
+		if(obstacleLeft){this.TODAStart = runwayWidth;}else{this.TODAStart=0;}
+		if(obstacleLeft){this.ASDAStart = runwayWidth;}else{this.ASDAStart=0;}
 				
 	}
 
-	@Override
 	public void updateAirport(Airport airport) {
-		// TODO Do whatever needs doing when the airport changes
+		this.airport=airport;
+		runway=airport.getCurrentRunway();
+		obstacle=airport.getCurrentPhysicalRunway().getObstacle();
 		
 	}
 }
