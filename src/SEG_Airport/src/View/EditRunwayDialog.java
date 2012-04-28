@@ -14,13 +14,14 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import Model.Airport;
+import Model.AirportObserver;
 import Model.PhysicalRunway;
 import Model.Runway;
 import net.miginfocom.swing.MigLayout;
 
 
 @SuppressWarnings("serial")
-public class EditRunwayDialog extends JDialog {
+public class EditRunwayDialog extends JDialog implements AirportObserver{
 
 	private JPanel contentPane;
 	private JTextField LASDA;
@@ -241,6 +242,12 @@ public class EditRunwayDialog extends JDialog {
 		
 		setVisible(true);
 
+	}
+
+	@Override
+	public void updateAirport(Airport airport) {
+		this.airport = airport;
+		
 	}
 }
 
