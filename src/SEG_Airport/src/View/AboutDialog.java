@@ -1,5 +1,6 @@
 package View;
 
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.BorderLayout;
@@ -9,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 
-public class AboutDialog extends JFrame{
+public class AboutDialog extends JDialog{
 
 
 	public AboutDialog() {

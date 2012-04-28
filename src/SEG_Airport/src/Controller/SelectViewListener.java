@@ -20,30 +20,20 @@ public class SelectViewListener implements ActionListener{
 	
 	//TODO: Change the type of view to sommat else
 	public SelectViewListener(JSplitPane splitPane, JComponent view, boolean top){
-
-
 		this.splitPane = splitPane;
 		this.view = view;
 		this.top = top;
-		
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
 		if(top){
 			splitPane.setLeftComponent(view);			
 		}
 		else {
 			splitPane.setRightComponent(view);
 		}
-
-		
-		
-		
 	}
-
-	
 	
 }

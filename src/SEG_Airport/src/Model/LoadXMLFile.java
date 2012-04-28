@@ -29,6 +29,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class to load an object from an XML file
@@ -55,42 +56,45 @@ public class LoadXMLFile {
 	/**
 	 * @param String representing address of file to be loaded.
 	 */
-	public void silentLoadObstacle(String address){
+	public Obstacle silentLoadObstacle(String address){
 		toPromtOrNotToPromt = false;
 		fileAddress = address;
 		try {
-			this.loadObstacle();
+			return this.loadObstacle();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return null;
 		
 	}
 	
 	/**
 	 * @param String representing address of file to be loaded.
 	 */
-	public void silentLoadAirport(String address){
+	public Airport silentLoadAirport(String address){
 		toPromtOrNotToPromt = false;
 		fileAddress = address;
 		try {
-			this.loadAirport();
+			return this.loadAirport();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return null;
 		
 	}
 	
 	/**
 	 * @param String representing address of file to be loaded.
 	 */
-	public void silentLoadContacts(String address){
+	public List<Contact> silentLoadContacts(String address){
 		toPromtOrNotToPromt = false;
 		fileAddress = address;
 		try {
-			this.loadContacts();
+			return this.loadContacts();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return null;
 		
 	}
 

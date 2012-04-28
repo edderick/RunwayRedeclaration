@@ -3,18 +3,24 @@ package Controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.List;
 
+import Model.Airport;
+import Model.AirportObserver;
 import Model.LoadXMLFile;
 import Model.Obstacle;
 import View.MainFrame;
 
-public class OpenObstacleListener implements ActionListener{
+public class OpenObstacleListener implements ActionListener, AirportObserver{
 
-	MainFrame mf;
+	Airport airport;
+	List<AirportObserver> airportObservers;
 	
-	public OpenObstacleListener(MainFrame mf){
-		this.mf = mf;
+	public OpenObstacleListener(Airport airport, List<AirportObserver> airportObserver){
+		this.airportObservers = airportObserver;
+		this.airport = airport;
 	}
+
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -22,10 +28,10 @@ public class OpenObstacleListener implements ActionListener{
 		LoadXMLFile lf = new LoadXMLFile();
 		try {
 			Obstacle o = lf.loadObstacle();
-			mf.getAirport().getCurrentPhysicalRunway().setObstacle(o);
+			airport.getCurrentPhysicalRunway().setObstacle(o);
 			
 			try {
-				mf.saveRecentFile(o, lf.getFilename());
+				MainFrame.saveRecentFile(o, lf.getFilename());
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -38,6 +44,11 @@ public class OpenObstacleListener implements ActionListener{
 		}
 		
 		
+	}
+
+	@Override
+	public void updateAirport(Airport airport) {
+		this.airport = airport;
 	}
  
 }

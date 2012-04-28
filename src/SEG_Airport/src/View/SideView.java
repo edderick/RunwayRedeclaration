@@ -1,8 +1,4 @@
-//TODO: If this is the latest version then this needs a large refactor!
-//This class should contain a runway and draw using that.
-
-
-//This class and it's bro need to have a common parent that is more specific that JPanel ;)
+//TODO: This class and it's bros need to have a common parent that is more specific that JPanel ;)
 
 package View;
 
@@ -13,9 +9,12 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
+import Model.Airport;
+import Model.AirportObserver;
+
 
 @SuppressWarnings("serial")
-public class SideView extends JPanel {
+public class SideView extends JPanel implements AirportObserver{
 	
 	
 	//this value determines the amount of pixels the tag is from the end of the runway
@@ -130,6 +129,12 @@ public class SideView extends JPanel {
 		this.ASDAStart = asdaStart;
 		this.LDAStart = ldaStart;
 		
+		
+	}
+
+	@Override
+	public void updateAirport(Airport airport) {
+		// TODO Do whatever needs doign when the airport changes
 		
 	}
 }

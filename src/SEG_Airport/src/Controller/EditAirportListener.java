@@ -2,30 +2,48 @@ package Controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import Model.Airport;
+import Model.AirportObserver;
 import View.EditAirportDialog;
 import View.MainFrame;
 
-public class EditAirportListener implements ActionListener{
+public class EditAirportListener implements ActionListener, AirportObserver{
 
-	MainFrame mf;
+	Airport airport;
+	List<AirportObserver> airportObservers;
 	
-	public EditAirportListener(MainFrame mf){
-		this.mf = mf;
+	public EditAirportListener(Airport airport, List<AirportObserver> airportObservers){
+		this.airport = airport;
+		this.airportObservers = airportObservers;
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		Airport old = mf.getAirport();
-		Airport airport = new Airport(old.getName());
+		Airport old = airport;
 		System.out.println("Editing Airport: " + old.getName());
 		@SuppressWarnings("unused")
 		EditAirportDialog ead = new EditAirportDialog(airport, old);
-		mf.setAirport(airport);
+		notifyAirportObservers();
 	}
 
+	@Override
+	public void updateAirport(Airport airport) {
+		this.airport = airport;
+	}
+	
+	void notifyAirportObservers(){
+		for(AirportObserver ao: airportObservers){
+			ao.updateAirport(airport);
+		}
+	}
+
+	
 }
+
+
 /*(
 new ActionListener() {
 	public void actionPerformed(ActionEvent arg0) {

@@ -1,16 +1,31 @@
 package View;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import Model.Airport;
+import Model.AirportObserver;
 import Model.PhysicalRunway;
 
 
 @SuppressWarnings("serial")
-public class CalculationsView extends JTextField{
+public class CalculationsView extends JTextArea implements AirportObserver{
 
-	public CalculationsView(PhysicalRunway runway){
-		//I couldn't work out how I am supposed to know which  runway is currently in focus!
-		//setText(runway.toCalculation()
-		
+	Airport airport; 
+	
+	public CalculationsView(Airport airport){
+		updateAirport(airport);
+		setAlignmentY(TOP_ALIGNMENT);
+	}
+
+	@Override
+	public void updateAirport(Airport airport) {
+		this.airport = airport;
+		if ((airport != null) && (airport.getCurrentPhysicalRunway() != null) && (airport.getCurrentRunway() != null)){
+			setText(airport.getCurrentPhysicalRunway().toCalculation(airport.getCurrentRunway().getName()));
+		}
+		else {
+			setText("No runway currently selected!");
+		}
 	}
 	
 }

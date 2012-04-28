@@ -9,12 +9,13 @@ import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
 import Model.Airport;
+import Model.AirportObserver;
 import Model.Obstacle;
 import Model.Runway;
 
 
 @SuppressWarnings("serial")
-public class TopView extends JPanel {
+public class TopView extends JPanel implements AirportObserver{
 	
 	
 	//this value determines the amount of pixels the tag is from the end of the runway
@@ -67,7 +68,9 @@ public class TopView extends JPanel {
 		//TODO: Decide a way of doing this
 		//runway=airport.getCurrentRunway();
 		//obstacle=airport.getCurrentPhysicalRunway().getObstacle();
-		setRunwayDimensions(0, 0, "", "");
+		
+		//TODO: Uncomment when working!
+		//setRunwayDimensions();
 		
 		
 	}
@@ -75,7 +78,8 @@ public class TopView extends JPanel {
 	public void paint (Graphics g){
 		super.paint(g);
 		Graphics2D g2d = (Graphics2D)g;
-		runwayCreation(g2d);
+		//TODO: You can have this back when you fix it!
+		//runwayCreation(g2d);
 		if(obstacle != null)obstacleCreation(g2d);
 		declaredRunwaysCreation(g2d);
 			
@@ -185,10 +189,17 @@ public class TopView extends JPanel {
 		this.obstacleLength =(int) obstacle.getLength();
 		this.obstacleWidth = (int) obstacle.getWidth();
 		if(threshold.equals(leftTag)){this.LDAStart = xObstacle;}else{this.LDAStart=0;}
-		if(threshold.equals(leftTag)){this.TORAStart = (int) (xObstacle-airport.getCurrentPhysicalRunway().getRESA()-airport.getCurrentPhysicalRunway().;}else{this.TORAStart=0;}
+		//TODO: Put this line back in!
+		//if(threshold.equals(leftTag)){this.TORAStart = (int) (xObstacle-airport.getCurrentPhysicalRunway().getRESA()-airport.getCurrentPhysicalRunway().;}else{this.TORAStart=0;}
 		if(threshold.equals(leftTag)){this.TODAStart = distance;}else{this.TODAStart=0;}
 		if(threshold.equals(leftTag)){this.ASDAStart = distance;}else{this.ASDAStart=0;}
 				
+	}
+
+	@Override
+	public void updateAirport(Airport airport) {
+		// TODO Do whatever needs doing when the airport changes
+		
 	}
 }
 

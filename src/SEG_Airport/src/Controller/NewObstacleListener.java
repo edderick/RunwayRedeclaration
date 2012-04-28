@@ -3,33 +3,38 @@ package Controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import Model.Airport;
+import Model.AirportObserver;
 import Model.Obstacle;
 import View.EditObstacleDialog;
 import View.MainFrame;
 
 
-public class NewObstacleListener implements ActionListener{
+public class NewObstacleListener implements ActionListener, AirportObserver{
 
-	MainFrame mf;
+	Airport airport;
 	
-	public NewObstacleListener(MainFrame mf){
-		this.mf = mf;
+	public NewObstacleListener(Airport airport){
+		this.airport = airport;
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		Obstacle old = mf.getAirport().getCurrentPhysicalRunway().getObstacle();
+		Obstacle old = airport.getCurrentPhysicalRunway().getObstacle();
 		Obstacle obstacle = new Obstacle(null, null, 0, 0, 0);
 		System.out.println("Editing Obstacle: " + old.getName());
 		@SuppressWarnings("unused")
 		EditObstacleDialog eod = new EditObstacleDialog(obstacle, old);
-		mf.getAirport().getCurrentPhysicalRunway().setObstacle(obstacle);
+		airport.getCurrentPhysicalRunway().setObstacle(obstacle);
 		
 	}
 
-	
-	
+	@Override
+	public void updateAirport(Airport airport) {
+		this.airport = airport;		
+	}
+
 }
 
 /*

@@ -9,7 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-
+import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -20,7 +20,6 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.TitledBorder;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.JComponent;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
@@ -34,7 +33,7 @@ import Controller.*;
 import Model.*;
 
 @SuppressWarnings("serial")
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame implements AirportObserver{
 
 	private static final int MAX_HISTORY = 10;
 	private static final int HISTORY_TO_SHOW = 5;
@@ -51,10 +50,11 @@ public class MainFrame extends JFrame {
 
 	private Airport airport;
 
+	private static List<String> recentAirports;
+	private static List<String> recentObstacles;
 
-	private ArrayList<String> recentAirports;
-	private ArrayList<String> recentObstacles;
-
+	private List<AirportObserver> airportObservers;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -72,12 +72,17 @@ public class MainFrame extends JFrame {
 	}
 
 	public MainFrame() {
+		
+		//TODO: Move these closer to where they are needed and maybe have two sets
 		TopView topView = new TopView(airport);
 		SideView sideView = new SideView();
+		CalculationsView calcView = new CalculationsView(airport);
 		
 		rightSplitPane = new JSplitPane();
 		
 		airport = new Airport("");
+		airportObservers = new ArrayList<AirportObserver>();
+		airportObservers.add(this);
 
 		setTitle("SEG Group 9 - Runway Redeclaration System");
 
@@ -114,12 +119,16 @@ public class MainFrame extends JFrame {
 
 		JMenuItem mntmNewMenuItem = new JMenuItem("Airport");
 		mntmNewMenuItem.setMnemonic('a');
-		mntmNewMenuItem.addActionListener(new NewAirportListener(this));
+		NewAirportListener nal = new NewAirportListener(airport, airportObservers);
+		mntmNewMenuItem.addActionListener(nal);
+		airportObservers.add(nal);
 		mnAirport.add(mntmNewMenuItem);
 
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Obstacle");
 		mntmNewMenuItem_1.setMnemonic('o');
-		mntmNewMenuItem_1.addActionListener(new NewObstacleListener(this));
+		NewObstacleListener nol = new NewObstacleListener(airport);
+		mntmNewMenuItem_1.addActionListener(nol);
+		airportObservers.add(nol);
 		mnAirport.add(mntmNewMenuItem_1);
 
 		JMenu mnNewMenu = new JMenu("Open");
@@ -128,12 +137,16 @@ public class MainFrame extends JFrame {
 
 		JMenuItem mntmAirport = new JMenuItem("Airport");
 		mntmAirport.setMnemonic('a');
-		mntmAirport.addActionListener(new OpenAirportListener(this));
+		OpenAirportListener oal = new OpenAirportListener(airport, airportObservers);
+		mntmAirport.addActionListener(oal);
+		airportObservers.add(oal);
 		mnNewMenu.add(mntmAirport);
 
 		JMenuItem mntmObstacle = new JMenuItem("Obstacle");
 		mntmObstacle.setMnemonic('o');
-		mntmObstacle.addActionListener(new OpenObstacleListener(this));
+		OpenObstacleListener ool = new OpenObstacleListener(airport, airportObservers);
+		mntmObstacle.addActionListener(ool);
+		airportObservers.add(ool);
 		mnNewMenu.add(mntmObstacle);
 
 		//TODO: Create a way to list recent opening and persistently store them
@@ -158,7 +171,9 @@ public class MainFrame extends JFrame {
 		for(String s : recentAirports){
 			JMenuItem mntmRecentAirport = new JMenuItem(s);
 			mnOpenRecentAirports.add(mntmRecentAirport);
-			mntmRecentAirport.addActionListener(new OpenRecentAirportListener(s));
+			OpenRecentAirportListener oral = new OpenRecentAirportListener(s, airport, airportObservers);
+			mntmRecentAirport.addActionListener(oral);
+			airportObservers.add(oral);
 		}
 		
 		JMenu mnOpenRecentObstacles = new JMenu("Obstacle");
@@ -169,7 +184,9 @@ public class MainFrame extends JFrame {
 		for(String s : recentObstacles){
 			JMenuItem mntmRecentObstacle = new JMenuItem(s);
 			mnOpenRecentObstacles.add(mntmRecentObstacle);
-			mntmRecentObstacle.addActionListener(new OpenRecentObstacleListener(s));
+			OpenRecentObstacleListener orol = new OpenRecentObstacleListener(s, null, airportObservers);
+			mntmRecentObstacle.addActionListener(orol);
+			airportObservers.add(orol);
 		}
 		
 		JMenu mnSave = new JMenu("Save");
@@ -178,12 +195,16 @@ public class MainFrame extends JFrame {
 
 		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Airport");
 		mntmNewMenuItem_4.setMnemonic('a');
-		mntmNewMenuItem_4.addActionListener(new SaveAirportListener(this));
+		SaveAirportListener sal = new SaveAirportListener(airport);
+		mntmNewMenuItem_4.addActionListener(sal);
+		airportObservers.add(sal);
 		mnSave.add(mntmNewMenuItem_4);
 
 		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Obstacle");
 		mntmNewMenuItem_5.setMnemonic('o');
-		mntmNewMenuItem_5.addActionListener(new SaveObstacleListener(this));
+		SaveObstacleListener sol = new SaveObstacleListener(airport);
+		mntmNewMenuItem_5.addActionListener(sol);
+		airportObservers.add(sol);
 		mnSave.add(mntmNewMenuItem_5);
 
 		JSeparator separator_1 = new JSeparator();
@@ -200,12 +221,14 @@ public class MainFrame extends JFrame {
 
 		JMenuItem mntmNewMenuItem_6 = new JMenuItem("Runway");
 		mntmNewMenuItem_6.setMnemonic('r');
-		mntmNewMenuItem_6.addActionListener(new EditRunwayListener(this));
+		EditRunwayListener erl = new EditRunwayListener(airport);
+		mntmNewMenuItem_6.addActionListener(erl);
 		mnEdit.add(mntmNewMenuItem_6);
 
 		JMenuItem mntmAirport_1 = new JMenuItem("Airport");
 		mntmAirport_1.setMnemonic('a');
-		mntmAirport_1.addActionListener(new  EditAirportListener(this));
+		EditAirportListener eal = new EditAirportListener(airport, airportObservers);
+		mntmAirport_1.addActionListener(eal);
 		mnEdit.add(mntmAirport_1);
 
 		JMenuItem mntmNewMenuItem_7 = new JMenuItem("Obstacle");
@@ -235,32 +258,32 @@ public class MainFrame extends JFrame {
 
 		JMenuItem mntmPositionObstacle = new JMenuItem("Position Obstacle");
 		mntmPositionObstacle.setMnemonic('p');
-		mntmPositionObstacle.addActionListener(new ObstaclePositionListener(this));
+		ObstaclePositionListener opl = new ObstaclePositionListener(airport);
+		mntmPositionObstacle.addActionListener(opl);
 		mnEdit.add(mntmPositionObstacle);
 
 		JMenu mnView = new JMenu("View");
 		mnView.setMnemonic('v');
 		menuBar.add(mnView);
 
-		//TODO: Fill in the appropriate Listeners here ======================================================================================
 		JMenu mnTopPanel = new JMenu("Top Panel");
 		mnTopPanel.setMnemonic('t');
 		mnView.add(mnTopPanel);
-
+		
 		JRadioButtonMenuItem rdbtnmntmTopPanelTopView = new JRadioButtonMenuItem("Top View");
 		topPanelButtonGroup.add(rdbtnmntmTopPanelTopView);
 		mnTopPanel.add(rdbtnmntmTopPanelTopView);
-		rdbtnmntmTopPanelTopView.addActionListener(new SelectViewListener(rightSplitPane, new TopView(airport), true));
+		rdbtnmntmTopPanelTopView.addActionListener(new SelectViewListener(rightSplitPane, topView, true));
 
 		JRadioButtonMenuItem rdbtnmntmTopPanelSideView = new JRadioButtonMenuItem("Side View");
 		topPanelButtonGroup.add(rdbtnmntmTopPanelSideView);
 		mnTopPanel.add(rdbtnmntmTopPanelSideView);
-		rdbtnmntmTopPanelSideView.addActionListener(new SelectViewListener(rightSplitPane, new SideView(), true));
+		rdbtnmntmTopPanelSideView.addActionListener(new SelectViewListener(rightSplitPane, sideView, true));
 
 		JRadioButtonMenuItem rdbtnmntmTopPanelCalculations = new JRadioButtonMenuItem("Calculations");
 		topPanelButtonGroup.add(rdbtnmntmTopPanelCalculations);
 		mnTopPanel.add(rdbtnmntmTopPanelCalculations);
-		rdbtnmntmTopPanelCalculations.addActionListener(new SelectViewListener(rightSplitPane, new CalculationsView(null), true));
+		rdbtnmntmTopPanelCalculations.addActionListener(new SelectViewListener(rightSplitPane, calcView, true));
 
 		JRadioButtonMenuItem rdbtnmntmTopPanelNone = new JRadioButtonMenuItem("None");
 		topPanelButtonGroup.add(rdbtnmntmTopPanelNone);
@@ -276,25 +299,23 @@ public class MainFrame extends JFrame {
 		JRadioButtonMenuItem rdbtnmntmBottomPanelTopView = new JRadioButtonMenuItem("Top View");
 		bottomPanelButtonGroup.add(rdbtnmntmBottomPanelTopView);
 		mnNewMenu_1.add(rdbtnmntmBottomPanelTopView);
-		rdbtnmntmBottomPanelTopView.addActionListener(new SelectViewListener(rightSplitPane, new TopView(airport), false));
+		rdbtnmntmBottomPanelTopView.addActionListener(new SelectViewListener(rightSplitPane, topView , false));
 
 		JRadioButtonMenuItem rdbtnmntmBottomPanelSideView = new JRadioButtonMenuItem("Side View");
 		rdbtnmntmBottomPanelSideView.setSelected(true);
 		bottomPanelButtonGroup.add(rdbtnmntmBottomPanelSideView);
 		mnNewMenu_1.add(rdbtnmntmBottomPanelSideView);
-		rdbtnmntmBottomPanelSideView.addActionListener(new SelectViewListener(rightSplitPane, new SideView(), false));
+		rdbtnmntmBottomPanelSideView.addActionListener(new SelectViewListener(rightSplitPane, sideView, false));
 
 		JRadioButtonMenuItem rdbtnmntmBottomPanelCalculations = new JRadioButtonMenuItem("Calculations");
 		bottomPanelButtonGroup.add(rdbtnmntmBottomPanelCalculations);
 		mnNewMenu_1.add(rdbtnmntmBottomPanelCalculations);
-		rdbtnmntmBottomPanelCalculations.addActionListener(new SelectViewListener(rightSplitPane, new CalculationsView(null), false));
+		rdbtnmntmBottomPanelCalculations.addActionListener(new SelectViewListener(rightSplitPane, calcView, false));
 
 		JRadioButtonMenuItem rdbtnmntmBottomPanelNone = new JRadioButtonMenuItem("None");
 		bottomPanelButtonGroup.add(rdbtnmntmBottomPanelNone);
 		mnNewMenu_1.add(rdbtnmntmBottomPanelNone);
 		rdbtnmntmBottomPanelNone.addActionListener(new SelectViewListener(rightSplitPane, null, false));
-
-		//TODO: All the way down to here ======================================================================================
 
 		JMenu mnEmail = new JMenu("Email");
 		mnEmail.setMnemonic('m');
@@ -407,8 +428,8 @@ public class MainFrame extends JFrame {
 		rightSplitPane.setResizeWeight(0.5);
 		rightSplitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
 
-		topView.setRunwayDimensions(100, 20, "08L", "27R");
 		//TODO: Uncomment this once it's fixed
+		//topView.setRunwayDimensions(100, 20, "08L", "27R");
 		//topView.setValues();
 		rightSplitPane.setLeftComponent(topView);
 
@@ -416,6 +437,10 @@ public class MainFrame extends JFrame {
 		sideView.setValues(80, 5, 40, 0, 73, 2, 15, 50, true, 76, 3, 9);
 		rightSplitPane.setRightComponent(sideView);
 
+		airportObservers.add(topView);
+		airportObservers.add(sideView);
+		airportObservers.add(calcView);
+		
 		try {
 			this.loadRecentFiles(5);
 		} catch (IOException e) {
@@ -457,7 +482,7 @@ public class MainFrame extends JFrame {
 
 	}
 
-	public void saveRecentFile(Airport airport, String filename) throws IOException{
+	public static void saveRecentFile(Airport airport, String filename) throws IOException{
 		if(recentAirports.contains(filename)){
 			recentAirports.remove(filename);
 			recentAirports.add(0, filename);
@@ -475,7 +500,7 @@ public class MainFrame extends JFrame {
 		bw.flush();
 	}
 
-	public void saveRecentFile(Obstacle obstacle, String filename) throws IOException{
+	public static void saveRecentFile(Obstacle obstacle, String filename) throws IOException{
 		if(recentObstacles.contains(filename)){
 			recentObstacles.remove(filename);
 			recentObstacles.add(0, filename);
@@ -493,14 +518,17 @@ public class MainFrame extends JFrame {
 		bw.flush();
 	}
 
-	public void setAirport(Airport airport){
-		this.airport = airport;
-		lblCurrentAirport.setText("Current Airport: " + airport.getName());
-
-	}
-
 	public Airport getAirport(){
 		return airport;
 	}
+
+	@Override
+	public void updateAirport(Airport airport) {
+		this.airport = airport;
+		lblCurrentAirport.setText("Current Airport: " + airport.getName());
+		
+	}
+	
+	
 
 }

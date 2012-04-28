@@ -4,15 +4,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import Model.Airport;
+import Model.AirportObserver;
 import Model.Obstacle;
 import View.MainFrame;
 
-public class ObstaclePositionListener implements ActionListener{
+public class ObstaclePositionListener implements ActionListener, AirportObserver{
 	
-	MainFrame mf;
+	Airport airport;
 	
-	public ObstaclePositionListener(MainFrame mf){
-		this.mf = mf;
+	public ObstaclePositionListener(Airport airport){
+		this.airport = airport;
 	}
 	
 	@Override
@@ -20,6 +21,13 @@ public class ObstaclePositionListener implements ActionListener{
 		// TODO Auto-generated method stub
 	}
 
+	@Override
+	public void updateAirport(Airport airport) {
+		this.airport = airport;
+		
+	}
+
+	
 	
 	
 }
