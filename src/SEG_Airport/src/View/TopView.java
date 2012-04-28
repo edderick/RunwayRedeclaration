@@ -71,6 +71,7 @@ public class TopView extends JPanel implements AirportObserver{
 	
 	public void paint (Graphics g){
 		super.paint(g);
+		setValues();
 		Graphics2D g2d = (Graphics2D)g;
 		
 		runwayCreation(g2d);
