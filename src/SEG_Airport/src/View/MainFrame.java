@@ -77,7 +77,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		
 		//TODO: Move these closer to where they are needed and maybe have two sets
 		TopView topView = new TopView(airport);
-		SideView sideView = new SideView();
+		SideView sideView = new SideView(airport);
 		CalculationsView calcView = new CalculationsView(airport);
 		
 		rightSplitPane = new JSplitPane();
@@ -449,8 +449,9 @@ public class MainFrame extends JFrame implements AirportObserver{
 		//topView.setValues();
 		rightSplitPane.setLeftComponent(topView);
 
-		sideView.setRunwayDimensions(80);
-		sideView.setValues(80, 5, 40, 0, 73, 2, 15, 50, true, 76, 3, 9);
+		//TODO: Uncomment this once it's fixed
+//		sideView.setRunwayDimensions(80);
+//		sideView.setValues(80, 5, 40, 0, 73, 2, 15, 50, true, 76, 3, 9);
 		rightSplitPane.setRightComponent(sideView);
 
 		airportObservers.add(topView);
