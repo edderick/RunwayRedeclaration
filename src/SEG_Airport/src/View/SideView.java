@@ -46,6 +46,9 @@ public class SideView extends JPanel implements AirportObserver{
 	Airport airport;
 	Runway runway;
 	Obstacle obstacle;
+	String threshold;
+	boolean obstacleLeft;
+	String leftTag;
 	
 	//relative to panel
 	int xRunway;
@@ -119,20 +122,27 @@ public class SideView extends JPanel implements AirportObserver{
 
 	
 	public void setValues(){
-//		this.runwayLength = length;
-//		this.TORA = tora;
-//		this.TODA = toda;
-//		this.ASDA = asda;
-//		this.LDA = lda;
-//		this.obstacle = obstacle;
-//		this.xObstacle = x;
-//		this.obstacleLength = length;
-//		this.obstacleHeight = height;
-//		this.TORAStart = toraStart;
-//		this.TODAStart = todaStart;
-//		this.ASDAStart = asdaStart;
-//		this.LDAStart = ldaStart;
-		
+		if(airport!=null){
+		this.runwayLength = (int) runway.getTORA(runway.DEFAULT);
+		this.TORA = (int) runway.getTORA(runway.REDECLARED);
+		this.TODA = (int) runway.getTODA(runway.REDECLARED);
+		this.ASDA = (int) runway.getASDA(runway.REDECLARED);
+		this.LDA = (int) runway.getLDA(runway.REDECLARED);
+		this.leftTag=airport.getCurrentPhysicalRunway().getRunway(0).getName();
+		if(obstacle!=null){
+			int distance = (int) airport.getCurrentPhysicalRunway().getDistanceAwayFromThreshold();
+			this.threshold=airport.getCurrentPhysicalRunway().closeTo().getName(); 
+			obstacleLeft=threshold.equals(leftTag);
+			if(obstacleLeft){this.xObstacle = distance;}else{this.xObstacle=runwayLength-distance;}
+			this.obstacleLength =(int) obstacle.getLength();
+			this.obstacleHeight = (int) obstacle.getHeight();
+		}
+		if(obstacleLeft){this.LDAStart = runwayLength;}else{this.LDAStart=0;}
+		if(obstacleLeft){this.TORAStart = runwayLength;}else{this.TORAStart=0;}
+		if(obstacleLeft){this.TODAStart = runwayLength;}else{this.TODAStart=0;}
+		if(obstacleLeft){this.ASDAStart = runwayLength;}else{this.ASDAStart=0;}
+
+		}
 		
 	}
 
