@@ -134,9 +134,10 @@ public class TopView extends JPanel implements AirportObserver{
 	}
 	
 	public void obstacleCreation(Graphics2D g2d){
-		g2d.setColor(Color.RED);
-		g2d.fillRect((int) ((r*xObstacle)+xRunway), (int)((r*yObstacle)+yRunway), (int)(r*obstacleLength), (int)(r*obstacleWidth));
-		
+		if(obstacle!=null){
+			g2d.setColor(Color.RED);
+			g2d.fillRect((int) ((r*xObstacle)+xRunway), (int)((r*yObstacle)+yRunway), (int)(r*obstacleLength), (int)(r*obstacleWidth));
+		}
 	}
 	
 	public void declaredRunwaysCreation(Graphics2D g2d){
@@ -183,13 +184,18 @@ public class TopView extends JPanel implements AirportObserver{
 		this.TODA = (int) runway.getTODA(runway.REDECLARED);
 		this.ASDA = (int) runway.getASDA(runway.REDECLARED);
 		this.LDA = (int) runway.getLDA(runway.REDECLARED);
-		int distance = (int) airport.getCurrentPhysicalRunway().getDistanceAwayFromThreshold();
-		this.threshold=airport.getCurrentPhysicalRunway().closeTo().getName(); 
-		obstacleLeft=threshold.equals(leftTag);
-		if(obstacleLeft){this.xObstacle = distance;}else{this.xObstacle=runwayWidth-distance;}
-		this.yObstacle = runwayHeight/2;
-		this.obstacleLength =(int) obstacle.getLength();
-		this.obstacleWidth = (int) obstacle.getWidth();
+		
+		if(obstacle!=null){
+			int distance = (int) airport.getCurrentPhysicalRunway().getDistanceAwayFromThreshold();
+			this.threshold=airport.getCurrentPhysicalRunway().closeTo().getName(); 
+			obstacleLeft=threshold.equals(leftTag);
+			if(obstacleLeft){this.xObstacle = distance;}else{this.xObstacle=runwayWidth-distance;}
+			this.yObstacle = runwayHeight/2;
+			this.obstacleLength =(int) obstacle.getLength();
+			this.obstacleWidth = (int) obstacle.getWidth();
+		}else{
+			obstacleLeft=false;
+		}
 		if(obstacleLeft){this.LDAStart = runwayWidth;}else{this.LDAStart=0;}
 		if(obstacleLeft){this.TORAStart = runwayWidth;}else{this.TORAStart=0;}
 		if(obstacleLeft){this.TODAStart = runwayWidth;}else{this.TODAStart=0;}
@@ -199,8 +205,10 @@ public class TopView extends JPanel implements AirportObserver{
 
 	public void updateAirport(Airport airport) {
 		this.airport=airport;
-		runway=airport.getCurrentRunway();
-		obstacle=airport.getCurrentPhysicalRunway().getObstacle();
+		if(airport!=null){
+			runway=airport.getCurrentRunway();
+			obstacle=airport.getCurrentPhysicalRunway().getObstacle();
+		}
 		
 	}
 }
