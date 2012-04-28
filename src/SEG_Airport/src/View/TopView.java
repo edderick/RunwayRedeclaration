@@ -184,12 +184,11 @@ public class TopView extends JPanel {
 		this.yObstacle = runwayHeight/2;
 		this.obstacleLength =(int) obstacle.getLength();
 		this.obstacleWidth = (int) obstacle.getWidth();
-		this.TORAStart = TORAStart;
-		this.TODAStart = TODAStart;
-		this.ASDAStart = ASDAStart;
-		this.LDAStart = LDAStart;
-		
-		
+		if(threshold.equals(leftTag)){this.LDAStart = xObstacle;}else{this.LDAStart=0;}
+		if(threshold.equals(leftTag)){this.TORAStart = (int) (xObstacle-airport.getCurrentPhysicalRunway().getRESA()-airport.getCurrentPhysicalRunway().;}else{this.TORAStart=0;}
+		if(threshold.equals(leftTag)){this.TODAStart = distance;}else{this.TODAStart=0;}
+		if(threshold.equals(leftTag)){this.ASDAStart = distance;}else{this.ASDAStart=0;}
+				
 	}
 }
 
