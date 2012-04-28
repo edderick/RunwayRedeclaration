@@ -116,12 +116,10 @@ public class SideView extends JPanel implements AirportObserver{
 //		g2d.drawString("ASDA", (int) (xRunway+((ASDA*r)/2)), (int) ((yRunway +((runwayHeight*r)/2) +g2d.getFontMetrics().getHeight())));
 //		g2d.drawString("LDA", (int) (xRunway+((LDA*r)/2)), (int) ((yRunway + (2* ((runwayHeight*r)/2)) +g2d.getFontMetrics().getHeight())));
 		}
-	
-	public void setRunwayDimensions(int length){
-		this.runwayLength = length;
-	}
+
 	
 	public void setValues(){
+//		this.runwayLength = length;
 //		this.TORA = tora;
 //		this.TODA = toda;
 //		this.ASDA = asda;
