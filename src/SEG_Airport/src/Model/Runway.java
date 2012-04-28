@@ -138,4 +138,8 @@ public class Runway {
 	public void setDisplacedThreshold(int option, double displacedThreshold) {
 		this.displacedThreshold[option] = displacedThreshold;
 	}
+	
+	public String toString(){
+		return name;
+	}
 }

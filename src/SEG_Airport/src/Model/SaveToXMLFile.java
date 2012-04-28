@@ -152,7 +152,7 @@ public class SaveToXMLFile {
 
 		//int numberOfRunways = airport.runways().size(); //number of physical runways
 
-		for (PhysicalRunway runway: airport.runways()) { // looping through all physical runways
+		for (PhysicalRunway runway: airport.getRunways()) { // looping through all physical runways
 
 
 			Element physicalRunway = document.createElement("PhysicalRunway");

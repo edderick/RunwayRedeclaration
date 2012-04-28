@@ -32,6 +32,8 @@ import net.miginfocom.swing.MigLayout;
 import Controller.*;
 import Model.*;
 
+import javax.swing.JComboBox;
+
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame implements AirportObserver{
 
@@ -43,8 +45,8 @@ public class MainFrame extends JFrame implements AirportObserver{
 	private JTable OriginalParametersTable;
 	private JTable RedeclaredParametersTable;
 	private JTable ObstacleDetailsTable;
-	private JLabel lblCurrentAirport;
-	private JLabel lblCurrentRunway;
+	private JLabel lblAirportName;
+	private JComboBox currentRunwayCombo;
 	private final ButtonGroup topPanelButtonGroup = new ButtonGroup();
 	private final ButtonGroup bottomPanelButtonGroup = new ButtonGroup();
 
@@ -357,14 +359,20 @@ public class MainFrame extends JFrame implements AirportObserver{
 
 		JPanel panel = new JPanel();
 		leftPanel.add(panel, "cell 0 0,grow");
-		panel.setLayout(new MigLayout("", "[77px]", "[14px][]"));
+		panel.setLayout(new MigLayout("", "[77px][grow]", "[14px][]"));
 
-		lblCurrentAirport = new JLabel("Current Airport:");
+		JLabel lblCurrentAirport = new JLabel("Current Airport:");
 		lblCurrentAirport.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel.add(lblCurrentAirport, "cell 0 0,alignx left,aligny top");
+		
+		lblAirportName = new JLabel("None");
+		panel.add(lblAirportName, "cell 1 0");
 
-		lblCurrentRunway = new JLabel("Current Runway:");
-		panel.add(lblCurrentRunway, "cell 0 1");
+		JLabel lblCurrentRunway = new JLabel("Current Runway:");
+		panel.add(lblCurrentRunway, "cell 0 1,alignx trailing");
+		
+		currentRunwayCombo = new JComboBox();
+		panel.add(currentRunwayCombo, "cell 1 1,growx");
 
 		JPanel leftTopPanel = new JPanel();
 		leftTopPanel.setBorder(new TitledBorder(null, "Original Parameters", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -525,8 +533,12 @@ public class MainFrame extends JFrame implements AirportObserver{
 	@Override
 	public void updateAirport(Airport airport) {
 		this.airport = airport;
-		lblCurrentAirport.setText("Current Airport: " + airport.getName());
-		
+		lblAirportName.setText(airport.getName());
+		currentRunwayCombo.removeAllItems();
+		for (PhysicalRunway r : airport.getRunways()){
+			currentRunwayCombo.addItem(r.getRunway(0));
+			currentRunwayCombo.addItem(r.getRunway(1));
+		}
 	}
 	
 	

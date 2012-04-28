@@ -20,9 +20,9 @@ public class EditAirportDialog extends JDialog {
 	private JTextField AirportName;
 
 	public EditAirportDialog(Airport airport, Airport old) {
-		System.out.println("old size: " + old.runways().size());
+		System.out.println("old size: " + old.getRunways().size());
 		ArrayList<String> physicalRunwayNames = new ArrayList<String>();
-		for(PhysicalRunway p : airport.runways()){
+		for(PhysicalRunway p : airport.getRunways()){
 			physicalRunwayNames.add(p.getId());
 		}
 		
@@ -92,7 +92,7 @@ class okListener implements ActionListener{
 	Airport a;
 	public void actionPerformed(ActionEvent e) {
 		a.setName(jt.getText());
-		System.out.println(a.runways().size());
+		System.out.println(a.getRunways().size());
 		jd.setVisible(false);
 	}
 	public okListener(JDialog jd, JTextField jt, Airport a) {
@@ -137,9 +137,9 @@ class EADdeleteListener implements ActionListener{
 	Airport a;
 	public void actionPerformed(ActionEvent arg0) {
 		int index = physicalRunwayJList.getSelectedIndex();
-		a.runways().remove(index);
+		a.getRunways().remove(index);
 		ArrayList<String> physicalRunwayNames = new ArrayList<String>();
-		for(PhysicalRunway p : a.runways()){
+		for(PhysicalRunway p : a.getRunways()){
 			physicalRunwayNames.add(p.getId());
 		}
 		DefaultListModel pr = new DefaultListModel();

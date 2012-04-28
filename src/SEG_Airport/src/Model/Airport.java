@@ -22,6 +22,15 @@ public class Airport {
 	public Airport(String name){
 		runways = new ArrayList<PhysicalRunway>();
 		this.name = name;
+		
+		if (!runways.isEmpty()) { 
+			currentPhysicalRunway = runways.get(0);
+		}
+		
+		if (currentPhysicalRunway != null){
+			currentRunway = currentPhysicalRunway.getRunway(0);
+		}
+		
 	}
 
 	/**
@@ -92,7 +101,7 @@ public class Airport {
 	/**
 	 * @return List of runways
 	 */
-	public ArrayList<PhysicalRunway> runways(){
+	public ArrayList<PhysicalRunway> getRunways(){
 		return runways;
 	}
 

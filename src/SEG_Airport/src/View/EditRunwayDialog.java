@@ -223,21 +223,21 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 		btnNewButton_1.setBounds(376, 11, 80, 23);
 		panel_2.add(btnNewButton_1);
 		
-		if(airport.runways().size() > 0 & !newRunway){			
+		if(airport.getRunways().size() > 0 & !newRunway){			
 			int index = physicalRunwayJList.getSelectedIndex();
-			txtl.setText(airport.runways().get(index).getRunway(0).getName());
-			txtr.setText(airport.runways().get(index).getRunway(1).getName());
+			txtl.setText(airport.getRunways().get(index).getRunway(0).getName());
+			txtr.setText(airport.getRunways().get(index).getRunway(1).getName());
 			
-			LASDA.setText(Double.toString(airport.runways().get(index).getRunway(0).getASDA(0)));
-			LTORA.setText(Double.toString(airport.runways().get(index).getRunway(0).getTORA(0)));
-			LTODA.setText(Double.toString(airport.runways().get(index).getRunway(0).getTODA(0)));
-			LLDA.setText(Double.toString(airport.runways().get(index).getRunway(0).getLDA(0)));
-			LDT.setText(Double.toString(airport.runways().get(index).getRunway(0).getDisplacedThreshold(0)));
-			RASDA.setText(Double.toString(airport.runways().get(index).getRunway(1).getASDA(0)));
-			RTORA.setText(Double.toString(airport.runways().get(index).getRunway(1).getTORA(0)));
-			RTODA.setText(Double.toString(airport.runways().get(index).getRunway(1).getTODA(0)));
-			RLDA.setText(Double.toString(airport.runways().get(index).getRunway(1).getLDA(0)));
-			RDT.setText(Double.toString(airport.runways().get(index).getRunway(1).getDisplacedThreshold(0)));
+			LASDA.setText(Double.toString(airport.getRunways().get(index).getRunway(0).getASDA(0)));
+			LTORA.setText(Double.toString(airport.getRunways().get(index).getRunway(0).getTORA(0)));
+			LTODA.setText(Double.toString(airport.getRunways().get(index).getRunway(0).getTODA(0)));
+			LLDA.setText(Double.toString(airport.getRunways().get(index).getRunway(0).getLDA(0)));
+			LDT.setText(Double.toString(airport.getRunways().get(index).getRunway(0).getDisplacedThreshold(0)));
+			RASDA.setText(Double.toString(airport.getRunways().get(index).getRunway(1).getASDA(0)));
+			RTORA.setText(Double.toString(airport.getRunways().get(index).getRunway(1).getTORA(0)));
+			RTODA.setText(Double.toString(airport.getRunways().get(index).getRunway(1).getTODA(0)));
+			RLDA.setText(Double.toString(airport.getRunways().get(index).getRunway(1).getLDA(0)));
+			RDT.setText(Double.toString(airport.getRunways().get(index).getRunway(1).getDisplacedThreshold(0)));
 		}		
 		
 		setVisible(true);
@@ -260,24 +260,24 @@ class ERDokListener implements ActionListener{
 	JDialog jd;
 	boolean newRunway;
 	public void actionPerformed(ActionEvent e) {
-		if(airport.runways().size() > 0 & !newRunway){ // get the physical runway and change the values
+		if(airport.getRunways().size() > 0 & !newRunway){ // get the physical runway and change the values
 			int index = physicalRunwayJList.getSelectedIndex();
 			// set the values to what's in the JTextFields
-			airport.runways().get(index).getRunway(0).setASDA(0, doubleParser.parse(LASDA.getText()));
-			airport.runways().get(index).getRunway(0).setTORA(0, doubleParser.parse(LTORA.getText()));
-			airport.runways().get(index).getRunway(0).setTODA(0, doubleParser.parse(LTODA.getText()));
-			airport.runways().get(index).getRunway(0).setLDA(0, doubleParser.parse(LLDA.getText()));
-			airport.runways().get(index).getRunway(0).setDisplacedThreshold(0, doubleParser.parse(LDT.getText()));
-			airport.runways().get(index).getRunway(1).setASDA(0, doubleParser.parse(RASDA.getText()));
-			airport.runways().get(index).getRunway(1).setTORA(0, doubleParser.parse(RTORA.getText()));
-			airport.runways().get(index).getRunway(1).setTODA(0, doubleParser.parse(RTODA.getText()));
-			airport.runways().get(index).getRunway(1).setLDA(0, doubleParser.parse(RLDA.getText()));
-			airport.runways().get(index).getRunway(1).setDisplacedThreshold(0, doubleParser.parse(RDT.getText()));
+			airport.getRunways().get(index).getRunway(0).setASDA(0, doubleParser.parse(LASDA.getText()));
+			airport.getRunways().get(index).getRunway(0).setTORA(0, doubleParser.parse(LTORA.getText()));
+			airport.getRunways().get(index).getRunway(0).setTODA(0, doubleParser.parse(LTODA.getText()));
+			airport.getRunways().get(index).getRunway(0).setLDA(0, doubleParser.parse(LLDA.getText()));
+			airport.getRunways().get(index).getRunway(0).setDisplacedThreshold(0, doubleParser.parse(LDT.getText()));
+			airport.getRunways().get(index).getRunway(1).setASDA(0, doubleParser.parse(RASDA.getText()));
+			airport.getRunways().get(index).getRunway(1).setTORA(0, doubleParser.parse(RTORA.getText()));
+			airport.getRunways().get(index).getRunway(1).setTODA(0, doubleParser.parse(RTODA.getText()));
+			airport.getRunways().get(index).getRunway(1).setLDA(0, doubleParser.parse(RLDA.getText()));
+			airport.getRunways().get(index).getRunway(1).setDisplacedThreshold(0, doubleParser.parse(RDT.getText()));
 //			System.out.println("rdt: " + airport.runways().get(index).getRunway(1).getDisplacedThreshold(0) + " " + RDT.getText());
-			airport.runways().get(index).getRunway(0).setName(LNAME.getText());
-			airport.runways().get(index).getRunway(1).setName(RNAME.getText());
+			airport.getRunways().get(index).getRunway(0).setName(LNAME.getText());
+			airport.getRunways().get(index).getRunway(1).setName(RNAME.getText());
 			
-			airport.runways().get(index).setId(LNAME.getText() + "/" + RNAME.getText());
+			airport.getRunways().get(index).setId(LNAME.getText() + "/" + RNAME.getText());
 		} else { // add a new physical runway and assign the values
 			airport.addPhysicalRunway(new PhysicalRunway(RNAME.getText() + "/" + LNAME.getText(), 
 					new Runway(RNAME.getText(), doubleParser.parse(RTORA.getText()), doubleParser.parse(RASDA.getText()), 
@@ -287,7 +287,7 @@ class ERDokListener implements ActionListener{
 		}
 		
 		ArrayList<String> physicalRunwayNames = new ArrayList<String>();
-		for(PhysicalRunway p : airport.runways()){
+		for(PhysicalRunway p : airport.getRunways()){
 			physicalRunwayNames.add(p.getId());
 		}
 		DefaultListModel pr = new DefaultListModel();
