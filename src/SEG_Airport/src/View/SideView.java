@@ -11,6 +11,8 @@ import javax.swing.JPanel;
 
 import Model.Airport;
 import Model.AirportObserver;
+import Model.Obstacle;
+import Model.Runway;
 
 
 @SuppressWarnings("serial")
@@ -41,7 +43,9 @@ public class SideView extends JPanel implements AirportObserver{
 	int declaredWidth = 10;
 	int obstacleLength;
 	int obstacleHeight;
-	boolean obstacle;
+	Airport airport;
+	Runway runway;
+	Obstacle obstacle;
 	
 	//relative to panel
 	int xRunway;
@@ -62,7 +66,7 @@ public class SideView extends JPanel implements AirportObserver{
 		super.paint(g);
 		Graphics2D g2d = (Graphics2D)g;
 		runwayCreation(g2d);
-		if(obstacle)obstacleCreation(g2d);
+		if(obstacle!= null)obstacleCreation(g2d);
 		declaredRunwaysCreation(g2d);
 			
 	}
@@ -132,9 +136,12 @@ public class SideView extends JPanel implements AirportObserver{
 		
 	}
 
-	@Override
 	public void updateAirport(Airport airport) {
-		// TODO Do whatever needs doign when the airport changes
+		this.airport=airport;
+		if(airport!=null){
+			runway=airport.getCurrentRunway();
+			obstacle=airport.getCurrentPhysicalRunway().getObstacle();
+		}
 		
 	}
 }
