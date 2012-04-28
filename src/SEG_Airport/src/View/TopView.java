@@ -161,14 +161,14 @@ public class TopView extends JPanel {
 		g2d.drawString("LDA", (int) (xRunway+((LDA*r)/2)), (int) ((yRunway + (2* ((runwayHeight*r)/2)) +g2d.getFontMetrics().getHeight())));
 		}
 	
-	public void setRunwayDimensions(int width, int height, String left, String right){
-		this.runwayWidth = width;
-		this.runwayHeight = height;
-		this.leftTag=left;
-		this.rightTag=right;
+	public void setRunwayDimensions(){
+		this.runwayWidth = (int) runway.getTORA(runway.DEFAULT);
+		this.runwayHeight = runwayWidth/20;
+		this.leftTag=airport.getCurrentPhysicalRunway().getRunway(0).getName();
+		this.rightTag=airport.getCurrentPhysicalRunway().getRunway(1).getName();
 	}
 	
-	//YUMMM
+
 	public void setValues(){
 		
 		this.TORA = (int) runway.getTORA(runway.REDECLARED);
