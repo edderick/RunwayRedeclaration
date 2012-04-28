@@ -47,6 +47,7 @@ public class TopView extends JPanel {
 	Airport airport;
 	Runway runway;
 	Obstacle obstacle;
+	String threshold;
 	
 	//relative to panel
 	int xRunway;
@@ -177,7 +178,9 @@ public class TopView extends JPanel {
 		this.LDA = (int) runway.getLDA(runway.REDECLARED);
 		
 //		this.obstacle = obstacle;
-		this.xObstacle = (int) airport.getCurrentPhysicalRunway().getDistanceAwayFromThreshold();
+		int distance = (int) airport.getCurrentPhysicalRunway().getDistanceAwayFromThreshold();
+		this.threshold=airport.getCurrentPhysicalRunway().closeTo().getName(); 
+		if(threshold.equals(leftTag)){this.xObstacle = distance;}else{this.xObstacle=runwayWidth-distance;}
 		this.yObstacle = 1; //TODO: Change this back to y
 		this.obstacleLength =(int) obstacle.getLength();
 		this.obstacleWidth = (int) obstacle.getWidth();
