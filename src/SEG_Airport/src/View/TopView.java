@@ -82,6 +82,7 @@ public class TopView extends JPanel implements AirportObserver{
 	
 	public void runwayCreation(Graphics2D g2d){
 		if(airport!=null){
+		
 		g2d.setColor(Color.GRAY);
 		
 		int pWidth = this.getWidth();
@@ -132,6 +133,37 @@ public class TopView extends JPanel implements AirportObserver{
 			g2d.rotate(-0.5 * Math.PI,  xRunway + width - tagBorder - offset, yRunway+(height/4));
 		}
 		}
+		g2d.setColor(Color.BLUE);
+		int nPoints = 12;
+		int xPoints[] = new int[nPoints];
+		int yPoints[] = new int[nPoints];
+		xPoints[0]=(int) (xRunway-(60*r));
+		yPoints[0]= (int) (yRunway+(((runwayWidth/2) -75)*r));
+		xPoints[1]= xPoints[1];
+		yPoints[1]= (int) (yRunway-(((runwayWidth/2) +75)*r));
+		xPoints[2]=(int) (xPoints[1]+(210*r));
+		yPoints[2]= yPoints[1];
+		xPoints[3]=(int) (xRunway+(300*r));
+		yPoints[3]= (int) (yRunway+(((runwayWidth/2) -105)*r));
+		xPoints[4]=(int) (xRunway+((runwayWidth-300)*r));
+		yPoints[4]= yPoints[3];
+		xPoints[5]=(int) (xRunway+((runwayWidth-150)*r));
+		yPoints[5]= yPoints[1];
+		xPoints[6]=(int) (xRunway+((runwayWidth+60)*r));
+		yPoints[6]= yPoints[1];
+		xPoints[7]=xPoints[6];
+		yPoints[7]= yPoints[0];
+		xPoints[8]=xPoints[5];
+		yPoints[8]= yPoints[0];
+		xPoints[9]=xPoints[4];
+		yPoints[9]= (int) (yRunway+(((runwayWidth/2) +105)*r));
+		xPoints[10]=xPoints[3];
+		yPoints[10]= yPoints[9];
+		xPoints[11]=xPoints[2];
+		yPoints[11]= yPoints[0];
+		
+		g2d.fillPolygon(xPoints, yPoints, nPoints);
+		
 		
 		
 	}
