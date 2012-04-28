@@ -235,7 +235,9 @@ public class MainFrame extends JFrame implements AirportObserver{
 
 		JMenuItem mntmNewMenuItem_7 = new JMenuItem("Obstacle");
 		mntmNewMenuItem_7.setMnemonic('o');
-		mntmNewMenuItem_7.addActionListener(new EditObstacleListener(this));
+		EditObstacleListener eol = new EditObstacleListener(airport);
+		mntmNewMenuItem_7.addActionListener(eol);
+		airportObservers.add(eol);
 		mnEdit.add(mntmNewMenuItem_7);
 
 		JSeparator separator = new JSeparator();
@@ -380,6 +382,8 @@ public class MainFrame extends JFrame implements AirportObserver{
 		leftTopPanel.setLayout(new BorderLayout(0, 0));
 
 		OriginalParametersTable = new JTable();
+		OriginalParametersTable.setEnabled(false);
+		OriginalParametersTable.setRowSelectionAllowed(false);
 		OriginalParametersTable.setModel(new DefaultTableModel(
 				new Object[][] {
 						{"TORA", "3884m"},
@@ -399,6 +403,8 @@ public class MainFrame extends JFrame implements AirportObserver{
 		leftMiddlePanel.setLayout(new BorderLayout(0, 0));
 
 		RedeclaredParametersTable = new JTable();
+		RedeclaredParametersTable.setEnabled(false);
+		RedeclaredParametersTable.setRowSelectionAllowed(false);
 		RedeclaredParametersTable.setModel(new DefaultTableModel(
 				new Object[][] {
 						{"TORA(R)", "3884m"},
@@ -418,6 +424,8 @@ public class MainFrame extends JFrame implements AirportObserver{
 		letBottomPanel.setLayout(new BorderLayout(0, 0));
 
 		ObstacleDetailsTable = new JTable();
+		ObstacleDetailsTable.setEnabled(false);
+		ObstacleDetailsTable.setRowSelectionAllowed(false);
 		ObstacleDetailsTable.setModel(new DefaultTableModel(
 				new Object[][] {
 						{"Type", "747"},
