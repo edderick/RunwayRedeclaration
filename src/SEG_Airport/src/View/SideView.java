@@ -54,11 +54,13 @@ public class SideView extends JPanel implements AirportObserver{
 	//relative to runway
 	int xObstacle;
 			
-	public SideView(){
+	public SideView(Airport airport){
 		super();
 		setSize(300,200);
 		this.setBackground(Color.WHITE);
 		setVisible(true);
+		updateAirport(airport);
+		setValues();
 			
 	}
 	
@@ -119,19 +121,19 @@ public class SideView extends JPanel implements AirportObserver{
 		this.runwayLength = length;
 	}
 	
-	public void setValues(int tora, int toraStart, int toda, int todaStart, int asda, int asdaStart, int lda, int ldaStart, boolean obstacle, int x, int length, int height){
-		this.TORA = tora;
-		this.TODA = toda;
-		this.ASDA = asda;
-		this.LDA = lda;
-		this.obstacle = obstacle;
-		this.xObstacle = x;
-		this.obstacleLength = length;
-		this.obstacleHeight = height;
-		this.TORAStart = toraStart;
-		this.TODAStart = todaStart;
-		this.ASDAStart = asdaStart;
-		this.LDAStart = ldaStart;
+	public void setValues(){
+//		this.TORA = tora;
+//		this.TODA = toda;
+//		this.ASDA = asda;
+//		this.LDA = lda;
+//		this.obstacle = obstacle;
+//		this.xObstacle = x;
+//		this.obstacleLength = length;
+//		this.obstacleHeight = height;
+//		this.TORAStart = toraStart;
+//		this.TODAStart = todaStart;
+//		this.ASDAStart = asdaStart;
+//		this.LDAStart = ldaStart;
 		
 		
 	}
