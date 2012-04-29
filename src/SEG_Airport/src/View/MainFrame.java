@@ -437,6 +437,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		ObstacleDetailsTable.setRowSelectionAllowed(false);
 		ObstacleDetailsTable.setModel(new DefaultTableModel(
 				new Object[][] {
+						{"Name","Chair"},
 						{"Type", "747"},
 						{"Height", "48m"},
 						{"Distance from Threshold", "73m"},
