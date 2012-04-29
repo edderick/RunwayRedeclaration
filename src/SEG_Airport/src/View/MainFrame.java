@@ -233,6 +233,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		JMenuItem mntmAirport_1 = new JMenuItem("Airport");
 		mntmAirport_1.setMnemonic('a');
 		EditAirportListener eal = new EditAirportListener(airport, airportObservers);
+		airportObservers.add(eal);
 		mntmAirport_1.addActionListener(eal);
 		mnEdit.add(mntmAirport_1);
 
@@ -267,6 +268,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		mntmPositionObstacle.setMnemonic('p');
 		ObstaclePositionListener opl = new ObstaclePositionListener(airport);
 		mntmPositionObstacle.addActionListener(opl);
+		airportObservers.add(opl);
 		mnEdit.add(mntmPositionObstacle);
 
 		JMenu mnView = new JMenu("View");
@@ -330,7 +332,9 @@ public class MainFrame extends JFrame implements AirportObserver{
 
 		JMenuItem mntmSendEmail = new JMenuItem("Send email");
 		mntmSendEmail.setMnemonic('s');
-		mntmSendEmail.addActionListener(new ShowEmailDialogListener(addressBook));
+		ShowEmailDialogListener sedl = new ShowEmailDialogListener(addressBook, airport);
+		airportObservers.add(sedl);
+		mntmSendEmail.addActionListener(sedl);
 		mnEmail.add(mntmSendEmail);
 
 		JMenuItem mntmAddressBook = new JMenuItem("Address book");

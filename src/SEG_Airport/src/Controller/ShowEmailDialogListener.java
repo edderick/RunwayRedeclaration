@@ -4,20 +4,28 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import Model.AddressBook;
+import Model.Airport;
+import Model.AirportObserver;
 import View.SendEmailDialog;
 
-public class ShowEmailDialogListener implements ActionListener{
+public class ShowEmailDialogListener implements ActionListener, AirportObserver{
 
 	AddressBook addressBook;
-	
-	public ShowEmailDialogListener(AddressBook addressBook){
+	Airport airport;
+
+	public ShowEmailDialogListener(AddressBook addressBook, Airport airport){
 		this.addressBook = addressBook;
+		this.airport = airport;
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		new SendEmailDialog(addressBook);
+		new SendEmailDialog(addressBook, airport);
+	}
+
+	@Override
+	public void updateAirport(Airport airport) {
+		this.airport = airport;
 	}
 
 }
