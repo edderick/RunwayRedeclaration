@@ -71,12 +71,66 @@ public class TopView extends JPanel implements AirportObserver{
 	
 	public void paint (Graphics g){
 		super.paint(g);
-		setValues();
+//		setValues();
 		Graphics2D g2d = (Graphics2D)g;
 		
-		runwayCreation(g2d);
-		if(obstacle != null)obstacleCreation(g2d);
-		declaredRunwaysCreation(g2d);
+		runwayWidth=2000;
+		runwayHeight=200;
+		
+		int pWidth = this.getWidth();
+		int pHeight = this.getHeight();
+		
+		
+		int width = (int) (ratio*pWidth);
+		r=width/(double)runwayWidth;
+				
+		int height = (int) (runwayHeight * r);
+		
+		if(2*height>pHeight){
+			height = (int) (pHeight/2);
+			r=height/(double)runwayHeight;
+			width=(int) (runwayWidth*r);
+		}
+		
+			
+		//calculates the x and y values to position the runway on the view
+		xRunway = (int) (((1.0-ratio)/2) *pWidth);
+		yRunway = (pHeight - height)/2;
+		
+		
+		int nPoints = 12;
+		int xPoints[] = new int[nPoints];
+		int yPoints[] = new int[nPoints];
+		xPoints[0]=(int) (xRunway-(60*r));
+		yPoints[0]= (int) (yRunway+(((runwayHeight/2) -75)*r));
+		xPoints[1]= xPoints[0];
+		yPoints[1]= (int) (yRunway-(((runwayHeight/2) +75)*r));
+		xPoints[2]=(int) (xPoints[1]+(210*r));
+		yPoints[2]= yPoints[1];
+		xPoints[3]=(int) (xRunway+(300*r));
+		yPoints[3]= (int) (yRunway-(((runwayHeight/2) -105)*r));
+		xPoints[4]=(int) (xRunway+((runwayWidth-300)*r));
+		yPoints[4]= yPoints[3];
+		xPoints[5]=(int) (xRunway+((runwayWidth-150)*r));
+		yPoints[5]= yPoints[1];
+		xPoints[6]=(int) (xRunway+((runwayWidth+60)*r));
+		yPoints[6]= yPoints[1];
+		xPoints[7]=xPoints[6];
+		yPoints[7]= yPoints[0];
+		xPoints[8]=xPoints[5];
+		yPoints[8]= yPoints[0];
+		xPoints[9]=xPoints[4];
+		yPoints[9]=  (int) (yRunway-(((runwayHeight/2)+105)*r));
+		xPoints[10]=xPoints[3];
+		yPoints[10]= yPoints[9];
+		xPoints[11]=xPoints[2];
+		yPoints[11]= yPoints[0];
+		
+		g2d.fillPolygon(xPoints, yPoints, nPoints);
+		
+//		runwayCreation(g2d);
+//		if(obstacle != null)obstacleCreation(g2d);
+//		declaredRunwaysCreation(g2d);
 			
 	}
 	
@@ -134,35 +188,7 @@ public class TopView extends JPanel implements AirportObserver{
 		}
 		}
 		g2d.setColor(Color.BLUE);
-		int nPoints = 12;
-		int xPoints[] = new int[nPoints];
-		int yPoints[] = new int[nPoints];
-		xPoints[0]=(int) (xRunway-(60*r));
-		yPoints[0]= (int) (yRunway+(((runwayWidth/2) -75)*r));
-		xPoints[1]= xPoints[1];
-		yPoints[1]= (int) (yRunway-(((runwayWidth/2) +75)*r));
-		xPoints[2]=(int) (xPoints[1]+(210*r));
-		yPoints[2]= yPoints[1];
-		xPoints[3]=(int) (xRunway+(300*r));
-		yPoints[3]= (int) (yRunway+(((runwayWidth/2) -105)*r));
-		xPoints[4]=(int) (xRunway+((runwayWidth-300)*r));
-		yPoints[4]= yPoints[3];
-		xPoints[5]=(int) (xRunway+((runwayWidth-150)*r));
-		yPoints[5]= yPoints[1];
-		xPoints[6]=(int) (xRunway+((runwayWidth+60)*r));
-		yPoints[6]= yPoints[1];
-		xPoints[7]=xPoints[6];
-		yPoints[7]= yPoints[0];
-		xPoints[8]=xPoints[5];
-		yPoints[8]= yPoints[0];
-		xPoints[9]=xPoints[4];
-		yPoints[9]= (int) (yRunway+(((runwayWidth/2) +105)*r));
-		xPoints[10]=xPoints[3];
-		yPoints[10]= yPoints[9];
-		xPoints[11]=xPoints[2];
-		yPoints[11]= yPoints[0];
 		
-		g2d.fillPolygon(xPoints, yPoints, nPoints);
 		
 		
 		
