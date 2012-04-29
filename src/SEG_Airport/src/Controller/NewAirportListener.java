@@ -23,7 +23,8 @@ public class NewAirportListener implements ActionListener, AirportObserver{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		Airport old = airport;
-		System.out.println("Creating new runway");
+		airport = new Airport("");
+		System.out.println("Creating new Airport");
 		@SuppressWarnings("unused")
 		EditAirportDialog ead = new EditAirportDialog(airport, old);
 		notifyAirportObservers();

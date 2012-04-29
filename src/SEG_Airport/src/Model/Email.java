@@ -1,5 +1,9 @@
 package Model;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -23,7 +27,7 @@ public class Email {
 	private Properties props = System.getProperties(); 
 	private Session session;
 	
-	//TODO: Maybe stored these settings in an xml file to be read in.
+	//TODO: Maybe stored these settings in a file to be read in.
 	private String host = "smtp.gmail.com";
 	private String from = "seg2012gp9@gmail.com";
 	private String password = "SasanMaleki";
@@ -37,6 +41,17 @@ public class Email {
 	 * Sets up the properties for a message to be sent
 	 */
 	public Email(){
+		
+		try{
+			loadSettings();
+		}
+		catch(IOException e){
+			System.out.println("Reverting to default email settings");
+			host = "smtp.gmail.com";
+			from = "seg2012gp9@gmail.com";
+			password = "SasanMaleki";
+		}
+		
 		props.put("mail.smtp.starttls.enable", "true");
 		props.put("mail.smtp.host", host);
 		props.put("mail.smtp.user", from);
@@ -46,6 +61,22 @@ public class Email {
 		session = Session.getDefaultInstance(props, null);
 	}
 
+	/**
+	 * Loads settings from file
+	 */
+	private void loadSettings() throws IOException{
+		FileInputStream fis = new FileInputStream("data/emailSettings");
+		InputStreamReader in = new InputStreamReader(fis);
+		BufferedReader br = new BufferedReader(in);
+
+		String line = br.readLine();
+		if (line != null) host = line;
+		line = br.readLine();
+		if (line != null) from = line;
+		line = br.readLine();
+		if (line != null) password = line;
+	}
+	
 	/**
 	 * Sets the subject of the email to be sent
 	 * @param subject The subject of the email
