@@ -173,7 +173,7 @@ public class SendEmailDialog extends JDialog {
 			tableModel.addContact(c);
 		}
 
-		tableModel.addContact(new Contact("edd", "se", "ejfs1g10@soton.ac.uk"));
+		//tableModel.addContact(new Contact("edd", "se", "ejfs1g10@soton.ac.uk"));
 
 		panel_1 = new JPanel();
 		contentPane.add(panel_1, "cell 1 0,grow");

@@ -339,7 +339,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 
 		JMenuItem mntmAddressBook = new JMenuItem("Address book");
 		mntmAddressBook.setMnemonic('a');
-		mntmAddressBook.addActionListener(new ShowAddressBookListener());
+		mntmAddressBook.addActionListener(new ShowAddressBookListener(addressBook));
 		mnEmail.add(mntmAddressBook);
 
 		JMenu mnHelp = new JMenu("Help");

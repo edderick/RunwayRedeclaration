@@ -6,11 +6,19 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.AbstractTableModel;
+
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import Model.AddressBook;
+import Model.Contact;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @SuppressWarnings("serial")
@@ -25,7 +33,7 @@ public class EditEmailDialog extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			EditEmailDialog dialog = new EditEmailDialog();
+			EditEmailDialog dialog = new EditEmailDialog(new Contact("Bill", "Bill", "Bill@Bill"));
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -36,7 +44,7 @@ public class EditEmailDialog extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public EditEmailDialog() {
+	public EditEmailDialog(Contact contact) {
 		setTitle("Email Editor");
 		setBounds(100, 100, 450, 150);
 		getContentPane().setLayout(new BorderLayout());
@@ -80,18 +88,10 @@ public class EditEmailDialog extends JDialog {
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(null); // sets the enter key to ok if set to okButton instead of null
 			}
-			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						setVisible(false);
-					}
-				});
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
-			}
 		}
 		setVisible(true);
 	}
 
+
 }
+

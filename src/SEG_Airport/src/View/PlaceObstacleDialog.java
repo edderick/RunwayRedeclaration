@@ -51,7 +51,7 @@ public class PlaceObstacleDialog extends JDialog {
 		JLabel lblM = new JLabel("m");
 		panel.add(lblM, "cell 1 0");
 		
-		JLabel lblL = new JLabel("REZA");
+		JLabel lblL = new JLabel("RESA");
 		panel.add(lblL, "cell 0 1,alignx trailing");
 		
 		TF_REZA = new JTextField();

@@ -1,18 +1,21 @@
 package View;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
+
+import Model.AddressBook;
+import Model.Contact;
 
 import net.miginfocom.swing.MigLayout;
 
 
 @SuppressWarnings("serial")
 public class AddressBookDialog extends JDialog {
-	
+
 	@SuppressWarnings("unused")
 	private final JPanel contentPanel = new JPanel();
 	private JPanel contentPane;
@@ -21,8 +24,7 @@ public class AddressBookDialog extends JDialog {
 	private JButton btnNewButton_1;
 	private JScrollPane scrollPane;
 	private JTable table;
-	private JButton btnEdit;
-	private JButton btnApply;
+	private JButton btnDelete;
 	private JButton btnCancel;
 	private JSeparator separator;
 	private JSeparator separator_1;
@@ -32,7 +34,7 @@ public class AddressBookDialog extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			AddressBookDialog dialog = new AddressBookDialog();
+			AddressBookDialog dialog = new AddressBookDialog(new AddressBook());
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -43,140 +45,167 @@ public class AddressBookDialog extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public AddressBookDialog() {
+	public AddressBookDialog(AddressBook addressBook) {
 		setTitle("Address Book");
 		setBounds(100, 100, 481, 300);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[grow][grow]", "[grow]"));
-		
+		contentPane.setLayout(new MigLayout("", "[grow][79px]", "[grow]"));
+
 		scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, "cell 0 0,grow");
-		
+
 		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-			},
-			new String[] {
-				"Name", "Email"
-			}
-		));
+
+		table.setModel(new MyTableModel(addressBook));
+
 		table.getColumnModel().getColumn(0).setResizable(false);
 		table.getColumnModel().getColumn(0).setPreferredWidth(50);
 		scrollPane.setViewportView(table);
-		
+
 		panel_1 = new JPanel();
 		contentPane.add(panel_1, "cell 1 0,grow");
-		GridBagLayout gbl_panel_1 = new GridBagLayout();
-		gbl_panel_1.columnWidths = new int[]{65, 0};
-		gbl_panel_1.rowHeights = new int[]{23, 23, 1, 23, 1, 23, 23, 0};
-		gbl_panel_1.columnWeights = new double[]{0.0, Double.MIN_VALUE};
-		gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		panel_1.setLayout(gbl_panel_1);
-		
+
 		btnNewButton = new JButton("New");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				EditEmailDialog eed = new EditEmailDialog();
-				eed.setVisible(true);
+				Contact contact = new Contact("","","");
+				EditEmailDialog eed = new EditEmailDialog(contact);
+				((MyTableModel)table.getModel()).getAddressBook().addContact(contact);
+				table.updateUI();
 			}
 		});
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.anchor = GridBagConstraints.NORTH;
-		gbc_btnNewButton.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnNewButton.insets = new Insets(0, 0, 5, 0);
-		gbc_btnNewButton.gridx = 0;
-		gbc_btnNewButton.gridy = 0;
-		panel_1.add(btnNewButton, gbc_btnNewButton);
-		
+		panel_1.setLayout(new MigLayout("", "[65px]", "[23px][23px][1px][23px][1px][grow][]"));
+		panel_1.add(btnNewButton, "cell 0 0,growx,aligny top");
+
 		btnNewButton_1 = new JButton("Edit");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				EditEmailDialog eed = new EditEmailDialog();
-				eed.setVisible(true);
+				if(table.getSelectedRow() != -1){
+					EditEmailDialog eed = new EditEmailDialog(((MyTableModel)table.getModel()).getAddressBook().getContacts().get(table.getSelectedRow()));
+					eed.setVisible(true);
+					table.updateUI();
+				}
 			}
 		});
-		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
-		gbc_btnNewButton_1.anchor = GridBagConstraints.NORTH;
-		gbc_btnNewButton_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 0);
-		gbc_btnNewButton_1.gridx = 0;
-		gbc_btnNewButton_1.gridy = 1;
-		panel_1.add(btnNewButton_1, gbc_btnNewButton_1);
-		
+		panel_1.add(btnNewButton_1, "cell 0 1,growx,aligny top");
+
 		separator = new JSeparator();
-		GridBagConstraints gbc_separator = new GridBagConstraints();
-		gbc_separator.fill = GridBagConstraints.BOTH;
-		gbc_separator.insets = new Insets(0, 0, 5, 0);
-		gbc_separator.gridx = 0;
-		gbc_separator.gridy = 2;
-		panel_1.add(separator, gbc_separator);
+		panel_1.add(separator, "cell 0 2,grow");
+
+		btnDelete = new JButton("Delete");
+		panel_1.add(btnDelete, "cell 0 3,growx,aligny top");
 		
-		btnEdit = new JButton("Delete");
-		GridBagConstraints gbc_btnEdit = new GridBagConstraints();
-		gbc_btnEdit.anchor = GridBagConstraints.NORTH;
-		gbc_btnEdit.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnEdit.insets = new Insets(0, 0, 5, 0);
-		gbc_btnEdit.gridx = 0;
-		gbc_btnEdit.gridy = 3;
-		panel_1.add(btnEdit, gbc_btnEdit);
-		
-		separator_1 = new JSeparator();
-		GridBagConstraints gbc_separator_1 = new GridBagConstraints();
-		gbc_separator_1.fill = GridBagConstraints.BOTH;
-		gbc_separator_1.insets = new Insets(0, 0, 5, 0);
-		gbc_separator_1.gridx = 0;
-		gbc_separator_1.gridy = 4;
-		panel_1.add(separator_1, gbc_separator_1);
-		
-		btnApply = new JButton("Apply");
-		btnApply.addActionListener(new ActionListener() {
+		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
+				if(table.getSelectedRow() != -1){
+					String email = ((MyTableModel)table.getModel()).getAddressBook().getContacts().get(table.getSelectedRow()).getEmail();
+					((MyTableModel)table.getModel()).getAddressBook().removeContactByEmail(email);
+					table.updateUI();
+				}
 			}
 		});
-		GridBagConstraints gbc_btnApply = new GridBagConstraints();
-		gbc_btnApply.anchor = GridBagConstraints.NORTH;
-		gbc_btnApply.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnApply.insets = new Insets(0, 0, 5, 0);
-		gbc_btnApply.gridx = 0;
-		gbc_btnApply.gridy = 5;
-		panel_1.add(btnApply, gbc_btnApply);
-		
-		btnCancel = new JButton("Cancel");
+
+		separator_1 = new JSeparator();
+		panel_1.add(separator_1, "cell 0 4,grow");
+
+		//		btnApply = new JButton("Apply");
+		//		btnApply.addActionListener(new ActionListener() {
+		//			public void actionPerformed(ActionEvent e) {
+		//				setVisible(false);
+		//			}
+		//		});
+
+		//		GridBagConstraints gbc_btnApply = new GridBagConstraints();
+		//		gbc_btnApply.anchor = GridBagConstraints.NORTH;
+		//		gbc_btnApply.fill = GridBagConstraints.HORIZONTAL;
+		//		gbc_btnApply.insets = new Insets(0, 0, 5, 0);
+		//		gbc_btnApply.gridx = 0;
+		//		gbc_btnApply.gridy = 5;
+		//		panel_1.add(btnApply, gbc_btnApply);
+
+		btnCancel = new JButton("Close");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
+				dispose();
 			}
 		});
-		GridBagConstraints gbc_btnCancel = new GridBagConstraints();
-		gbc_btnCancel.fill = GridBagConstraints.BOTH;
-		gbc_btnCancel.gridx = 0;
-		gbc_btnCancel.gridy = 6;
-		panel_1.add(btnCancel, gbc_btnCancel);
+		panel_1.add(btnCancel, "cell 0 6,grow");
 
 		setVisible(true);
+	}
+
+}
+
+class MyTableModel extends AbstractTableModel {
+	AddressBook addressBook;
+	private String[] columnNames = {"First name", "Last name" ,"Email"};
+
+	public MyTableModel(AddressBook addressBook){
+		this.addressBook = addressBook;
+	}
+
+	public void addContact(Contact contact){
+		addressBook.addContact(contact);
+
+	}
+
+	public int getColumnCount() {
+		return columnNames.length;
+	}
+
+	public int getRowCount() {
+		return addressBook.getContacts().size();
+	}
+
+	public String getColumnName(int col) {
+		return columnNames[col];
+	}
+
+	public Object getValueAt(int row, int col) {
+		switch(col){
+		case 0 : return addressBook.getContacts().get(row).getFirstName();
+		case 1 : return addressBook.getContacts().get(row).getLastName();
+		case 2 : return addressBook.getContacts().get(row).getEmail();
+		default : return null;
+		}
+	}
+
+	/*
+	 * JTable uses this method to determine the default renderer/
+	 * editor for each cell.  If we didn't implement this method,
+	 * then the last column would contain text ("true"/"false"),
+	 * rather than a check box.
+	 */
+	@SuppressWarnings("unchecked")
+	public Class getColumnClass(int c) {
+		return getValueAt(0, c).getClass();
+	}
+
+	/*
+	 * Don't need to implement this method unless your table's
+	 * editable.
+	 */
+	public boolean isCellEditable(int row, int col) {
+		//Note that the data/cell address is constant,
+		//no matter where the cell appears onscreen.
+		if (col > 0) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	/*
+	 * Don't need to implement this method unless your table's
+	 * data can change.
+	 */
+	public void setValueAt(Object value, int row, int col) {
+	}
+
+	public AddressBook getAddressBook(){
+		return addressBook;
 	}
 
 }
