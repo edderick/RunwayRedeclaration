@@ -32,6 +32,9 @@ public class TopView extends JPanel implements AirportObserver{
 	//final removed to prevent warning
 	double tagRotate = 1;
 	
+	int xOffset = 0;
+	int yOffset = 0;
+	
 	double r;
 	int TORA;
 	int TODA;
@@ -73,6 +76,7 @@ public class TopView extends JPanel implements AirportObserver{
 	
 	public void paint (Graphics g){
 		super.paint(g);
+		g.translate(xOffset, yOffset);
 		setValues();
 		Graphics2D g2d = (Graphics2D)g;
 		
@@ -244,8 +248,7 @@ public class TopView extends JPanel implements AirportObserver{
 //		if(airport!=null){
 //		this.runwayWidth = (int) runway.getTORA(runway.DEFAULT);
 //		this.runwayHeight = runwayWidth/20;
-//		this.leftTag=airport.getCurrentPhysicalRunway().getRunway(0).getName();
-//		this.rightTag=airport.getCurrentPhysicalRunway().getRunway(1).getName();
+//		
 //		this.TORA = (int) runway.getTORA(runway.REDECLARED);
 //		this.TODA = (int) runway.getTODA(runway.REDECLARED);
 //		this.ASDA = (int) runway.getASDA(runway.REDECLARED);
@@ -254,18 +257,16 @@ public class TopView extends JPanel implements AirportObserver{
 //		if(obstacle!=null){
 //			int distance = (int) airport.getCurrentPhysicalRunway().getDistanceAwayFromThreshold();
 //			this.threshold=airport.getCurrentPhysicalRunway().closeTo().getName(); 
-//			obstacleLeft=threshold.equals(leftTag);
-//			if(obstacleLeft){this.xObstacle = distance;}else{this.xObstacle=runwayWidth-distance;}
+//			if(threshold.equals(airport.getCurrentPhysicalRunway().getRunway(0).getName())){this.leftTag=airport.getCurrentPhysicalRunway().getRunway(1).getName();}else{this.leftTag=airport.getCurrentPhysicalRunway().getRunway(0).getName();}
+//			this.rightTag=threshold;
+//			this.xObstacle=runwayWidth-distance;
 //			this.yObstacle = runwayHeight/2;
 //			this.obstacleLength =(int) obstacle.getLength();
 //			this.obstacleWidth = (int) obstacle.getWidth();
-//		}else{
-//			obstacleLeft=false;
-//		}
-//		if(obstacleLeft){this.LDAStart = runwayWidth;}else{this.LDAStart=0;}
-//		if(obstacleLeft){this.TORAStart = runwayWidth;}else{this.TORAStart=0;}
-//		if(obstacleLeft){this.TODAStart = runwayWidth;}else{this.TODAStart=0;}
-//		if(obstacleLeft){this.ASDAStart = runwayWidth;}else{this.ASDAStart=0;}
+//			this.LDAStart=(int) (xRunway-(obstacleLength*airport.getCurrentPhysicalRunway().getAngleOfSlope()));
+//			this.TORAStart=0;
+//			this.TODAStart=TORAStart+TORA;
+//			this.ASDAStart=TORAStart+TORA;
 //		}	
 	}
 
@@ -281,6 +282,8 @@ public class TopView extends JPanel implements AirportObserver{
 		
 	}
 	
+	
+	
 	public void zoomIn(){
 		ratio=ratio+ratioIncrement;
 	}
@@ -291,6 +294,11 @@ public class TopView extends JPanel implements AirportObserver{
 	
 	public void setZoom(double ratioIncrement){
 		this.ratioIncrement=ratioIncrement;
+	}
+	
+	public void setOffset(int x, int y){
+		this.xOffset=x;
+		this.yOffset=y;
 	}
 }
 
