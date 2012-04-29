@@ -397,6 +397,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 						{"TODA", "3962m"},
 						{"ASDA", "3884m"},
 						{"LDA", "3884m"},
+						{"DT","100m"}
 				},
 				new String[] {
 						"New column", "New column"
@@ -418,6 +419,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 						{"TODA(R)", "3962m"},
 						{"ASDA(R)", "3884m"},
 						{"LDA(R)", "3884m"},
+						{"DT","100m"}
 				},
 				new String[] {
 						"New column", "New column"

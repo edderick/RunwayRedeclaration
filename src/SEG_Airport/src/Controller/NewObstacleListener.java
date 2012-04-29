@@ -43,8 +43,7 @@ public class NewObstacleListener implements ActionListener, AirportObserver{
 			Obstacle obstacle = new Obstacle(null, null, 0, 0, 0);
 			@SuppressWarnings("unused")
 			EditObstacleDialog eod = new EditObstacleDialog(obstacle, old);
-			airport.getCurrentPhysicalRunway().setObstacle(obstacle);
-			
+			airport.getCurrentPhysicalRunway().setObstacle(obstacle);			
 		}
 			
 	}
