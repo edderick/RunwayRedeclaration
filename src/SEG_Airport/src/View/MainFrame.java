@@ -51,6 +51,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 	private final ButtonGroup bottomPanelButtonGroup = new ButtonGroup();
 
 	private Airport airport;
+	private AddressBook addressBook;
 
 	private static List<String> recentAirports;
 	private static List<String> recentObstacles;
@@ -79,6 +80,9 @@ public class MainFrame extends JFrame implements AirportObserver{
 		TopView topView = new TopView(airport);
 		SideView sideView = new SideView(airport);
 		CalculationsView calcView = new CalculationsView(airport);
+		
+		//TODO: Load addressbook on application start;
+		addressBook = new AddressBook();
 		
 		rightSplitPane = new JSplitPane();
 		
@@ -327,7 +331,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 
 		JMenuItem mntmSendEmail = new JMenuItem("Send email");
 		mntmSendEmail.setMnemonic('s');
-		mntmSendEmail.addActionListener(new ShowEmailDialogListener());
+		mntmSendEmail.addActionListener(new ShowEmailDialogListener(addressBook));
 		mnEmail.add(mntmSendEmail);
 
 		JMenuItem mntmAddressBook = new JMenuItem("Address book");

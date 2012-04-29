@@ -272,7 +272,10 @@ public class TopView extends JPanel implements AirportObserver{
 
 	public void updateAirport(Airport airport) {
 		this.airport=airport;
-		if(airport!=null){
+		if(airport!=null && airport.getCurrentRunway() != null &&
+		   airport.getCurrentPhysicalRunway() != null && 
+		   airport.getCurrentPhysicalRunway().getObstacle() != null)
+		{
 			runway=airport.getCurrentRunway();
 			obstacle=airport.getCurrentPhysicalRunway().getObstacle();
 		}

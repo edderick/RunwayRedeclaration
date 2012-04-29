@@ -5,6 +5,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -16,6 +18,10 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
+import javax.swing.text.TabExpander;
+
+import Model.AddressBook;
+import Model.Contact;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -33,22 +39,43 @@ public class SendEmailDialog extends JDialog {
 	private JButton btnSend;
 	private JButton btnCancel;
 
+	private AddressBook addressBook; 
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		try {
+			SendEmailDialog dialog = new SendEmailDialog(new AddressBook());
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 
 	class MyTableModel extends AbstractTableModel {
-		private String[] columnNames = {"Send","Name","Email"};
-		private Object[][] data = {
-				{new Boolean(false),"Kathy S", "Smith@arbitary.domain.gl",},
-				{new Boolean(false),"John D", "Doe@arbitary.domain.gl"},
-				{new Boolean(false),"J Bizzle", "B@arbitary.domain.gl",},
-				{new Boolean(false),"Bear Grills", "G@arbitary.domain.gl"}
-		};
-
+		private String[] columnNames = {"Send","First name", "Last name" ,"Email"};
+		private List<Boolean> send = new ArrayList<Boolean>();
+		private List<String> firstName = new ArrayList<String>();
+		private List<String> lastName = new ArrayList<String>();
+		private List<String> email = new ArrayList<String>();
+		
+		public void addContact(Contact contact){
+			send.add(false);
+			firstName.add(contact.getFirstName());
+			lastName.add(contact.getLastName());
+			email.add(contact.getEmail());
+			
+		}
+		
 		public int getColumnCount() {
 			return columnNames.length;
 		}
 
 		public int getRowCount() {
-			return data.length;
+			return send.size();
 		}
 
 		public String getColumnName(int col) {
@@ -56,7 +83,13 @@ public class SendEmailDialog extends JDialog {
 		}
 
 		public Object getValueAt(int row, int col) {
-			return data[row][col];
+			switch(col){
+			case 0 : return send.get(row);
+			case 1 : return firstName.get(row);
+			case 2 : return lastName.get(row);
+			case 3 : return email.get(row);
+			default : return null;
+			}
 		}
 
 		/*
@@ -70,50 +103,43 @@ public class SendEmailDialog extends JDialog {
 			return getValueAt(0, c).getClass();
 		}
 
-        /*
-         * Don't need to implement this method unless your table's
-         * editable.
-         */
-        public boolean isCellEditable(int row, int col) {
-            //Note that the data/cell address is constant,
-            //no matter where the cell appears onscreen.
-            if (col > 0) {
-                return false;
-            } else {
-                return true;
-            }
-        }
+		/*
+		 * Don't need to implement this method unless your table's
+		 * editable.
+		 */
+		public boolean isCellEditable(int row, int col) {
+			//Note that the data/cell address is constant,
+			//no matter where the cell appears onscreen.
+			if (col > 0) {
+				return false;
+			} else {
+				return true;
+			}
+		}
 		/*
 		 * Don't need to implement this method unless your table's
 		 * data can change.
 		 */
 		public void setValueAt(Object value, int row, int col) {
-			data[row][col] = value;
+			switch(col){
+			case 0 : send.set(row, (Boolean)value); break;
+			case 1 : firstName.set(row, (String)value); break;
+			case 2 : lastName.set(row, (String)value); break;
+			case 3 : email.set(row, (String) value); break;
+			}
 			fireTableCellUpdated(row, col);
 			if(col == 0 && (Boolean) getValueAt(row, 0)){ System.out.println("Email will be sent to: "+this.getValueAt(row, col+2)); }
+			
 		}
 
 	}
-	
-	
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			SendEmailDialog dialog = new SendEmailDialog();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+
 
 
 	/**
 	 * Create the dialog.
 	 */
-	public SendEmailDialog() {
+	public SendEmailDialog(AddressBook addressBook) {
 		setTitle("Address Book");
 		setBounds(100, 100, 481, 300);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -138,11 +164,20 @@ public class SendEmailDialog extends JDialog {
 				return  component;
 			}
 		};
-		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // turns this table into a 'spring' table		
-		table.setModel(new MyTableModel());
+		//table.setAutoResizeMode(JTable.AUTO_RESIZE_ON); // turns this table into a 'spring' table		
 		
+		MyTableModel tableModel = new MyTableModel();
+		
+		table.setModel(tableModel);
+	
 		scrollPane.setViewportView(table);
-
+		
+		for(Contact c : addressBook.getContacts()){
+			tableModel.addContact(c);
+		}
+		
+		tableModel.addContact(new Contact("edd", "se", "lol"));
+		
 		panel_1 = new JPanel();
 		contentPane.add(panel_1, "cell 1 0,grow");
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
@@ -179,6 +214,20 @@ public class SendEmailDialog extends JDialog {
 		gbc_btnCancel.gridy = 6;
 		panel_1.add(btnCancel, gbc_btnCancel);
 		setVisible(true);
+	}
+	
+}
+
+class sendButtonListener implements ActionListener{
+
+	AddressBook addressBook;
+	
+
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		new SendEmailDialog(addressBook);
 	}
 
 }
