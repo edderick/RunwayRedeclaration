@@ -102,8 +102,7 @@ public class LoadXMLFile {
 	 * @return Obstacle that was contained in XML
 	 * @throws Exception Exceptions to do with reading files and parsing XML
 	 */
-	public Obstacle loadObstacle() throws Exception{
-
+	public Obstacle loadObstacle() throws Exception{		
 		if (toPromtOrNotToPromt == true){
 			JFileChooser fileChooser = new JFileChooser();
 			XMLFileFilter fileFilter = new XMLFileFilter();

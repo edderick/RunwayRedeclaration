@@ -9,7 +9,7 @@ public class PhysicalRunway {
 
 	private String id;
 	private Runway[] runway;
-	private Obstacle obstacle;
+	private Obstacle obstacle = new Obstacle("", "", 0.0, 0.0, 0.0);
 
 	//Meters are used for these measurements 
 	private double distanceAwayFromThreshold, RESA, stopway, blastAllowance; 
@@ -17,6 +17,11 @@ public class PhysicalRunway {
 	private double angleOfSlope;
 	private boolean closeToA;
 
+	@Override
+	public boolean equals(Object obj) {		
+		return this.id.equals( ((PhysicalRunway) obj).id );
+	}
+	
 	/**
 	 * Default constructor for Physical Runway
 	 * @param identifier The name of the physical runway
@@ -27,7 +32,7 @@ public class PhysicalRunway {
 		id = identifier;
 		runway = new Runway[2];
 		runway[0] = runwayOne;
-		runway[1] = runwayTwo;
+		runway[1] = runwayTwo;		
 	}
 
 	/**

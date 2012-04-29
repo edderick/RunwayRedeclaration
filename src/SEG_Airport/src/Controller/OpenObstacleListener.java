@@ -24,7 +24,7 @@ public class OpenObstacleListener implements ActionListener, AirportObserver{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
+		
 		LoadXMLFile lf = new LoadXMLFile();
 		try {
 			Obstacle o = lf.loadObstacle();

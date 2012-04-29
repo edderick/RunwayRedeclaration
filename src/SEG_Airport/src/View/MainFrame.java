@@ -75,7 +75,6 @@ public class MainFrame extends JFrame implements AirportObserver{
 	}
 
 	public MainFrame() {
-		
 		//TODO: Move these closer to where they are needed and maybe have two sets
 		TopView topView = new TopView(airport);
 		SideView sideView = new SideView(airport);

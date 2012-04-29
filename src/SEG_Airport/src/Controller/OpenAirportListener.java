@@ -31,7 +31,7 @@ public class OpenAirportListener implements ActionListener, AirportObserver{
 			ap = lf.loadAirport();
 
 
-			System.out.println("This is the airport opened: " + ap.getName());
+			System.out.println("This is the airport opened:: " + ap.getName());
 			//iterate over the runways in the loaded airport and print all values
 			for (PhysicalRunway r : ap.getRunways()) { // this will show all the physical runways
 				System.out.println(((PhysicalRunway) r).getId() 
