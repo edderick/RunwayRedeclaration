@@ -24,7 +24,7 @@ public class NewObstacleListener implements ActionListener, AirportObserver{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(airport.getRunways().size() == 0){
-			JOptionPane.showMessageDialog(null, "Airport does not contain any physical runways", "", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Airport does not contain any physical runways\r\nPlease add one by going to Edit > Airport", "", JOptionPane.ERROR_MESSAGE);
 		} else {
 			if(airport.getCurrentPhysicalRunway() == null){
 				// we shall pick a runway
@@ -32,7 +32,11 @@ public class NewObstacleListener implements ActionListener, AirportObserver{
 				for(PhysicalRunway p : airport.getRunways())
 					physicalRunwayNames += p.getId() + " ";
 				
-				airport.setCurrentPhysicalRunway(airport.getRunways().get(airport.getRunways().indexOf(new PhysicalRunway(	(String) JOptionPane.showInputDialog(null,"Choose one", "Input", JOptionPane.INFORMATION_MESSAGE, null,	physicalRunwayNames.split(" "), physicalRunwayNames.split(" ")[0]), null, null))));
+				airport.setCurrentPhysicalRunway(airport.getRunways().get(
+						airport.getRunways().indexOf(new PhysicalRunway( 
+								(String) JOptionPane.showInputDialog(null,"Choose a physical for this obstacle", 
+										"", JOptionPane.INFORMATION_MESSAGE, null,	
+										physicalRunwayNames.split(" "), physicalRunwayNames.split(" ")[0]), null, null))));
 			}
 			
 			Obstacle old = airport.getCurrentPhysicalRunway().getObstacle();
