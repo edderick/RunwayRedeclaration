@@ -71,31 +71,9 @@ public class TopView extends JPanel implements AirportObserver{
 	
 	public void paint (Graphics g){
 		super.paint(g);
-//		setValues();
+		setValues();
 		Graphics2D g2d = (Graphics2D)g;
 		
-		runwayWidth=2000;
-		runwayHeight=200;
-		
-		int pWidth = this.getWidth();
-		int pHeight = this.getHeight();
-		
-		
-		int width = (int) (ratio*pWidth);
-		r=width/(double)runwayWidth;
-				
-		int height = (int) (runwayHeight * r);
-		
-		if(2*height>pHeight){
-			height = (int) (pHeight/2);
-			r=height/(double)runwayHeight;
-			width=(int) (runwayWidth*r);
-		}
-		
-			
-		//calculates the x and y values to position the runway on the view
-		xRunway = (int) (((1.0-ratio)/2) *pWidth);
-		yRunway = (pHeight - height)/2;
 		
 		
 		int nPoints = 12;
@@ -132,14 +110,14 @@ public class TopView extends JPanel implements AirportObserver{
 		
 		g2d.fillPolygon(xPoints, yPoints, nPoints);
 		
-//		runwayCreation(g2d);
-//		if(obstacle != null)obstacleCreation(g2d);
-//		declaredRunwaysCreation(g2d);
+		runwayCreation(g2d);
+		obstacleCreation(g2d);
+		declaredRunwaysCreation(g2d);
 			
 	}
 	
 	public void runwayCreation(Graphics2D g2d){
-		if(airport!=null){
+//		if(airport!=null){
 		
 		g2d.setColor(Color.GRAY);
 		
@@ -190,7 +168,7 @@ public class TopView extends JPanel implements AirportObserver{
 			g2d.drawString(rightTag, xRunway+ width - tagBorder - offset, yRunway+(height/4));
 			g2d.rotate(-0.5 * Math.PI,  xRunway + width - tagBorder - offset, yRunway+(height/4));
 		}
-		}
+//		}
 		g2d.setColor(Color.BLUE);
 		
 		
@@ -199,10 +177,10 @@ public class TopView extends JPanel implements AirportObserver{
 	}
 	
 	public void obstacleCreation(Graphics2D g2d){
-		if(obstacle!=null){
+//		if(obstacle!=null){
 			g2d.setColor(Color.RED);
 			g2d.fillRect((int) ((r*xObstacle)+xRunway), (int)((r*yObstacle)+yRunway), (int)(r*obstacleLength), (int)(r*obstacleWidth));
-		}
+//		}
 	}
 	
 	public void declaredRunwaysCreation(Graphics2D g2d){
@@ -242,32 +220,53 @@ public class TopView extends JPanel implements AirportObserver{
 	
 	
 	public void setValues(){
-		if(airport!=null){
-		this.runwayWidth = (int) runway.getTORA(runway.DEFAULT);
+		this.runwayWidth = 2000;
 		this.runwayHeight = runwayWidth/20;
-		this.leftTag=airport.getCurrentPhysicalRunway().getRunway(0).getName();
-		this.rightTag=airport.getCurrentPhysicalRunway().getRunway(1).getName();
-		this.TORA = (int) runway.getTORA(runway.REDECLARED);
-		this.TODA = (int) runway.getTODA(runway.REDECLARED);
-		this.ASDA = (int) runway.getASDA(runway.REDECLARED);
-		this.LDA = (int) runway.getLDA(runway.REDECLARED);
-		
-		if(obstacle!=null){
-			int distance = (int) airport.getCurrentPhysicalRunway().getDistanceAwayFromThreshold();
-			this.threshold=airport.getCurrentPhysicalRunway().closeTo().getName(); 
+		this.leftTag="08L";
+		this.rightTag="27R";
+		this.TORA = 0;
+		this.TODA = 0;
+		this.ASDA = 0;
+		this.LDA = 0;
+			int distance = 400;
+			this.threshold="08L";
 			obstacleLeft=threshold.equals(leftTag);
 			if(obstacleLeft){this.xObstacle = distance;}else{this.xObstacle=runwayWidth-distance;}
 			this.yObstacle = runwayHeight/2;
-			this.obstacleLength =(int) obstacle.getLength();
-			this.obstacleWidth = (int) obstacle.getWidth();
-		}else{
-			obstacleLeft=false;
-		}
+			this.obstacleLength = 20;
+			this.obstacleWidth = 20;
 		if(obstacleLeft){this.LDAStart = runwayWidth;}else{this.LDAStart=0;}
 		if(obstacleLeft){this.TORAStart = runwayWidth;}else{this.TORAStart=0;}
 		if(obstacleLeft){this.TODAStart = runwayWidth;}else{this.TODAStart=0;}
 		if(obstacleLeft){this.ASDAStart = runwayWidth;}else{this.ASDAStart=0;}
-		}	
+		
+		
+//		if(airport!=null){
+//		this.runwayWidth = (int) runway.getTORA(runway.DEFAULT);
+//		this.runwayHeight = runwayWidth/20;
+//		this.leftTag=airport.getCurrentPhysicalRunway().getRunway(0).getName();
+//		this.rightTag=airport.getCurrentPhysicalRunway().getRunway(1).getName();
+//		this.TORA = (int) runway.getTORA(runway.REDECLARED);
+//		this.TODA = (int) runway.getTODA(runway.REDECLARED);
+//		this.ASDA = (int) runway.getASDA(runway.REDECLARED);
+//		this.LDA = (int) runway.getLDA(runway.REDECLARED);
+//		
+//		if(obstacle!=null){
+//			int distance = (int) airport.getCurrentPhysicalRunway().getDistanceAwayFromThreshold();
+//			this.threshold=airport.getCurrentPhysicalRunway().closeTo().getName(); 
+//			obstacleLeft=threshold.equals(leftTag);
+//			if(obstacleLeft){this.xObstacle = distance;}else{this.xObstacle=runwayWidth-distance;}
+//			this.yObstacle = runwayHeight/2;
+//			this.obstacleLength =(int) obstacle.getLength();
+//			this.obstacleWidth = (int) obstacle.getWidth();
+//		}else{
+//			obstacleLeft=false;
+//		}
+//		if(obstacleLeft){this.LDAStart = runwayWidth;}else{this.LDAStart=0;}
+//		if(obstacleLeft){this.TORAStart = runwayWidth;}else{this.TORAStart=0;}
+//		if(obstacleLeft){this.TODAStart = runwayWidth;}else{this.TODAStart=0;}
+//		if(obstacleLeft){this.ASDAStart = runwayWidth;}else{this.ASDAStart=0;}
+//		}	
 	}
 
 	public void updateAirport(Airport airport) {
