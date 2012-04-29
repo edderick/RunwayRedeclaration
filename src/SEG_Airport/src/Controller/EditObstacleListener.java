@@ -23,22 +23,6 @@ public class EditObstacleListener implements ActionListener, AirportObserver{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-//		if (airport.getCurrentPhysicalRunway() == null)
-//		{ 
-//			JOptionPane.showMessageDialog(null, "No current runway!");
-//		}
-//		else if(airport.getCurrentPhysicalRunway().getObstacle() == null){
-//			//TODO: Maybe make this bring up a dialog to create an obstacle
-//			JOptionPane.showMessageDialog(null, "No current obstacle!");
-//		}
-//		else{
-//			Obstacle old = airport.getCurrentPhysicalRunway().getObstacle();
-//			Obstacle obstacle = new Obstacle(null, null, 0, 0, 0);
-//			System.out.println("Editing Obstacle: " + old.getName());
-//			@SuppressWarnings("unused")
-//			EditObstacleDialog eod = new EditObstacleDialog(obstacle, old);
-//			airport.getCurrentPhysicalRunway().setObstacle(obstacle);
-//		}
 		if(airport.getRunways().size() == 0){
 			JOptionPane.showMessageDialog(null, "Airport does not contain any physical runways\r\nPlease add one by going to Edit > Airport", "", JOptionPane.ERROR_MESSAGE);
 		} else {
@@ -69,13 +53,3 @@ public class EditObstacleListener implements ActionListener, AirportObserver{
 	}
 
 }
-
-/*
-new ActionListener() {
-public void actionPerformed(ActionEvent arg0) {
-	Obstacle old = obstacle;
-	@SuppressWarnings("unused")
-	EditObstacleDialog ead = new EditObstacleDialog(obstacle, old);
-}
-}
- */

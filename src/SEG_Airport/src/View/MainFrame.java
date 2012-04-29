@@ -19,9 +19,12 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.TitledBorder;
 import javax.swing.JTable;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.ButtonGroup;
@@ -33,6 +36,8 @@ import Controller.*;
 import Model.*;
 
 import javax.swing.JComboBox;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame implements AirportObserver{
@@ -97,13 +102,10 @@ public class MainFrame extends JFrame implements AirportObserver{
 		} catch (UnsupportedLookAndFeelException ex) {
 			System.out.println("Unable to load native look and feel");
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -164,7 +166,6 @@ public class MainFrame extends JFrame implements AirportObserver{
 		try {
 			this.loadRecentFiles(HISTORY_TO_SHOW);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -464,9 +465,10 @@ public class MainFrame extends JFrame implements AirportObserver{
 //		sideView.setValues(80, 5, 40, 0, 73, 2, 15, 50, true, 76, 3, 9);
 		rightSplitPane.setRightComponent(sideView);
 
-		airportObservers.add(topView);
-		airportObservers.add(sideView);
-		airportObservers.add(calcView);
+//		airportObservers.add(topView);
+//		airportObservers.add(sideView);
+//		airportObservers.add(calcView);
+		currentRunwayCombo.addActionListener(new SelectRunwayListener(airport, currentRunwayCombo, OriginalParametersTable, RedeclaredParametersTable));
 		
 		try {
 			this.loadRecentFiles(5);
@@ -553,13 +555,12 @@ public class MainFrame extends JFrame implements AirportObserver{
 	public void updateAirport(Airport airport) {
 		this.airport = airport;
 		lblAirportName.setText(airport.getName());
+		
 		currentRunwayCombo.removeAllItems();
 		for (PhysicalRunway r : airport.getRunways()){
 			currentRunwayCombo.addItem(r.getRunway(0));
 			currentRunwayCombo.addItem(r.getRunway(1));
 		}
+		currentRunwayCombo.setSelectedIndex(0);
 	}
-	
-	
-
 }

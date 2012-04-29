@@ -27,9 +27,7 @@ public class OpenAirportListener implements ActionListener, AirportObserver{
 		Airport ap = new Airport("");
 
 		try {
-
 			ap = lf.loadAirport();
-
 
 			System.out.println("This is the airport opened:: " + ap.getName());
 			//iterate over the runways in the loaded airport and print all values
@@ -53,6 +51,7 @@ public class OpenAirportListener implements ActionListener, AirportObserver{
 		} catch (Exception ex) {}
 		if (ap != null) {
 			this.airport = ap;
+			System.out.println("name of opened airport: " + ap.getName());
 			notifyAirportObservers();
 			try {
 				MainFrame.saveRecentFile(ap, lf.getFilename());
@@ -73,7 +72,7 @@ public class OpenAirportListener implements ActionListener, AirportObserver{
 	
 	void notifyAirportObservers() {
 		for(AirportObserver ao: airportObservers){
-			ao.updateAirport(airport);
+			ao.updateAirport(this.airport);
 		}
 	}
 

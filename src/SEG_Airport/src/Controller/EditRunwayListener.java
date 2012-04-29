@@ -20,8 +20,7 @@ public class EditRunwayListener implements ActionListener, AirportObserver{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		@SuppressWarnings("unused")
+		@SuppressWarnings({ "unused", "rawtypes" })
 		EditRunwayDialog erd = new EditRunwayDialog(airport, new JList(), false);
 	}
 
