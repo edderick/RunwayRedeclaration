@@ -27,7 +27,7 @@ public class Runway {
 		TORA = new double[2];
 		TORA[DEFAULT] = tora;
 		TORA[REDECLARED] = tora;
-		
+			
 		ASDA = new double[2];
 		ASDA[DEFAULT] = asda;
 		ASDA[REDECLARED] = asda;
