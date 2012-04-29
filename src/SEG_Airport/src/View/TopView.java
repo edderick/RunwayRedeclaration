@@ -24,6 +24,8 @@ public class TopView extends JPanel implements AirportObserver{
 	//this value determines how much of the width of the panel the runway takes up.
 	double ratio = 0.75;
 	
+	double ratioIncrement = 0.05;
+	
 	//this value determines how much of the width of the runway the runwayTag takes up.
 	final double fontRatio = 0.5;
 	
@@ -280,11 +282,15 @@ public class TopView extends JPanel implements AirportObserver{
 	}
 	
 	public void zoomIn(){
-		ratio=ratio+0.05;
+		ratio=ratio+ratioIncrement;
 	}
 	
 	public void zoomOut(){
-		ratio=ratio-0.05;
+		ratio=ratio-ratioIncrement;
+	}
+	
+	public void setZoom(double ratioIncrement){
+		this.ratioIncrement=ratioIncrement;
 	}
 }
 
