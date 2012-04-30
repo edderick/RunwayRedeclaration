@@ -9,7 +9,7 @@ public class PhysicalRunway {
 
 	private String id;
 	private Runway[] runway;
-	private Obstacle obstacle = new Obstacle("", "", 0.0, 0.0, 0.0);
+	private Obstacle obstacle;
 
 	//Meters are used for these measurements 
 	private double distanceAwayFromThreshold, RESA, stopway, blastAllowance; 

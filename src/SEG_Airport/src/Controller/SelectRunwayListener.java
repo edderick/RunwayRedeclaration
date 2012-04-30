@@ -34,13 +34,16 @@ public class SelectRunwayListener implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("airport name: " + airport.getName());
-		ArrayList<Runway> runways = new ArrayList<Runway>();
-		for(PhysicalRunway p : airport.getPhysicalRunways()){
-			runways.add(p.getRunway(0));
-			runways.add(p.getRunway(1));
-	}
-		System.out.println("size: " + runways.size() + " " + airport.getPhysicalRunways().size());
+		airport.setCurrentRunway(runway);
+		notifyAirportObservers();
+		
+//		System.out.println("airport name: " + airport.getName());
+//		ArrayList<Runway> runways = new ArrayList<Runway>();
+//		for(PhysicalRunway p : airport.getPhysicalRunways()){
+//			runways.add(p.getRunway(0));
+//			runways.add(p.getRunway(1));
+//		}
+//		System.out.println("size: " + runways.size() + " " + airport.getPhysicalRunways().size());
 //		original.setModel(new DefaultTableModel(
 //				new Object[][] {
 //						{"TORA(R)", runways.get(jc.getSelectedIndex()).getTORA(Runway.DEFAULT)},

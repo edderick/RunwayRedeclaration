@@ -27,7 +27,8 @@ public class SelectPhysicalRunwayListener implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
+		airport.setCurrentPhysicalRunway(physicalRunway);
+		notifyAirportObservers();
 	}
 
 
