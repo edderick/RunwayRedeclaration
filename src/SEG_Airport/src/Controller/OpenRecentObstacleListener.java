@@ -31,28 +31,30 @@ public class OpenRecentObstacleListener implements ActionListener, AirportObserv
 
 		if(airport.getPhysicalRunways().size() == 0){
 			JOptionPane.showMessageDialog(null, "Airport does not contain any physical runways\r\nPlease add one by going to Edit > Airport", "", JOptionPane.ERROR_MESSAGE);
-			return;
-		}
-		
-		LoadXMLFile lf = new LoadXMLFile();
-		try {
-			Obstacle o = lf.silentLoadObstacle(filename);
-			airport.getCurrentPhysicalRunway().setObstacle(o);
-			
+		} else if (airport.getCurrentPhysicalRunway() == null){
+			JOptionPane.showMessageDialog(null, "Please select a physical runway", "", JOptionPane.ERROR_MESSAGE);
+		} else if (airport.getCurrentPhysicalRunway().getObstacle() == null){
+			LoadXMLFile lf = new LoadXMLFile();
 			try {
-				MainFrame.saveRecentFile(o, lf.getFilename());
-			} catch (IOException e1) {
+				Obstacle o = lf.silentLoadObstacle(filename);
+				airport.getCurrentPhysicalRunway().setObstacle(o);
+
+				try {
+					MainFrame.saveRecentFile(o, lf.getFilename());
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+				System.out.println("Obstacle Opened");
+				notifyAirportObservers();
+
+
+			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			
-			System.out.println("Obstacle Opened");
-			notifyAirportObservers();
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
 		}
-		
 		
 	}
 
