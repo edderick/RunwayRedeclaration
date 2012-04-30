@@ -156,14 +156,14 @@ public class SideView extends JPanel implements AirportObserver{
 	}
 
 	public void updateAirport(Airport airport) {
-		this.airport=airport;
-		if(airport!=null && airport.getCurrentRunway() != null &&
-				   airport.getCurrentPhysicalRunway() != null && 
-				   airport.getCurrentPhysicalRunway().getObstacle() != null)
-				{
-			runway=airport.getCurrentRunway();
-			obstacle=airport.getCurrentPhysicalRunway().getObstacle();
-		}
+//		this.airport=airport;
+//		if(airport!=null && airport.getCurrentRunway() != null &&
+//				   airport.getCurrentPhysicalRunway() != null && 
+//				   airport.getCurrentPhysicalRunway().getObstacle() != null)
+//				{
+//			runway=airport.getCurrentRunway();
+//			obstacle=airport.getCurrentPhysicalRunway().getObstacle();
+//		}
 		
 	}
 }

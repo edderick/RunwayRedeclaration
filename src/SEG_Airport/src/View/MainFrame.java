@@ -81,10 +81,8 @@ public class MainFrame extends JFrame implements AirportObserver{
 	}
 
 	public MainFrame() {
-		//TODO: Move these closer to where they are needed and maybe have two sets
-		TopView topView = new TopView(airport);
-		SideView sideView = new SideView(airport);
-		CalculationsView calcView = new CalculationsView(airport);
+
+
 
 		//TODO: Load addressbook on application start;
 		addressBook = new AddressBook();
@@ -457,21 +455,6 @@ public class MainFrame extends JFrame implements AirportObserver{
 		contentPane.add(rightSplitPane, "cell 1 0,grow");
 		rightSplitPane.setResizeWeight(0.5);
 		rightSplitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
-
-		//TODO: Uncomment this once it's fixed
-		//topView.setRunwayDimensions(100, 20, "08L", "27R");
-		//topView.setValues();
-		//rightSplitPane.setLeftComponent(topView);
-   
-		//TEST
-		//TODO: Uncomment this once it's fixed
-		//		sideView.setRunwayDimensions(80);
-		//		sideView.setValues(80, 5, 40, 0, 73, 2, 15, 50, true, 76, 3, 9);
-		rightSplitPane.setRightComponent(sideView);
-
-		//		airportObservers.add(topView);
-		//		airportObservers.add(sideView);
-		//		airportObservers.add(calcView);
 
 		try {
 			this.loadRecentFiles(5);

@@ -19,13 +19,14 @@ public class CalculationsView extends JTextArea implements AirportObserver{
 
 	@Override
 	public void updateAirport(Airport airport) {
-		this.airport = airport;
-		if ((airport != null) && (airport.getCurrentPhysicalRunway() != null) && (airport.getCurrentRunway() != null)){
-			setText(airport.getCurrentPhysicalRunway().toCalculation(airport.getCurrentRunway().getName()));
-		}
-		else {
-			setText("No runway currently selected!");
-		}
+		this.airport = airport;	
+//		if ((airport != null) && (airport.getCurrentPhysicalRunway() != null) && (airport.getCurrentRunway() != null)){
+//			if(airport.getCurrentPhysicalRunway().getObstacle() == null) {setText("No obstacle has been placed!"); return;}
+//			setText(airport.getCurrentPhysicalRunway().toCalculation(airport.getCurrentRunway().getName()));
+//		}
+//		else {
+//			setText("No runway currently selected!");
+//		}
 	}
 	
 }
