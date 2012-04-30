@@ -17,6 +17,7 @@ import Model.Runway;
 @SuppressWarnings("serial")
 public class TopView extends JPanel implements AirportObserver{
 	
+	boolean visible = false;
 	
 	//this value determines the amount of pixels the tag is from the end of the runway
 	int tagBorder = 10;
@@ -76,6 +77,7 @@ public class TopView extends JPanel implements AirportObserver{
 	
 	public void paint (Graphics g){
 		super.paint(g);
+		if(visible){
 		g.translate(xOffset, yOffset);
 		setValues();
 		Graphics2D g2d = (Graphics2D)g;
@@ -83,7 +85,11 @@ public class TopView extends JPanel implements AirportObserver{
 		runwayCreation(g2d);
 		obstacleCreation(g2d);
 		declaredRunwaysCreation(g2d);
-			
+		}
+	}
+	
+	public void setVisible(boolean b){
+		visible=b;
 	}
 	
 	public void runwayCreation(Graphics2D g2d){
