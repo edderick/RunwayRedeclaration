@@ -19,10 +19,10 @@ public class TopView extends JPanel implements AirportObserver{
 	
 	
 	//this value determines the amount of pixels the tag is from the end of the runway
-	final int tagBorder = 10;
+	int tagBorder = 10;
 	
 	//this value determines how much of the width of the panel the runway takes up.
-	double ratio = 0.75;
+	double ratio = 0.95;
 	
 	double ratioIncrement = 0.05;
 	
@@ -148,14 +148,25 @@ public class TopView extends JPanel implements AirportObserver{
 		g2d.setColor(Color.GRAY);
 		g2d.fillRect(xRunway, yRunway, width, height);
 		
+		g2d.setColor(Color.WHITE);
+		int dashesY = (int) (yRunway+((runwayHeight/2)*r));
+		int dashesLength = 35;
+		int dashesWidth = 1;
+		int gaps = 25;
+		for(int i = dashesLength*4; i<runwayWidth-(dashesLength*5); i=i+gaps+dashesLength){
+			g2d.drawRect((int) (xRunway+i*r), dashesY, (int) (dashesLength*r), (int) (dashesWidth*r));
+		}
+		tagBorder=(int) (dashesLength*3*r);
+		
 		//27R 08L tags
-		g2d.setColor(Color.BLACK);
-		int i;
-		for(i=0; i<1000; i++){
+	
+		for(int i=0; i<1000; i++){
 			Font f = new Font("tag", 1, 1000-i);
 			g2d.setFont(f);
 			if(g2d.getFontMetrics().stringWidth(leftTag)<=(fontRatio*height))break;
 		}
+		
+		
 		
 		if(tagRotate == 1){
 			g2d.rotate(0.5 * Math.PI,  xRunway+tagBorder, yRunway+(height/4));
@@ -172,6 +183,20 @@ public class TopView extends JPanel implements AirportObserver{
 			g2d.rotate(0.5 * Math.PI,  xRunway + width - tagBorder - offset, yRunway+(height/4));
 			g2d.drawString(rightTag, xRunway+ width - tagBorder - offset, yRunway+(height/4));
 			g2d.rotate(-0.5 * Math.PI,  xRunway + width - tagBorder - offset, yRunway+(height/4));
+		}
+		
+		dashesWidth=(runwayHeight/20);
+		gaps=dashesWidth;
+		int dashesX = (int) (xRunway + ((dashesLength/2)*r));
+		dashesLength=dashesLength*2;
+		
+		for(int i = gaps; i<runwayHeight-(gaps*2); i=i+gaps+dashesWidth){
+			g2d.fillRect(dashesX, (int)(yRunway+i*r), (int) (dashesLength*r), (int) (dashesWidth*r));
+		}
+		
+		dashesX = (int) (xRunway + (runwayWidth*r)  - ((dashesLength/4)*r) - (dashesLength*r));
+		for(int i = gaps; i<runwayHeight-(gaps*2); i=i+gaps+dashesWidth){
+			g2d.fillRect(dashesX, (int)(yRunway+i*r), (int) (dashesLength*r), (int) (dashesWidth*r));
 		}
 		
 //		}
