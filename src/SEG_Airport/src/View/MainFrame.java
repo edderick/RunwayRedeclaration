@@ -86,7 +86,9 @@ public class MainFrame extends JFrame implements AirportObserver{
 
 		//TODO: Load addressbook on application start;
 		addressBook = new AddressBook();
-
+		//LoadXMLFile lf = new LoadXMLFile();
+		//lf.silentLoadContacts("data/contacts.xml");
+		
 		rightSplitPane = new JSplitPane();
 
 		airport = new Airport("");
