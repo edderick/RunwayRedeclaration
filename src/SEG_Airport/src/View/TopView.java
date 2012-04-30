@@ -87,7 +87,7 @@ public class TopView extends JPanel implements AirportObserver{
 	}
 	
 	public void runwayCreation(Graphics2D g2d){
-//		if(airport!=null){
+		if(airport!=null && runway!=null){
 		
 		int pWidth = this.getWidth();
 		int pHeight = this.getHeight();
@@ -199,21 +199,21 @@ public class TopView extends JPanel implements AirportObserver{
 			g2d.fillRect(dashesX, (int)(yRunway+i*r), (int) (dashesLength*r), (int) (dashesWidth*r));
 		}
 		
-//		}
+		}
 		
 		
 		
 	}
 	
 	public void obstacleCreation(Graphics2D g2d){
-//		if(obstacle!=null){
+		if(obstacle!=null){
 			g2d.setColor(Color.RED);
 			g2d.fillRect((int) ((r*xObstacle)+xRunway), (int)((r*yObstacle)+yRunway), (int)(r*obstacleLength), (int)(r*obstacleWidth));
-//		}
+		}
 	}
 	
 	public void declaredRunwaysCreation(Graphics2D g2d){
-		if(airport!=null){
+		if(airport!=null && runway!=null){
 		Color toraColor = new Color(255, 0, 0, 125);
 		Color todaColor = new Color(0, 255, 0, 125);
 		Color asdaColor = new Color(0, 0, 255, 125);
@@ -249,60 +249,62 @@ public class TopView extends JPanel implements AirportObserver{
 	
 	
 	public void setValues(){
-		this.runwayWidth = 2000;
-		this.runwayHeight = runwayWidth/20;
-		this.leftTag="08L";
-		this.rightTag="27R";
-		this.TORA = 0;
-		this.TODA = 0;
-		this.ASDA = 0;
-		this.LDA = 0;
-			int distance = 400;
-			this.threshold="08L";
-			obstacleLeft=threshold.equals(leftTag);
-			if(obstacleLeft){this.xObstacle = distance;}else{this.xObstacle=runwayWidth-distance;}
-			this.yObstacle = runwayHeight/2;
-			this.obstacleLength = 20;
-			this.obstacleWidth = 20;
-		if(obstacleLeft){this.LDAStart = (int) (runwayWidth*r);}else{this.LDAStart=0;}
-		if(obstacleLeft){this.TORAStart = (int) (runwayWidth*r);}else{this.TORAStart=0;}
-		if(obstacleLeft){this.TODAStart = (int) (runwayWidth*r);}else{this.TODAStart=0;}
-		if(obstacleLeft){this.ASDAStart = (int) (runwayWidth*r);}else{this.ASDAStart=0;}
-		
-		
-//		if(airport!=null){
-//		this.runwayWidth = (int) runway.getTORA(runway.DEFAULT);
+//		this.runwayWidth = 2000;
 //		this.runwayHeight = runwayWidth/20;
-//		
-//		this.TORA = (int) runway.getTORA(runway.REDECLARED);
-//		this.TODA = (int) runway.getTODA(runway.REDECLARED);
-//		this.ASDA = (int) runway.getASDA(runway.REDECLARED);
-//		this.LDA = (int) runway.getLDA(runway.REDECLARED);
-//		
-//		if(obstacle!=null){
-//			int distance = (int) airport.getCurrentPhysicalRunway().getDistanceAwayFromThreshold();
-//			this.threshold=airport.getCurrentPhysicalRunway().closeTo().getName(); 
-//			if(threshold.equals(airport.getCurrentPhysicalRunway().getRunway(0).getName())){this.leftTag=airport.getCurrentPhysicalRunway().getRunway(1).getName();}else{this.leftTag=airport.getCurrentPhysicalRunway().getRunway(0).getName();}
-//			this.rightTag=threshold;
-//			this.xObstacle=runwayWidth-distance;
+//		this.leftTag="08L";
+//		this.rightTag="27R";
+//		this.TORA = 0;
+//		this.TODA = 0;
+//		this.ASDA = 0;
+//		this.LDA = 0;
+//			int distance = 400;
+//			this.threshold="08L";
+//			obstacleLeft=threshold.equals(leftTag);
+//			if(obstacleLeft){this.xObstacle = distance;}else{this.xObstacle=runwayWidth-distance;}
 //			this.yObstacle = runwayHeight/2;
-//			this.obstacleLength =(int) obstacle.getLength();
-//			this.obstacleWidth = (int) obstacle.getWidth();
-//			this.LDAStart=(int) (xRunway-(obstacleLength*airport.getCurrentPhysicalRunway().getAngleOfSlope()));
-//			this.TORAStart=0;
-//			this.TODAStart=TORAStart+TORA;
-//			this.ASDAStart=TORAStart+TORA;
-//		}	
+//			this.obstacleLength = 20;
+//			this.obstacleWidth = 20;
+//		if(obstacleLeft){this.LDAStart = (int) (runwayWidth*r);}else{this.LDAStart=0;}
+//		if(obstacleLeft){this.TORAStart = (int) (runwayWidth*r);}else{this.TORAStart=0;}
+//		if(obstacleLeft){this.TODAStart = (int) (runwayWidth*r);}else{this.TODAStart=0;}
+//		if(obstacleLeft){this.ASDAStart = (int) (runwayWidth*r);}else{this.ASDAStart=0;}
+		
+		
+		if(airport!=null && runway!=null){
+		this.runwayWidth = (int) runway.getTORA(runway.DEFAULT);
+		this.runwayHeight = runwayWidth/20;
+		
+		this.TORA = (int) runway.getTORA(runway.REDECLARED);
+		this.TODA = (int) runway.getTODA(runway.REDECLARED);
+		this.ASDA = (int) runway.getASDA(runway.REDECLARED);
+		this.LDA = (int) runway.getLDA(runway.REDECLARED);
+		
+		if(obstacle!=null){
+			int distance = (int) airport.getCurrentPhysicalRunway().getDistanceAwayFromThreshold();
+			this.threshold=airport.getCurrentPhysicalRunway().closeTo().getName(); 
+			if(threshold.equals(airport.getCurrentPhysicalRunway().getRunway(0).getName())){this.leftTag=airport.getCurrentPhysicalRunway().getRunway(1).getName();}else{this.leftTag=airport.getCurrentPhysicalRunway().getRunway(0).getName();}
+			this.rightTag=threshold;
+			this.xObstacle=runwayWidth-distance;
+			this.yObstacle = runwayHeight/2;
+			this.obstacleLength =(int) obstacle.getLength();
+			this.obstacleWidth = (int) obstacle.getWidth();
+			this.LDAStart=(int) (xRunway-(obstacleLength*airport.getCurrentPhysicalRunway().getAngleOfSlope()));
+			this.TORAStart=0;
+			this.TODAStart=TORAStart+TORA;
+			this.ASDAStart=TORAStart+TORA;
+		}	
+		}
 	}
 
 	public void updateAirport(Airport airport) {
 		this.airport=airport;
-		if(airport!=null && airport.getCurrentRunway() != null &&
-		   airport.getCurrentPhysicalRunway() != null && 
-		   airport.getCurrentPhysicalRunway().getObstacle() != null)
+		if(airport!=null &&
+		   airport.getCurrentPhysicalRunway() != null)
 		{
 			runway=airport.getCurrentRunway();
 			obstacle=airport.getCurrentPhysicalRunway().getObstacle();
+			setValues();
+			repaint();
 		}
 		
 	}
