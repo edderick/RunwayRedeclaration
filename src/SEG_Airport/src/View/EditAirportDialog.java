@@ -13,6 +13,7 @@ import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import Model.*;
+
 import javax.swing.JLabel;
 
 
@@ -70,7 +71,7 @@ public class EditAirportDialog extends JDialog {
 		getContentPane().add(btnDelete);
 
 		JButton btnOk = new JButton("OK");
-		btnOk.addActionListener(new okListener(this, AirportName, airport));
+		btnOk.addActionListener(new okListener(this, AirportName, airport, airportObservers));
 		btnOk.setBounds(185, 221, 131, 23);
 		getContentPane().add(btnOk);
 
@@ -95,14 +96,23 @@ class okListener implements ActionListener{
 	JDialog jd;
 	JTextField jt;
 	Airport a;
+	List<AirportObserver> airportObservers; 
 	public void actionPerformed(ActionEvent e) {
 		a.setName(jt.getText());
 		System.out.println(a.getPhysicalRunways().size());
 		jd.setVisible(false);
+		notifyAirportObservers();
 	}
-	public okListener(JDialog jd, JTextField jt, Airport a) {
-		this.jd = jd; this.jt = jt; this.a = a;
+	public okListener(JDialog jd, JTextField jt, Airport a, List<AirportObserver> airportObservers) {
+		this.jd = jd; this.jt = jt; this.a = a; this.airportObservers = airportObservers;
 	}	
+	
+	void notifyAirportObservers(){
+		for(AirportObserver ao: airportObservers){
+			ao.updateAirport(a);
+		}
+	}
+	
 }
 
 class editListener implements ActionListener{

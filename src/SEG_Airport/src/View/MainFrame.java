@@ -157,8 +157,6 @@ public class MainFrame extends JFrame implements AirportObserver{
 		airportObservers.add(ool);
 		mnNewMenu.add(mntmObstacle);
 
-		//TODO: Create a way to list recent opening and persistently store them
-
 		JMenu mnOpenRecent = new JMenu("Open Recent");
 		mnOpenRecent.setMnemonic('r');
 		mnFile.add(mnOpenRecent);
@@ -252,12 +250,8 @@ public class MainFrame extends JFrame implements AirportObserver{
 		physicalRunwayMenu = new JMenu("Select Physical Runway");
 		physicalRunwayMenu.setMnemonic('s');
 		mnEdit.add(physicalRunwayMenu);
-
-		//TODO: Replace these place holders with some generated stuff
 		
 		generatePhysicalRunwayRadioButtons(physicalRunwayMenu);
-		
-		//End place holders
 
 		JMenuItem mntmPositionObstacle = new JMenuItem("Position Obstacle");
 		mntmPositionObstacle.setMnemonic('p');
@@ -571,7 +565,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 	}
 	
 	private void updateTables(){
-		
+		//TODO: Update the tables to show the data they need to show
 	}
 }
 
