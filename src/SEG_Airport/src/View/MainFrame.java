@@ -545,10 +545,12 @@ public class MainFrame extends JFrame implements AirportObserver{
 		lblAirportName.setText(airport.getName());
 		
 		currentRunwayCombo.removeAllItems();
-		for (PhysicalRunway r : airport.getPhysicalRunways()){
+		if (airport.getCurrentPhysicalRunway() != null){
+			PhysicalRunway r = airport.getCurrentPhysicalRunway();
 			currentRunwayCombo.addItem(r.getRunway(0));
 			currentRunwayCombo.addItem(r.getRunway(1));
 		}
+		
 		generatePhysicalRunwayRadioButtons(physicalRunwayMenu);
 		//currentRunwayCombo.setSelectedIndex(0);
 		updateTables();
