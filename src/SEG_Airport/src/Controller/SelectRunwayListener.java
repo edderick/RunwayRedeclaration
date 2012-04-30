@@ -24,20 +24,11 @@ public class SelectRunwayListener implements ActionListener{
 	
 	Airport airport;
 	Runway runway;
-	JComboBox jc;
-	JTable original, redeclared;
-	Airport airport;
 	List<AirportObserver> airportObservers;
 	
 	public SelectRunwayListener(Airport airport, Runway runway, List<AirportObserver> airportObservers){
-	public SelectRunwayListener(Airport airport, JComboBox jc, JTable original, JTable redeclared) {
 		this.airport = airport;
 		this.runway  = runway;
-		super();
-		this.jc = jc;
-		this.original = original;
-		this.redeclared = redeclared;
-		this.airport = airport;
 		this.airportObservers = airportObservers;
 	}
 	
@@ -45,11 +36,11 @@ public class SelectRunwayListener implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		System.out.println("airport name: " + airport.getName());
 		ArrayList<Runway> runways = new ArrayList<Runway>();
-		for(PhysicalRunway p : airport.getRunways()){
+		for(PhysicalRunway p : airport.getPhysicalRunways()){
 			runways.add(p.getRunway(0));
 			runways.add(p.getRunway(1));
 	}
-		System.out.println("size: " + runways.size() + " " + airport.getRunways().size());
+		System.out.println("size: " + runways.size() + " " + airport.getPhysicalRunways().size());
 //		original.setModel(new DefaultTableModel(
 //				new Object[][] {
 //						{"TORA(R)", runways.get(jc.getSelectedIndex()).getTORA(Runway.DEFAULT)},

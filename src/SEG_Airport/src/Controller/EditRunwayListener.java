@@ -30,7 +30,6 @@ public class EditRunwayListener implements ActionListener, AirportObserver{
 			return;
 		}
 		@SuppressWarnings("unused")
-		@SuppressWarnings({ "unused", "rawtypes" })
 		EditRunwayDialog erd = new EditRunwayDialog(airport, new JList(), false, airportObservers);
 		notifyAirportObservers();
 	}

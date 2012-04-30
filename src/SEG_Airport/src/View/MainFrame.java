@@ -463,7 +463,6 @@ public class MainFrame extends JFrame implements AirportObserver{
 //		airportObservers.add(topView);
 //		airportObservers.add(sideView);
 //		airportObservers.add(calcView);
-		currentRunwayCombo.addActionListener(new SelectRunwayListener(airport, currentRunwayCombo, OriginalParametersTable, RedeclaredParametersTable));
 		
 		try {
 			this.loadRecentFiles(5);
@@ -557,7 +556,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 			currentRunwayCombo.addItem(r.getRunway(1));
 		}
 		generatePhysicalRunwayRadioButtons(physicalRunwayMenu);
-		currentRunwayCombo.setSelectedIndex(0);
+		//currentRunwayCombo.setSelectedIndex(0);
 		updateTables();
 	}
 	
@@ -576,4 +575,3 @@ public class MainFrame extends JFrame implements AirportObserver{
 	}
 }
 
-}
