@@ -68,7 +68,7 @@ public class TopView extends JPanel implements AirportObserver{
 	public TopView(Airport airport){
 		super();
 		setSize(300,200);
-		this.setBackground(Color.WHITE);
+		this.setBackground(new Color(154, 205, 50));
 		setVisible(true);
 		updateAirport(airport);
 		setValues();		
@@ -138,10 +138,10 @@ public class TopView extends JPanel implements AirportObserver{
 		yPoints[10]= yPoints[9];
 		xPoints[11]=xPoints[2];
 		yPoints[11]= yPoints[0];
-		g2d.setColor(Color.ORANGE);
+		g2d.setColor(new Color(34, 139, 34));
 		g2d.fillRect(xPoints[0], (int) (yRunway - ((150-(runwayHeight/2))*r)), (int) ((runwayWidth+120)*r),(int) (300*r));
 		
-		g2d.setColor(Color.BLUE);
+		g2d.setColor(new Color(0, 100, 0));
 		
 		g2d.fillPolygon(xPoints, yPoints, nPoints);
 		
@@ -188,7 +188,7 @@ public class TopView extends JPanel implements AirportObserver{
 	}
 	
 	public void declaredRunwaysCreation(Graphics2D g2d){
-//		if(airport!=null){
+		if(airport!=null){
 		Color toraColor = new Color(255, 0, 0, 125);
 		Color todaColor = new Color(0, 255, 0, 125);
 		Color asdaColor = new Color(0, 0, 255, 125);
@@ -219,7 +219,7 @@ public class TopView extends JPanel implements AirportObserver{
 		g2d.drawString("TODA", (int) (xRunway+((TODA*r)/2)), (int) ((yRunway -((runwayHeight*r)/2)) +g2d.getFontMetrics().getHeight()));
 		g2d.drawString("ASDA", (int) (xRunway+((ASDA*r)/2)), (int) ((yRunway +((runwayHeight*r)/2) +g2d.getFontMetrics().getHeight())));
 		g2d.drawString("LDA", (int) (xRunway+((LDA*r)/2)), (int) ((yRunway + (2* ((runwayHeight*r)/2)) +g2d.getFontMetrics().getHeight())));
-//		}
+		}
 	}
 	
 	
@@ -228,10 +228,10 @@ public class TopView extends JPanel implements AirportObserver{
 		this.runwayHeight = runwayWidth/20;
 		this.leftTag="08L";
 		this.rightTag="27R";
-		this.TORA = 1500;
-		this.TODA = 1000;
-		this.ASDA = 500;
-		this.LDA = 1500;
+		this.TORA = 0;
+		this.TODA = 0;
+		this.ASDA = 0;
+		this.LDA = 0;
 			int distance = 400;
 			this.threshold="08L";
 			obstacleLeft=threshold.equals(leftTag);
