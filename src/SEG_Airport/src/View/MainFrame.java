@@ -451,7 +451,8 @@ public class MainFrame extends JFrame implements AirportObserver{
 		//topView.setRunwayDimensions(100, 20, "08L", "27R");
 		//topView.setValues();
 		//rightSplitPane.setLeftComponent(topView);
-
+   
+		//TEST
 		//TODO: Uncomment this once it's fixed
 		//		sideView.setRunwayDimensions(80);
 		//		sideView.setValues(80, 5, 40, 0, 73, 2, 15, 50, true, 76, 3, 9);
