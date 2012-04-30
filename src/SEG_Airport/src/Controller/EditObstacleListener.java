@@ -37,7 +37,7 @@ public class EditObstacleListener implements ActionListener, AirportObserver{
 			airport.getCurrentPhysicalRunway().setObstacle(obstacle);			
 		}
 		else {
-
+			//This comment should be removed
 			Obstacle old = airport.getCurrentPhysicalRunway().getObstacle();
 			Obstacle obstacle = airport.getCurrentPhysicalRunway().getObstacle();
 			EditObstacleDialog eod = new EditObstacleDialog(obstacle, old);
