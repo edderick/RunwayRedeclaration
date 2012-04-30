@@ -279,13 +279,17 @@ public class MainFrame extends JFrame implements AirportObserver{
 		JRadioButtonMenuItem rdbtnmntmTopPanelSideView = new JRadioButtonMenuItem("Side View");
 		topPanelButtonGroup.add(rdbtnmntmTopPanelSideView);
 		mnTopPanel.add(rdbtnmntmTopPanelSideView);
-		rdbtnmntmTopPanelSideView.addActionListener(new SelectViewListener(rightSplitPane, new SideView(airport), true));
-
+		SideView topSideView = new SideView(airport); 
+		rdbtnmntmTopPanelSideView.addActionListener(new SelectViewListener(rightSplitPane, topSideView, true));
+		airportObservers.add(topSideView);
+		
 		JRadioButtonMenuItem rdbtnmntmTopPanelCalculations = new JRadioButtonMenuItem("Calculations");
 		topPanelButtonGroup.add(rdbtnmntmTopPanelCalculations);
 		mnTopPanel.add(rdbtnmntmTopPanelCalculations);
-		rdbtnmntmTopPanelCalculations.addActionListener(new SelectViewListener(rightSplitPane, new CalculationsView(airport), true));
-
+		CalculationsView topCalcView = new CalculationsView(airport);
+		rdbtnmntmTopPanelCalculations.addActionListener(new SelectViewListener(rightSplitPane, topCalcView, true));
+		airportObservers.add(topCalcView);
+		
 		JRadioButtonMenuItem rdbtnmntmTopPanelNone = new JRadioButtonMenuItem("None");
 		topPanelButtonGroup.add(rdbtnmntmTopPanelNone);
 		mnTopPanel.add(rdbtnmntmTopPanelNone);
@@ -300,19 +304,26 @@ public class MainFrame extends JFrame implements AirportObserver{
 		JRadioButtonMenuItem rdbtnmntmBottomPanelTopView = new JRadioButtonMenuItem("Top View");
 		bottomPanelButtonGroup.add(rdbtnmntmBottomPanelTopView);
 		mnNewMenu_1.add(rdbtnmntmBottomPanelTopView);
-		rdbtnmntmBottomPanelTopView.addActionListener(new SelectViewListener(rightSplitPane, new TopView(airport) , false));
+		TopView bottomTopView = new TopView(airport); 
+		rdbtnmntmBottomPanelTopView.addActionListener(new SelectViewListener(rightSplitPane, bottomTopView, false));
+		airportObservers.add(bottomTopView);
 
 		JRadioButtonMenuItem rdbtnmntmBottomPanelSideView = new JRadioButtonMenuItem("Side View");
 		rdbtnmntmBottomPanelSideView.setSelected(true);
 		bottomPanelButtonGroup.add(rdbtnmntmBottomPanelSideView);
 		mnNewMenu_1.add(rdbtnmntmBottomPanelSideView);
-		rdbtnmntmBottomPanelSideView.addActionListener(new SelectViewListener(rightSplitPane, new SideView(airport), false));
-
+		SideView bottomSideView = new SideView(airport);
+		rdbtnmntmBottomPanelSideView.addActionListener(new SelectViewListener(rightSplitPane, bottomSideView, false));
+		airportObservers.add(bottomSideView);
+		rightSplitPane.setRightComponent(bottomSideView);
+		
 		JRadioButtonMenuItem rdbtnmntmBottomPanelCalculations = new JRadioButtonMenuItem("Calculations");
 		bottomPanelButtonGroup.add(rdbtnmntmBottomPanelCalculations);
 		mnNewMenu_1.add(rdbtnmntmBottomPanelCalculations);
-		rdbtnmntmBottomPanelCalculations.addActionListener(new SelectViewListener(rightSplitPane, new CalculationsView(airport), false));
-
+		CalculationsView bottomCalcView = new CalculationsView(airport);
+		rdbtnmntmBottomPanelCalculations.addActionListener(new SelectViewListener(rightSplitPane, bottomCalcView, false));
+		airportObservers.add(bottomCalcView);
+		
 		JRadioButtonMenuItem rdbtnmntmBottomPanelNone = new JRadioButtonMenuItem("None");
 		bottomPanelButtonGroup.add(rdbtnmntmBottomPanelNone);
 		mnNewMenu_1.add(rdbtnmntmBottomPanelNone);
