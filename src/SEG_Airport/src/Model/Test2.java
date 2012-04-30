@@ -67,7 +67,7 @@ public class Test2 {
 		
 		Obstacle ob = new Obstacle("Boeing 777", "Big", 25, 75, 80);
 		
-		PhysicalRunway copyOfpr1 = (PhysicalRunway) a.getRunways().get(0);
+		PhysicalRunway copyOfpr1 = (PhysicalRunway) a.getPhysicalRunways().get(0);
 	    copyOfpr1.placeNewObstacle(ob, 500, copyOfpr1.getRunway(1).getName());
 	    
 	    System.out.println("Placing obstacle on "+copyOfpr1.getId());

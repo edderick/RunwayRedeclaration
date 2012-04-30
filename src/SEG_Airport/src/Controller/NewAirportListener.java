@@ -26,7 +26,7 @@ public class NewAirportListener implements ActionListener, AirportObserver{
 		airport = new Airport("");
 		System.out.println("Creating new Airport");
 		@SuppressWarnings("unused")
-		EditAirportDialog ead = new EditAirportDialog(airport, old);
+		EditAirportDialog ead = new EditAirportDialog(airport, old, airportObservers);
 		notifyAirportObservers();
 	}
 

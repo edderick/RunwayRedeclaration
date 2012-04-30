@@ -2,6 +2,7 @@ package View;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -41,10 +42,13 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 	private JTextField LDT;
 	private JTextField RDT;
 
-	public EditRunwayDialog(Airport airport, JList physicalRunwayJList, boolean newRunway) {
+	private List<AirportObserver> airportObservers;
+	
+	public EditRunwayDialog(Airport airport, JList physicalRunwayJList, boolean newRunway, List<AirportObserver> airportObservers) {
 		this.airport = airport;
 		this.physicalRunwayJList = physicalRunwayJList;
 		
+		this.airportObservers = airportObservers;
 		
 		setResizable(false);
 		setTitle("Edit Runway");
@@ -210,7 +214,7 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 		JButton btnNewButton = new JButton("Apply");
 		btnNewButton.setBounds(290, 11, 80, 23);
 		btnNewButton.addActionListener(new ERDokListener(airport, LASDA, LTORA, LTODA, 
-				LLDA, LDT, RASDA, RTORA, RTODA, RLDA, RDT, txtr, txtl, physicalRunwayJList, this, newRunway));
+				LLDA, LDT, RASDA, RTORA, RTODA, RLDA, RDT, txtr, txtl, physicalRunwayJList, this, newRunway, airportObservers));
 		panel_2.setLayout(null);
 		panel_2.add(btnNewButton);
 		
@@ -223,21 +227,21 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 		btnNewButton_1.setBounds(376, 11, 80, 23);
 		panel_2.add(btnNewButton_1);
 		
-		if(airport.getRunways().size() > 0 & !newRunway){			
+		if(airport.getPhysicalRunways().size() > 0 & !newRunway){			
 			int index = physicalRunwayJList.getSelectedIndex();
-			txtl.setText(airport.getRunways().get(index).getRunway(0).getName());
-			txtr.setText(airport.getRunways().get(index).getRunway(1).getName());
+			txtl.setText(airport.getPhysicalRunways().get(index).getRunway(0).getName());
+			txtr.setText(airport.getPhysicalRunways().get(index).getRunway(1).getName());
 			
-			LASDA.setText(Double.toString(airport.getRunways().get(index).getRunway(0).getASDA(0)));
-			LTORA.setText(Double.toString(airport.getRunways().get(index).getRunway(0).getTORA(0)));
-			LTODA.setText(Double.toString(airport.getRunways().get(index).getRunway(0).getTODA(0)));
-			LLDA.setText(Double.toString(airport.getRunways().get(index).getRunway(0).getLDA(0)));
-			LDT.setText(Double.toString(airport.getRunways().get(index).getRunway(0).getDisplacedThreshold(0)));
-			RASDA.setText(Double.toString(airport.getRunways().get(index).getRunway(1).getASDA(0)));
-			RTORA.setText(Double.toString(airport.getRunways().get(index).getRunway(1).getTORA(0)));
-			RTODA.setText(Double.toString(airport.getRunways().get(index).getRunway(1).getTODA(0)));
-			RLDA.setText(Double.toString(airport.getRunways().get(index).getRunway(1).getLDA(0)));
-			RDT.setText(Double.toString(airport.getRunways().get(index).getRunway(1).getDisplacedThreshold(0)));
+			LASDA.setText(Double.toString(airport.getPhysicalRunways().get(index).getRunway(0).getASDA(0)));
+			LTORA.setText(Double.toString(airport.getPhysicalRunways().get(index).getRunway(0).getTORA(0)));
+			LTODA.setText(Double.toString(airport.getPhysicalRunways().get(index).getRunway(0).getTODA(0)));
+			LLDA.setText(Double.toString(airport.getPhysicalRunways().get(index).getRunway(0).getLDA(0)));
+			LDT.setText(Double.toString(airport.getPhysicalRunways().get(index).getRunway(0).getDisplacedThreshold(0)));
+			RASDA.setText(Double.toString(airport.getPhysicalRunways().get(index).getRunway(1).getASDA(0)));
+			RTORA.setText(Double.toString(airport.getPhysicalRunways().get(index).getRunway(1).getTORA(0)));
+			RTODA.setText(Double.toString(airport.getPhysicalRunways().get(index).getRunway(1).getTODA(0)));
+			RLDA.setText(Double.toString(airport.getPhysicalRunways().get(index).getRunway(1).getLDA(0)));
+			RDT.setText(Double.toString(airport.getPhysicalRunways().get(index).getRunway(1).getDisplacedThreshold(0)));
 		}		
 		
 		setVisible(true);
@@ -259,25 +263,27 @@ class ERDokListener implements ActionListener{
 	JList physicalRunwayJList;
 	JDialog jd;
 	boolean newRunway;
+	List<AirportObserver> airportObserver;
 	public void actionPerformed(ActionEvent e) {
-		if(airport.getRunways().size() > 0 & !newRunway){ // get the physical runway and change the values
+		if(airport.getPhysicalRunways().size() > 0 & !newRunway){ // get the physical runway and change the values
 			int index = physicalRunwayJList.getSelectedIndex();
 			// set the values to what's in the JTextFields
-			airport.getRunways().get(index).getRunway(0).setASDA(0, doubleParser.parse(LASDA.getText()));
-			airport.getRunways().get(index).getRunway(0).setTORA(0, doubleParser.parse(LTORA.getText()));
-			airport.getRunways().get(index).getRunway(0).setTODA(0, doubleParser.parse(LTODA.getText()));
-			airport.getRunways().get(index).getRunway(0).setLDA(0, doubleParser.parse(LLDA.getText()));
-			airport.getRunways().get(index).getRunway(0).setDisplacedThreshold(0, doubleParser.parse(LDT.getText()));
-			airport.getRunways().get(index).getRunway(1).setASDA(0, doubleParser.parse(RASDA.getText()));
-			airport.getRunways().get(index).getRunway(1).setTORA(0, doubleParser.parse(RTORA.getText()));
-			airport.getRunways().get(index).getRunway(1).setTODA(0, doubleParser.parse(RTODA.getText()));
-			airport.getRunways().get(index).getRunway(1).setLDA(0, doubleParser.parse(RLDA.getText()));
-			airport.getRunways().get(index).getRunway(1).setDisplacedThreshold(0, doubleParser.parse(RDT.getText()));
+			airport.getPhysicalRunways().get(index).getRunway(0).setASDA(0, doubleParser.parse(LASDA.getText()));
+			airport.getPhysicalRunways().get(index).getRunway(0).setTORA(0, doubleParser.parse(LTORA.getText()));
+			airport.getPhysicalRunways().get(index).getRunway(0).setTODA(0, doubleParser.parse(LTODA.getText()));
+			airport.getPhysicalRunways().get(index).getRunway(0).setLDA(0, doubleParser.parse(LLDA.getText()));
+			airport.getPhysicalRunways().get(index).getRunway(0).setDisplacedThreshold(0, doubleParser.parse(LDT.getText()));
+			airport.getPhysicalRunways().get(index).getRunway(1).setASDA(0, doubleParser.parse(RASDA.getText()));
+			airport.getPhysicalRunways().get(index).getRunway(1).setTORA(0, doubleParser.parse(RTORA.getText()));
+			airport.getPhysicalRunways().get(index).getRunway(1).setTODA(0, doubleParser.parse(RTODA.getText()));
+			airport.getPhysicalRunways().get(index).getRunway(1).setLDA(0, doubleParser.parse(RLDA.getText()));
+			airport.getPhysicalRunways().get(index).getRunway(1).setDisplacedThreshold(0, doubleParser.parse(RDT.getText()));
 //			System.out.println("rdt: " + airport.runways().get(index).getRunway(1).getDisplacedThreshold(0) + " " + RDT.getText());
-			airport.getRunways().get(index).getRunway(0).setName(LNAME.getText());
-			airport.getRunways().get(index).getRunway(1).setName(RNAME.getText());
+			airport.getPhysicalRunways().get(index).getRunway(0).setName(LNAME.getText());
+			airport.getPhysicalRunways().get(index).getRunway(1).setName(RNAME.getText());
 			
-			airport.getRunways().get(index).setId(LNAME.getText() + "/" + RNAME.getText());
+			airport.getPhysicalRunways().get(index).setId(LNAME.getText() + "/" + RNAME.getText());
+			
 		} else { // add a new physical runway and assign the values
 			airport.addPhysicalRunway(new PhysicalRunway(RNAME.getText() + "/" + LNAME.getText(), 
 					new Runway(RNAME.getText(), doubleParser.parse(RTORA.getText()), doubleParser.parse(RASDA.getText()), 
@@ -287,7 +293,7 @@ class ERDokListener implements ActionListener{
 		}
 		
 		ArrayList<String> physicalRunwayNames = new ArrayList<String>();
-		for(PhysicalRunway p : airport.getRunways()){
+		for(PhysicalRunway p : airport.getPhysicalRunways()){
 			physicalRunwayNames.add(p.getId());
 		}
 		DefaultListModel pr = new DefaultListModel();
@@ -297,12 +303,15 @@ class ERDokListener implements ActionListener{
 		physicalRunwayJList.setModel(pr);
 		physicalRunwayJList.setSelectedIndex(0);
 		jd.setVisible(false);
+		
+		notifyAirportObservers();
+		
 	}
 	public ERDokListener(Airport airport, JTextField lASDA, JTextField lTORA,
 			JTextField lTODA, JTextField lLDA, JTextField lDT,
 			JTextField rASDA, JTextField rTORA, JTextField rTODA,
 			JTextField rLDA, JTextField rDT, JTextField rNAME,
-			JTextField lNAME, JList physicalRunwayJList, JDialog jd, boolean newRunway) {
+			JTextField lNAME, JList physicalRunwayJList, JDialog jd, boolean newRunway, List<AirportObserver> airportObserver) {
 		this.airport = airport;
 		LASDA = lASDA;
 		LTORA = lTORA;
@@ -319,7 +328,15 @@ class ERDokListener implements ActionListener{
 		this.physicalRunwayJList = physicalRunwayJList;
 		this.jd = jd;
 		this.newRunway = newRunway;
+		this.airportObserver = airportObserver;
 	}
+	
+	void notifyAirportObservers(){
+		for(AirportObserver ao: airportObserver){
+			ao.updateAirport(airport);
+		}
+	}
+	
 }
 
 class doubleParser{

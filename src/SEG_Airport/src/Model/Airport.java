@@ -101,7 +101,7 @@ public class Airport {
 	/**
 	 * @return List of runways
 	 */
-	public ArrayList<PhysicalRunway> getRunways(){
+	public ArrayList<PhysicalRunway> getPhysicalRunways(){
 		return runways;
 	}
 

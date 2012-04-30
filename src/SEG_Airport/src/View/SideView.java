@@ -127,7 +127,9 @@ public class SideView extends JPanel implements AirportObserver{
 
 	
 	public void setValues(){
-		if(airport!=null){
+		if(airport!=null  && airport.getCurrentRunway() != null &&
+				   airport.getCurrentPhysicalRunway() != null && 
+				   airport.getCurrentPhysicalRunway().getObstacle() != null){
 		this.runwayLength = (int) runway.getTORA(runway.DEFAULT);
 		this.TORA = (int) runway.getTORA(runway.REDECLARED);
 		this.TODA = (int) runway.getTODA(runway.REDECLARED);
@@ -155,7 +157,10 @@ public class SideView extends JPanel implements AirportObserver{
 
 	public void updateAirport(Airport airport) {
 		this.airport=airport;
-		if(airport!=null){
+		if(airport!=null && airport.getCurrentRunway() != null &&
+				   airport.getCurrentPhysicalRunway() != null && 
+				   airport.getCurrentPhysicalRunway().getObstacle() != null)
+				{
 			runway=airport.getCurrentRunway();
 			obstacle=airport.getCurrentPhysicalRunway().getObstacle();
 		}

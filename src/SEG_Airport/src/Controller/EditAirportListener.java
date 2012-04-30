@@ -25,7 +25,7 @@ public class EditAirportListener implements ActionListener, AirportObserver{
 		Airport old = airport;
 		System.out.println("Editing Airport: " + old.getName());
 		@SuppressWarnings("unused")
-		EditAirportDialog ead = new EditAirportDialog(airport, old);
+		EditAirportDialog ead = new EditAirportDialog(airport, old, airportObservers);
 		notifyAirportObservers();
 	}
 

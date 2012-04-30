@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import Model.Airport;
 import Model.AirportObserver;
 import Model.LoadXMLFile;
@@ -25,6 +27,11 @@ public class OpenObstacleListener implements ActionListener, AirportObserver{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
+		if(airport.getPhysicalRunways().size() == 0){
+			JOptionPane.showMessageDialog(null, "Airport does not contain any physical runways\r\nPlease add one by going to Edit > Airport", "", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		
 		LoadXMLFile lf = new LoadXMLFile();
 		try {
 			Obstacle o = lf.loadObstacle();
@@ -38,6 +45,7 @@ public class OpenObstacleListener implements ActionListener, AirportObserver{
 			}
 			
 			System.out.println("Obstacle Opened");
+			notifyAirportObservers();
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -51,4 +59,9 @@ public class OpenObstacleListener implements ActionListener, AirportObserver{
 		this.airport = airport;
 	}
  
+	void notifyAirportObservers() {
+		for(AirportObserver ao: airportObservers){
+			ao.updateAirport(airport);
+		}
+	}
 }

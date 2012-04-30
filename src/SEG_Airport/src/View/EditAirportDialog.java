@@ -3,6 +3,8 @@ package View;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -19,11 +21,11 @@ public class EditAirportDialog extends JDialog {
 
 	private JTextField AirportName;
 
-	public EditAirportDialog(Airport airport, Airport old) {
-		System.out.println("old size: " + old.getRunways().size());
+	public EditAirportDialog(Airport airport, Airport old, List<AirportObserver> airportObservers) {
+		System.out.println("old size: " + old.getPhysicalRunways().size());
 		ArrayList<String> physicalRunwayNames = new ArrayList<String>();
 		
-		for(PhysicalRunway p : airport.getRunways()){
+		for(PhysicalRunway p : airport.getPhysicalRunways()){
 			physicalRunwayNames.add(p.getId());
 		}
 
@@ -53,12 +55,12 @@ public class EditAirportDialog extends JDialog {
 		getContentPane().add(list);
 
 		JButton btnEdit = new JButton("Edit");
-		btnEdit.addActionListener(new editListener(airport,list,false));
+		btnEdit.addActionListener(new editListener(airport,list,false,airportObservers));
 		btnEdit.setBounds(185, 76, 131, 23);
 		getContentPane().add(btnEdit);
 
 		JButton btnNewRunway = new JButton("New Runway");
-		btnNewRunway.addActionListener(new editListener(airport,list,true));
+		btnNewRunway.addActionListener(new editListener(airport,list,true,airportObservers));
 		btnNewRunway.setBounds(185, 42, 131, 23);
 		getContentPane().add(btnNewRunway);
 
@@ -95,7 +97,7 @@ class okListener implements ActionListener{
 	Airport a;
 	public void actionPerformed(ActionEvent e) {
 		a.setName(jt.getText());
-		System.out.println(a.getRunways().size());
+		System.out.println(a.getPhysicalRunways().size());
 		jd.setVisible(false);
 	}
 	public okListener(JDialog jd, JTextField jt, Airport a) {
@@ -107,14 +109,16 @@ class editListener implements ActionListener{
 	Airport a;
 	JList physicalRunwayJList;
 	boolean newRunway;
+	List<AirportObserver> airportObservers;
 	public void actionPerformed(ActionEvent e) {
 		@SuppressWarnings("unused")
-		EditRunwayDialog erd = new EditRunwayDialog(a,physicalRunwayJList,newRunway);		
+		EditRunwayDialog erd = new EditRunwayDialog(a,physicalRunwayJList,newRunway, airportObservers);	
 	}
-	public editListener(Airport a, JList physicalRunwayJList, boolean newRunway) {
+	public editListener(Airport a, JList physicalRunwayJList, boolean newRunway, List<AirportObserver> airportObservers) {
 		this.a = a;
 		this.physicalRunwayJList = physicalRunwayJList;
 		this.newRunway = newRunway;
+		this.airportObservers = airportObservers;
 	}	
 }
 
@@ -140,9 +144,9 @@ class EADdeleteListener implements ActionListener{
 	Airport a;
 	public void actionPerformed(ActionEvent arg0) {
 		int index = physicalRunwayJList.getSelectedIndex();
-		a.getRunways().remove(index);
+		a.getPhysicalRunways().remove(index);
 		ArrayList<String> physicalRunwayNames = new ArrayList<String>();
-		for(PhysicalRunway p : a.getRunways()){
+		for(PhysicalRunway p : a.getPhysicalRunways()){
 			physicalRunwayNames.add(p.getId());
 		}
 		DefaultListModel pr = new DefaultListModel();

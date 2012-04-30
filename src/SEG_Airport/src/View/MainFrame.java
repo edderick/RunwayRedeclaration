@@ -62,6 +62,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 	private static List<String> recentObstacles;
 
 	private List<AirportObserver> airportObservers;
+	private JMenu physicalRunwayMenu;
 	
 	/**
 	 * Launch the application.
@@ -133,7 +134,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Obstacle");
 		mntmNewMenuItem_1.setMnemonic('o');
-		NewObstacleListener nol = new NewObstacleListener(airport);
+		NewObstacleListener nol = new NewObstacleListener(airport, airportObservers);
 		mntmNewMenuItem_1.addActionListener(nol);
 		airportObservers.add(nol);
 		mnAirport.add(mntmNewMenuItem_1);
@@ -225,9 +226,9 @@ public class MainFrame extends JFrame implements AirportObserver{
 		mnEdit.setMnemonic('e');
 		menuBar.add(mnEdit);
 
-		JMenuItem mntmNewMenuItem_6 = new JMenuItem("Runway");
+		JMenuItem mntmNewMenuItem_6 = new JMenuItem("Physical Runway");
 		mntmNewMenuItem_6.setMnemonic('r');
-		EditRunwayListener erl = new EditRunwayListener(airport);
+		EditRunwayListener erl = new EditRunwayListener(airport, airportObservers);
 		mntmNewMenuItem_6.addActionListener(erl);
 		mnEdit.add(mntmNewMenuItem_6);
 
@@ -240,7 +241,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 
 		JMenuItem mntmNewMenuItem_7 = new JMenuItem("Obstacle");
 		mntmNewMenuItem_7.setMnemonic('o');
-		EditObstacleListener eol = new EditObstacleListener(airport);
+		EditObstacleListener eol = new EditObstacleListener(airport, airportObservers);
 		mntmNewMenuItem_7.addActionListener(eol);
 		airportObservers.add(eol);
 		mnEdit.add(mntmNewMenuItem_7);
@@ -248,26 +249,19 @@ public class MainFrame extends JFrame implements AirportObserver{
 		JSeparator separator = new JSeparator();
 		mnEdit.add(separator);
 
-		JMenu mnSelectRunway = new JMenu("Select Runway");
-		mnSelectRunway.setMnemonic('s');
-		mnEdit.add(mnSelectRunway);
+		physicalRunwayMenu = new JMenu("Select Physical Runway");
+		physicalRunwayMenu.setMnemonic('s');
+		mnEdit.add(physicalRunwayMenu);
 
 		//TODO: Replace these place holders with some generated stuff
-
-		JRadioButtonMenuItem rdbtnmntmlr = new JRadioButtonMenuItem("09L/27R");
-		topPanelButtonGroup.add(rdbtnmntmlr);
-		rdbtnmntmlr.setSelected(true);
-		mnSelectRunway.add(rdbtnmntmlr);
-
-		JRadioButtonMenuItem rdbtnmntmrl = new JRadioButtonMenuItem("09R/27L");
-		topPanelButtonGroup.add(rdbtnmntmrl);
-		mnSelectRunway.add(rdbtnmntmrl);
-
+		
+		generatePhysicalRunwayRadioButtons(physicalRunwayMenu);
+		
 		//End place holders
 
 		JMenuItem mntmPositionObstacle = new JMenuItem("Position Obstacle");
 		mntmPositionObstacle.setMnemonic('p');
-		ObstaclePositionListener opl = new ObstaclePositionListener(airport);
+		ObstaclePositionListener opl = new ObstaclePositionListener(airport, airportObservers);
 		mntmPositionObstacle.addActionListener(opl);
 		airportObservers.add(opl);
 		mnEdit.add(mntmPositionObstacle);
@@ -437,18 +431,19 @@ public class MainFrame extends JFrame implements AirportObserver{
 		ObstacleDetailsTable.setEnabled(false);
 		ObstacleDetailsTable.setRowSelectionAllowed(false);
 		ObstacleDetailsTable.setModel(new DefaultTableModel(
-				new Object[][] {
-						{"Name","Chair"},
-						{"Type", "747"},
-						{"Height", "48m"},
-						{"Distance from Threshold", "73m"},
-						{"Engine Blast Allowance", "10m"},
-						{"Angle of Slope", "1:50"},
-				},
-				new String[] {
-						"Property", "Value"
-				}
-				));
+			new Object[][] {
+				{"Name", "Chair"},
+				{"Type", "747"},
+				{"Height", "48m"},
+				{"Distance from Threshold", "73m"},
+				{"Closest To", "09L"},
+				{"Engine Blast Allowance", "10m"},
+				{"Angle of Slope", "1:50"},
+			},
+			new String[] {
+				"Property", "Value"
+			}
+		));
 		letBottomPanel.add(ObstacleDetailsTable);
 
 		contentPane.add(rightSplitPane, "cell 1 0,grow");
@@ -557,10 +552,28 @@ public class MainFrame extends JFrame implements AirportObserver{
 		lblAirportName.setText(airport.getName());
 		
 		currentRunwayCombo.removeAllItems();
-		for (PhysicalRunway r : airport.getRunways()){
+		for (PhysicalRunway r : airport.getPhysicalRunways()){
 			currentRunwayCombo.addItem(r.getRunway(0));
 			currentRunwayCombo.addItem(r.getRunway(1));
 		}
+		generatePhysicalRunwayRadioButtons(physicalRunwayMenu);
 		currentRunwayCombo.setSelectedIndex(0);
+		updateTables();
 	}
+	
+	private void  generatePhysicalRunwayRadioButtons(JMenu parentMenuItem){
+		parentMenuItem.removeAll();
+		for(PhysicalRunway r : airport.getPhysicalRunways()){
+			JRadioButtonMenuItem rdbtnmntmlr = new JRadioButtonMenuItem(r.getId());
+			topPanelButtonGroup.add(rdbtnmntmlr);
+			parentMenuItem.add(rdbtnmntmlr);
+			rdbtnmntmlr.addActionListener(new SelectPhysicalRunwayListener(airport, r, airportObservers));
+		}
+	}
+	
+	private void updateTables(){
+		
+	}
+}
+
 }

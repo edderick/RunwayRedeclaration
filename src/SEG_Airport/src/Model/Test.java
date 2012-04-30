@@ -25,7 +25,7 @@ public class Test {
 		
 		//iterate over the runways in the airport and print all values
 		System.out.println("\n******************\nThis is the airport and its runways:\n" + a.getName());
-		for (Object o : a.getRunways()) {
+		for (Object o : a.getPhysicalRunways()) {
 			System.out.println(((PhysicalRunway) o).getId() 
 					+" "+ ((PhysicalRunway) o).getRunway(0).getName() 
 					+" "+ ((PhysicalRunway) o).getRunway(0).getTORA(1)
@@ -47,7 +47,7 @@ public class Test {
 		
 		System.out.println("\nThis is the same airport with runway one removed:\n" + a.getName());
 		//iterate over the runways in the airport and print all values
-		for (Object o : a.getRunways()) {
+		for (Object o : a.getPhysicalRunways()) {
 			System.out.println(((PhysicalRunway) o).getId() 
 					+" "+ ((PhysicalRunway) o).getRunway(0).getName() 
 					+" "+ ((PhysicalRunway) o).getRunway(0).getTORA(1)
@@ -80,7 +80,7 @@ public class Test {
 		System.out.println("\nThis is the loaded airport:\n" + a2.getName());
 		//iterate over the runways in the loaded airport and print all values
 		
-		for (Object o : a2.getRunways()) {
+		for (Object o : a2.getPhysicalRunways()) {
 			System.out.println(((PhysicalRunway) o).getId() 
 					+" "+ ((PhysicalRunway) o).getRunway(0).getName() 
 					+" "+ ((PhysicalRunway) o).getRunway(0).getTORA(1)

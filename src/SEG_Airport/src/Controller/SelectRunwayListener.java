@@ -2,8 +2,12 @@ package Controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.util.ArrayList;
 
+import Model.Airport;
+import Model.AirportObserver;
+import Model.PhysicalRunway;
 import javax.swing.JColorChooser;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
@@ -14,23 +18,29 @@ import Model.PhysicalRunway;
 import Model.Runway;
 
 public class SelectRunwayListener implements ActionListener{
-
 	//I am not sure how to select a runway. 
 	//Right now I have put to do it using a runway object, 
 	//but it could be done in a different way if that is more convenient
 	
+	Airport airport;
+	Runway runway;
 	JComboBox jc;
 	JTable original, redeclared;
 	Airport airport;
-
+	List<AirportObserver> airportObservers;
+	
+	public SelectRunwayListener(Airport airport, Runway runway, List<AirportObserver> airportObservers){
 	public SelectRunwayListener(Airport airport, JComboBox jc, JTable original, JTable redeclared) {
+		this.airport = airport;
+		this.runway  = runway;
 		super();
 		this.jc = jc;
 		this.original = original;
 		this.redeclared = redeclared;
 		this.airport = airport;
+		this.airportObservers = airportObservers;
 	}
-
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		System.out.println("airport name: " + airport.getName());
@@ -38,7 +48,7 @@ public class SelectRunwayListener implements ActionListener{
 		for(PhysicalRunway p : airport.getRunways()){
 			runways.add(p.getRunway(0));
 			runways.add(p.getRunway(1));
-		}
+	}
 		System.out.println("size: " + runways.size() + " " + airport.getRunways().size());
 //		original.setModel(new DefaultTableModel(
 //				new Object[][] {
@@ -66,4 +76,11 @@ public class SelectRunwayListener implements ActionListener{
 //				));
 	}
 
+
+	void notifyAirportObservers() {
+		for(AirportObserver ao: airportObservers){
+			ao.updateAirport(airport);
+		}
+	}
+	
 }
