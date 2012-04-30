@@ -278,6 +278,8 @@ public class TopView extends JPanel implements AirportObserver{
 		this.TODA = (int) runway.getTODA(runway.REDECLARED);
 		this.ASDA = (int) runway.getASDA(runway.REDECLARED);
 		this.LDA = (int) runway.getLDA(runway.REDECLARED);
+		this.leftTag= airport.getCurrentPhysicalRunway().getRunway(0).getName();
+		this.rightTag = airport.getCurrentPhysicalRunway().getRunway(1).getName();
 		
 		if(obstacle!=null){
 			int distance = (int) airport.getCurrentPhysicalRunway().getDistanceAwayFromThreshold();
