@@ -10,6 +10,7 @@ import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JSplitPane;
 
 import View.TopView;
+import View.ViewPanel;
 
 public class SelectViewListener implements ActionListener{
 
@@ -29,10 +30,14 @@ public class SelectViewListener implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(top){
+			if(splitPane.getLeftComponent() != null) ((ViewPanel)splitPane.getLeftComponent()).setVisible(false);
 			splitPane.setLeftComponent(view);			
+			if(splitPane.getLeftComponent() != null) ((ViewPanel)splitPane.getLeftComponent()).setVisible(true);
 		}
 		else {
-			splitPane.setRightComponent(view);
+			if(splitPane.getRightComponent() != null) ((ViewPanel)splitPane.getRightComponent()).setVisible(false);
+			splitPane.setRightComponent(view);			
+			if(splitPane.getRightComponent() != null) ((ViewPanel)splitPane.getRightComponent()).setVisible(true);
 		}
 	}
 	

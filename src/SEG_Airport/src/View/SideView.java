@@ -16,7 +16,7 @@ import Model.Runway;
 
 
 @SuppressWarnings("serial")
-public class SideView extends JPanel implements AirportObserver{
+public class SideView extends JPanel implements AirportObserver, ViewPanel{
 	
 	boolean visible = false;
 	

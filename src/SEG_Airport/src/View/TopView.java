@@ -15,7 +15,7 @@ import Model.Runway;
 
 
 @SuppressWarnings("serial")
-public class TopView extends JPanel implements AirportObserver{
+public class TopView extends JPanel implements AirportObserver, ViewPanel{
 	
 	boolean visible = false;
 	
@@ -192,6 +192,7 @@ public class TopView extends JPanel implements AirportObserver{
 		}
 		
 		dashesWidth=(runwayHeight/20);
+		if (dashesWidth == 0) dashesWidth = 1;
 		gaps=dashesWidth;
 		int dashesX = (int) (xRunway + ((dashesLength/2)*r));
 		dashesLength=dashesLength*2;

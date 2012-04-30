@@ -8,7 +8,7 @@ import Model.PhysicalRunway;
 
 
 @SuppressWarnings("serial")
-public class CalculationsView extends JTextArea implements AirportObserver{
+public class CalculationsView extends JTextArea implements AirportObserver, ViewPanel{
 
 	Airport airport; 
 	
@@ -27,6 +27,10 @@ public class CalculationsView extends JTextArea implements AirportObserver{
 //		else {
 //			setText("No runway currently selected!");
 //		}
+	}
+	
+	public void setVisible(boolean visible){
+		
 	}
 	
 }

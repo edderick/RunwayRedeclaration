@@ -273,6 +273,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		rdbtnmntmTopPanelTopView.addActionListener(new SelectViewListener(rightSplitPane, topTopView, true));
 		rightSplitPane.setLeftComponent(topTopView);
 		airportObservers.add(topTopView);
+		topTopView.setVisible(true);
 		
 		JRadioButtonMenuItem rdbtnmntmTopPanelSideView = new JRadioButtonMenuItem("Side View");
 		topPanelButtonGroup.add(rdbtnmntmTopPanelSideView);
@@ -314,6 +315,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		rdbtnmntmBottomPanelSideView.addActionListener(new SelectViewListener(rightSplitPane, bottomSideView, false));
 		airportObservers.add(bottomSideView);
 		rightSplitPane.setRightComponent(bottomSideView);
+		bottomSideView.setVisible(true);
 		
 		JRadioButtonMenuItem rdbtnmntmBottomPanelCalculations = new JRadioButtonMenuItem("Calculations");
 		bottomPanelButtonGroup.add(rdbtnmntmBottomPanelCalculations);
