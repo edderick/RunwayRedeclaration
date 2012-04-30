@@ -221,30 +221,31 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 	
 	public void declaredRunwaysCreation(Graphics2D g2d){
 		if(airport!=null && runway!=null){
-		Color toraColor = new Color(255, 0, 0, 125);
-		Color todaColor = new Color(0, 255, 0, 125);
-		Color asdaColor = new Color(0, 0, 255, 125);
-		Color ldaColor = new Color(255, 0, 255, 125);
-		if(obstacleLeft){
-			g2d.setColor(toraColor);
-			g2d.fillRect(xRunway+TORAStart-(int) (TORA*r), yRunway, (int) (TORA*r), (int) (((runwayHeight*r)/2)-(r*runwayHeight *0.05)));
-			g2d.setColor(todaColor);
-			g2d.fillRect(xRunway+TODAStart-(int) (TODA*r), (int) (yRunway -((runwayHeight*r)/2)), (int) (TODA*r), (int) (((runwayHeight*r)/2)-(r*runwayHeight *0.05)));
-			g2d.setColor(asdaColor);
-			g2d.fillRect(xRunway+ASDAStart-(int) (ASDA*r), (int) (yRunway +((runwayHeight*r)/2)), (int) (ASDA*r), (int) (((runwayHeight*r)/2)-(r*runwayHeight *0.05)));
-			g2d.setColor(ldaColor);
-			g2d.fillRect(xRunway+LDAStart-(int) (LDA*r), (int) (yRunway + (2* ((runwayHeight*r)/2))), (int) (LDA*r), (int) (((runwayHeight*r)/2)-(r*runwayHeight *0.05)));
-			
-		}else{	
-			g2d.setColor(toraColor);
-			g2d.fillRect(xRunway+TORAStart, yRunway, (int) (TORA*r), (int) (((runwayHeight*r)/2)-(r*runwayHeight *0.05)));
-			g2d.setColor(todaColor);
-			g2d.fillRect(xRunway+TODAStart, (int) (yRunway -((runwayHeight*r)/2)), (int) (TODA*r), (int) (((runwayHeight*r)/2)-(r*runwayHeight *0.05)));
-			g2d.setColor(asdaColor);
-			g2d.fillRect(xRunway+ASDAStart, (int) (yRunway +((runwayHeight*r)/2)), (int) (ASDA*r), (int) (((runwayHeight*r)/2)-(r*runwayHeight *0.05)));
-			g2d.setColor(ldaColor);
-			g2d.fillRect(xRunway+LDAStart, (int) (yRunway + (2* ((runwayHeight*r)/2))), (int) (LDA*r), (int) (((runwayHeight*r)/2)-(r*runwayHeight *0.05)));
-		}
+//		Color toraColor = new Color(0, 255, 0, 70);
+//		Color todaColor = new Color(255, 0, 0, 70);
+//		Color asdaColor = new Color(0, 0, 255, 70);
+//		Color ldaColor = new Color(255, 0, 255, 70);
+			Color toraColor = new Color(0, 255, 0);
+			Color todaColor = new Color(255, 0, 0);
+			Color asdaColor = new Color(0, 0, 255);
+			Color ldaColor = new Color(255, 0, 255);
+		int yInc = (int) ((runwayHeight/5)*r);
+//			g2d.setColor(toraColor);
+//			g2d.fillRect(xRunway+TORAStart, (int) (yRunway+offset), (int) (TORA*r), (int) ((3*(runwayHeight*r)/8)-(r*runwayHeight *0.05)));
+//			g2d.setColor(todaColor);
+//			g2d.fillRect(xRunway+TODAStart, (int) (yRunway -((3*(runwayHeight*r)/8))+offset), (int) (TODA*r), (int) ((3*(runwayHeight*r)/8)-(r*runwayHeight *0.05)));
+//			g2d.setColor(asdaColor);
+//			g2d.fillRect(xRunway+ASDAStart, (int) (yRunway +((3*(runwayHeight*r)/8))+offset), (int) (ASDA*r), (int) ((3*(runwayHeight*r)/8)-(r*runwayHeight *0.05)));
+//			g2d.setColor(ldaColor);
+//			g2d.fillRect(xRunway+LDAStart, (int) (yRunway + (2* ((3*(runwayHeight*r)/8)))+offset), (int) (LDA*r), (int) ((3*(runwayHeight*r)/8)-(r*runwayHeight *0.05)));
+		g2d.setColor(toraColor);
+		g2d.fillRect(xRunway+TORAStart, (int) (yRunway+yInc), (int) (TORA*r), 1);
+		g2d.setColor(todaColor);
+		g2d.fillRect(xRunway+TODAStart, (int) (yRunway +yInc*2), (int) (TODA*r), 1);
+		g2d.setColor(asdaColor);
+		g2d.fillRect(xRunway+ASDAStart, (int) (yRunway +yInc*3), (int) (ASDA*r), 1);
+		g2d.setColor(ldaColor);
+		g2d.fillRect(xRunway+LDAStart, (int) (yRunway + yInc*4), (int) (LDA*r), 1);
 		
 		g2d.setColor(Color.BLACK);
 		g2d.drawString("TORA", (int) (xRunway+((TORA*r)/2)), (yRunway+g2d.getFontMetrics().getHeight()));
@@ -322,10 +323,12 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 	
 	public void zoomIn(){
 		ratio=ratio+ratioIncrement;
+		repaint();
 	}
 	
 	public void zoomOut(){
 		ratio=ratio-ratioIncrement;
+		repaint();
 	}
 	
 	public void setZoom(double ratioIncrement){

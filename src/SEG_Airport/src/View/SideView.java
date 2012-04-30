@@ -18,7 +18,7 @@ import Model.Runway;
 @SuppressWarnings("serial")
 public class SideView extends JPanel implements AirportObserver, ViewPanel{
 	
-	boolean visible = false;
+	boolean visible = true;
 	
 	//this value determines the amount of pixels the tag is from the end of the runway
 	final int tagBorder = 10;
@@ -115,8 +115,8 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 	
 	public void declaredRunwaysCreation(Graphics2D g2d){
 //		if(airport!=null){
-		Color toraColor = new Color(255, 0, 0, 125);
-		Color todaColor = new Color(0, 255, 0, 125);
+		Color toraColor = new Color(0, 255, 0, 125);
+		Color todaColor = new Color(255, 0, 0, 125);
 		Color asdaColor = new Color(0, 0, 255, 125);
 		Color ldaColor = new Color(255, 0, 255, 125);
 		g2d.setColor(toraColor);
@@ -138,19 +138,19 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 	
 	public void setValues(){
 		this.runwayLength = 2000;
-		this.TORA = 0;
-		this.TODA = 0;
-		this.ASDA = 0;
-		this.LDA = 0;
+		this.TORA = 100;
+		this.TODA = 100;
+		this.ASDA = 100;
+		this.LDA = 100;
 			int distance = 400;
 			this.threshold="08L";
 			this.xObstacle=runwayLength-distance;
-			this.obstacleLength = 20;
-			this.obstacleHeight = 20;
+			this.obstacleLength = 100;
+			this.obstacleHeight = 100;
 		this.LDAStart=0;
 		this.TORAStart=0;
-		this.TODAStart=0;
-		this.ASDAStart=0;
+		this.TODAStart=TORAStart+TORA;
+		this.ASDAStart=TORAStart+TORA;
 		
 //		if(airport!=null  && airport.getCurrentRunway() != null &&
 //				   airport.getCurrentPhysicalRunway() != null && 
@@ -181,14 +181,14 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 	}
 
 	public void updateAirport(Airport airport) {
-//		this.airport=airport;
-//		if(airport!=null && airport.getCurrentRunway() != null &&
-//				   airport.getCurrentPhysicalRunway() != null && 
-//				   airport.getCurrentPhysicalRunway().getObstacle() != null)
-//				{
-//			runway=airport.getCurrentRunway();
-//			obstacle=airport.getCurrentPhysicalRunway().getObstacle();
-//		}
+		this.airport=airport;
+		if(airport!=null && airport.getCurrentRunway() != null &&
+				   airport.getCurrentPhysicalRunway() != null && 
+				   airport.getCurrentPhysicalRunway().getObstacle() != null)
+				{
+			runway=airport.getCurrentRunway();
+			obstacle=airport.getCurrentPhysicalRunway().getObstacle();
+		}
 		
 	}
 }
