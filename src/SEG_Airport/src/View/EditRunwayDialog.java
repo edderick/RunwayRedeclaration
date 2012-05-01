@@ -289,7 +289,11 @@ class ERDokListener implements ActionListener{
 					new Runway(RNAME.getText(), doubleParser.parse(RTORA.getText()), doubleParser.parse(RASDA.getText()), 
 							doubleParser.parse(RTODA.getText()), doubleParser.parse(RLDA.getText()), doubleParser.parse(RDT.getText())), 
 					new Runway(LNAME.getText(), doubleParser.parse(LTORA.getText()), doubleParser.parse(LASDA.getText()), 
-							doubleParser.parse(LTODA.getText()), doubleParser.parse(LLDA.getText()), doubleParser.parse(LDT.getText()))));						
+							doubleParser.parse(LTODA.getText()), doubleParser.parse(LLDA.getText()), doubleParser.parse(LDT.getText()))));	
+			if(airport.getPhysicalRunways().size() == 1){
+				airport.setCurrentPhysicalRunway(airport.getPhysicalRunways().get(0));
+				airport.setCurrentRunway(airport.getCurrentPhysicalRunway().getRunway(0));
+			}
 		}
 		
 		ArrayList<String> physicalRunwayNames = new ArrayList<String>();
