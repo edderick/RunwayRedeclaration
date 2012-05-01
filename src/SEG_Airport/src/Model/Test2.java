@@ -53,11 +53,12 @@ public class Test2 {
 		Airport a = new Airport("Heathrow");
 		PhysicalRunway pr1, pr2;
 		
+		/*
 		Runway r1_1, r1_2;
 		Runway r2_1, r2_2;
 		r1_1 = new Runway("09L", 3902, 3902, 3902, 3595, 306);
 		r1_2 = new Runway("27R", 3884, 3962, 3884, 3884, 0);
-		pr1 = new PhysicalRunway("09L-27R", r1_1, r1_2);
+		pr1 = new PhysicalRunway("09L-27R", 4000, r1_1, r1_2);
 		
 		r2_1 = new Runway("09R", 3658, 3658, 3658, 3353, 307);
 		r2_2 = new Runway("27L", 3658, 3658, 3658, 3658, 0);

@@ -5,10 +5,14 @@ package Model;
  * @author Kelvin
  */
 public class Obstacle {
+	
+	public static int DEFAULT = 0;
+	public static int REDECLARED = 1;
 
 	private String name;
 	private String sizeType; // Small ; Medium ; Large
 	private double height, width, length;
+	private double[] angleOfSlope;
 
 	/**
 	 * Default constructor for an obstacle
@@ -18,12 +22,16 @@ public class Obstacle {
 	 * @param width Width of object
 	 * @param length Length of object
 	 */
-	public Obstacle(String name, String sizeType, double height, double width, double length) {
+	public Obstacle(String name, String sizeType, double height, double width, double length, double angleOfSlope) {
 		this.name = name;
 		this.sizeType = sizeType;
 		this.height = height;
 		this.width = width;
 		this.length = length;
+		
+		this.angleOfSlope = new double[2];
+		this.angleOfSlope[DEFAULT] = angleOfSlope;
+		this.angleOfSlope[REDECLARED] = angleOfSlope;
 	}
 
 	/**
@@ -94,6 +102,22 @@ public class Obstacle {
 	 */
 	public void setLength(double length) {
 		this.length = length;
+	}
+	
+	/**
+	 * @param option Runway.DEFAULT or Runway.REDECLARED
+	 * @return Value of angle of slope
+	 */
+	public double getAngleOfSlope(int option) {
+		return this.angleOfSlope[option];
+	}
+
+	/**
+	 * @param option Runway.DEFAULT or Runway.REDECLARED
+	 * @param angleOfSlope New value for angle of slope
+	 */
+	public void setAngleOfSlope(int option, double angleOfSlope) {
+		this.angleOfSlope[option] = angleOfSlope;
 	}
 
 	/**
