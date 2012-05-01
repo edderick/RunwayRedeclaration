@@ -198,6 +198,11 @@ public class SaveToXMLFile {
 			distanceAwayFromCenterline.appendChild(document.createTextNode(distanceFromCenterString));
 			physicalRunway.appendChild(distanceAwayFromCenterline);
 			
+			Element angleOfSlope = document.createElement("Angle_Of_Slope");
+			String angleString = Double.toString(runway.getAngleOfSlope(0));
+			angleOfSlope.appendChild(document.createTextNode(angleString));
+			physicalRunway.appendChild(angleOfSlope);
+			
 			
 
 			for (int i = 0; i < 2; i++) { // looping through each actual runway (2)
