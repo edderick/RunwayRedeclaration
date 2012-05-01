@@ -230,7 +230,27 @@ public class LoadXMLFile {
 					Element eElement = (Element) nNode;
 
 					String name = getTagValue("Name", eElement);
+					Double resa = Double.parseDouble(getTagValue("RESA", eElement));
+					Double stopway = Double.parseDouble(getTagValue("Stopway", eElement));
+					Double blastAllowance = Double.parseDouble(getTagValue("Blast_Allowance", eElement));
+					Double runwayWidth = Double.parseDouble(getTagValue("Runway_Strip_Width", eElement));
+					Double clearedWidth = Double.parseDouble(getTagValue("Cleared_And_Graded_Width", eElement));
+					Double distanceThreshold = Double.parseDouble(getTagValue("Distance_Away_From_Threshold", eElement));
+					Double distanceCenterline = Double.parseDouble(getTagValue("Distance_Away_From_Centerline", eElement));
+					Double angle = Double.parseDouble(getTagValue("Angle_Of_Slope", eElement));
+					
+					
 					PhysicalRunway physicalRunwayObject = new PhysicalRunway(name, runways.get(index), runways.get(index+1));
+					physicalRunwayObject.setRESA(0, resa);
+					physicalRunwayObject.setStopway(0, stopway);
+					physicalRunwayObject.setBlastAllowance(0, blastAllowance);
+					physicalRunwayObject.setRunwayStripWidth(runwayWidth);
+					physicalRunwayObject.setClearedAndGradedWidth(clearedWidth);
+					physicalRunwayObject.setDistanceAwayFromThreshold(distanceThreshold);
+					physicalRunwayObject.setDistanceAwayFromCenterLine(distanceCenterline);
+					physicalRunwayObject.setAngleOfSlope(0, angle);
+					
+					
 					airport.addPhysicalRunway(physicalRunwayObject);
 					index = index + 2;
 				}
