@@ -18,7 +18,7 @@ public class PhysicalRunway {
 
 	// Meters are used for these measurements
 	private double distanceAwayFromThreshold, distanceAwayFromCenterLine;
-	private double[] RESA, stopway, blastAllowance;
+	private double[] RESA, stopway, blastAllowance, angleOfSlope;
 
 	private boolean closeToA;
 
@@ -39,8 +39,7 @@ public class PhysicalRunway {
 	 * @param runwayTwo
 	 *            The second runway
 	 */
-	public PhysicalRunway(String identifier, Runway runwayOne,
-			Runway runwayTwo, double RESA, double stopway, double blastAllowance) {
+	public PhysicalRunway(String identifier, Runway runwayOne, Runway runwayTwo) {
 		id = identifier;
 		this.clearedAndGradedWidth = 75;
 		this.runwayStripWidth = 150;
@@ -49,16 +48,20 @@ public class PhysicalRunway {
 		runway[1] = runwayTwo;
 
 		this.RESA = new double[2];
-		this.RESA[DEFAULT] = RESA;
-		this.RESA[REDECLARED] = RESA;
+		this.RESA[DEFAULT] = 240;
+		this.RESA[REDECLARED] = 240;
 
 		this.stopway = new double[2];
-		this.stopway[DEFAULT] = stopway;
-		this.stopway[REDECLARED] = stopway;
+		this.stopway[DEFAULT] = 60;
+		this.stopway[REDECLARED] = 60;
 
 		this.blastAllowance = new double[2];
-		this.blastAllowance[DEFAULT] = blastAllowance;
-		this.blastAllowance[REDECLARED] = blastAllowance;
+		this.blastAllowance[DEFAULT] = 300;
+		this.blastAllowance[REDECLARED] = 300;
+
+		this.angleOfSlope = new double[2];
+		this.angleOfSlope[DEFAULT] = 50;
+		this.angleOfSlope[REDECLARED] = 50;
 	}
 
 	/**
@@ -175,6 +178,25 @@ public class PhysicalRunway {
 	}
 
 	/**
+	 * @param option
+	 *            Runway.DEFAULT or Runway.REDECLARED
+	 * @return Value of angle of slope
+	 */
+	public double getAngleOfSlope(int option) {
+		return this.angleOfSlope[option];
+	}
+
+	/**
+	 * @param option
+	 *            Runway.DEFAULT or Runway.REDECLARED
+	 * @param angleOfSlope
+	 *            New value for angle of slope
+	 */
+	public void setAngleOfSlope(int option, double angleOfSlope) {
+		this.angleOfSlope[option] = angleOfSlope;
+	}
+
+	/**
 	 * Places a new obstacle on the runway and performs the required
 	 * calculations
 	 * 
@@ -252,8 +274,7 @@ public class PhysicalRunway {
 	 * Resets the runway numbers to their defaults
 	 */
 	private void reset() {
-		this.obstacle.setAngleOfSlope(Obstacle.REDECLARED,
-				obstacle.getAngleOfSlope(Obstacle.DEFAULT));
+		setAngleOfSlope(REDECLARED, angleOfSlope[DEFAULT]);
 		setRESA(REDECLARED, RESA[DEFAULT]);
 		setStopway(REDECLARED, stopway[DEFAULT]);
 		setBlastAllowance(REDECLARED, blastAllowance[DEFAULT]);
@@ -330,30 +351,26 @@ public class PhysicalRunway {
 					+ closeTo.getTODA(Runway.REDECLARED) + "\n");
 			result.append("New LDA : " + closeTo.getLDA(Runway.DEFAULT) + " - "
 					+ distanceAwayFromThreshold + " - (" + obstacle.getHeight()
-					+ " * " + obstacle.getAngleOfSlope(Obstacle.REDECLARED)
-					+ ") - " + stopway + ") = "
-					+ closeTo.getLDA(Runway.REDECLARED) + "\n");
+					+ " * " + angleOfSlope[REDECLARED] + ") - " + stopway
+					+ ") = " + closeTo.getLDA(Runway.REDECLARED) + "\n");
 
 		} else {
 			result.append("New TORA : " + awayFrom.getTORA(Runway.DEFAULT)
 					+ " - " + distanceAwayFromThreshold + " - ("
-					+ obstacle.getHeight() + " * "
-					+ obstacle.getAngleOfSlope(Obstacle.REDECLARED) + ") - "
-					+ stopway + " - "
+					+ obstacle.getHeight() + " * " + angleOfSlope[REDECLARED]
+					+ ") - " + stopway + " - "
 					+ closeTo.getDisplacedThreshold(Runway.REDECLARED) + " = "
 					+ awayFrom.getTORA(Runway.REDECLARED) + "\n");
 			result.append("New ASDA : " + awayFrom.getASDA(Runway.DEFAULT)
 					+ " - " + distanceAwayFromThreshold + " - ("
-					+ obstacle.getHeight() + " * "
-					+ obstacle.getAngleOfSlope(Obstacle.REDECLARED) + ") - "
-					+ stopway + " - "
+					+ obstacle.getHeight() + " * " + angleOfSlope[REDECLARED]
+					+ ") - " + stopway + " - "
 					+ closeTo.getDisplacedThreshold(Runway.REDECLARED) + " = "
 					+ awayFrom.getASDA(Runway.REDECLARED) + "\n");
 			result.append("New TODA : " + awayFrom.getTODA(Runway.DEFAULT)
 					+ " - " + distanceAwayFromThreshold + " - ("
-					+ obstacle.getHeight() + " * "
-					+ obstacle.getAngleOfSlope(Obstacle.REDECLARED) + ") - "
-					+ stopway + " - "
+					+ obstacle.getHeight() + " * " + angleOfSlope[REDECLARED]
+					+ ") - " + stopway + " - "
 					+ closeTo.getDisplacedThreshold(Runway.REDECLARED) + " = "
 					+ awayFrom.getTODA(Runway.REDECLARED) + "\n");
 			result.append("New LDA : " + awayFrom.getLDA(Runway.DEFAULT)
@@ -400,13 +417,10 @@ public class PhysicalRunway {
 						: -(distanceAwayFromCenterLine) > runwayStripWidth)) {
 			closeTo.setLDA(1, closeTo.getLDA(Runway.DEFAULT));
 		} else {
-			closeTo.setLDA(
-					1,
-					closeTo.getLDA(Runway.DEFAULT)
-							- distanceAwayFromThreshold
-							- (obstacle.getHeight() * obstacle
-									.getAngleOfSlope(Obstacle.REDECLARED))
-							- stopway[REDECLARED]);
+			closeTo.setLDA(1, closeTo.getLDA(Runway.DEFAULT)
+					- distanceAwayFromThreshold
+					- (obstacle.getHeight() * angleOfSlope[REDECLARED])
+					- stopway[REDECLARED]);
 		}
 	}
 
@@ -446,8 +460,7 @@ public class PhysicalRunway {
 					1,
 					awayFrom.getTORA(Runway.DEFAULT)
 							- distanceAwayFromThreshold
-							- (obstacle.getHeight() * obstacle
-									.getAngleOfSlope(Obstacle.REDECLARED))
+							- (obstacle.getHeight() * angleOfSlope[REDECLARED])
 							- stopway[REDECLARED]
 							- closeTo.getDisplacedThreshold(Runway.REDECLARED));
 		}
@@ -489,8 +502,7 @@ public class PhysicalRunway {
 					1,
 					awayFrom.getASDA(Runway.DEFAULT)
 							- distanceAwayFromThreshold
-							- (obstacle.getHeight() * obstacle
-									.getAngleOfSlope(Obstacle.REDECLARED))
+							- (obstacle.getHeight() * angleOfSlope[REDECLARED])
 							- stopway[REDECLARED]
 							- closeTo.getDisplacedThreshold(Runway.REDECLARED));
 		}
@@ -532,8 +544,7 @@ public class PhysicalRunway {
 					1,
 					awayFrom.getTODA(Runway.DEFAULT)
 							- distanceAwayFromThreshold
-							- (obstacle.getHeight() * obstacle
-									.getAngleOfSlope(Obstacle.REDECLARED))
+							- (obstacle.getHeight() * angleOfSlope[REDECLARED])
 							- stopway[REDECLARED]
 							- closeTo.getDisplacedThreshold(Runway.REDECLARED));
 		}
