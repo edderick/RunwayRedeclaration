@@ -162,6 +162,38 @@ public class SaveToXMLFile {
 			Element physicalRunwayName = document.createElement("Name");
 			physicalRunwayName.appendChild(document.createTextNode(namePhysicalRunwayString));
 			physicalRunway.appendChild(physicalRunwayName);
+			
+			Element resa = document.createElement("RESA");
+			String resaString = Double.toString(runway.getRESA(0));
+			resa.appendChild(document.createTextNode(resaString));
+			physicalRunway.appendChild(resa);
+			
+			Element stopway = document.createElement("Stopway");
+			String stopwayString = Double.toString(runway.getStopway(0));
+			stopway.appendChild(document.createTextNode(stopwayString));
+			physicalRunway.appendChild(stopway);
+			
+			Element blastAllowance = document.createElement("Blast_Allowance");
+			String blastString = Double.toString(runway.getBlastAllowance(0));
+			blastAllowance.appendChild(document.createTextNode(blastString));
+			physicalRunway.appendChild(blastAllowance);
+			
+			Element runwayStripWidth = document.createElement("Runway_Strip_Width");
+			String runwayWidthString = Double.toString(runway.getRunwayStripWidth());
+			runwayStripWidth.appendChild(document.createTextNode(runwayWidthString));
+			physicalRunway.appendChild(runwayStripWidth);
+			
+			Element clearAndGradedWidth = document.createElement("Clear_And_Graded_Width");
+			String clearWidthString = Double.toString(runway.getClearedAndGradedWidth());
+			clearAndGradedWidth.appendChild(document.createTextNode(clearWidthString));
+			physicalRunway.appendChild(clearAndGradedWidth);
+			
+			Element distanceAwayFromThreshold = document.createElement("Distance_Away_From_Threshold");
+			String distanceFromThresString = Double.toString(runway.getDistanceAwayFromThreshold());
+			distanceAwayFromThreshold.appendChild(document.createTextNode(distanceFromThresString));
+			physicalRunway.appendChild(distanceAwayFromThreshold);
+			
+			
 
 			for (int i = 0; i < 2; i++) { // looping through each actual runway (2)
 				Runway runwayObject = runway.getRunway(i);// getting a runway
