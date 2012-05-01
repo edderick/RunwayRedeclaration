@@ -7,23 +7,18 @@ package Model;
 public class Obstacle {
 
 	private String name;
-	private String sizeType; // Small ; Medium ; Large
 	private double height, width, length;
 
 	/**
 	 * Default constructor for an obstacle
 	 * @param name Name of obstacle
-	 * @param sizeType The size category that it fits in
 	 * @param height Height of object
-	 * @param width Width of object
-	 * @param length Length of object
 	 */
-	public Obstacle(String name, String sizeType, double height, double width, double length) {
+	public Obstacle(String name, double height) {
 		this.name = name;
-		this.sizeType = sizeType;
 		this.height = height;
-		this.width = width;
-		this.length = length;
+		this.width = 300;
+	    this.length = 1000;
 	}
 
 	/**
@@ -38,20 +33,6 @@ public class Obstacle {
 	 */
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	/**
-	 * @return The size type of the obstacle
-	 */
-	public String getSizeType() {
-		return sizeType;
-	}
-
-	/**
-	 * @param sizeType The new size type of the obstacle
-	 */
-	public void setSizeType(String sizeType) {
-		this.sizeType = sizeType;
 	}
 
 	/**

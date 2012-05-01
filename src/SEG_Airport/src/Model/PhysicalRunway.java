@@ -32,8 +32,6 @@ public class PhysicalRunway {
 	 * 
 	 * @param identifier
 	 *            The name of the physical runway
-	 * @param width
-	 *            The width of the physical runway
 	 * @param runwayOne
 	 *            The first runway
 	 * @param runwayTwo
