@@ -97,7 +97,7 @@ public class Test {
 					);
 		}
 		
-		Obstacle obs = new Obstacle("boeing 747", "Medium", 56.0, 45.0, 567.0);
+		Obstacle obs = new Obstacle("boeing 747", 56.0);
 		obs.saveToXML();
 		
 		LoadXMLFile lof = new LoadXMLFile();
@@ -111,7 +111,7 @@ public class Test {
 			e.printStackTrace();
 		}
 		
-		System.out.println(obs1.getName() + obs1.getSizeType() +
+		System.out.println(obs1.getName() +
 				obs1.getHeight() + obs1.getWidth() + obs1.getLength());
 		
 		Contact cont1 = new Contact("oscar", "mariani", "mariani.oscar@gmail.com");
