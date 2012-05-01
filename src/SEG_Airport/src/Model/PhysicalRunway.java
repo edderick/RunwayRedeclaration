@@ -14,11 +14,11 @@ public class PhysicalRunway {
 	private String id;
 	private Runway[] runway;
 	private Obstacle obstacle;
-	private double runwayStripWidth, clearedAndGradedWidth;
 
 	// Meters are used for these measurements
 	private double distanceAwayFromThreshold, distanceAwayFromCenterLine;
-	private double[] RESA, stopway, blastAllowance, angleOfSlope;
+	private double[] runwayStripWidth, clearedAndGradedWidth, resa, stopway,
+			blastAllowance, angleOfSlope;
 
 	private boolean closeToA;
 
@@ -39,15 +39,21 @@ public class PhysicalRunway {
 	 */
 	public PhysicalRunway(String identifier, Runway runwayOne, Runway runwayTwo) {
 		id = identifier;
-		this.clearedAndGradedWidth = 75;
-		this.runwayStripWidth = 150;
 		runway = new Runway[2];
 		runway[0] = runwayOne;
 		runway[1] = runwayTwo;
 
-		this.RESA = new double[2];
-		this.RESA[DEFAULT] = 240;
-		this.RESA[REDECLARED] = 240;
+		this.clearedAndGradedWidth = new double[2];
+		this.clearedAndGradedWidth[DEFAULT] = 75;
+		this.clearedAndGradedWidth[REDECLARED] = 75;
+
+		this.runwayStripWidth = new double[2];
+		this.runwayStripWidth[DEFAULT] = 150;
+		this.runwayStripWidth[REDECLARED] = 150;
+
+		this.resa = new double[2];
+		this.resa[DEFAULT] = 240;
+		this.resa[REDECLARED] = 240;
 
 		this.stopway = new double[2];
 		this.stopway[DEFAULT] = 60;
@@ -90,7 +96,7 @@ public class PhysicalRunway {
 	 * @return The width of the runway, cleared and graded area
 	 */
 	public double getClearedAndGradedWidth() {
-		return clearedAndGradedWidth;
+		return clearedAndGradedWidth[REDECLARED];
 	}
 
 	/**
@@ -99,14 +105,21 @@ public class PhysicalRunway {
 	 *            runway strip
 	 */
 	public void setClearedAndGradedWidth(double clearedAndGradedWidth) {
-		this.clearedAndGradedWidth = clearedAndGradedWidth;
+		this.clearedAndGradedWidth[REDECLARED] = clearedAndGradedWidth;
+	}
+
+	/**
+	 * Reset the values of the width of the runway, cleared and graded area
+	 */
+	public void resetClearedAndGradedWidth() {
+		this.clearedAndGradedWidth[REDECLARED] = this.clearedAndGradedWidth[DEFAULT];
 	}
 
 	/**
 	 * @return The width of the runway, cleared and graded area and runway strip
 	 */
 	public double getRunwayStripWidth() {
-		return runwayStripWidth;
+		return runwayStripWidth[REDECLARED];
 	}
 
 	/**
@@ -115,7 +128,15 @@ public class PhysicalRunway {
 	 *            runway strip
 	 */
 	public void setRunwayStripWidth(double runwayStripWidth) {
-		this.runwayStripWidth = runwayStripWidth;
+		this.runwayStripWidth[REDECLARED] = runwayStripWidth;
+	}
+
+	/**
+	 * Reset the values of the width of the runway, cleared and graded area and
+	 * runway strip
+	 */
+	public void resetRunwayStripWidth() {
+		this.runwayStripWidth[REDECLARED] = this.runwayStripWidth[DEFAULT];
 	}
 
 	/**
@@ -123,8 +144,8 @@ public class PhysicalRunway {
 	 *            Runway.DEFAULT or Runway.REDECLARED
 	 * @return Value of RESA
 	 */
-	public double getRESA(int option) {
-		return this.RESA[option];
+	public double getResa() {
+		return this.resa[REDECLARED];
 	}
 
 	/**
@@ -133,8 +154,15 @@ public class PhysicalRunway {
 	 * @param aSDA
 	 *            New value of RESA
 	 */
-	public void setRESA(int option, double RESA) {
-		this.RESA[option] = RESA;
+	public void setResa(double resa) {
+		this.resa[REDECLARED] = resa;
+	}
+
+	/**
+	 * Reset the values of the RESA
+	 */
+	public void resetResa() {
+		this.resa[REDECLARED] = this.resa[DEFAULT];
 	}
 
 	/**
@@ -142,8 +170,8 @@ public class PhysicalRunway {
 	 *            Runway.DEFAULT or Runway.REDECLARED
 	 * @return Value of stopway
 	 */
-	public double getStopway(int option) {
-		return this.stopway[option];
+	public double getStopway() {
+		return this.stopway[REDECLARED];
 	}
 
 	/**
@@ -152,8 +180,15 @@ public class PhysicalRunway {
 	 * @param aSDA
 	 *            New value of stopway
 	 */
-	public void setStopway(int option, double stopway) {
-		this.stopway[option] = stopway;
+	public void setStopway(double stopway) {
+		this.stopway[REDECLARED] = stopway;
+	}
+
+	/**
+	 * Reset the values of the stopway
+	 */
+	public void resetStopway() {
+		this.stopway[REDECLARED] = this.stopway[DEFAULT];
 	}
 
 	/**
@@ -161,8 +196,8 @@ public class PhysicalRunway {
 	 *            Runway.DEFAULT or Runway.REDECLARED
 	 * @return Value of RESA
 	 */
-	public double getBlastAllowance(int option) {
-		return this.blastAllowance[option];
+	public double getBlastAllowance() {
+		return this.blastAllowance[REDECLARED];
 	}
 
 	/**
@@ -171,8 +206,15 @@ public class PhysicalRunway {
 	 * @param aSDA
 	 *            New value of RESA
 	 */
-	public void setBlastAllowance(int option, double blastAllowance) {
-		this.blastAllowance[option] = blastAllowance;
+	public void setBlastAllowance(double blastAllowance) {
+		this.blastAllowance[REDECLARED] = blastAllowance;
+	}
+
+	/**
+	 * Reset the values of the stopway
+	 */
+	public void resetBlastAllowance() {
+		this.blastAllowance[REDECLARED] = this.blastAllowance[DEFAULT];
 	}
 
 	/**
@@ -180,8 +222,8 @@ public class PhysicalRunway {
 	 *            Runway.DEFAULT or Runway.REDECLARED
 	 * @return Value of angle of slope
 	 */
-	public double getAngleOfSlope(int option) {
-		return this.angleOfSlope[option];
+	public double getAngleOfSlope() {
+		return this.angleOfSlope[REDECLARED];
 	}
 
 	/**
@@ -190,8 +232,15 @@ public class PhysicalRunway {
 	 * @param angleOfSlope
 	 *            New value for angle of slope
 	 */
-	public void setAngleOfSlope(int option, double angleOfSlope) {
-		this.angleOfSlope[option] = angleOfSlope;
+	public void setAngleOfSlope(double angleOfSlope) {
+		this.angleOfSlope[REDECLARED] = angleOfSlope;
+	}
+
+	/**
+	 * Reset the values of the stopway
+	 */
+	public void resetAngleOfSlope() {
+		this.angleOfSlope[REDECLARED] = this.angleOfSlope[DEFAULT];
 	}
 
 	/**
@@ -272,10 +321,12 @@ public class PhysicalRunway {
 	 * Resets the runway numbers to their defaults
 	 */
 	private void reset() {
-		setAngleOfSlope(REDECLARED, angleOfSlope[DEFAULT]);
-		setRESA(REDECLARED, RESA[DEFAULT]);
-		setStopway(REDECLARED, stopway[DEFAULT]);
-		setBlastAllowance(REDECLARED, blastAllowance[DEFAULT]);
+		resetRunwayStripWidth();
+		resetClearedAndGradedWidth();
+		resetResa();
+		resetStopway();
+		resetBlastAllowance();
+		resetAngleOfSlope();
 	}
 
 	/**
@@ -334,48 +385,49 @@ public class PhysicalRunway {
 		if (runwayName.equals(closeTo.getName())) {
 			result.append("New TORA : " + closeTo.getTORA(Runway.DEFAULT)
 					+ " - " + distanceAwayFromThreshold + " - "
-					+ blastAllowance + " - "
+					+ blastAllowance[REDECLARED] + " - "
 					+ closeTo.getDisplacedThreshold(Runway.REDECLARED) + " = "
 					+ closeTo.getTORA(Runway.REDECLARED) + "\n");
 			result.append("New ASDA : " + closeTo.getASDA(Runway.DEFAULT)
 					+ " - " + distanceAwayFromThreshold + " - "
-					+ blastAllowance + " - "
+					+ blastAllowance[REDECLARED] + " - "
 					+ closeTo.getDisplacedThreshold(Runway.REDECLARED) + " = "
 					+ closeTo.getASDA(Runway.REDECLARED) + "\n");
 			result.append("New TODA : " + closeTo.getTODA(Runway.DEFAULT)
 					+ " - " + distanceAwayFromThreshold + " - "
-					+ blastAllowance + " - "
+					+ blastAllowance[REDECLARED] + " - "
 					+ closeTo.getDisplacedThreshold(Runway.REDECLARED) + " = "
 					+ closeTo.getTODA(Runway.REDECLARED) + "\n");
 			result.append("New LDA : " + closeTo.getLDA(Runway.DEFAULT) + " - "
 					+ distanceAwayFromThreshold + " - (" + obstacle.getHeight()
-					+ " * " + angleOfSlope[REDECLARED] + ") - " + stopway
-					+ ") = " + closeTo.getLDA(Runway.REDECLARED) + "\n");
+					+ " * " + angleOfSlope[REDECLARED] + ") - "
+					+ stopway[REDECLARED] + ") = "
+					+ closeTo.getLDA(Runway.REDECLARED) + "\n");
 
 		} else {
 			result.append("New TORA : " + awayFrom.getTORA(Runway.DEFAULT)
 					+ " - " + distanceAwayFromThreshold + " - ("
 					+ obstacle.getHeight() + " * " + angleOfSlope[REDECLARED]
-					+ ") - " + stopway + " - "
+					+ ") - " + stopway[REDECLARED] + " - "
 					+ closeTo.getDisplacedThreshold(Runway.REDECLARED) + " = "
 					+ awayFrom.getTORA(Runway.REDECLARED) + "\n");
 			result.append("New ASDA : " + awayFrom.getASDA(Runway.DEFAULT)
 					+ " - " + distanceAwayFromThreshold + " - ("
 					+ obstacle.getHeight() + " * " + angleOfSlope[REDECLARED]
-					+ ") - " + stopway + " - "
+					+ ") - " + stopway[REDECLARED] + " - "
 					+ closeTo.getDisplacedThreshold(Runway.REDECLARED) + " = "
 					+ awayFrom.getASDA(Runway.REDECLARED) + "\n");
 			result.append("New TODA : " + awayFrom.getTODA(Runway.DEFAULT)
 					+ " - " + distanceAwayFromThreshold + " - ("
 					+ obstacle.getHeight() + " * " + angleOfSlope[REDECLARED]
-					+ ") - " + stopway + " - "
+					+ ") - " + stopway[REDECLARED] + " - "
 					+ closeTo.getDisplacedThreshold(Runway.REDECLARED) + " = "
 					+ awayFrom.getTODA(Runway.REDECLARED) + "\n");
 			result.append("New LDA : " + awayFrom.getLDA(Runway.DEFAULT)
 					+ " - " + closeTo.getDisplacedThreshold(Runway.REDECLARED)
-					+ " - " + distanceAwayFromThreshold + " - " + RESA + " - "
-					+ stopway + " = " + awayFrom.getLDA(Runway.REDECLARED)
-					+ "\n");
+					+ " - " + distanceAwayFromThreshold + " - "
+					+ resa[REDECLARED] + " - " + stopway[REDECLARED] + " = "
+					+ awayFrom.getLDA(Runway.REDECLARED) + "\n");
 		}
 		return result.toString();
 	}
@@ -390,15 +442,15 @@ public class PhysicalRunway {
 	 */
 	private void calculateLDATowardsObstacle(Runway closeTo, Runway awayFrom) {
 		if (obstacle == null
-				|| (distanceAwayFromCenterLine >= 0 ? distanceAwayFromCenterLine > runwayStripWidth
-						: -(distanceAwayFromCenterLine) > runwayStripWidth)) {
+				|| (distanceAwayFromCenterLine >= 0 ? distanceAwayFromCenterLine > runwayStripWidth[REDECLARED]
+						: -(distanceAwayFromCenterLine) > runwayStripWidth[REDECLARED])) {
 			awayFrom.setLDA(1, awayFrom.getLDA(Runway.DEFAULT));
 		} else {
 			awayFrom.setLDA(
 					1,
 					awayFrom.getLDA(Runway.DEFAULT)
 							- closeTo.getDisplacedThreshold(Runway.REDECLARED)
-							- distanceAwayFromThreshold - RESA[REDECLARED]
+							- distanceAwayFromThreshold - resa[REDECLARED]
 							- stopway[REDECLARED]);
 		}
 	}
@@ -411,8 +463,8 @@ public class PhysicalRunway {
 	 */
 	private void calculateLDAOverObstacle(Runway closeTo) {
 		if (obstacle == null
-				|| (distanceAwayFromCenterLine >= 0 ? distanceAwayFromCenterLine > runwayStripWidth
-						: -(distanceAwayFromCenterLine) > runwayStripWidth)) {
+				|| (distanceAwayFromCenterLine >= 0 ? distanceAwayFromCenterLine > runwayStripWidth[REDECLARED]
+						: -(distanceAwayFromCenterLine) > runwayStripWidth[REDECLARED])) {
 			closeTo.setLDA(1, closeTo.getLDA(Runway.DEFAULT));
 		} else {
 			closeTo.setLDA(1, closeTo.getLDA(Runway.DEFAULT)
@@ -430,8 +482,8 @@ public class PhysicalRunway {
 	 */
 	private void calculateTORAAwayFromObstacle(Runway closeTo) {
 		if (obstacle == null
-				|| (distanceAwayFromCenterLine >= 0 ? distanceAwayFromCenterLine > runwayStripWidth
-						: -(distanceAwayFromCenterLine) > runwayStripWidth)) {
+				|| (distanceAwayFromCenterLine >= 0 ? distanceAwayFromCenterLine > runwayStripWidth[REDECLARED]
+						: -(distanceAwayFromCenterLine) > runwayStripWidth[REDECLARED])) {
 			closeTo.setTORA(1, closeTo.getTORA(Runway.DEFAULT));
 		} else {
 			closeTo.setTORA(1, closeTo.getTORA(Runway.DEFAULT)
@@ -450,8 +502,8 @@ public class PhysicalRunway {
 	 */
 	private void calculateTORATowardsObstacle(Runway closeTo, Runway awayFrom) {
 		if (obstacle == null
-				|| (distanceAwayFromCenterLine >= 0 ? distanceAwayFromCenterLine > runwayStripWidth
-						: -(distanceAwayFromCenterLine) > runwayStripWidth)) {
+				|| (distanceAwayFromCenterLine >= 0 ? distanceAwayFromCenterLine > runwayStripWidth[REDECLARED]
+						: -(distanceAwayFromCenterLine) > runwayStripWidth[REDECLARED])) {
 			awayFrom.setTORA(1, awayFrom.getTORA(Runway.DEFAULT));
 		} else {
 			awayFrom.setTORA(
@@ -472,8 +524,8 @@ public class PhysicalRunway {
 	 */
 	private void calculateASDAAwayFromObstacle(Runway closeTo) {
 		if (obstacle == null
-				|| (distanceAwayFromCenterLine >= 0 ? distanceAwayFromCenterLine > runwayStripWidth
-						: -(distanceAwayFromCenterLine) > runwayStripWidth)) {
+				|| (distanceAwayFromCenterLine >= 0 ? distanceAwayFromCenterLine > runwayStripWidth[REDECLARED]
+						: -(distanceAwayFromCenterLine) > runwayStripWidth[REDECLARED])) {
 			closeTo.setASDA(1, closeTo.getASDA(Runway.DEFAULT));
 		} else {
 			closeTo.setASDA(1, closeTo.getASDA(Runway.DEFAULT)
@@ -492,8 +544,8 @@ public class PhysicalRunway {
 	 */
 	private void calculateASDATowardsObstacle(Runway closeTo, Runway awayFrom) {
 		if (obstacle == null
-				|| (distanceAwayFromCenterLine >= 0 ? distanceAwayFromCenterLine > runwayStripWidth
-						: -(distanceAwayFromCenterLine) > runwayStripWidth)) {
+				|| (distanceAwayFromCenterLine >= 0 ? distanceAwayFromCenterLine > runwayStripWidth[REDECLARED]
+						: -(distanceAwayFromCenterLine) > runwayStripWidth[REDECLARED])) {
 			awayFrom.setASDA(1, awayFrom.getASDA(Runway.DEFAULT));
 		} else {
 			awayFrom.setASDA(
@@ -514,8 +566,8 @@ public class PhysicalRunway {
 	 */
 	private void calculateTODAAwayFromObstacle(Runway closeTo) {
 		if (obstacle == null
-				|| (distanceAwayFromCenterLine >= 0 ? distanceAwayFromCenterLine > runwayStripWidth
-						: -(distanceAwayFromCenterLine) > runwayStripWidth)) {
+				|| (distanceAwayFromCenterLine >= 0 ? distanceAwayFromCenterLine > runwayStripWidth[REDECLARED]
+						: -(distanceAwayFromCenterLine) > runwayStripWidth[REDECLARED])) {
 			closeTo.setTODA(1, closeTo.getTODA(Runway.DEFAULT));
 		} else {
 			closeTo.setTODA(1, closeTo.getTODA(Runway.DEFAULT)
@@ -534,8 +586,8 @@ public class PhysicalRunway {
 	 */
 	private void calculateTODATowardsObstacle(Runway closeTo, Runway awayFrom) {
 		if (obstacle == null
-				|| (distanceAwayFromCenterLine >= 0 ? distanceAwayFromCenterLine > runwayStripWidth
-						: -(distanceAwayFromCenterLine) > runwayStripWidth)) {
+				|| (distanceAwayFromCenterLine >= 0 ? distanceAwayFromCenterLine > runwayStripWidth[REDECLARED]
+						: -(distanceAwayFromCenterLine) > runwayStripWidth[REDECLARED])) {
 			awayFrom.setTODA(1, awayFrom.getTODA(Runway.DEFAULT));
 		} else {
 			awayFrom.setTODA(
