@@ -234,7 +234,7 @@ public class LoadXMLFile {
 					Double stopway = Double.parseDouble(getTagValue("Stopway", eElement));
 					Double blastAllowance = Double.parseDouble(getTagValue("Blast_Allowance", eElement));
 					Double runwayWidth = Double.parseDouble(getTagValue("Runway_Strip_Width", eElement));
-					Double clearedWidth = Double.parseDouble(getTagValue("Cleared_And_Graded_Width", eElement));
+					Double clearedWidth = Double.parseDouble(getTagValue("Clear_And_Graded_Width", eElement));
 					Double distanceThreshold = Double.parseDouble(getTagValue("Distance_Away_From_Threshold", eElement));
 					Double distanceCenterline = Double.parseDouble(getTagValue("Distance_Away_From_Centerline", eElement));
 					Double angle = Double.parseDouble(getTagValue("Angle_Of_Slope", eElement));
