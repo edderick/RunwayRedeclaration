@@ -129,12 +129,7 @@ public class LoadXMLFile {
 			NodeList airportName = document.getElementsByTagName("Obstacle_Name");
 			Node node = airportName.item(0);
 			Element element = (Element) node;
-			String obstacleName = element.getTextContent();//Obstacle name (string)
-
-			NodeList sizeType = document.getElementsByTagName("Size_Type");
-			Node sizeTypeNode = sizeType.item(0);
-			Element element1 = (Element) sizeTypeNode;
-			String sizeTypeString = element1.getTextContent();//Obstacle type (string)
+			String obstacleName = element.getTextContent();
 
 			NodeList height = document.getElementsByTagName("Height");
 			Node heightNode = height.item(0);
@@ -152,7 +147,9 @@ public class LoadXMLFile {
 			Double lengthValue = Double.parseDouble(element4.getTextContent());
 
 
-			obstacle = new Obstacle(obstacleName, sizeTypeString, heightValue, widthValue, lengthValue);
+			obstacle = new Obstacle(obstacleName, heightValue);
+			obstacle.setWidth(widthValue);
+			obstacle.setLength(lengthValue);
 			// System.out.println(arpt.getName());
 
 			fileAddress = "";
