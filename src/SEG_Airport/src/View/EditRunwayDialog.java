@@ -19,6 +19,9 @@ import Model.AirportObserver;
 import Model.PhysicalRunway;
 import Model.Runway;
 import net.miginfocom.swing.MigLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
 
 
 @SuppressWarnings("serial")
@@ -43,6 +46,9 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 	private JTextField RDT;
 
 	private List<AirportObserver> airportObservers;
+	private JTextField RESA;
+	private JTextField BLAST;
+	private JTextField STOPWAY;
 	
 	public EditRunwayDialog(Airport airport, JList physicalRunwayJList, boolean newRunway, List<AirportObserver> airportObservers) {
 		this.airport = airport;
@@ -53,14 +59,14 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 		setResizable(false);
 		setTitle("Edit Runway");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 490, 354);
+		setBounds(100, 100, 490, 383);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(12, 50, 212, 185);
+		panel.setBounds(12, 50, 212, 140);
 		contentPane.add(panel);
 		panel.setLayout(new MigLayout("", "[37px][37px,grow]", "[15px][][][][]"));
 		
@@ -135,12 +141,12 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 		txtl.setColumns(10);
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(12, 267, 463, 45);
+		panel_2.setBounds(10, 305, 448, 45);
 		contentPane.add(panel_2);
 		
 		
 		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(246, 50, 212, 185);
+		panel_3.setBounds(246, 50, 212, 140);
 		contentPane.add(panel_3);
 		panel_3.setLayout(new MigLayout("", "[][grow]", "[][][][][]"));
 		
@@ -212,7 +218,7 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 		panel_4.add(txtr, "cell 1 0");
 		
 		JButton btnNewButton = new JButton("Apply");
-		btnNewButton.setBounds(290, 11, 80, 23);
+		btnNewButton.setBounds(266, 11, 80, 23);
 		btnNewButton.addActionListener(new ERDokListener(airport, LASDA, LTORA, LTODA, 
 				LLDA, LDT, RASDA, RTORA, RTODA, RLDA, RDT, txtr, txtl, physicalRunwayJList, this, newRunway, airportObservers));
 		panel_2.setLayout(null);
@@ -224,8 +230,41 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 				setVisible(false);
 			}
 		});
-		btnNewButton_1.setBounds(376, 11, 80, 23);
+		btnNewButton_1.setBounds(356, 11, 80, 23);
 		panel_2.add(btnNewButton_1);
+		
+		JPanel panel_5 = new JPanel();
+		panel_5.setBounds(178, 199, 280, 95);
+		contentPane.add(panel_5);
+		panel_5.setLayout(new MigLayout("", "[][grow][]", "[][][]"));
+		
+		JLabel lblResa = new JLabel("RESA");
+		panel_5.add(lblResa, "cell 0 0,alignx trailing");
+		
+		RESA = new JTextField();
+		panel_5.add(RESA, "cell 1 0,growx");
+		RESA.setColumns(10);
+		
+		JLabel lblM_2 = new JLabel("m");
+		panel_5.add(lblM_2, "cell 2 0");
+		JLabel lblM_3 = new JLabel("m");
+		panel_5.add(lblM_3, "cell 2 1");
+		JLabel lblM_4 = new JLabel("m");
+		panel_5.add(lblM_4, "cell 2 2");
+		
+		JLabel lblBlastAllowance = new JLabel("Blast Allowance");
+		panel_5.add(lblBlastAllowance, "cell 0 1,alignx trailing");
+		
+		BLAST = new JTextField();
+		panel_5.add(BLAST, "cell 1 1,growx");
+		BLAST.setColumns(10);
+		
+		JLabel lblStopway = new JLabel("Stopway");
+		panel_5.add(lblStopway, "cell 0 2,alignx trailing");
+		
+		STOPWAY = new JTextField();
+		panel_5.add(STOPWAY, "cell 1 2,growx");
+		STOPWAY.setColumns(10);
 		
 		if(airport.getPhysicalRunways().size() > 0 & !newRunway){			
 			int index = physicalRunwayJList.getSelectedIndex();
@@ -264,7 +303,9 @@ class ERDokListener implements ActionListener{
 	JDialog jd;
 	boolean newRunway;
 	List<AirportObserver> airportObserver;
+	
 	public void actionPerformed(ActionEvent e) {
+		
 		if(airport.getPhysicalRunways().size() > 0 & !newRunway){ // get the physical runway and change the values
 			int index = physicalRunwayJList.getSelectedIndex();
 			// set the values to what's in the JTextFields
