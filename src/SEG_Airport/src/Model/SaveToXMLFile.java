@@ -257,11 +257,6 @@ public class SaveToXMLFile {
 	 */
 	public void addNodesAndElementsObstacle(Obstacle obstacle) {
 
-		Element size_Type = document.createElement("Size_Type");
-		String sizeTypeString = obstacle.getSizeType();
-		size_Type.appendChild(document.createTextNode(sizeTypeString));
-		rootElement.appendChild(size_Type);
-
 		Element height = document.createElement("Height");
 		String heightString = Double.toString(obstacle.getHeight());
 		height.appendChild(document.createTextNode(heightString));
