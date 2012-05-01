@@ -193,6 +193,11 @@ public class SaveToXMLFile {
 			distanceAwayFromThreshold.appendChild(document.createTextNode(distanceFromThresString));
 			physicalRunway.appendChild(distanceAwayFromThreshold);
 			
+			Element distanceAwayFromCenterline = document.createElement("Distance_Away_From_Centerline");
+			String distanceFromCenterString = Double.toString(runway.getDistanceAwayFromCenterLine());
+			distanceAwayFromCenterline.appendChild(document.createTextNode(distanceFromCenterString));
+			physicalRunway.appendChild(distanceAwayFromCenterline);
+			
 			
 
 			for (int i = 0; i < 2; i++) { // looping through each actual runway (2)
