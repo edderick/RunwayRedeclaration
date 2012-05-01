@@ -567,7 +567,8 @@ public class MainFrame extends JFrame implements AirportObserver{
 			JRadioButtonMenuItem rdbtnmntmlr = new JRadioButtonMenuItem(r.getId());
 			topPanelButtonGroup.add(rdbtnmntmlr);
 			parentMenuItem.add(rdbtnmntmlr);
-			rdbtnmntmlr.addActionListener(new SelectPhysicalRunwayListener(airport, r, airportObservers));
+			rdbtnmntmlr.addActionListener(new SelectPhysicalRunwayListener(airport, r, airportObservers)); 
+			if (airport.getCurrentPhysicalRunway() == r) rdbtnmntmlr.setSelected(true);
 		}
 	}
 
