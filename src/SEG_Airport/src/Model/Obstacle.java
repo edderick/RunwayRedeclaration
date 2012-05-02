@@ -42,7 +42,7 @@ public class Obstacle {
 	 * @param name The obstacles new name
 	 */
 	public void setName(String name) {
-		this.name = name;
+		this.name = (name == null? this.name : name);
 	}
 
 	/**
@@ -56,7 +56,7 @@ public class Obstacle {
 	 * @param height The new height of the obstacle
 	 */
 	public void setHeight(double height) {
-		this.height = height;
+		this.height = (height < 0? this.height : height);
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class Obstacle {
 	 * @param width The new width of the obstacle
 	 */
 	public void setWidth(double width) {
-		this.width = width;
+		this.width = (width < 0? this.width : width);
 	}
 
 	/**
@@ -84,7 +84,7 @@ public class Obstacle {
 	 * @param length The new height of the obstacle
 	 */
 	public void setLength(double length) {
-		this.length = length;
+		this.length = (length < 0? this.length : length);
 	}
 
 	/**

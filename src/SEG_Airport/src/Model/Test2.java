@@ -7,6 +7,10 @@ public class Test2 {
 	public static void main(String[] args) throws Exception {
 	    Scanner in = new Scanner(System.in);
 	    
+	    /*
+	     * Testing for AddressBook and Contacts
+	     */
+	    /*
 	    AddressBook ab = new AddressBook();
 	    Contact c1 = new Contact("Kelvin", "Chan", "ycc1g11@soton.ac.uk");
 	    System.out.println(c1);
@@ -49,27 +53,74 @@ public class Test2 {
 	    }
 	    
 	    in.nextLine();
+	    */
 	    
+	    /*
+	     * Testing for Obstacle
+	     */
+	    Obstacle ob = new Obstacle("Boeing 777", 100);
+	    
+	    /*
+	    
+	    System.out.println("Obstacle : "+ob.getName());
+	    System.out.println("Height of the obstacle : "+ob.getHeight());
+	    
+        Obstacle ob2 = new Obstacle("Boeing 777", -5000);
+	    
+	    System.out.println("Obstacle : "+ob2.getName());
+	    System.out.println("Height of the obstacle : "+ob2.getHeight());
+	    
+        Obstacle ob3 = new Obstacle(null, 30);
+	    
+	    System.out.println("Obstacle : "+ob3.getName());
+	    System.out.println("Height of the obstacle : "+ob3.getHeight());
+	    
+        Obstacle ob4 = new Obstacle(null, -5000);
+	    
+	    System.out.println("Obstacle : "+ob4.getName());
+	    System.out.println("Height of the obstacle : "+ob4.getHeight());
+	    
+	    ob.setHeight(-9999);
+	    ob.setLength(-500);
+	    ob.setWidth(-1000);
+	    ob.setName(null);
+	    
+	    System.out.println("Obstacle : "+ob.getName());
+	    System.out.println("Height of the obstacle : "+ob.getHeight());
+	    System.out.println("Length of the obstacle : "+ob.getLength());
+	    System.out.println("Width of the obstacle : "+ob.getWidth());
+	    
+	    */
+	    
+	    /*
+	     * Testing for PhysicalRunway
+	     */
 		Airport a = new Airport("Heathrow");
-		PhysicalRunway pr1, pr2;
-		
-		/*
+
 		Runway r1_1, r1_2;
 		Runway r2_1, r2_2;
 		r1_1 = new Runway("09L", 3902, 3902, 3902, 3595, 306);
 		r1_2 = new Runway("27R", 3884, 3962, 3884, 3884, 0);
-		pr1 = new PhysicalRunway("09L-27R", 4000, r1_1, r1_2);
-		
 		r2_1 = new Runway("09R", 3658, 3658, 3658, 3353, 307);
 		r2_2 = new Runway("27L", 3658, 3658, 3658, 3658, 0);
+		
+		PhysicalRunway pr1, pr2;
+		pr1 = new PhysicalRunway("09L-27R", null, r1_2);
 		pr2 = new PhysicalRunway("09R-27L", r2_1, r2_2);
 		a.addPhysicalRunway(pr1);
 		a.addPhysicalRunway(pr2);
 		
-		Obstacle ob = new Obstacle("Boeing 777", "Big", 25, 75, 80);
+		System.out.println(pr1.toCalculation("09L-27R"));
+		pr1.placeNewObstacle(ob, 10, 30, pr1.getRunway(1).getName());
+		System.out.println(pr1.toCalculation("09L-27R"));
+		pr1.removeObstacleAndReset();
+		System.out.println(pr1.toCalculation("09L-27R"));
+		pr1.placeNewObstacle(ob, 500, 180, pr1.getRunway(1).getName());
+		System.out.println(pr1.toCalculation("09L-27R"));
 		
+		/*
 		PhysicalRunway copyOfpr1 = (PhysicalRunway) a.getPhysicalRunways().get(0);
-	    copyOfpr1.placeNewObstacle(ob, 500, copyOfpr1.getRunway(1).getName());
+	    copyOfpr1.placeNewObstacle(ob, 500, 30, copyOfpr1.getRunway(1).getName());
 	    
 	    System.out.println("Placing obstacle on "+copyOfpr1.getId());
 	    System.out.println("Obstacle : "+ob.getName());
