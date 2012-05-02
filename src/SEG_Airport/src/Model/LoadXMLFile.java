@@ -238,14 +238,14 @@ public class LoadXMLFile {
 					
 					
 					PhysicalRunway physicalRunwayObject = new PhysicalRunway(name, runways.get(index), runways.get(index+1));
-					physicalRunwayObject.setRESA(0, resa);
-					physicalRunwayObject.setStopway(0, stopway);
-					physicalRunwayObject.setBlastAllowance(0, blastAllowance);
+					physicalRunwayObject.setResa(resa);//.setRESA(0, resa);
+					physicalRunwayObject.setStopway(stopway);//.setStopway(0, stopway);
+					physicalRunwayObject.setBlastAllowance(blastAllowance);//.setBlastAllowance(0, blastAllowance);
 					physicalRunwayObject.setRunwayStripWidth(runwayWidth);
 					physicalRunwayObject.setClearedAndGradedWidth(clearedWidth);
 					physicalRunwayObject.setDistanceAwayFromThreshold(distanceThreshold);
 					physicalRunwayObject.setDistanceAwayFromCenterLine(distanceCenterline);
-					physicalRunwayObject.setAngleOfSlope(0, angle);
+					physicalRunwayObject.setAngleOfSlope(angle);//.setAngleOfSlope(0, angle);
 					
 					
 					airport.addPhysicalRunway(physicalRunwayObject);
