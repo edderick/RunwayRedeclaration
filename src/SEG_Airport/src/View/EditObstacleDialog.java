@@ -24,7 +24,7 @@ public class EditObstacleDialog extends JDialog {
 		setResizable(false);
 		setTitle("Edit Obstacle");
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 241, 249);
+		setBounds(100, 100, 353, 249);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -45,9 +45,6 @@ public class EditObstacleDialog extends JDialog {
 		contentPane.add(panel, "cell 0 2,grow");
 		panel.setLayout(new MigLayout("", "[37px][37px,grow]", "[15px][][][]"));
 		
-		JLabel lblAsda = new JLabel("Size");
-		panel.add(lblAsda, "cell 0 0,alignx trailing,aligny top");
-		
 		JLabel lblToda = new JLabel("Height");
 		panel.add(lblToda, "cell 0 1,alignx trailing,aligny top");
 		
@@ -56,7 +53,7 @@ public class EditObstacleDialog extends JDialog {
 		panel.add(TF_HEIGHT, "flowx,cell 1 1,growx");
 		TF_HEIGHT.setColumns(10);
 		
-		JLabel lblToda_1 = new JLabel("Width");
+		JLabel lblToda_1 = new JLabel("Dist. From Threshold");
 		panel.add(lblToda_1, "cell 0 2,alignx trailing");
 		
 		TF_WIDTH = new JTextField();
@@ -64,7 +61,7 @@ public class EditObstacleDialog extends JDialog {
 		panel.add(TF_WIDTH, "flowx,cell 1 2,growx");
 		TF_WIDTH.setColumns(10);
 		
-		JLabel lblLda = new JLabel("Length");
+		JLabel lblLda = new JLabel("Dist. From Centre Line");
 		panel.add(lblLda, "cell 0 3,alignx trailing");
 		
 		TF_LENGTH = new JTextField();
@@ -81,10 +78,6 @@ public class EditObstacleDialog extends JDialog {
 		JLabel lblNewLabel_2 = new JLabel("m");
 		panel.add(lblNewLabel_2, "cell 1 2");
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Small", "Medium", "Large"}));
-		panel.add(comboBox, "cell 1 0,growx");
-		
 		JLabel label = new JLabel("m");
 		panel.add(label, "cell 1 3");
 		
@@ -96,7 +89,6 @@ public class EditObstacleDialog extends JDialog {
 		panel_2.setLayout(new MigLayout("", "[grow][][]", "[grow][]"));
 		
 		JButton btnNewButton = new JButton("Apply");
-		btnNewButton.addActionListener(new EODapplyListener(obstacle, this, TF_HEIGHT, TF_LENGTH, TF_WIDTH, TF_NAME, comboBox));
 		panel_2.add(btnNewButton, "cell 1 0");
 		
 		JButton btnNewButton_1 = new JButton("Cancel");

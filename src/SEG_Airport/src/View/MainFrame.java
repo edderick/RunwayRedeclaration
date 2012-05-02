@@ -253,7 +253,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 
 		generatePhysicalRunwayRadioButtons(physicalRunwayMenu);
 
-		JMenuItem mntmPositionObstacle = new JMenuItem("Position Obstacle");
+		JMenuItem mntmPositionObstacle = new JMenuItem("Advanced Parameters");
 		mntmPositionObstacle.setMnemonic('p');
 		ObstaclePositionListener opl = new ObstaclePositionListener(airport, airportObservers);
 		mntmPositionObstacle.addActionListener(opl);
@@ -443,7 +443,6 @@ public class MainFrame extends JFrame implements AirportObserver{
 		ObstacleDetailsTable.setModel(new DefaultTableModel(
 				new Object[][] {
 						{"Name", "Chair"},
-						{"Type", "747"},
 						{"Height", "48m"},
 						{"Distance from Threshold", "73m"},
 						{"Closest To", "09L"},
@@ -597,11 +596,11 @@ public class MainFrame extends JFrame implements AirportObserver{
 			
 			TableModel obstacleTab = ObstacleDetailsTable.getModel();
 			obstacleTab.setValueAt(obstacle.getName(), 0, 1);
-			obstacleTab.setValueAt(obstacle.getHeight(), 2, 1);
-			obstacleTab.setValueAt(physicalRunway.getDistanceAwayFromThreshold(), 3, 1);
-			obstacleTab.setValueAt(physicalRunway.closeTo(), 4, 1);
-			obstacleTab.setValueAt(physicalRunway.getBlastAllowance(), 5, 1);
-			obstacleTab.setValueAt(physicalRunway.getAngleOfSlope(), 6, 1);
+			obstacleTab.setValueAt(obstacle.getHeight(), 1, 1);
+			obstacleTab.setValueAt(physicalRunway.getDistanceAwayFromThreshold(), 2, 1);
+			obstacleTab.setValueAt(physicalRunway.closeTo(), 3, 1);
+			obstacleTab.setValueAt(physicalRunway.getBlastAllowance(), 4, 1);
+			obstacleTab.setValueAt(physicalRunway.getAngleOfSlope(), 5, 1);
 			
 		}
 		

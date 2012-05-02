@@ -46,10 +46,6 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 	private JTextField RDT;
 
 	private List<AirportObserver> airportObservers;
-	private JTextField RESA;
-	private JTextField BLAST;
-	private JTextField STOPWAY;
-	private JTextField WIDTH;
 	
 	public EditRunwayDialog(Airport airport, JList physicalRunwayJList, boolean newRunway, List<AirportObserver> airportObservers) {
 		this.airport = airport;
@@ -60,7 +56,7 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 		setResizable(false);
 		setTitle("Edit Runway");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 490, 410);
+		setBounds(100, 100, 490, 291);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -142,7 +138,7 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 		txtl.setColumns(10);
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(10, 322, 448, 45);
+		panel_2.setBounds(12, 209, 448, 45);
 		contentPane.add(panel_2);
 		
 		
@@ -220,7 +216,7 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 		
 		JButton btnNewButton = new JButton("Apply");
 		btnNewButton.setBounds(266, 11, 80, 23);
-		btnNewButton.addActionListener(new ERDokListener(airport, LASDA, LTORA, LTODA, LLDA, LDT, RASDA, RTORA, RTODA, RLDA, RDT, txtr, txtl, BLAST, WIDTH, RESA, STOPWAY, physicalRunwayJList, this, newRunway, airportObservers));
+		btnNewButton.addActionListener(new ERDokListener(airport, LASDA, LTORA, LTODA, LLDA, LDT, RASDA, RTORA, RTODA, RLDA, RDT, txtr, txtl, physicalRunwayJList, this, newRunway, airportObservers));
 		panel_2.setLayout(null);
 		panel_2.add(btnNewButton);
 		
@@ -232,48 +228,6 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 		});
 		btnNewButton_1.setBounds(356, 11, 80, 23);
 		panel_2.add(btnNewButton_1);
-		
-		JPanel panel_5 = new JPanel();
-		panel_5.setBounds(178, 199, 280, 106);
-		contentPane.add(panel_5);
-		panel_5.setLayout(new MigLayout("", "[][grow][]", "[][][][]"));
-		
-		JLabel lblResa = new JLabel("RESA");
-		panel_5.add(lblResa, "cell 0 0,alignx trailing");
-		
-		RESA = new JTextField();
-		panel_5.add(RESA, "cell 1 0,growx");
-		RESA.setColumns(10);
-		
-		JLabel lblM_2 = new JLabel("m");
-		panel_5.add(lblM_2, "cell 2 0");
-		JLabel lblM_3 = new JLabel("m");
-		panel_5.add(lblM_3, "cell 2 1");
-		JLabel lblM_4 = new JLabel("m");
-		panel_5.add(lblM_4, "cell 2 2");
-		JLabel lblM_5 = new JLabel("m");
-		panel_5.add(lblM_5, "cell 2 3");
-		
-		JLabel lblBlastAllowance = new JLabel("Blast Allowance");
-		panel_5.add(lblBlastAllowance, "cell 0 1,alignx trailing");
-		
-		BLAST = new JTextField();
-		panel_5.add(BLAST, "cell 1 1,growx");
-		BLAST.setColumns(10);
-		
-		JLabel lblStopway = new JLabel("Stopway");
-		panel_5.add(lblStopway, "cell 0 2,alignx trailing");
-		
-		STOPWAY = new JTextField();
-		panel_5.add(STOPWAY, "cell 1 2,growx");
-		STOPWAY.setColumns(10);
-		
-		JLabel lblWidth = new JLabel("Width");
-		panel_5.add(lblWidth, "cell 0 3,alignx trailing");
-		
-		WIDTH = new JTextField();
-		panel_5.add(WIDTH, "cell 1 3,growx");
-		WIDTH.setColumns(10);
 		
 		if(airport.getPhysicalRunways().size() > 0 & !newRunway){			
 			int index = physicalRunwayJList.getSelectedIndex();
@@ -290,9 +244,6 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 			RTODA.setText(Double.toString(airport.getPhysicalRunways().get(index).getRunway(1).getTODA(0)));
 			RLDA.setText(Double.toString(airport.getPhysicalRunways().get(index).getRunway(1).getLDA(0)));
 			RDT.setText(Double.toString(airport.getPhysicalRunways().get(index).getRunway(1).getDisplacedThreshold(0)));
-			BLAST.setText(Double.toString(airport.getPhysicalRunways().get(index).getBlastAllowance()));
-			RESA.setText(Double.toString(airport.getPhysicalRunways().get(index).getRESA()));
-			STOPWAY.setText(Double.toString(airport.getPhysicalRunways().get(index).getStopway()));
 		}		
 		
 		setVisible(true);
@@ -311,7 +262,6 @@ class ERDokListener implements ActionListener{
 	JTextField LASDA; JTextField LTORA; JTextField LTODA; JTextField LLDA; JTextField LDT;
 	JTextField RASDA; JTextField RTORA; JTextField RTODA; JTextField RLDA; JTextField RDT;
 	JTextField RNAME; JTextField LNAME; 
-	JTextField BLAST; JTextField WIDTH; JTextField RESA; JTextField STOPWAY;
 	JList physicalRunwayJList;
 	JDialog jd;
 	boolean newRunway;
@@ -334,9 +284,6 @@ class ERDokListener implements ActionListener{
 			airport.getPhysicalRunways().get(index).getRunway(1).setDisplacedThreshold(0, doubleParser.parse(RDT.getText()));
 			airport.getPhysicalRunways().get(index).getRunway(0).setName(LNAME.getText());
 			airport.getPhysicalRunways().get(index).getRunway(1).setName(RNAME.getText());
-			airport.getPhysicalRunways().get(index).setBlastAllowance(doubleParser.parse(BLAST.getText()));
-			airport.getPhysicalRunways().get(index).setRESA(doubleParser.parse(RESA.getText()));
-			airport.getPhysicalRunways().get(index).setStopway(doubleParser.parse(STOPWAY.getText()));
 	
 			
 			airport.getPhysicalRunways().get(index).setId(LNAME.getText() + "/" + RNAME.getText());
@@ -375,8 +322,7 @@ class ERDokListener implements ActionListener{
 			JTextField lTODA, JTextField lLDA, JTextField lDT,
 			JTextField rASDA, JTextField rTORA, JTextField rTODA,
 			JTextField rLDA, JTextField rDT, JTextField rNAME,
-			JTextField lNAME, JTextField bLAST, JTextField wIDTH,
-			JTextField rESA, JTextField sTOPWAY, JList physicalRunwayJList,
+			JTextField lNAME, JList physicalRunwayJList,
 			JDialog jd, boolean newRunway, List<AirportObserver> airportObserver) {
 		super();
 		this.airport = airport;
@@ -392,10 +338,6 @@ class ERDokListener implements ActionListener{
 		RDT = rDT;
 		RNAME = rNAME;
 		LNAME = lNAME;
-		BLAST = bLAST;
-		WIDTH = wIDTH;
-		RESA = rESA;
-		STOPWAY = sTOPWAY;
 		this.physicalRunwayJList = physicalRunwayJList;
 		this.jd = jd;
 		this.newRunway = newRunway;
