@@ -2,13 +2,11 @@ package Controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 
 import Model.Airport;
 import Model.AirportObserver;
 import View.EditAirportDialog;
-import View.MainFrame;
 
 public class EditAirportListener implements ActionListener, AirportObserver{
 

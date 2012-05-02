@@ -46,6 +46,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 	private JTable OriginalParametersTable;
 	private JTable RedeclaredParametersTable;
 	private JTable ObstacleDetailsTable;
+	private JTable AdvancedParametersTable;
 	private JLabel lblAirportName;
 	private JComboBox currentRunwayCombo;
 	private final ButtonGroup topPanelButtonGroup = new ButtonGroup();
@@ -108,7 +109,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 798, 524);
+		setBounds(100, 100, 800, 600);
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -365,7 +366,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 
 		JPanel leftPanel = new JPanel();
 		contentPane.add(leftPanel, "cell 0 0,alignx center,aligny top");
-		leftPanel.setLayout(new MigLayout("", "[275px,grow]", "[grow][][][][grow]"));
+		leftPanel.setLayout(new MigLayout("", "[275px,grow]", "[grow][][][][][grow]"));
 
 		JPanel panel = new JPanel();
 		leftPanel.add(panel, "cell 0 0,grow");
@@ -394,11 +395,11 @@ public class MainFrame extends JFrame implements AirportObserver{
 		OriginalParametersTable.setRowSelectionAllowed(false);
 		OriginalParametersTable.setModel(new DefaultTableModel(
 				new Object[][] {
-						{"TORA", "3884m"},
-						{"TODA", "3962m"},
-						{"ASDA", "3884m"},
-						{"LDA", "3884m"},
-						{"DT","100m"}
+						{"TORA", ""},
+						{"TODA", ""},
+						{"ASDA", ""},
+						{"LDA", ""},
+						{"DT",""}
 				},
 				new String[] {
 						"New column", "New column"
@@ -416,11 +417,11 @@ public class MainFrame extends JFrame implements AirportObserver{
 		RedeclaredParametersTable.setRowSelectionAllowed(false);
 		RedeclaredParametersTable.setModel(new DefaultTableModel(
 				new Object[][] {
-						{"TORA(R)", "3884m"},
-						{"TODA(R)", "3962m"},
-						{"ASDA(R)", "3884m"},
-						{"LDA(R)", "3884m"},
-						{"DT","100m"}
+						{"TORA(R)", ""},
+						{"TODA(R)", ""},
+						{"ASDA(R)", ""},
+						{"LDA(R)", ""},
+						{"DT",""}
 				},
 				new String[] {
 						"New column", "New column"
@@ -428,28 +429,50 @@ public class MainFrame extends JFrame implements AirportObserver{
 		));
 		leftMiddlePanel.add(RedeclaredParametersTable, BorderLayout.CENTER);
 
-		JPanel letBottomPanel = new JPanel();
-		letBottomPanel.setBorder(new TitledBorder(null, "Obstacle Details", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		leftPanel.add(letBottomPanel, "cell 0 3,grow");
-		letBottomPanel.setLayout(new BorderLayout(0, 0));
+		JPanel leftUpperBottomPanel = new JPanel();
+		leftUpperBottomPanel.setBorder(new TitledBorder(null, "Obstacle Details", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		leftPanel.add(leftUpperBottomPanel, "cell 0 3,grow");
+		leftUpperBottomPanel.setLayout(new BorderLayout(0, 0));
 
 		ObstacleDetailsTable = new JTable();
 		ObstacleDetailsTable.setEnabled(false);
 		ObstacleDetailsTable.setRowSelectionAllowed(false);
 		ObstacleDetailsTable.setModel(new DefaultTableModel(
 				new Object[][] {
-						{"Name", "Chair"},
-						{"Height", "48m"},
-						{"Distance from Threshold", "73m"},
-						{"Closest To", "09L"},
-						{"Engine Blast Allowance", "10m"},
-						{"Angle of Slope", "1:50"},
+						{"Name", ""},
+						{"Height", ""},
+						{"Distance from Threshold", ""},
+						{"Closest To", ""},
 				},
 				new String[] {
 						"Property", "Value"
 				}
 		));
-		letBottomPanel.add(ObstacleDetailsTable);
+		leftUpperBottomPanel.add(ObstacleDetailsTable);
+		
+		JPanel leftLowerBottomPanel = new JPanel();
+		leftLowerBottomPanel.setBorder(new TitledBorder(null, "Advanced Parameters", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		leftPanel.add(leftLowerBottomPanel, "cell 0 4,grow");
+		leftLowerBottomPanel.setLayout(new BorderLayout(0, 0));
+		
+		AdvancedParametersTable = new JTable();
+		AdvancedParametersTable.setEnabled(false);
+		AdvancedParametersTable.setRowSelectionAllowed(false);
+		AdvancedParametersTable.setModel(new DefaultTableModel(
+				new Object[][] {
+						{"RESA", ""},
+						{"Stopway", ""},
+						{"Blast Allowance", ""},
+						{"Angle of Slope", ""},
+						{"Strip Width", ""},
+				},
+				new String[] {
+						"Property", "Value"
+				}
+		));
+		leftLowerBottomPanel.add(AdvancedParametersTable);
+		
+	
 
 		contentPane.add(rightSplitPane, "cell 1 0,grow");
 		rightSplitPane.setResizeWeight(0.5);
@@ -588,6 +611,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 			redeclared.setValueAt(runway.getLDA(Runway.REDECLARED) + "m", 3, 1);
 			redeclared.setValueAt(runway.getDisplacedThreshold(Runway.REDECLARED) + "m", 4, 1);
 		}
+		
 		if(airport.getCurrentPhysicalRunway() != null && airport.getCurrentPhysicalRunway().getObstacle() != null){
 			PhysicalRunway physicalRunway = airport.getCurrentPhysicalRunway();
 			Obstacle obstacle = physicalRunway.getObstacle();
@@ -597,11 +621,18 @@ public class MainFrame extends JFrame implements AirportObserver{
 			obstacleTab.setValueAt(obstacle.getHeight(), 1, 1);
 			obstacleTab.setValueAt(physicalRunway.getDistanceAwayFromThreshold(), 2, 1);
 			obstacleTab.setValueAt(physicalRunway.closeTo(), 3, 1);
-			obstacleTab.setValueAt(physicalRunway.getBlastAllowance(), 4, 1);
-			obstacleTab.setValueAt(physicalRunway.getAngleOfSlope(), 5, 1);
-			
 		}
 		
+		if(airport.getCurrentPhysicalRunway() != null){
+			PhysicalRunway physicalRunway = airport.getCurrentPhysicalRunway();
+			
+			TableModel advancedParametersTab = AdvancedParametersTable.getModel();
+			advancedParametersTab.setValueAt(physicalRunway.getRESA(), 0, 1);
+			advancedParametersTab.setValueAt(physicalRunway.getStopway(), 1, 1);
+			advancedParametersTab.setValueAt(physicalRunway.getBlastAllowance(), 2, 1);
+			advancedParametersTab.setValueAt(physicalRunway.getAngleOfSlope(), 3, 1);
+			advancedParametersTab.setValueAt(physicalRunway.getRunwayStripWidth(), 4, 1);
+		}
 	}
 }
 

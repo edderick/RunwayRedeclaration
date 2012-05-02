@@ -8,6 +8,8 @@ public class Obstacle {
 
 	private String name;
 	private double height, width, length;
+	private final double DEFAULT_WIDTH = 100;
+	private final double DEFAULT_LENGTH = 100;
 
 	/**
 	 * Default constructor for an obstacle
@@ -17,10 +19,18 @@ public class Obstacle {
 	public Obstacle(String name, double height) {
 		this.name = (name == null? "Temp Obstacle" : name);
 		this.height = (height < 0? 25 : height);
-		this.width = 100;
-	    this.length = 100;
+		this.width = DEFAULT_WIDTH;
+	    this.length = DEFAULT_LENGTH;
 	}
 
+	/**
+	 * resets the width and length to their default values
+	 */
+	public void resetSize(){
+		width = DEFAULT_WIDTH;
+		length = DEFAULT_LENGTH;
+	}
+	
 	/**
 	 * @return The obstacles name
 	 */

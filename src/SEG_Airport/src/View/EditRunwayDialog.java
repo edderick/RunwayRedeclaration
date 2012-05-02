@@ -289,6 +289,7 @@ class ERDokListener implements ActionListener{
 			airport.getPhysicalRunways().get(index).getRunway(1).setLDA(0, doubleParser.parse(RLDA.getText()));
 			airport.getPhysicalRunways().get(index).getRunway(1).setDisplacedThreshold(0, doubleParser.parse(RDT.getText()));
 	
+			airport.getPhysicalRunways().get(index).calculateParameters();
 			
 			airport.getPhysicalRunways().get(index).setId(LNAME.getText() + "/" + RNAME.getText());
 			
@@ -316,6 +317,8 @@ class ERDokListener implements ActionListener{
 		physicalRunwayJList.setModel(pr);
 		physicalRunwayJList.setSelectedIndex(0);
 		jd.dispose();
+		
+		
 		
 		notifyAirportObservers();
 		

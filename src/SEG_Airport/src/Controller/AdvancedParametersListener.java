@@ -8,8 +8,6 @@ import javax.swing.JOptionPane;
 
 import Model.Airport;
 import Model.AirportObserver;
-import Model.Obstacle;
-import View.MainFrame;
 import View.AdvancedParametersDialog;
 
 public class AdvancedParametersListener implements ActionListener, AirportObserver{
@@ -25,7 +23,7 @@ public class AdvancedParametersListener implements ActionListener, AirportObserv
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(airport.getCurrentPhysicalRunway() != null){
-			new AdvancedParametersDialog(airport.getCurrentPhysicalRunway());
+			new AdvancedParametersDialog(airport, airportObservers);
 		}
 		else JOptionPane.showMessageDialog(null, "Airport does not contain any physical runways\r\nPlease add one by going to Edit > Airport", "", JOptionPane.ERROR_MESSAGE);
 	}
