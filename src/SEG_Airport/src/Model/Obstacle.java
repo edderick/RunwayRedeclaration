@@ -15,8 +15,8 @@ public class Obstacle {
 	 * @param height Height of object
 	 */
 	public Obstacle(String name, double height) {
-		this.name = name;
-		this.height = height;
+		this.name = (name == null? "Temp Obstacle" : name);
+		this.height = (height < 0? 25 : height);
 		this.width = 300;
 	    this.length = 1000;
 	}
