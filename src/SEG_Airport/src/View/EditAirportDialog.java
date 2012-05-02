@@ -26,7 +26,7 @@ public class EditAirportDialog extends JDialog {
 	private JTextField AirportName;
 
 	public EditAirportDialog(Airport airport, Airport old, List<AirportObserver> airportObservers) {
-		System.out.println("old size: " + old.getPhysicalRunways().size());
+		
 		ArrayList<String> physicalRunwayNames = new ArrayList<String>();
 		
 		for(PhysicalRunway p : airport.getPhysicalRunways()){
@@ -41,9 +41,8 @@ public class EditAirportDialog extends JDialog {
 
 		AirportName = new JTextField();
 		AirportName.setText(airport.getName());
-		AirportName.setBounds(59, 11, 151, 20);
+		AirportName.setBounds(60, 10, 130, 20);
 		getContentPane().add(AirportName);
-		AirportName.setColumns(10);
 
 		JList list = new JList();
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -55,7 +54,7 @@ public class EditAirportDialog extends JDialog {
 		
 		list.setModel(pr);
 		list.setSelectedIndex(0);
-		list.setBounds(20, 42, 141, 202);
+		list.setBounds(20, 45, 140, 200);
 		getContentPane().add(list);
 
 		JButton btnEdit = new JButton("Edit");
