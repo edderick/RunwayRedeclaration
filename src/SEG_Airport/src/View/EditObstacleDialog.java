@@ -45,6 +45,9 @@ public class EditObstacleDialog extends JDialog {
 		contentPane.add(panel, "cell 0 2,grow");
 		panel.setLayout(new MigLayout("", "[37px][37px,grow]", "[15px][][][]"));
 		
+		JLabel lblCloserTo = new JLabel("Closer To");
+		panel.add(lblCloserTo, "cell 0 0,alignx trailing");
+		
 		JLabel lblToda = new JLabel("Height");
 		panel.add(lblToda, "cell 0 1,alignx trailing,aligny top");
 		
@@ -81,9 +84,6 @@ public class EditObstacleDialog extends JDialog {
 		JLabel label = new JLabel("m");
 		panel.add(label, "cell 1 3");
 		
-		JLabel label_1 = new JLabel("   ");
-		panel.add(label_1, "cell 1 0");
-		
 		JPanel panel_2 = new JPanel();
 		contentPane.add(panel_2, "cell 0 4,grow");
 		panel_2.setLayout(new MigLayout("", "[grow][][]", "[grow][]"));
@@ -99,6 +99,10 @@ public class EditObstacleDialog extends JDialog {
 		TF_HEIGHT.setText(Double.toString(obstacle.getHeight()));
 		TF_LENGTH.setText(Double.toString(obstacle.getLength()));
 		TF_WIDTH.setText(Double.toString(obstacle.getWidth()));
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Runway 1", "Runway 2"}));
+		panel.add(comboBox, "cell 1 0,alignx right");
 		TF_NAME.setText(obstacle.getName());
 
 		

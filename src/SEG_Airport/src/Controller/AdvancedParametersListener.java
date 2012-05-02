@@ -12,20 +12,20 @@ import Model.Obstacle;
 import View.MainFrame;
 import View.AdvancedParametersDialog;
 
-public class ObstaclePositionListener implements ActionListener, AirportObserver{
+public class AdvancedParametersListener implements ActionListener, AirportObserver{
 	
 	Airport airport;
 	List<AirportObserver> airportObservers;
 	
-	public ObstaclePositionListener(Airport airport, List<AirportObserver> airportObservers){
+	public AdvancedParametersListener(Airport airport, List<AirportObserver> airportObservers){
 		this.airport = airport;
 		this.airportObservers = airportObservers;
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if((airport.getCurrentPhysicalRunway() != null) && (airport.getCurrentPhysicalRunway().getObstacle() != null)){
-			new AdvancedParametersDialog(airport.getCurrentPhysicalRunway().getObstacle());
+		if(airport.getCurrentPhysicalRunway() != null){
+			new AdvancedParametersDialog(airport.getCurrentPhysicalRunway());
 		}
 		else JOptionPane.showMessageDialog(null, "Airport does not contain any physical runways\r\nPlease add one by going to Edit > Airport", "", JOptionPane.ERROR_MESSAGE);
 	}

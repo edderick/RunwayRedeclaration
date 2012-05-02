@@ -255,7 +255,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 
 		JMenuItem mntmPositionObstacle = new JMenuItem("Advanced Parameters");
 		mntmPositionObstacle.setMnemonic('p');
-		ObstaclePositionListener opl = new ObstaclePositionListener(airport, airportObservers);
+		AdvancedParametersListener opl = new AdvancedParametersListener(airport, airportObservers);
 		mntmPositionObstacle.addActionListener(opl);
 		airportObservers.add(opl);
 		mnEdit.add(mntmPositionObstacle);

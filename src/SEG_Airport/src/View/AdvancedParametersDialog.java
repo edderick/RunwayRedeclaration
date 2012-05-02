@@ -6,6 +6,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import Model.Obstacle;
+import Model.PhysicalRunway;
 import net.miginfocom.swing.MigLayout;
 
 
@@ -16,20 +17,19 @@ public class AdvancedParametersDialog extends JDialog {
 	@SuppressWarnings("unused")
 	private Obstacle obstacle, obstacle_backup;
 	private boolean newObstacle;
-	private JTextField TF_DFT;
 	private JTextField TF_REZA;
 	private JTextField TF_STOPWAY;
 	private JTextField TF_BLASTALLOWANCE;
 	private JTextField TF_AOS;
 
-	public AdvancedParametersDialog(Obstacle obstacle) {
+	public AdvancedParametersDialog(PhysicalRunway physicalRunway) {
 		this.obstacle = obstacle;
 		this.obstacle_backup = obstacle;
 		
 		if(newObstacle) obstacle = new Obstacle("", 0);
 		
 		setResizable(false);
-		setTitle("Place Obstacle");
+		setTitle("Advanced Parameters");
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 309, 251);
 		contentPane = new JPanel();
@@ -40,16 +40,6 @@ public class AdvancedParametersDialog extends JDialog {
 		JPanel panel = new JPanel();
 		contentPane.add(panel, "cell 0 0,grow");
 		panel.setLayout(new MigLayout("", "[][grow]", "[][][][][][][]"));
-		
-		JLabel lblLength = new JLabel("Distance from threshold");
-		panel.add(lblLength, "cell 0 0,alignx trailing");
-		
-		TF_DFT = new JTextField();
-		panel.add(TF_DFT, "flowx,cell 1 0,growx");
-		TF_DFT.setColumns(10);
-		
-		JLabel lblM = new JLabel("m");
-		panel.add(lblM, "cell 1 0");
 		
 		JLabel lblL = new JLabel("RESA");
 		panel.add(lblL, "cell 0 1,alignx trailing");
@@ -90,13 +80,6 @@ public class AdvancedParametersDialog extends JDialog {
 		
 		JLabel label_6 = new JLabel("m");
 		panel.add(label_6, "cell 1 4");
-		
-		JLabel lblClosetoa = new JLabel("Closer to");
-		panel.add(lblClosetoa, "cell 0 5,alignx trailing");
-		
-		JComboBox CB_CTA = new JComboBox();
-		CB_CTA.setModel(new DefaultComboBoxModel(new String[] {"runway0", "runway1"}));
-		panel.add(CB_CTA, "cell 1 5,growx");
 		
 		JPanel panel_2 = new JPanel();
 		contentPane.add(panel_2, "cell 0 1,grow");
