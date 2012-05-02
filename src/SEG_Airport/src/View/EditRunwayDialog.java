@@ -19,9 +19,6 @@ import Model.AirportObserver;
 import Model.PhysicalRunway;
 import Model.Runway;
 import net.miginfocom.swing.MigLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 
 
 @SuppressWarnings("serial")
@@ -46,6 +43,8 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 	private JTextField RDT;
 
 	private List<AirportObserver> airportObservers;
+	
+	//I don't really see any benifit to passing this JList in over passing in a physicalRunway...
 	
 	public EditRunwayDialog(Airport airport, JList physicalRunwayJList, boolean newRunway, List<AirportObserver> airportObservers) {
 		this.airport = airport;
@@ -229,8 +228,9 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 		btnNewButton_1.setBounds(356, 11, 80, 23);
 		panel_2.add(btnNewButton_1);
 		
-		if(airport.getPhysicalRunways().size() > 0 & !newRunway){			
+		if(airport.getPhysicalRunways().size() > 0 & !newRunway){
 			int index = physicalRunwayJList.getSelectedIndex();
+			if(index == -1) index = airport.getPhysicalRunways().indexOf(airport.getCurrentPhysicalRunway());
 			txtl.setText(airport.getPhysicalRunways().get(index).getRunway(0).getName());
 			txtr.setText(airport.getPhysicalRunways().get(index).getRunway(1).getName());
 			
@@ -271,6 +271,7 @@ class ERDokListener implements ActionListener{
 		
 		if(airport.getPhysicalRunways().size() > 0 & !newRunway){ // get the physical runway and change the values
 			int index = physicalRunwayJList.getSelectedIndex();
+			if(index == -1) index = airport.getPhysicalRunways().indexOf(airport.getCurrentPhysicalRunway());
 			// set the values to what's in the JTextFields
 			airport.getPhysicalRunways().get(index).getRunway(0).setASDA(0, doubleParser.parse(LASDA.getText()));
 			airport.getPhysicalRunways().get(index).getRunway(0).setTORA(0, doubleParser.parse(LTORA.getText()));

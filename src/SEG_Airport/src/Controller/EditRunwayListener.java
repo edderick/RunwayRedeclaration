@@ -9,6 +9,8 @@ import javax.swing.JOptionPane;
 
 import Model.Airport;
 import Model.AirportObserver;
+import Model.PhysicalRunway;
+import Model.Runway;
 import View.EditRunwayDialog;
 import View.MainFrame;
 
@@ -16,22 +18,23 @@ public class EditRunwayListener implements ActionListener, AirportObserver{
 
 	Airport airport;
 	List<AirportObserver> airportObservers;
-	
+
 	public EditRunwayListener(Airport airport, List<AirportObserver> airportObservers ){
 		this.airport = airport;
 		this.airportObservers = airportObservers;
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(airport.getPhysicalRunways().size() == 0){
-			JOptionPane.showMessageDialog(null, "Airport does not contain any physical runways\r\nPlease add one by going to Edit > Airport", "", JOptionPane.ERROR_MESSAGE);
-			return;
+			EditRunwayDialog erd = new EditRunwayDialog(airport, new JList(), true, airportObservers);
+			notifyAirportObservers();
+		}else{
+			@SuppressWarnings("unused")
+			EditRunwayDialog erd = new EditRunwayDialog(airport, new JList(), false, airportObservers);
+			notifyAirportObservers();
 		}
-		@SuppressWarnings("unused")
-		EditRunwayDialog erd = new EditRunwayDialog(airport, new JList(), false, airportObservers);
-		notifyAirportObservers();
 	}
 
 	@Override
@@ -52,4 +55,4 @@ ActionEvent e) {
 EditRunwayDialog erd = new EditRunwayDialog(airport, new JList(), false);
 }
 }
-*/
+ */

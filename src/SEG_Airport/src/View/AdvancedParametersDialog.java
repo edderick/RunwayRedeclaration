@@ -17,7 +17,7 @@ public class AdvancedParametersDialog extends JDialog {
 	@SuppressWarnings("unused")
 	private Obstacle obstacle, obstacle_backup;
 	private boolean newObstacle;
-	private JTextField TF_REZA;
+	private JTextField TF_RESA;
 	private JTextField TF_STOPWAY;
 	private JTextField TF_BLASTALLOWANCE;
 	private JTextField TF_AOS;
@@ -44,9 +44,9 @@ public class AdvancedParametersDialog extends JDialog {
 		JLabel lblL = new JLabel("RESA");
 		panel.add(lblL, "cell 0 1,alignx trailing");
 		
-		TF_REZA = new JTextField();
-		panel.add(TF_REZA, "flowx,cell 1 1,growx");
-		TF_REZA.setColumns(10);
+		TF_RESA = new JTextField();
+		panel.add(TF_RESA, "flowx,cell 1 1,growx");
+		TF_RESA.setColumns(10);
 		
 		JLabel label = new JLabel("m");
 		panel.add(label, "cell 1 1");
