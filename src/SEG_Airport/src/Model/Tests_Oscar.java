@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.ArrayList;
+
 public class Tests_Oscar {
 
 	/**
@@ -246,6 +248,36 @@ public class Tests_Oscar {
 		// Step 2.
 		System.out.println("Obstacle " + obstacle2.getName() + "\nheigth: " + obstacle2.getHeight()
 				+ "\nlength: " + obstacle2.getLength() + "\nwidth: " + obstacle2.getWidth());
+		
+		
+		
+		
+		/*
+		 * ********
+		 * Test 8. 
+		 * ******** 
+		 * Step 1: Instantiate two Contacts.
+		 * Step 2: Create an ArrayList<Contact> and add both contacts to it
+		 * Step 3: Print fields of all contacts in the ArrayList
+		 * Expected output: Same values as entered.
+		 */
+		
+		System.out.println("************\nTEST 8\n************");
+		
+		// Step 1.
+		Contact contact1 = new Contact("Oscar", "Mariani", "mariani.oscar@gamil.com");
+		Contact contact2 = new Contact("bob", "squarepants", "squarepants@gmail.com");
+		
+		// Step 2.
+		ArrayList<Contact> contactsList = new ArrayList<Contact>();
+		contactsList.add(contact1);
+		contactsList.add(contact2);
+		
+		// Step 3.
+		for (Contact c : contactsList){
+			System.out.println("Contact: " + c.getFirstName() + " " + c.getLastName() + " - " + c.getEmail());
+		}
+		
 		
 		
 		
