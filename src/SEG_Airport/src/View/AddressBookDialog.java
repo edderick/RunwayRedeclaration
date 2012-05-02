@@ -46,7 +46,7 @@ public class AddressBookDialog extends JDialog {
 		setContentPane(contentPane);
 
 		tblContacts = new JTable();
-		tblContacts.setModel(new MyTableModel(addressBook));
+		tblContacts.setModel(new AddressBookTableModel(addressBook));
 		tblContacts.getColumnModel().getColumn(0).setResizable(false);
 		tblContacts.getColumnModel().getColumn(0).setPreferredWidth(50);
 
@@ -65,7 +65,7 @@ public class AddressBookDialog extends JDialog {
 				Contact contact = new Contact("","","");
 				@SuppressWarnings("unused")
 				EditContactDialog eed = new EditContactDialog(contact, tblContacts);
-				((MyTableModel)tblContacts.getModel()).getAddressBook().addContact(contact);
+				((AddressBookTableModel)tblContacts.getModel()).getAddressBook().addContact(contact);
 				tblContacts.updateUI();
 			}
 		});
@@ -76,7 +76,7 @@ public class AddressBookDialog extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				if(tblContacts.getSelectedRow() != -1){
 					@SuppressWarnings("unused")
-					EditContactDialog eed = new EditContactDialog(((MyTableModel)tblContacts.getModel()).getAddressBook().getContacts().get(tblContacts.getSelectedRow()), tblContacts);
+					EditContactDialog eed = new EditContactDialog(((AddressBookTableModel)tblContacts.getModel()).getAddressBook().getContacts().get(tblContacts.getSelectedRow()), tblContacts);
 					tblContacts.updateUI();
 				}
 			}
@@ -90,8 +90,8 @@ public class AddressBookDialog extends JDialog {
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(tblContacts.getSelectedRow() != -1){
-					String email = ((MyTableModel)tblContacts.getModel()).getAddressBook().getContacts().get(tblContacts.getSelectedRow()).getEmail();
-					((MyTableModel)tblContacts.getModel()).getAddressBook().removeContactByEmail(email);
+					String email = ((AddressBookTableModel)tblContacts.getModel()).getAddressBook().getContacts().get(tblContacts.getSelectedRow()).getEmail();
+					((AddressBookTableModel)tblContacts.getModel()).getAddressBook().removeContactByEmail(email);
 					tblContacts.updateUI();
 				}
 			}
@@ -113,13 +113,13 @@ public class AddressBookDialog extends JDialog {
  * Allows the table to access the AddressBook
  * @author Edward Seabrook
  */
-class MyTableModel extends AbstractTableModel {
+class AddressBookTableModel extends AbstractTableModel {
 	private static final long serialVersionUID = 1L;
 
 	AddressBook addressBook;
 	private String[] columnNames = {"First name", "Last name" ,"Email"};
 
-	public MyTableModel(AddressBook addressBook){
+	public AddressBookTableModel(AddressBook addressBook){
 		this.addressBook = addressBook;
 	}
 

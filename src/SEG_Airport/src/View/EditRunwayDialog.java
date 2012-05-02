@@ -1,8 +1,10 @@
 package View;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -18,29 +20,31 @@ import Model.Airport;
 import Model.AirportObserver;
 import Model.PhysicalRunway;
 import Model.Runway;
+
 import net.miginfocom.swing.MigLayout;
 
 
-@SuppressWarnings("serial")
+
 public class EditRunwayDialog extends JDialog implements AirportObserver{
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField LASDA;
-	private JTextField LTORA;
-	private JTextField LTODA;
-	private JTextField LLDA;
-	private JTextField NAME_L;
-	private JTextField RASDA;
-	private JTextField RTORA;
-	private JTextField RTODA;
-	private JTextField RLDA;
-	private JTextField NAME_R;
+	private JTextField tfLeftASDA;
+	private JTextField tfLeftTORA;
+	private JTextField tfLeftTODA;
+	private JTextField tfLeftLDA;
+	private JTextField tfLeftName;
+	private JTextField tfRightASDA;
+	private JTextField tfRightTORA;
+	private JTextField tfRightTODA;
+	private JTextField tfRightLDA;
+	private JTextField tfRightName;
 	@SuppressWarnings("unused")
 	private Airport airport;
 	@SuppressWarnings("unused")
 	private JList physicalRunwayJList;
-	private JTextField LDT;
-	private JTextField RDT;
+	private JTextField tfLeftDisplacementThreshold;
+	private JTextField tfRightDisplacedThreshold;
 
 	private List<AirportObserver> airportObservers;
 	
@@ -62,190 +66,196 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JPanel panel = new JPanel();
-		panel.setBounds(12, 50, 212, 140);
-		contentPane.add(panel);
-		panel.setLayout(new MigLayout("", "[37px][37px,grow]", "[15px][][][][]"));
+		JPanel leftFeildsPanel = new JPanel();
+		leftFeildsPanel.setBounds(12, 50, 212, 140);
+		contentPane.add(leftFeildsPanel);
+		leftFeildsPanel.setLayout(new MigLayout("", "[37px][37px,grow]", "[15px][][][][]"));
 		
-		JLabel lblAsda = new JLabel("ASDA");
-		lblAsda.setToolTipText("Accelerate Stop Distance Available");
-		panel.add(lblAsda, "cell 0 0,alignx trailing,aligny top");
+		JLabel lblLeftASDA = new JLabel("ASDA");
+		lblLeftASDA.setToolTipText("Accelerate Stop Distance Available");
+		leftFeildsPanel.add(lblLeftASDA, "cell 0 0,alignx trailing,aligny top");
 		
-		LASDA = new JTextField();
-		panel.add(LASDA, "cell 1 0,growx");
-		LASDA.setColumns(10);
+		tfLeftASDA = new JTextField();
+		leftFeildsPanel.add(tfLeftASDA, "cell 1 0,growx");
+		tfLeftASDA.setColumns(10);
 		
-		JLabel lblToda = new JLabel("TORA");
-		lblToda.setToolTipText("Take-Off Run Available ");
-		panel.add(lblToda, "cell 0 1,alignx trailing,aligny top");
+		JLabel lblLeftTORA = new JLabel("TORA");
+		lblLeftTORA.setToolTipText("Take-Off Run Available ");
+		leftFeildsPanel.add(lblLeftTORA, "cell 0 1,alignx trailing,aligny top");
 		
-		LTORA = new JTextField();
-		lblToda.setLabelFor(LTORA);
-		panel.add(LTORA, "flowx,cell 1 1,growx");
-		LTORA.setColumns(10);
+		tfLeftTORA = new JTextField();
+		lblLeftTORA.setLabelFor(tfLeftTORA);
+		leftFeildsPanel.add(tfLeftTORA, "flowx,cell 1 1,growx");
+		tfLeftTORA.setColumns(10);
 		
-		JLabel lblToda_1 = new JLabel("TODA");
-		lblToda_1.setToolTipText("Take-Off Distance Available");
-		panel.add(lblToda_1, "cell 0 2,alignx trailing");
+		JLabel lblLeftTODA = new JLabel("TODA");
+		lblLeftTODA.setToolTipText("Take-Off Distance Available");
+		leftFeildsPanel.add(lblLeftTODA, "cell 0 2,alignx trailing");
 		
-		LTODA = new JTextField();
-		lblToda_1.setLabelFor(LTODA);
-		panel.add(LTODA, "flowx,cell 1 2,growx");
-		LTODA.setColumns(10);
+		tfLeftTODA = new JTextField();
+		lblLeftTODA.setLabelFor(tfLeftTODA);
+		leftFeildsPanel.add(tfLeftTODA, "flowx,cell 1 2,growx");
+		tfLeftTODA.setColumns(10);
 		
-		JLabel lblLda = new JLabel("LDA");
-		lblLda.setToolTipText("Landing Distance Available");
-		panel.add(lblLda, "cell 0 3,alignx trailing");
+		JLabel lbLeftLDA = new JLabel("LDA");
+		lbLeftLDA.setToolTipText("Landing Distance Available");
+		leftFeildsPanel.add(lbLeftLDA, "cell 0 3,alignx trailing");
 		
-		LLDA = new JTextField();
-		lblLda.setLabelFor(LLDA);
-		panel.add(LLDA, "flowx,cell 1 3,growx");
-		LLDA.setColumns(10);
+		tfLeftLDA = new JTextField();
+		lbLeftLDA.setLabelFor(tfLeftLDA);
+		leftFeildsPanel.add(tfLeftLDA, "flowx,cell 1 3,growx");
+		tfLeftLDA.setColumns(10);
 		
-		JLabel lblM = new JLabel("m");
-		panel.add(lblM, "cell 1 0");
+		JLabel lblm1 = new JLabel("m");
+		leftFeildsPanel.add(lblm1, "cell 1 0");
 		
-		JLabel lblNewLabel_1 = new JLabel("m");
-		panel.add(lblNewLabel_1, "cell 1 1");
+		JLabel lblm2 = new JLabel("m");
+		leftFeildsPanel.add(lblm2, "cell 1 1");
 		
-		JLabel lblNewLabel_2 = new JLabel("m");
-		panel.add(lblNewLabel_2, "cell 1 2");
+		JLabel lblm4 = new JLabel("m");
+		leftFeildsPanel.add(lblm4, "cell 1 2");
 		
-		JLabel lblM_1 = new JLabel("m");
-		panel.add(lblM_1, "cell 1 3");
+		JLabel lblm3 = new JLabel("m");
+		leftFeildsPanel.add(lblm3, "cell 1 3");
 		
-		JLabel lblDisplacementThreshold = new JLabel("Displaced Threshold");
-		lblDisplacementThreshold.setToolTipText("Displacement Threshold");
-		panel.add(lblDisplacementThreshold, "cell 0 4,alignx trailing");
+		JLabel lbLeftDisplacementThreshold = new JLabel("DT");
+		lbLeftDisplacementThreshold.setToolTipText("Displacement Threshold");
+		leftFeildsPanel.add(lbLeftDisplacementThreshold, "cell 0 4,alignx trailing");
 		
-		LDT = new JTextField();
-		LDT.setColumns(10);
-		panel.add(LDT, "flowx,cell 1 4,growx");
+		tfLeftDisplacementThreshold = new JTextField();
+		tfLeftDisplacementThreshold.setColumns(10);
+		leftFeildsPanel.add(tfLeftDisplacementThreshold, "flowx,cell 1 4,growx");
 		
-		JLabel label_10 = new JLabel("m");
-		panel.add(label_10, "cell 1 4");
+		JLabel lblm5 = new JLabel("m");
+		leftFeildsPanel.add(lblm5, "cell 1 4");
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(12, 12, 212, 34);
-		contentPane.add(panel_1);
-		panel_1.setLayout(new MigLayout("", "[68.00,grow][129.00,grow]", "[24px]"));
+		JPanel leftNamePanel = new JPanel();
+		leftNamePanel.setBounds(12, 12, 212, 34);
+		contentPane.add(leftNamePanel);
+		leftNamePanel.setLayout(new MigLayout("", "[68.00,grow][129.00,grow]", "[24px]"));
 		
-		JLabel lblNewLabel = new JLabel("Runway");
-		panel_1.add(lblNewLabel, "cell 0 0,alignx center,aligny center");
+		JLabel lblLeftRunway = new JLabel("Runway");
+		leftNamePanel.add(lblLeftRunway, "cell 0 0,alignx center,aligny center");
 		
-		NAME_L = new JTextField();	
-		panel_1.add(NAME_L, "cell 1 0");
-		NAME_L.setColumns(10);
+		tfLeftName = new JTextField();	
+		leftNamePanel.add(tfLeftName, "flowx,cell 1 0,growx");
+		tfLeftName.setColumns(10);
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(12, 209, 448, 45);
-		contentPane.add(panel_2);
+		JPanel buttonsPanel = new JPanel();
+		buttonsPanel.setBounds(12, 209, 448, 45);
+		contentPane.add(buttonsPanel);
 		
 		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(246, 50, 212, 140);
-		contentPane.add(panel_3);
-		panel_3.setLayout(new MigLayout("", "[][grow]", "[][][][][]"));
+		JPanel rightFeildsPanel = new JPanel();
+		rightFeildsPanel.setBounds(246, 50, 212, 140);
+		contentPane.add(rightFeildsPanel);
+		rightFeildsPanel.setLayout(new MigLayout("", "[][grow]", "[][][][][]"));
 		
-		JLabel label = new JLabel("ASDA");
-		label.setToolTipText("Accelerate Stop Distance Available");
-		panel_3.add(label, "cell 0 0,alignx trailing");
+		JLabel lblRightASDA = new JLabel("ASDA");
+		lblRightASDA.setToolTipText("Accelerate Stop Distance Available");
+		rightFeildsPanel.add(lblRightASDA, "cell 0 0,alignx trailing");
 		
-		RASDA = new JTextField();
-		RASDA.setColumns(10);
-		panel_3.add(RASDA, "flowx,cell 1 0,growx");
+		tfRightASDA = new JTextField();
+		tfRightASDA.setColumns(10);
+		rightFeildsPanel.add(tfRightASDA, "flowx,cell 1 0,growx");
 		
-		JLabel label_1 = new JLabel("m");
-		panel_3.add(label_1, "cell 1 0");
+		JLabel label_m6 = new JLabel("m");
+		rightFeildsPanel.add(label_m6, "cell 1 0");
 		
-		JLabel label_2 = new JLabel("TORA");
-		label_2.setToolTipText("Take-Off Run Available ");
-		panel_3.add(label_2, "cell 0 1,alignx trailing");
+		JLabel lblRightTORA = new JLabel("TORA");
+		lblRightTORA.setToolTipText("Take-Off Run Available ");
+		rightFeildsPanel.add(lblRightTORA, "cell 0 1,alignx trailing");
 		
-		RTORA = new JTextField();
-		RTORA.setColumns(10);
-		panel_3.add(RTORA, "flowx,cell 1 1,growx");
+		tfRightTORA = new JTextField();
+		tfRightTORA.setColumns(10);
+		rightFeildsPanel.add(tfRightTORA, "flowx,cell 1 1,growx");
 		
-		JLabel label_4 = new JLabel("TODA");
-		label_4.setToolTipText("Take-Off Distance Available");
-		panel_3.add(label_4, "cell 0 2,alignx trailing");
+		JLabel lblRightTODA = new JLabel("TODA");
+		lblRightTODA.setToolTipText("Take-Off Distance Available");
+		rightFeildsPanel.add(lblRightTODA, "cell 0 2,alignx trailing");
 		
-		RTODA = new JTextField();
-		RTODA.setColumns(10);
-		panel_3.add(RTODA, "flowx,cell 1 2,growx");
+		tfRightTODA = new JTextField();
+		tfRightTODA.setColumns(10);
+		rightFeildsPanel.add(tfRightTODA, "flowx,cell 1 2,growx");
 		
-		JLabel label_3 = new JLabel("LDA");
-		label_3.setToolTipText("Landing Distance Available");
-		panel_3.add(label_3, "cell 0 3,alignx trailing");
+		JLabel lblRightLDA = new JLabel("LDA");
+		lblRightLDA.setToolTipText("Landing Distance Available");
+		rightFeildsPanel.add(lblRightLDA, "cell 0 3,alignx trailing");
 		
-		RLDA = new JTextField();
-		RLDA.setColumns(10);
-		panel_3.add(RLDA, "flowx,cell 1 3,growx");
+		tfRightLDA = new JTextField();
+		tfRightLDA.setColumns(10);
+		rightFeildsPanel.add(tfRightLDA, "flowx,cell 1 3,growx");
 		
-		JLabel label_5 = new JLabel("m");
-		panel_3.add(label_5, "cell 1 1");
+		JLabel labelm7 = new JLabel("m");
+		rightFeildsPanel.add(labelm7, "cell 1 1");
 		
-		JLabel label_6 = new JLabel("m");
-		panel_3.add(label_6, "cell 1 2");
+		JLabel labelm8 = new JLabel("m");
+		rightFeildsPanel.add(labelm8, "cell 1 2");
 		
-		JLabel label_7 = new JLabel("m");
-		panel_3.add(label_7, "cell 1 3");
+		JLabel labelm9 = new JLabel("m");
+		rightFeildsPanel.add(labelm9, "cell 1 3");
 		
-		JLabel lblDt = new JLabel("DT");
-		lblDt.setToolTipText("Displacement Threshold");
-		panel_3.add(lblDt, "cell 0 4,alignx trailing");
+		JLabel lblRightDisplacedThreshold = new JLabel("DT");
+		lblRightDisplacedThreshold.setToolTipText("Displacement Threshold");
+		rightFeildsPanel.add(lblRightDisplacedThreshold, "cell 0 4,alignx trailing");
 		
-		RDT = new JTextField();
-		RDT.setColumns(10);
-		panel_3.add(RDT, "flowx,cell 1 4,growx");
+		tfRightDisplacedThreshold = new JTextField();
+		tfRightDisplacedThreshold.setColumns(10);
+		rightFeildsPanel.add(tfRightDisplacedThreshold, "flowx,cell 1 4,growx");
 		
-		JLabel label_11 = new JLabel("m");
-		panel_3.add(label_11, "cell 1 4");
+		JLabel labelm10 = new JLabel("m");
+		rightFeildsPanel.add(labelm10, "cell 1 4");
 		
-		JPanel panel_4 = new JPanel();
-		panel_4.setBounds(246, 12, 212, 34);
-		contentPane.add(panel_4);
-		panel_4.setLayout(new MigLayout("", "[74.00][grow]", "[]"));
+		JPanel rightNamePanel = new JPanel();
+		rightNamePanel.setBounds(246, 12, 212, 34);
+		contentPane.add(rightNamePanel);
+		rightNamePanel.setLayout(new MigLayout("", "[74.00][grow]", "[]"));
 		
-		JLabel label_8 = new JLabel("Runway");
-		panel_4.add(label_8, "cell 0 0,alignx center");
+		JLabel lblRightRunway = new JLabel("Runway");
+		rightNamePanel.add(lblRightRunway, "cell 0 0,alignx center");
 		
-		NAME_R = new JTextField();
-		NAME_R.setColumns(10);
-		panel_4.add(NAME_R, "cell 1 0");
+		tfRightName = new JTextField();
+		tfRightName.setColumns(10);
+		rightNamePanel.add(tfRightName, "flowx,cell 1 0,growx");
 		
-		JButton btnNewButton = new JButton("Apply");
-		btnNewButton.setBounds(266, 11, 80, 23);
-		btnNewButton.addActionListener(new ERDokListener(airport, LASDA, LTORA, LTODA, LLDA, LDT, RASDA, RTORA, RTODA, RLDA, RDT, NAME_R, NAME_L, physicalRunwayJList, this, newRunway, airportObservers));
-		panel_2.setLayout(null);
-		panel_2.add(btnNewButton);
+		JButton btnApply = new JButton("Apply");
+		btnApply.setBounds(266, 11, 80, 23);
+		btnApply.addActionListener(new ERDokListener(airport, tfLeftASDA, tfLeftTORA, tfLeftTODA, tfLeftLDA, tfLeftDisplacementThreshold, tfRightASDA, tfRightTORA, tfRightTODA, tfRightLDA, tfRightDisplacedThreshold, tfRightName, tfLeftName, physicalRunwayJList, this, newRunway, airportObservers));
 		
-		JButton btnNewButton_1 = new JButton("Cancel");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JPanel panel_Spacer2 = new JPanel();
+		rightNamePanel.add(panel_Spacer2, "cell 1 0");
+		
+		JPanel panel_Spacer = new JPanel();
+		leftNamePanel.add(panel_Spacer, "cell 1 0");
+		buttonsPanel.setLayout(null);
+		buttonsPanel.add(btnApply);
+		
+		JButton btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 			}
 		});
-		btnNewButton_1.setBounds(356, 11, 80, 23);
-		panel_2.add(btnNewButton_1);
+		btnCancel.setBounds(356, 11, 80, 23);
+		buttonsPanel.add(btnCancel);
 		
 		if(airport.getPhysicalRunways().size() > 0 & !newRunway){
 			int index = physicalRunwayJList.getSelectedIndex();
 			if(index == -1) index = airport.getPhysicalRunways().indexOf(airport.getCurrentPhysicalRunway());
 			
-			NAME_L.setText(airport.getPhysicalRunways().get(index).getRunway(0).getName());
-			LASDA.setText(Double.toString(airport.getPhysicalRunways().get(index).getRunway(0).getASDA(0)));
-			LTORA.setText(Double.toString(airport.getPhysicalRunways().get(index).getRunway(0).getTORA(0)));
-			LTODA.setText(Double.toString(airport.getPhysicalRunways().get(index).getRunway(0).getTODA(0)));
-			LLDA.setText(Double.toString(airport.getPhysicalRunways().get(index).getRunway(0).getLDA(0)));
-			LDT.setText(Double.toString(airport.getPhysicalRunways().get(index).getRunway(0).getDisplacedThreshold(0)));
+			tfLeftName.setText(airport.getPhysicalRunways().get(index).getRunway(0).getName());
+			tfLeftASDA.setText(Double.toString(airport.getPhysicalRunways().get(index).getRunway(0).getASDA(0)));
+			tfLeftTORA.setText(Double.toString(airport.getPhysicalRunways().get(index).getRunway(0).getTORA(0)));
+			tfLeftTODA.setText(Double.toString(airport.getPhysicalRunways().get(index).getRunway(0).getTODA(0)));
+			tfLeftLDA.setText(Double.toString(airport.getPhysicalRunways().get(index).getRunway(0).getLDA(0)));
+			tfLeftDisplacementThreshold.setText(Double.toString(airport.getPhysicalRunways().get(index).getRunway(0).getDisplacedThreshold(0)));
 			
-			NAME_R.setText(airport.getPhysicalRunways().get(index).getRunway(1).getName());
-			RASDA.setText(Double.toString(airport.getPhysicalRunways().get(index).getRunway(1).getASDA(0)));
-			RTORA.setText(Double.toString(airport.getPhysicalRunways().get(index).getRunway(1).getTORA(0)));
-			RTODA.setText(Double.toString(airport.getPhysicalRunways().get(index).getRunway(1).getTODA(0)));
-			RLDA.setText(Double.toString(airport.getPhysicalRunways().get(index).getRunway(1).getLDA(0)));
-			RDT.setText(Double.toString(airport.getPhysicalRunways().get(index).getRunway(1).getDisplacedThreshold(0)));
+			tfRightName.setText(airport.getPhysicalRunways().get(index).getRunway(1).getName());
+			tfRightASDA.setText(Double.toString(airport.getPhysicalRunways().get(index).getRunway(1).getASDA(0)));
+			tfRightTORA.setText(Double.toString(airport.getPhysicalRunways().get(index).getRunway(1).getTORA(0)));
+			tfRightTODA.setText(Double.toString(airport.getPhysicalRunways().get(index).getRunway(1).getTODA(0)));
+			tfRightLDA.setText(Double.toString(airport.getPhysicalRunways().get(index).getRunway(1).getLDA(0)));
+			tfRightDisplacedThreshold.setText(Double.toString(airport.getPhysicalRunways().get(index).getRunway(1).getDisplacedThreshold(0)));
 		}		
 		
 		setVisible(true);

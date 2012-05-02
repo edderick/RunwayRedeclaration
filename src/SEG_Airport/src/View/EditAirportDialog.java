@@ -23,12 +23,18 @@ import Model.PhysicalRunway;
 public class EditAirportDialog extends JDialog {
 
 	private static final long serialVersionUID = 1L;
-	private JTextField AirportName;
+	private JTextField tfAirportName;
 
+	private Airport airport;
+	private List<AirportObserver> airportObservers;
+	
 	public EditAirportDialog(Airport airport, Airport old, List<AirportObserver> airportObservers) {
+
+		this.airport = airport;
+		this.airportObservers = airportObservers;
 		
 		ArrayList<String> physicalRunwayNames = new ArrayList<String>();
-		
+
 		for(PhysicalRunway p : airport.getPhysicalRunways()){
 			physicalRunwayNames.add(p.getId());
 		}
@@ -39,50 +45,50 @@ public class EditAirportDialog extends JDialog {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 
-		AirportName = new JTextField();
-		AirportName.setText(airport.getName());
-		AirportName.setBounds(60, 10, 130, 20);
-		getContentPane().add(AirportName);
+		tfAirportName = new JTextField();
+		tfAirportName.setText(airport.getName());
+		tfAirportName.setBounds(60, 10, 130, 20);
+		getContentPane().add(tfAirportName);
 
-		JList list = new JList();
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		DefaultListModel pr = new DefaultListModel();
-		
+		JList listOfRunways = new JList();
+		listOfRunways.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		DefaultListModel physicalRunwayListModel = new DefaultListModel();
+
 		for(int i = 0; i < physicalRunwayNames.size(); i++){
-			pr.addElement(physicalRunwayNames.get(i));
+			physicalRunwayListModel.addElement(physicalRunwayNames.get(i));
 		}
-		
-		list.setModel(pr);
-		list.setSelectedIndex(0);
-		list.setBounds(20, 45, 140, 200);
-		getContentPane().add(list);
+
+		listOfRunways.setModel(physicalRunwayListModel);
+		listOfRunways.setSelectedIndex(0);
+		listOfRunways.setBounds(20, 45, 140, 200);
+		getContentPane().add(listOfRunways);
 
 		JButton btnEdit = new JButton("Edit");
-		btnEdit.addActionListener(new editListener(airport,list,false,airportObservers));
-		btnEdit.setBounds(185, 76, 131, 23);
+		btnEdit.addActionListener(new EditListener(listOfRunways, false));
+		btnEdit.setBounds(185, 75, 130, 25);
 		getContentPane().add(btnEdit);
 
 		JButton btnNewRunway = new JButton("New Runway");
-		btnNewRunway.addActionListener(new editListener(airport,list,true,airportObservers));
-		btnNewRunway.setBounds(185, 42, 131, 23);
+		btnNewRunway.addActionListener(new EditListener(listOfRunways, true));
+		btnNewRunway.setBounds(185, 45, 130, 25);
 		getContentPane().add(btnNewRunway);
 
 		JButton btnDelete = new JButton("Delete");
-		btnDelete.addActionListener(new EADdeleteListener(list, airport));
-		btnDelete.setBounds(185, 143, 131, 23);
+		btnDelete.addActionListener(new DeleteListener(listOfRunways));
+		btnDelete.setBounds(185, 145, 130, 25);
 		getContentPane().add(btnDelete);
 
 		JButton btnOk = new JButton("OK");
-		btnOk.addActionListener(new okListener(this, AirportName, airport, airportObservers));
-		btnOk.setBounds(185, 221, 131, 23);
+		btnOk.addActionListener(new OkListener());
+		btnOk.setBounds(185, 220, 130, 25);
 		getContentPane().add(btnOk);
 
 		JSeparator separator = new JSeparator();
-		separator.setBounds(195, 121, 121, 11);
+		separator.setBounds(195, 120, 120, 10);
 		getContentPane().add(separator);
 
 		JSeparator separator_1 = new JSeparator();
-		separator_1.setBounds(195, 183, 121, 11);
+		separator_1.setBounds(195, 184, 120, 10);
 		getContentPane().add(separator_1);
 
 		JLabel lblNameOfAirport = new JLabel("Name:");
@@ -92,86 +98,60 @@ public class EditAirportDialog extends JDialog {
 		setVisible(true);
 
 	}
-}
 
-class okListener implements ActionListener{
-	JDialog jd;
-	JTextField jt;
-	Airport a;
-	List<AirportObserver> airportObservers; 
-	public void actionPerformed(ActionEvent e) {
-		a.setName(jt.getText());
-		System.out.println(a.getPhysicalRunways().size());
-		jd.setVisible(false);
-		notifyAirportObservers();
-	}
-	public okListener(JDialog jd, JTextField jt, Airport a, List<AirportObserver> airportObservers) {
-		this.jd = jd; this.jt = jt; this.a = a; this.airportObservers = airportObservers;
-	}	
-	
 	void notifyAirportObservers(){
 		for(AirportObserver ao: airportObservers){
-			ao.updateAirport(a);
+			ao.updateAirport(airport);
 		}
 	}
+
 	
-}
-
-class editListener implements ActionListener{
-	Airport a;
-	JList physicalRunwayJList;
-	boolean newRunway;
-	List<AirportObserver> airportObservers;
-	public void actionPerformed(ActionEvent e) {
-		@SuppressWarnings("unused")
-		EditRunwayDialog erd = new EditRunwayDialog(a,physicalRunwayJList,newRunway, airportObservers);	
-	}
-	public editListener(Airport a, JList physicalRunwayJList, boolean newRunway, List<AirportObserver> airportObservers) {
-		this.a = a;
-		this.physicalRunwayJList = physicalRunwayJList;
-		this.newRunway = newRunway;
-		this.airportObservers = airportObservers;
-	}	
-}
-
-class EADcancelListener implements ActionListener{
-	Airport airport, old;
-	EditAirportDialog ead;
-
-	public void actionPerformed(ActionEvent e) {
-		ead.setVisible(false);
-	}
-
-	public EADcancelListener(Airport airport, Airport old, EditAirportDialog ead) {
-		super();
-		this.airport = airport;
-		this.old = old;
-		this.ead = ead;
-	}
-
-}
-
-class EADdeleteListener implements ActionListener{
-	JList physicalRunwayJList;
-	Airport a;
-	public void actionPerformed(ActionEvent arg0) {
-		int index = physicalRunwayJList.getSelectedIndex();
-		a.getPhysicalRunways().remove(index);
-		ArrayList<String> physicalRunwayNames = new ArrayList<String>();
-		for(PhysicalRunway p : a.getPhysicalRunways()){
-			physicalRunwayNames.add(p.getId());
+	class OkListener implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			airport.setName(tfAirportName.getText());
+			System.out.println(airport.getPhysicalRunways().size());
+			setVisible(false);
+			notifyAirportObservers();
 		}
-		DefaultListModel pr = new DefaultListModel();
-		for(int i = 0; i < physicalRunwayNames.size(); i++){
-			pr.addElement(physicalRunwayNames.get(i));
-		}
-		physicalRunwayJList.setModel(pr);
-		physicalRunwayJList.setSelectedIndex(0);
-	}
-	public EADdeleteListener(JList physicalRunwayJList, Airport a) {
-		super();
-		this.physicalRunwayJList = physicalRunwayJList;
-		this.a = a;
 	}
 
+	
+	class EditListener implements ActionListener{
+		JList physicalRunwayJList;
+		boolean newRunway;
+		public void actionPerformed(ActionEvent e) {
+			@SuppressWarnings("unused")
+			EditRunwayDialog erd = new EditRunwayDialog(airport,physicalRunwayJList,newRunway, airportObservers);	
+		}
+		public EditListener(JList physicalRunwayJList, boolean newRunway) {
+			this.physicalRunwayJList = physicalRunwayJList;
+			this.newRunway = newRunway;
+		}	
+	}
+
+	
+	class DeleteListener implements ActionListener{
+		JList physicalRunwayJList;
+		public void actionPerformed(ActionEvent arg0) {
+			int index = physicalRunwayJList.getSelectedIndex();
+			
+			airport.getPhysicalRunways().remove(index);
+			
+			ArrayList<String> physicalRunwayNames = new ArrayList<String>();
+			for(PhysicalRunway p : airport.getPhysicalRunways()){
+				physicalRunwayNames.add(p.getId());
+			}
+			
+			DefaultListModel pr = new DefaultListModel();
+			for(int i = 0; i < physicalRunwayNames.size(); i++){
+				pr.addElement(physicalRunwayNames.get(i));
+			}
+			
+			physicalRunwayJList.setModel(pr);
+			physicalRunwayJList.setSelectedIndex(0);
+		}
+		public DeleteListener(JList physicalRunwayJList) {
+			this.physicalRunwayJList = physicalRunwayJList;
+		}
+	}
 }
