@@ -44,14 +44,14 @@ public class Tests_Oscar {
 		//iterate over the runways and physical runways in the loaded airport and print all values
 		for (Object o : airport0.getPhysicalRunways()) {
 			System.out.println(((PhysicalRunway) o).getId()
-					+"\n resa: "+ ((PhysicalRunway) o).getRESA(0)
-					+"\n stopway: "+ ((PhysicalRunway) o).getStopway(0)
-					+"\n blast: "+ ((PhysicalRunway) o).getBlastAllowance(0)
+					+"\n resa: "+ ((PhysicalRunway) o).getResa()
+					+"\n stopway: "+ ((PhysicalRunway) o).getStopway()
+					+"\n blast: "+ ((PhysicalRunway) o).getBlastAllowance()
 					+"\n stripWidth: "+ ((PhysicalRunway) o).getRunwayStripWidth()
 					+"\n clearedWidth: "+ ((PhysicalRunway) o).getClearedAndGradedWidth()
 					+"\n distanceFromThreshold: "+ ((PhysicalRunway) o).getDistanceAwayFromThreshold()
 					+"\n distanceFromCenterline: "+ ((PhysicalRunway) o).getDistanceAwayFromCenterLine()
-					+"\n angleOfSlope: "+ ((PhysicalRunway) o).getAngleOfSlope(0)
+					+"\n angleOfSlope: "+ ((PhysicalRunway) o).getAngleOfSlope()
 					
 					
 					+"\n runway0 name: "+ ((PhysicalRunway) o).getRunway(0).getName() 
@@ -112,14 +112,14 @@ public class Tests_Oscar {
 		
 		for (Object o : airport1.getPhysicalRunways()) {
 			System.out.println(((PhysicalRunway) o).getId()
-					+"\n resa: "+ ((PhysicalRunway) o).getRESA(0)
-					+"\n stopway: "+ ((PhysicalRunway) o).getStopway(0)
-					+"\n blast: "+ ((PhysicalRunway) o).getBlastAllowance(0)
+					+"\n resa: "+ ((PhysicalRunway) o).getResa()
+					+"\n stopway: "+ ((PhysicalRunway) o).getStopway()
+					+"\n blast: "+ ((PhysicalRunway) o).getBlastAllowance()
 					+"\n stripWidth: "+ ((PhysicalRunway) o).getRunwayStripWidth()
 					+"\n clearedWidth: "+ ((PhysicalRunway) o).getClearedAndGradedWidth()
 					+"\n distanceFromThreshold: "+ ((PhysicalRunway) o).getDistanceAwayFromThreshold()
 					+"\n distanceFromCenterline: "+ ((PhysicalRunway) o).getDistanceAwayFromCenterLine()
-					+"\n angleOfSlope: "+ ((PhysicalRunway) o).getAngleOfSlope(0)
+					+"\n angleOfSlope: "+ ((PhysicalRunway) o).getAngleOfSlope()
 					
 					
 					+"\n runway0 name: "+ ((PhysicalRunway) o).getRunway(0).getName() 
@@ -154,6 +154,43 @@ public class Tests_Oscar {
 			System.out.println("Error: corrupted file");
 			e.printStackTrace();
 		}
+		
+		
+		/*
+		 * ********
+		 * Test 4. 
+		 * ******** 
+		 * Step 1: Instantiate an Obstacle.
+		 * Step 2: Set its width and length values to random values.
+		 * Step 3: Print its fields values.
+		 * Expected output: Same values as entered.
+		 */
+		
+		// Step 1.
+		Obstacle obstacle = new Obstacle("boeing 747", 56.0);
+		
+		// Step 2.
+		obstacle.setLength(40.0);
+		obstacle.setWidth(50.0);
+		
+		// Step 3.
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		//obs.saveToXML();
+		
+		
+		
+		
+		
+		
 		
 		
 		
