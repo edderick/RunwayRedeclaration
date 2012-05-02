@@ -33,14 +33,14 @@ public class NewObstacleListener implements ActionListener, AirportObserver{
 		} else if (airport.getCurrentPhysicalRunway().getObstacle() == null){
 			Obstacle old = new Obstacle("", 0);
 			Obstacle obstacle = new Obstacle("", 0);
-			EditObstacleDialog eod = new EditObstacleDialog(obstacle, old, airport);
+			EditObstacleDialog eod = new EditObstacleDialog(obstacle, old, airport, airportObservers);
 			airport.getCurrentPhysicalRunway().setObstacle(obstacle);			
 		}
 		else {
 			//This comment should be removed
 			Obstacle old = airport.getCurrentPhysicalRunway().getObstacle();
 			Obstacle obstacle = airport.getCurrentPhysicalRunway().getObstacle();
-			EditObstacleDialog eod = new EditObstacleDialog(obstacle, old, airport);
+			EditObstacleDialog eod = new EditObstacleDialog(obstacle, old, airport, airportObservers);
 			airport.getCurrentPhysicalRunway().setObstacle(obstacle);			
 		}		
 			
