@@ -293,11 +293,12 @@ class ERDokListener implements ActionListener{
 			airport.getPhysicalRunways().get(index).setId(LNAME.getText() + "/" + RNAME.getText());
 			
 		} else { // add a new physical runway and assign the values
-			//THIS LOOKS TRUELY INFANTILE!!!
+			// THIS LOOKS TRUELY INFANTILE!!!
+			// YOU LOOK TRUELY INFANTILE!!! >.<
 			airport.addPhysicalRunway(
-					new PhysicalRunway( LNAME.getText() + "/" +  RNAME.getText(), 
-							new Runway(LNAME.getText(), doubleParser.parse(LTORA.getText()), doubleParser.parse(LASDA.getText()), doubleParser.parse(LTODA.getText()), doubleParser.parse(LLDA.getText()), doubleParser.parse(LDT.getText())),	
-							new Runway(RNAME.getText(), doubleParser.parse(RTORA.getText()), doubleParser.parse(RASDA.getText()), doubleParser.parse(RTODA.getText()), doubleParser.parse(RLDA.getText()), doubleParser.parse(RDT.getText())))); 
+					new PhysicalRunway(LNAME.getText() + "/" +  RNAME.getText(), 
+						new Runway(LNAME.getText(), doubleParser.parse(LTORA.getText()), doubleParser.parse(LASDA.getText()), doubleParser.parse(LTODA.getText()), doubleParser.parse(LLDA.getText()), doubleParser.parse(LDT.getText())),	
+						new Runway(RNAME.getText(), doubleParser.parse(RTORA.getText()), doubleParser.parse(RASDA.getText()), doubleParser.parse(RTODA.getText()), doubleParser.parse(RLDA.getText()), doubleParser.parse(RDT.getText())))); 
 			if(airport.getPhysicalRunways().size() == 1){
 				airport.setCurrentPhysicalRunway(airport.getPhysicalRunways().get(0));
 				airport.setCurrentRunway(airport.getCurrentPhysicalRunway().getRunway(0));
