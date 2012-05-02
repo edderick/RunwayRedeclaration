@@ -10,7 +10,7 @@ import net.miginfocom.swing.MigLayout;
 
 
 @SuppressWarnings("serial")
-public class PlaceObstacleDialog extends JDialog {
+public class AdvancedParametersDialog extends JDialog {
 
 	private JPanel contentPane;
 	@SuppressWarnings("unused")
@@ -22,7 +22,7 @@ public class PlaceObstacleDialog extends JDialog {
 	private JTextField TF_BLASTALLOWANCE;
 	private JTextField TF_AOS;
 
-	public PlaceObstacleDialog(Obstacle obstacle) {
+	public AdvancedParametersDialog(Obstacle obstacle) {
 		this.obstacle = obstacle;
 		this.obstacle_backup = obstacle;
 		
