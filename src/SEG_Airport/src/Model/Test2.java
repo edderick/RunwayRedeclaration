@@ -64,9 +64,11 @@ public class Test2 {
 	    
 	    System.out.println("Obstacle : "+ob.getName());
 	    System.out.println("Height of the obstacle : "+ob.getHeight());
+	    */
 	    
-        Obstacle ob2 = new Obstacle("Boeing 777", -5000);
-	    
+        Obstacle ob2 = new Obstacle("Boeing 757", -5000);
+        
+	    /*
 	    System.out.println("Obstacle : "+ob2.getName());
 	    System.out.println("Height of the obstacle : "+ob2.getHeight());
 	    
@@ -100,7 +102,7 @@ public class Test2 {
 		Runway r1_1, r1_2;
 		Runway r2_1, r2_2;
 		r1_1 = new Runway("09L", 3902, 3902, 3902, 3595, 306);
-		r1_2 = new Runway("27R", 3884, 3962, 3884, 3884, 0);
+		r1_2 = new Runway("27R", 3884, 3884, 3962, 3884, 0);
 		r2_1 = new Runway("09R", 3658, 3658, 3658, 3353, 307);
 		r2_2 = new Runway("27L", 3658, 3658, 3658, 3658, 0);
 		
@@ -117,6 +119,11 @@ public class Test2 {
 		System.out.println(pr1.toCalculation("09L-27R"));
 		pr1.placeNewObstacle(ob, 500, 180, pr1.getRunway(1).getName());
 		System.out.println(pr1.toCalculation("09L-27R"));
+		
+		pr1.placeNewObstacle(ob2, 500, 30, pr1.getRunway(1).getName());
+		System.out.println(pr1.toCalculation(pr1.getRunway(1).getName()));
+		pr1.removeObstacleAndReset();
+		System.out.println(pr1.toCalculation(pr1.getRunway(1).getName()));
 		
 		/*
 		PhysicalRunway copyOfpr1 = (PhysicalRunway) a.getPhysicalRunways().get(0);

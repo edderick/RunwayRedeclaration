@@ -307,8 +307,7 @@ public class PhysicalRunway {
 	 *            the physical runway
 	 */
 	public void setDistanceAwayFromCenterLine(double distanceAwayFromCenterLine) {
-		if (distanceAwayFromCenterLine > 0)
-			this.distanceAwayFromCenterLine = distanceAwayFromCenterLine;
+		this.distanceAwayFromCenterLine = distanceAwayFromCenterLine;
 		calculateParameters();
 	}
 
@@ -389,7 +388,8 @@ public class PhysicalRunway {
 	 *            The distance that the obstacle is from the threshold
 	 */
 	public void setDistanceAwayFromThreshold(double distanceAwayFromThreshold) {
-		this.distanceAwayFromThreshold = distanceAwayFromThreshold;
+		if (distanceAwayFromThreshold > 0)
+			this.distanceAwayFromThreshold = distanceAwayFromThreshold;
 		calculateParameters();
 	}
 
@@ -437,6 +437,7 @@ public class PhysicalRunway {
 				result.append("Angle of slope: " + angleOfSlope[REDECLARED]
 						+ "\n");
 				result.append("Stopway: " + stopway[REDECLARED] + "m\n");
+				result.append("\n--Any negative result will be assigned as zero--\n");
 				result.append("New TORA : " + closeTo.getTORA(Runway.DEFAULT)
 						+ " - " + distanceAwayFromThreshold + " - "
 						+ blastAllowance[REDECLARED] + " - "
@@ -492,6 +493,7 @@ public class PhysicalRunway {
 				result.append("Angle of slope: " + angleOfSlope[REDECLARED]
 						+ "\n");
 				result.append("Stopway: " + stopway[REDECLARED] + "m\n");
+				result.append("\n--Any negative result will be assigned as zero--\n");
 				result.append("New TORA : " + awayFrom.getTORA(Runway.DEFAULT)
 						+ " - " + distanceAwayFromThreshold + " - ("
 						+ obstacle.getHeight() + " * "
@@ -513,7 +515,7 @@ public class PhysicalRunway {
 						+ stopway[REDECLARED] + " - "
 						+ closeTo.getDisplacedThreshold(Runway.REDECLARED)
 						+ " = " + awayFrom.getTODA(Runway.REDECLARED) + "m\n");
-				result.append("New LDA : " + awayFrom.getLDA(Runway.DEFAULT)
+				result.append("New LDA  : " + awayFrom.getLDA(Runway.DEFAULT)
 						+ " - "
 						+ closeTo.getDisplacedThreshold(Runway.REDECLARED)
 						+ " - " + distanceAwayFromThreshold + " - "
