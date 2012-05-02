@@ -1,3 +1,8 @@
+
+
+//TODO: Implement the combo box for selecting closerTo!!! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
 package View;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -15,11 +20,11 @@ public class EditObstacleDialog extends JDialog {
 
 	private JPanel contentPane;
 	private JTextField TF_HEIGHT;
-	private JTextField TF_WIDTH;
-	private JTextField TF_LENGTH;
+	private JTextField TF_ThresholdDistance;
+	private JTextField TF_CentereLineDistance;
 	private JTextField TF_NAME;
 	
-	public EditObstacleDialog(Obstacle obstacle, Obstacle old) {
+	public EditObstacleDialog(Obstacle obstacle, Obstacle old, Airport airport) {
 		
 		setResizable(false);
 		setTitle("Edit Obstacle");
@@ -48,41 +53,38 @@ public class EditObstacleDialog extends JDialog {
 		JLabel lblCloserTo = new JLabel("Closer To");
 		panel.add(lblCloserTo, "cell 0 0,alignx trailing");
 		
-		JLabel lblToda = new JLabel("Height");
-		panel.add(lblToda, "cell 0 1,alignx trailing,aligny top");
+		JLabel lblHeight = new JLabel("Height");
+		panel.add(lblHeight, "cell 0 1,alignx trailing,aligny top");
 		
 		TF_HEIGHT = new JTextField();
-		lblToda.setLabelFor(TF_HEIGHT);
+		lblHeight.setLabelFor(TF_HEIGHT);
 		panel.add(TF_HEIGHT, "flowx,cell 1 1,growx");
 		TF_HEIGHT.setColumns(10);
 		
-		JLabel lblToda_1 = new JLabel("Dist. From Threshold");
-		panel.add(lblToda_1, "cell 0 2,alignx trailing");
+		JLabel lblThresholdDistance = new JLabel("Dist. From Threshold");
+		panel.add(lblThresholdDistance, "cell 0 2,alignx trailing");
 		
-		TF_WIDTH = new JTextField();
-		lblToda_1.setLabelFor(TF_WIDTH);
-		panel.add(TF_WIDTH, "flowx,cell 1 2,growx");
-		TF_WIDTH.setColumns(10);
+		TF_ThresholdDistance = new JTextField();
+		lblThresholdDistance.setLabelFor(TF_ThresholdDistance);
+		panel.add(TF_ThresholdDistance, "flowx,cell 1 2,growx");
+		TF_ThresholdDistance.setColumns(10);
 		
-		JLabel lblLda = new JLabel("Dist. From Centre Line");
-		panel.add(lblLda, "cell 0 3,alignx trailing");
+		JLabel lblCentreLineDistance = new JLabel("Dist. From Centre Line");
+		panel.add(lblCentreLineDistance, "cell 0 3,alignx trailing");
 		
-		TF_LENGTH = new JTextField();
-		lblLda.setLabelFor(TF_LENGTH);
-		panel.add(TF_LENGTH, "flowx,cell 1 3,growx");
-		TF_LENGTH.setColumns(10);
+		TF_CentereLineDistance = new JTextField();
+		lblCentreLineDistance.setLabelFor(TF_CentereLineDistance);
+		panel.add(TF_CentereLineDistance, "flowx,cell 1 3,growx");
+		TF_CentereLineDistance.setColumns(10);
 		
-		JLabel lblM = new JLabel("    ");
-		panel.add(lblM, "flowx,cell 1 0");
+		JLabel lblmetres_1 = new JLabel("m");
+		panel.add(lblmetres_1, "cell 1 1");
 		
-		JLabel lblNewLabel_1 = new JLabel("m");
-		panel.add(lblNewLabel_1, "cell 1 1");
+		JLabel lblmetres_2 = new JLabel("m");
+		panel.add(lblmetres_2, "cell 1 2");
 		
-		JLabel lblNewLabel_2 = new JLabel("m");
-		panel.add(lblNewLabel_2, "cell 1 2");
-		
-		JLabel label = new JLabel("m");
-		panel.add(label, "cell 1 3");
+		JLabel lblmetres_3 = new JLabel("m");
+		panel.add(lblmetres_3, "cell 1 3");
 		
 		JPanel panel_2 = new JPanel();
 		contentPane.add(panel_2, "cell 0 4,grow");
@@ -90,6 +92,7 @@ public class EditObstacleDialog extends JDialog {
 		
 		JButton btnNewButton = new JButton("Apply");
 		panel_2.add(btnNewButton, "cell 1 0");
+	
 		
 		JButton btnNewButton_1 = new JButton("Cancel");
 		btnNewButton_1.addActionListener(new EODcancelListener(obstacle, old, this));
@@ -97,14 +100,15 @@ public class EditObstacleDialog extends JDialog {
 		
 		// Add text to the textfields from the obstacle object
 		TF_HEIGHT.setText(Double.toString(obstacle.getHeight()));
-		TF_LENGTH.setText(Double.toString(obstacle.getLength()));
-		TF_WIDTH.setText(Double.toString(obstacle.getWidth()));
+		TF_CentereLineDistance.setText(Double.toString(obstacle.getLength()));
+		TF_ThresholdDistance.setText(Double.toString(obstacle.getWidth()));
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Runway 1", "Runway 2"}));
-		panel.add(comboBox, "cell 1 0,alignx right");
+		JComboBox comboBoxCloserTo = new JComboBox();
+		comboBoxCloserTo.setModel(new DefaultComboBoxModel(new String[] {"Runway 1", "Runway 2"}));
+		panel.add(comboBoxCloserTo, "cell 1 0,alignx right");
 		TF_NAME.setText(obstacle.getName());
 
+		btnNewButton.addActionListener(new EODapplyListener(obstacle, airport, this, TF_HEIGHT, TF_ThresholdDistance, TF_CentereLineDistance, TF_NAME, comboBoxCloserTo));
 		
 		setVisible(true);
 	}
@@ -112,30 +116,32 @@ public class EditObstacleDialog extends JDialog {
 
 class EODapplyListener implements ActionListener{
 	Obstacle obstacle;
+	Airport airport;
 	EditObstacleDialog eod;
-	JTextField height, length, width, name;
-	JComboBox size;
+	JTextField height, distanceToThreshold, distanceToCentreLine, name;
+	JComboBox closeTo;
 	
 	public void actionPerformed(ActionEvent e) {
 		obstacle.setHeight(doubleParser.parse(height.getText()));
-		obstacle.setLength(doubleParser.parse(length.getText()));
-		obstacle.setWidth(doubleParser.parse(width.getText()));
+		airport.getCurrentPhysicalRunway().setDistanceAwayFromThreshold(doubleParser.parse(distanceToThreshold.getText()));
+		airport.getCurrentPhysicalRunway().setDistanceAwayFromCenterLine(doubleParser.parse(distanceToCentreLine.getText()));
 		obstacle.setName(name.getText());
 
-		eod.setVisible(false);
+		eod.dispose();
 	}
 
-	public EODapplyListener(Obstacle obstacle, EditObstacleDialog eod,
-			JTextField height, JTextField length, JTextField width,
-			JTextField name, JComboBox size) {
+	public EODapplyListener(Obstacle obstacle, Airport airport, EditObstacleDialog eod,
+			JTextField height, JTextField distanceToThreshold, JTextField distanceToCentreLine,
+			JTextField name, JComboBox closeTo) {
 		super();
 		this.obstacle = obstacle;
 		this.eod = eod;
 		this.height = height;
-		this.length = length;
-		this.width = width;
+		this.distanceToThreshold = distanceToThreshold;
+		this.distanceToCentreLine = distanceToCentreLine;
 		this.name = name;
-		this.size = size;
+		this.closeTo = closeTo;
+		this.airport = airport;
 	}
 }
 
@@ -145,7 +151,7 @@ class EODcancelListener implements ActionListener{
 	
 	public void actionPerformed(ActionEvent e){
 //		obstacle = revertTo;
-		eod.setVisible(false);
+		eod.dispose();
 	}
 
 	public EODcancelListener(Obstacle obstacle, Obstacle revertTo, EditObstacleDialog eod) {
