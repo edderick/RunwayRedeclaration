@@ -1,113 +1,152 @@
 package View;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import net.miginfocom.swing.MigLayout;
 
 import Model.Obstacle;
 import Model.PhysicalRunway;
-import net.miginfocom.swing.MigLayout;
-
 
 @SuppressWarnings("serial")
 public class AdvancedParametersDialog extends JDialog {
 
-	private JPanel contentPane;
 	@SuppressWarnings("unused")
 	private Obstacle obstacle, obstacle_backup;
-	private boolean newObstacle;
-	private JTextField TF_RESA;
-	private JTextField TF_STOPWAY;
-	private JTextField TF_BLASTALLOWANCE;
-	private JTextField TF_AOS;
+	private JTextField tfRESA;
+	private JTextField tfStopway;
+	private JTextField tfBlastAllowance;
+	private JTextField tfAngleOfSlope;
+	private JTextField tfRunwayStripWidth;
+	private JTextField tfClearAndGradedWidth;
+	private JTextField tfObstacleWidth;
+	private JTextField tfObstacleLength;
 
 	public AdvancedParametersDialog(PhysicalRunway physicalRunway) {
-		this.obstacle = obstacle;
-		this.obstacle_backup = obstacle;
-		
-		if(newObstacle) obstacle = new Obstacle("", 0);
-		
 		setResizable(false);
 		setTitle("Advanced Parameters");
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 309, 251);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setBounds(100, 100, 310, 326);
+		
+		JPanel contentPane = new JPanel();
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[100px:n,grow]", "[15px,grow][][][24px,grow][][6.00][]"));
+		contentPane.setLayout(new MigLayout("", "[100px:n,grow]", "[15px,grow][]"));
 		
-		JPanel panel = new JPanel();
-		contentPane.add(panel, "cell 0 0,grow");
-		panel.setLayout(new MigLayout("", "[][grow]", "[][][][][][][]"));
+		JPanel fieldsPanel = new JPanel();
+		contentPane.add(fieldsPanel, "cell 0 0,grow");
+		fieldsPanel.setLayout(new MigLayout("", "[][grow]", "[][][][][][][][][][grow]"));
 		
-		JLabel lblL = new JLabel("RESA");
-		panel.add(lblL, "cell 0 1,alignx trailing");
 		
-		TF_RESA = new JTextField();
-		panel.add(TF_RESA, "flowx,cell 1 1,growx");
-		TF_RESA.setColumns(10);
+		JLabel lblRESA = new JLabel("RESA");
+		fieldsPanel.add(lblRESA, "cell 0 0,alignx trailing");
 		
-		JLabel label = new JLabel("m");
-		panel.add(label, "cell 1 1");
+		tfRESA = new JTextField();
+		fieldsPanel.add(tfRESA, "flowx,cell 1 0,growx");
+		
+		JLabel labelm0 = new JLabel("m");
+		fieldsPanel.add(labelm0, "cell 1 0");
+		
 		
 		JLabel lblStopway = new JLabel("Stopway");
-		panel.add(lblStopway, "cell 0 2,alignx trailing");
+		fieldsPanel.add(lblStopway, "cell 0 1,alignx trailing");
 		
-		TF_STOPWAY = new JTextField();
-		TF_STOPWAY.setColumns(10);
-		panel.add(TF_STOPWAY, "flowx,cell 1 2,growx");
+		tfStopway = new JTextField();
+		fieldsPanel.add(tfStopway, "flowx,cell 1 1,growx");
 		
-		JLabel label_2 = new JLabel("m");
-		panel.add(label_2, "cell 1 2");
+		JLabel labelm1 = new JLabel("m");
+		fieldsPanel.add(labelm1, "cell 1 1");
+		
 		
 		JLabel lblBlastAllowance = new JLabel("Blast allowance");
-		panel.add(lblBlastAllowance, "cell 0 3,alignx trailing");
+		fieldsPanel.add(lblBlastAllowance, "cell 0 2,alignx trailing");
 		
-		TF_BLASTALLOWANCE = new JTextField();
-		TF_BLASTALLOWANCE.setColumns(10);
-		panel.add(TF_BLASTALLOWANCE, "flowx,cell 1 3,grow");
+		tfBlastAllowance = new JTextField();
+		fieldsPanel.add(tfBlastAllowance, "flowx,cell 1 2,grow");
 		
-		JLabel label_4 = new JLabel("m");
-		panel.add(label_4, "cell 1 3");
+		JLabel labelm2 = new JLabel("m");
+		fieldsPanel.add(labelm2, "cell 1 2");
+		
 		
 		JLabel lblAngleOfSlope = new JLabel("Angle of slope");
-		panel.add(lblAngleOfSlope, "cell 0 4,alignx trailing");
+		fieldsPanel.add(lblAngleOfSlope, "cell 0 3,alignx trailing");
 		
-		TF_AOS = new JTextField();
-		TF_AOS.setColumns(10);
-		panel.add(TF_AOS, "flowx,cell 1 4,growx");
+		tfAngleOfSlope = new JTextField();
+		fieldsPanel.add(tfAngleOfSlope, "flowx,cell 1 3,growx");
 		
-		JLabel label_6 = new JLabel("m");
-		panel.add(label_6, "cell 1 4");
+		JLabel labelm3 = new JLabel("m");
+		fieldsPanel.add(labelm3, "cell 1 3");
 		
-		JPanel panel_2 = new JPanel();
-		contentPane.add(panel_2, "cell 0 1,grow");
-		panel_2.setLayout(new MigLayout("", "[][][grow][][]", "[grow][]"));
+		JLabel labelRunwayStripWidth = new JLabel("Runway Strip Width");
+		fieldsPanel.add(labelRunwayStripWidth, "cell 0 4,alignx trailing");
 		
-		JButton btnNewButton = new JButton("Apply");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				setVisible(false);
-			}
-		});
+		tfRunwayStripWidth = new JTextField();
+		fieldsPanel.add(tfRunwayStripWidth, "flowx,cell 1 4,growx");
+		tfRunwayStripWidth.setColumns(10);
+		
+		JLabel labelm4 = new JLabel("m");
+		fieldsPanel.add(labelm4, "cell 1 4");
+		
+		JLabel lblClearAndGradedWidth = new JLabel("Clear and Graded Width");
+		fieldsPanel.add(lblClearAndGradedWidth, "cell 0 5,alignx trailing");
+		
+		tfClearAndGradedWidth = new JTextField();
+		fieldsPanel.add(tfClearAndGradedWidth, "flowx,cell 1 5,growx");
+		tfClearAndGradedWidth.setColumns(10);
+		
+		JLabel labelm5 = new JLabel("m");
+		fieldsPanel.add(labelm5, "cell 1 5");
+		
+		JLabel lblNewLabel = new JLabel("Obstacle Width");
+		fieldsPanel.add(lblNewLabel, "cell 0 7,alignx trailing");
+		
+		tfObstacleWidth = new JTextField();
+		fieldsPanel.add(tfObstacleWidth, "flowx,cell 1 7,growx,aligny top");
+		tfObstacleWidth.setColumns(10);
+		
+		JLabel lblObstacleLength = new JLabel("Obstacle Length");
+		fieldsPanel.add(lblObstacleLength, "cell 0 8,alignx trailing");
+		
+		tfObstacleLength = new JTextField();
+		fieldsPanel.add(tfObstacleLength, "flowx,cell 1 8,growx");
+		tfObstacleLength.setColumns(10);
+		
+		JLabel lblNewLabel_1 = new JLabel("m");
+		fieldsPanel.add(lblNewLabel_1, "cell 1 7");
+		
+		JLabel lblM = new JLabel("m");
+		fieldsPanel.add(lblM, "cell 1 8");
+		
+		
+		JPanel buttonsPanel = new JPanel();
+		contentPane.add(buttonsPanel, "cell 0 1,grow");
+		buttonsPanel.setLayout(new MigLayout("", "[][][grow][][]", "[grow][]"));
 		
 		JButton btnDefault = new JButton("Default");
-		panel_2.add(btnDefault, "cell 0 0");
+		buttonsPanel.add(btnDefault, "cell 0 1");
 		
-		JLabel label_1 = new JLabel("                 ");
-		panel_2.add(label_1, "cell 1 0");
-		panel_2.add(btnNewButton, "cell 3 0");
 		
-		JButton btnNewButton_1 = new JButton("Cancel");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		JButton btnApply = new JButton("Apply");
+		btnApply.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//TODO: Implement this
 				setVisible(false);
 			}
 		});
-		panel_2.add(btnNewButton_1, "cell 4 0");		
+		buttonsPanel.add(btnApply, "cell 3 1");
+		
+		JButton btnClose = new JButton("Close");
+		btnClose.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		buttonsPanel.add(btnClose, "cell 4 1");		
 		
 		setVisible(true);
 	}
-
 }
