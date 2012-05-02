@@ -238,7 +238,7 @@ public class LoadXMLFile {
 					
 					
 					PhysicalRunway physicalRunwayObject = new PhysicalRunway(name, runways.get(index), runways.get(index+1));
-					physicalRunwayObject.setResa(resa);//.setRESA(0, resa);
+					physicalRunwayObject.setRESA(resa);//.setRESA(0, resa);
 					physicalRunwayObject.setStopway(stopway);//.setStopway(0, stopway);
 					physicalRunwayObject.setBlastAllowance(blastAllowance);//.setBlastAllowance(0, blastAllowance);
 					physicalRunwayObject.setRunwayStripWidth(runwayWidth);

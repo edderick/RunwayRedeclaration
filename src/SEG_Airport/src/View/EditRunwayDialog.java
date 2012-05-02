@@ -290,10 +290,9 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 			RTODA.setText(Double.toString(airport.getPhysicalRunways().get(index).getRunway(1).getTODA(0)));
 			RLDA.setText(Double.toString(airport.getPhysicalRunways().get(index).getRunway(1).getLDA(0)));
 			RDT.setText(Double.toString(airport.getPhysicalRunways().get(index).getRunway(1).getDisplacedThreshold(0)));
-			BLAST.setText(Double.toString(airport.getPhysicalRunways().get(index).getBlastAllowance(0)));
-			RESA.setText(Double.toString(airport.getPhysicalRunways().get(index).getRESA(0)));
-			STOPWAY.setText(Double.toString(airport.getPhysicalRunways().get(index).getStopway(0)));
-			WIDTH.setText(Double.toString(airport.getPhysicalRunways().get(index).getWidth()));
+			BLAST.setText(Double.toString(airport.getPhysicalRunways().get(index).getBlastAllowance()));
+			RESA.setText(Double.toString(airport.getPhysicalRunways().get(index).getRESA()));
+			STOPWAY.setText(Double.toString(airport.getPhysicalRunways().get(index).getStopway()));
 		}		
 		
 		setVisible(true);
@@ -335,20 +334,19 @@ class ERDokListener implements ActionListener{
 			airport.getPhysicalRunways().get(index).getRunway(1).setDisplacedThreshold(0, doubleParser.parse(RDT.getText()));
 			airport.getPhysicalRunways().get(index).getRunway(0).setName(LNAME.getText());
 			airport.getPhysicalRunways().get(index).getRunway(1).setName(RNAME.getText());
-			airport.getPhysicalRunways().get(index).setBlastAllowance(Runway.DEFAULT, doubleParser.parse(BLAST.getText()));
-			airport.getPhysicalRunways().get(index).setRESA(Runway.DEFAULT, doubleParser.parse(RESA.getText()));
-			airport.getPhysicalRunways().get(index).setStopway(Runway.DEFAULT, doubleParser.parse(STOPWAY.getText()));
-			airport.getPhysicalRunways().get(index).setWidth(doubleParser.parse(WIDTH.getText()));
+			airport.getPhysicalRunways().get(index).setBlastAllowance(doubleParser.parse(BLAST.getText()));
+			airport.getPhysicalRunways().get(index).setRESA(doubleParser.parse(RESA.getText()));
+			airport.getPhysicalRunways().get(index).setStopway(doubleParser.parse(STOPWAY.getText()));
+	
 			
 			airport.getPhysicalRunways().get(index).setId(LNAME.getText() + "/" + RNAME.getText());
 			
 		} else { // add a new physical runway and assign the values
-			airport.addPhysicalRunway(new PhysicalRunway(RNAME.getText() + "/" + LNAME.getText(), doubleParser.parse(WIDTH.getText()), 
-					new Runway(RNAME.getText(), doubleParser.parse(RTORA.getText()), doubleParser.parse(RASDA.getText()), 
-							doubleParser.parse(RTODA.getText()), doubleParser.parse(RLDA.getText()), doubleParser.parse(RDT.getText())), 
-					new Runway(LNAME.getText(), doubleParser.parse(LTORA.getText()), doubleParser.parse(LASDA.getText()), 
-							doubleParser.parse(LTODA.getText()), doubleParser.parse(LLDA.getText()), doubleParser.parse(LDT.getText())), 
-					doubleParser.parse(RESA.getText()), doubleParser.parse(STOPWAY.getText()), doubleParser.parse(BLAST.getText())));	
+			//THIS LOOKS TRUELY INFANTILE!!!
+			airport.addPhysicalRunway(
+					new PhysicalRunway(RNAME.getText() + "/" + LNAME.getText(), 
+							new Runway(RNAME.getText(), doubleParser.parse(RTORA.getText()), doubleParser.parse(RASDA.getText()), doubleParser.parse(RTODA.getText()), doubleParser.parse(RLDA.getText()), doubleParser.parse(RDT.getText())), 
+							new Runway(LNAME.getText(), doubleParser.parse(LTORA.getText()), doubleParser.parse(LASDA.getText()), doubleParser.parse(LTODA.getText()), doubleParser.parse(LLDA.getText()), doubleParser.parse(LDT.getText()))));	
 			if(airport.getPhysicalRunways().size() == 1){
 				airport.setCurrentPhysicalRunway(airport.getPhysicalRunways().get(0));
 				airport.setCurrentRunway(airport.getCurrentPhysicalRunway().getRunway(0));

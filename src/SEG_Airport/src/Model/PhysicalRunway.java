@@ -17,7 +17,7 @@ public class PhysicalRunway {
 
 	// Meters are used for these measurements
 	private double distanceAwayFromThreshold, distanceAwayFromCenterLine;
-	private double[] runwayStripWidth, clearedAndGradedWidth, resa, stopway,
+	private double[] runwayStripWidth, clearedAndGradedWidth, RESA, stopway,
 			blastAllowance, angleOfSlope;
 
 	private boolean closeToA;
@@ -51,9 +51,9 @@ public class PhysicalRunway {
 		this.runwayStripWidth[DEFAULT] = 150;
 		this.runwayStripWidth[REDECLARED] = 150;
 
-		this.resa = new double[2];
-		this.resa[DEFAULT] = 240;
-		this.resa[REDECLARED] = 240;
+		this.RESA = new double[2];
+		this.RESA[DEFAULT] = 240;
+		this.RESA[REDECLARED] = 240;
 
 		this.stopway = new double[2];
 		this.stopway[DEFAULT] = 60;
@@ -144,8 +144,8 @@ public class PhysicalRunway {
 	 *            Runway.DEFAULT or Runway.REDECLARED
 	 * @return Value of RESA
 	 */
-	public double getResa() {
-		return this.resa[REDECLARED];
+	public double getRESA() {
+		return this.RESA[REDECLARED];
 	}
 
 	/**
@@ -154,15 +154,15 @@ public class PhysicalRunway {
 	 * @param aSDA
 	 *            New value of RESA
 	 */
-	public void setResa(double resa) {
-		this.resa[REDECLARED] = resa;
+	public void setRESA(double resa) {
+		this.RESA[REDECLARED] = resa;
 	}
 
 	/**
 	 * Reset the values of the RESA
 	 */
-	public void resetResa() {
-		this.resa[REDECLARED] = this.resa[DEFAULT];
+	public void resetRESA() {
+		this.RESA[REDECLARED] = this.RESA[DEFAULT];
 	}
 
 	/**
@@ -323,7 +323,7 @@ public class PhysicalRunway {
 	private void reset() {
 		resetRunwayStripWidth();
 		resetClearedAndGradedWidth();
-		resetResa();
+		resetRESA();
 		resetStopway();
 		resetBlastAllowance();
 		resetAngleOfSlope();
@@ -426,7 +426,7 @@ public class PhysicalRunway {
 			result.append("New LDA : " + awayFrom.getLDA(Runway.DEFAULT)
 					+ " - " + closeTo.getDisplacedThreshold(Runway.REDECLARED)
 					+ " - " + distanceAwayFromThreshold + " - "
-					+ resa[REDECLARED] + " - " + stopway[REDECLARED] + " = "
+					+ RESA[REDECLARED] + " - " + stopway[REDECLARED] + " = "
 					+ awayFrom.getLDA(Runway.REDECLARED) + "\n");
 		}
 		return result.toString();
@@ -450,7 +450,7 @@ public class PhysicalRunway {
 					1,
 					awayFrom.getLDA(Runway.DEFAULT)
 							- closeTo.getDisplacedThreshold(Runway.REDECLARED)
-							- distanceAwayFromThreshold - resa[REDECLARED]
+							- distanceAwayFromThreshold - RESA[REDECLARED]
 							- stopway[REDECLARED]);
 		}
 	}

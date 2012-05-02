@@ -26,7 +26,7 @@ public class PlaceObstacleDialog extends JDialog {
 		this.obstacle = obstacle;
 		this.obstacle_backup = obstacle;
 		
-		if(newObstacle) obstacle = new Obstacle("", "", 0, 0, 0);
+		if(newObstacle) obstacle = new Obstacle("", 0);
 		
 		setResizable(false);
 		setTitle("Place Obstacle");

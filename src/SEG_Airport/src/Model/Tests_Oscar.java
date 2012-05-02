@@ -44,7 +44,7 @@ public class Tests_Oscar {
 		//iterate over the runways and physical runways in the loaded airport and print all values
 		for (Object o : airport0.getPhysicalRunways()) {
 			System.out.println(((PhysicalRunway) o).getId()
-					+"\n resa: "+ ((PhysicalRunway) o).getResa()
+					+"\n resa: "+ ((PhysicalRunway) o).getRESA()
 					+"\n stopway: "+ ((PhysicalRunway) o).getStopway()
 					+"\n blast: "+ ((PhysicalRunway) o).getBlastAllowance()
 					+"\n stripWidth: "+ ((PhysicalRunway) o).getRunwayStripWidth()
@@ -112,7 +112,7 @@ public class Tests_Oscar {
 		
 		for (Object o : airport1.getPhysicalRunways()) {
 			System.out.println(((PhysicalRunway) o).getId()
-					+"\n resa: "+ ((PhysicalRunway) o).getResa()
+					+"\n resa: "+ ((PhysicalRunway) o).getRESA()
 					+"\n stopway: "+ ((PhysicalRunway) o).getStopway()
 					+"\n blast: "+ ((PhysicalRunway) o).getBlastAllowance()
 					+"\n stripWidth: "+ ((PhysicalRunway) o).getRunwayStripWidth()

@@ -164,7 +164,7 @@ public class SaveToXMLFile {
 			physicalRunway.appendChild(physicalRunwayName);
 			
 			Element resa = document.createElement("RESA");
-			String resaString = Double.toString(runway.getResa()/*.getRESA()*/);
+			String resaString = Double.toString(runway.getRESA()/*.getRESA()*/);
 			resa.appendChild(document.createTextNode(resaString));
 			physicalRunway.appendChild(resa);
 			

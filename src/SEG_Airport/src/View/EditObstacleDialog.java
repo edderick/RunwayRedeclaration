@@ -108,7 +108,7 @@ public class EditObstacleDialog extends JDialog {
 		TF_LENGTH.setText(Double.toString(obstacle.getLength()));
 		TF_WIDTH.setText(Double.toString(obstacle.getWidth()));
 		TF_NAME.setText(obstacle.getName());
-		comboBox.setSelectedItem(obstacle.getSizeType());
+
 		
 		setVisible(true);
 	}
@@ -125,8 +125,7 @@ class EODapplyListener implements ActionListener{
 		obstacle.setLength(doubleParser.parse(length.getText()));
 		obstacle.setWidth(doubleParser.parse(width.getText()));
 		obstacle.setName(name.getText());
-		obstacle.setSizeType((String) size.getSelectedItem());
-		
+
 		eod.setVisible(false);
 	}
 
