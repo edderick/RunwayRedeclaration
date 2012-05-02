@@ -164,17 +164,17 @@ public class SaveToXMLFile {
 			physicalRunway.appendChild(physicalRunwayName);
 			
 			Element resa = document.createElement("RESA");
-			String resaString = Double.toString(runway.getRESA(0));
+			String resaString = Double.toString(runway.getResa()/*.getRESA()*/);
 			resa.appendChild(document.createTextNode(resaString));
 			physicalRunway.appendChild(resa);
 			
 			Element stopway = document.createElement("Stopway");
-			String stopwayString = Double.toString(runway.getStopway(0));
+			String stopwayString = Double.toString(runway.getStopway());
 			stopway.appendChild(document.createTextNode(stopwayString));
 			physicalRunway.appendChild(stopway);
 			
 			Element blastAllowance = document.createElement("Blast_Allowance");
-			String blastString = Double.toString(runway.getBlastAllowance(0));
+			String blastString = Double.toString(runway.getBlastAllowance());
 			blastAllowance.appendChild(document.createTextNode(blastString));
 			physicalRunway.appendChild(blastAllowance);
 			
@@ -199,7 +199,7 @@ public class SaveToXMLFile {
 			physicalRunway.appendChild(distanceAwayFromCenterline);
 			
 			Element angleOfSlope = document.createElement("Angle_Of_Slope");
-			String angleString = Double.toString(runway.getAngleOfSlope(0));
+			String angleString = Double.toString(runway.getAngleOfSlope());
 			angleOfSlope.appendChild(document.createTextNode(angleString));
 			physicalRunway.appendChild(angleOfSlope);
 			
