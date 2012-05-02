@@ -296,7 +296,7 @@ public class PhysicalRunway {
 	 * @param closeToRunwayName
 	 *            The runway the obstacle is closest to
 	 */
-	private void setCloserToWhichThreshold(String closeToRunwayName) {
+	public void setCloserToWhichThreshold(String closeToRunwayName) {
 		closeToA = closeToRunwayName.equals(runway[0].getName());
 		calculateParameters();
 	}

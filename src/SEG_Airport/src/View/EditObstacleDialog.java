@@ -1,8 +1,3 @@
-
-
-//TODO: Implement the combo box for selecting closerTo!!! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-
 package View;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+import Controller.SelectRunwayListener;
 import Model.*;
 import net.miginfocom.swing.MigLayout;
 
@@ -100,15 +96,28 @@ public class EditObstacleDialog extends JDialog {
 		
 		// Add text to the textfields from the obstacle object
 		TF_HEIGHT.setText(Double.toString(obstacle.getHeight()));
-		TF_CentereLineDistance.setText(Double.toString(obstacle.getLength()));
-		TF_ThresholdDistance.setText(Double.toString(obstacle.getWidth()));
+		TF_CentereLineDistance.setText(Double.toString(airport.getCurrentPhysicalRunway().getDistanceAwayFromCenterLine()));
+		TF_ThresholdDistance.setText(Double.toString(airport.getCurrentPhysicalRunway().getDistanceAwayFromThreshold()));
 		
 		JComboBox comboBoxCloserTo = new JComboBox();
-		comboBoxCloserTo.setModel(new DefaultComboBoxModel(new String[] {"Runway 1", "Runway 2"}));
-		panel.add(comboBoxCloserTo, "cell 1 0,alignx right");
+		panel.add(comboBoxCloserTo, "flowx,cell 1 0,alignx right,grow");
 		TF_NAME.setText(obstacle.getName());
 
+		
+		if ((airport.getCurrentPhysicalRunway() != null) && 
+				(airport.getCurrentPhysicalRunway().getRunway(0) != comboBoxCloserTo.getItemAt(0))){
+			comboBoxCloserTo.removeAllItems();
+			PhysicalRunway r = airport.getCurrentPhysicalRunway();
+			comboBoxCloserTo.addItem(r.getRunway(0));
+			comboBoxCloserTo.addItem(r.getRunway(1));
+		}
+		
+		
+		
 		btnNewButton.addActionListener(new EODapplyListener(obstacle, airport, this, TF_HEIGHT, TF_ThresholdDistance, TF_CentereLineDistance, TF_NAME, comboBoxCloserTo));
+		
+		JPanel panel_Spacer = new JPanel();
+		panel.add(panel_Spacer, "cell 1 0");
 		
 		setVisible(true);
 	}
@@ -125,6 +134,7 @@ class EODapplyListener implements ActionListener{
 		obstacle.setHeight(doubleParser.parse(height.getText()));
 		airport.getCurrentPhysicalRunway().setDistanceAwayFromThreshold(doubleParser.parse(distanceToThreshold.getText()));
 		airport.getCurrentPhysicalRunway().setDistanceAwayFromCenterLine(doubleParser.parse(distanceToCentreLine.getText()));
+		airport.getCurrentPhysicalRunway().setCloserToWhichThreshold(airport.getCurrentRunway().getName());
 		obstacle.setName(name.getText());
 
 		eod.dispose();

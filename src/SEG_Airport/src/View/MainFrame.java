@@ -545,7 +545,13 @@ public class MainFrame extends JFrame implements AirportObserver{
 		this.airport = airport;
 		lblAirportName.setText(airport.getName());
 
+		generateRunwayComboBox(currentRunwayCombo);
+		generatePhysicalRunwayRadioButtons(physicalRunwayMenu);
+		//currentRunwayCombo.setSelectedIndex(0);
+		updateTables();
+	}
 
+	private void generateRunwayComboBox(JComboBox currentRunwayComboBox){
 		if ((airport.getCurrentPhysicalRunway() != null) && 
 				(airport.getCurrentPhysicalRunway().getRunway(0) != currentRunwayCombo.getItemAt(0))){
 			currentRunwayCombo.removeAllItems();
@@ -554,12 +560,8 @@ public class MainFrame extends JFrame implements AirportObserver{
 			currentRunwayCombo.addItem(r.getRunway(1));
 			currentRunwayCombo.addItemListener(new SelectRunwayListener(airport, airportObservers));
 		}
-
-		generatePhysicalRunwayRadioButtons(physicalRunwayMenu);
-		//currentRunwayCombo.setSelectedIndex(0);
-		updateTables();
 	}
-
+	
 	private void  generatePhysicalRunwayRadioButtons(JMenu parentMenuItem){
 		parentMenuItem.removeAll();
 		for(PhysicalRunway r : airport.getPhysicalRunways()){
