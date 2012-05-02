@@ -365,7 +365,6 @@ public class Tests_Oscar {
 		try {
 			contactsList2 = lof2.loadContacts();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
