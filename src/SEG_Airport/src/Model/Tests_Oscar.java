@@ -19,6 +19,7 @@ public class Tests_Oscar {
 		 * Step 5: Print all values.
 		 */
 		
+		System.out.println("************\nTEST 0\n************");
 		// Step 1.
 		Airport airport0 = new Airport("Heathrow");
 		Runway r = new Runway("27R", 1, 2, 3, 4, 5);
@@ -80,6 +81,8 @@ public class Tests_Oscar {
 		 * Step 1: Save an Airport to an XML file.
 		 * Step 2: Open the file saved and compare values with the expected ones.
 		 */
+		System.out.println("************\nTEST 1\n************");
+		
 		airport0.saveToXML();
 		
 		
@@ -94,6 +97,7 @@ public class Tests_Oscar {
 		 * Expected output: same values as in Aiport airport0.
 		 * 
 		 */
+		System.out.println("************\nTEST 2\n************");
 		
 		Airport airport1 = null;
 		
@@ -146,6 +150,8 @@ public class Tests_Oscar {
 		 * Step 1: Load an Airport from a corrupted XML file (mistakes in the syntax)
 		 * Expected output: Exception thrown and "Error: corrupted file" in stdout
 		 */
+		System.out.println("************\nTEST 3\n************");
+		
 		Airport airport2 = null;
 		LoadXMLFile loadFile1 = new LoadXMLFile();
 		try {
@@ -166,6 +172,8 @@ public class Tests_Oscar {
 		 * Expected output: Same values as entered.
 		 */
 		
+		System.out.println("************\nTEST 4\n************");
+		
 		// Step 1.
 		Obstacle obstacle = new Obstacle("boeing 747", 56.0);
 		
@@ -174,17 +182,74 @@ public class Tests_Oscar {
 		obstacle.setWidth(50.0);
 		
 		// Step 3.
+		System.out.println("Obstacle " + obstacle.getName() + "\nheigth: " + obstacle.getHeight()
+				+ "\nlength: " + obstacle.getLength() + "\nwidth: " + obstacle.getWidth());
+		
+		
+		/*
+		 * ********
+		 * Test 5. 
+		 * ******** 
+		 * Step 1: Save previous Obstacle to XML.
+		 * Step 2: Open the file saved and compare values with the expected ones.
+		 */
+		
+		System.out.println("************\nTEST 5\n************");
+		
+		// Step 1.
+		obstacle.saveToXML();
+		
+		
+		/*
+		 * ********
+		 * Test 6. 
+		 * ******** 
+		 * Step 1: Load an Obstacle from an XML file.
+		 * Step 2: Print to stdout the values of the loaded Obstacle 
+		 * 			and compare them with the original ones.
+		 * Expected output: same values as in Obstacle obstacle.
+		 */
+		
+		System.out.println("************\nTEST 6\n************");
+		
+		//Step 1.
+		LoadXMLFile lof = new LoadXMLFile();
+		Obstacle obstacle1 = null;
+		
+		try {
+			obstacle1 = lof.loadObstacle();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		// Step 2.
+		System.out.println("Obstacle " + obstacle1.getName() + "\nheigth: " + obstacle1.getHeight()
+				+ "\nlength: " + obstacle1.getLength() + "\nwidth: " + obstacle1.getWidth());
+		
+		
+		/*
+		 * ********
+		 * Test 7. 
+		 * ******** 
+		 * Step 1: Load an Obstacle from an XML file without prompting a dialog box.
+		 * Step 2: Print to stdout the values of the loaded Obstacle 
+		 * 			and compare them with the original ones.
+		 * Expected output: same values as in Obstacle obstacle.
+		 */
+		
+		System.out.println("************\nTEST 7\n************");
+		
+		//Step 1.
+		LoadXMLFile lof1 = new LoadXMLFile();
+		Obstacle obstacle2 = lof1.silentLoadObstacle("/Users/oscarmariani/Desktop/obstacle.xml");
+		
+		// Step 2.
+		System.out.println("Obstacle " + obstacle2.getName() + "\nheigth: " + obstacle2.getHeight()
+				+ "\nlength: " + obstacle2.getLength() + "\nwidth: " + obstacle2.getWidth());
 		
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		//obs.saveToXML();
 		
 		
 		
