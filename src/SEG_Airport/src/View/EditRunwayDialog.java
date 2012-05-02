@@ -29,12 +29,12 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 	private JTextField LTORA;
 	private JTextField LTODA;
 	private JTextField LLDA;
-	private JTextField txtl;
+	private JTextField NAME_L;
 	private JTextField RASDA;
 	private JTextField RTORA;
 	private JTextField RTODA;
 	private JTextField RLDA;
-	private JTextField txtr;
+	private JTextField NAME_R;
 	@SuppressWarnings("unused")
 	private Airport airport;
 	@SuppressWarnings("unused")
@@ -47,6 +47,7 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 	//I don't really see any benifit to passing this JList in over passing in a physicalRunway...
 	
 	public EditRunwayDialog(Airport airport, JList physicalRunwayJList, boolean newRunway, List<AirportObserver> airportObservers) {
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.airport = airport;
 		this.physicalRunwayJList = physicalRunwayJList;
 		
@@ -132,9 +133,9 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 		JLabel lblNewLabel = new JLabel("Runway");
 		panel_1.add(lblNewLabel, "cell 0 0,alignx center,aligny center");
 		
-		txtl = new JTextField();	
-		panel_1.add(txtl, "cell 1 0");
-		txtl.setColumns(10);
+		NAME_L = new JTextField();	
+		panel_1.add(NAME_L, "cell 1 0");
+		NAME_L.setColumns(10);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBounds(12, 209, 448, 45);
@@ -209,13 +210,13 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 		JLabel label_8 = new JLabel("Runway");
 		panel_4.add(label_8, "cell 0 0,alignx center");
 		
-		txtr = new JTextField();
-		txtr.setColumns(10);
-		panel_4.add(txtr, "cell 1 0");
+		NAME_R = new JTextField();
+		NAME_R.setColumns(10);
+		panel_4.add(NAME_R, "cell 1 0");
 		
 		JButton btnNewButton = new JButton("Apply");
 		btnNewButton.setBounds(266, 11, 80, 23);
-		btnNewButton.addActionListener(new ERDokListener(airport, LASDA, LTORA, LTODA, LLDA, LDT, RASDA, RTORA, RTODA, RLDA, RDT, txtr, txtl, physicalRunwayJList, this, newRunway, airportObservers));
+		btnNewButton.addActionListener(new ERDokListener(airport, LASDA, LTORA, LTODA, LLDA, LDT, RASDA, RTORA, RTODA, RLDA, RDT, NAME_R, NAME_L, physicalRunwayJList, this, newRunway, airportObservers));
 		panel_2.setLayout(null);
 		panel_2.add(btnNewButton);
 		
@@ -231,14 +232,15 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 		if(airport.getPhysicalRunways().size() > 0 & !newRunway){
 			int index = physicalRunwayJList.getSelectedIndex();
 			if(index == -1) index = airport.getPhysicalRunways().indexOf(airport.getCurrentPhysicalRunway());
-			txtl.setText(airport.getPhysicalRunways().get(index).getRunway(0).getName());
-			txtr.setText(airport.getPhysicalRunways().get(index).getRunway(1).getName());
 			
+			NAME_L.setText(airport.getPhysicalRunways().get(index).getRunway(0).getName());
 			LASDA.setText(Double.toString(airport.getPhysicalRunways().get(index).getRunway(0).getASDA(0)));
 			LTORA.setText(Double.toString(airport.getPhysicalRunways().get(index).getRunway(0).getTORA(0)));
 			LTODA.setText(Double.toString(airport.getPhysicalRunways().get(index).getRunway(0).getTODA(0)));
 			LLDA.setText(Double.toString(airport.getPhysicalRunways().get(index).getRunway(0).getLDA(0)));
 			LDT.setText(Double.toString(airport.getPhysicalRunways().get(index).getRunway(0).getDisplacedThreshold(0)));
+			
+			NAME_R.setText(airport.getPhysicalRunways().get(index).getRunway(1).getName());
 			RASDA.setText(Double.toString(airport.getPhysicalRunways().get(index).getRunway(1).getASDA(0)));
 			RTORA.setText(Double.toString(airport.getPhysicalRunways().get(index).getRunway(1).getTORA(0)));
 			RTODA.setText(Double.toString(airport.getPhysicalRunways().get(index).getRunway(1).getTODA(0)));
@@ -273,18 +275,19 @@ class ERDokListener implements ActionListener{
 			int index = physicalRunwayJList.getSelectedIndex();
 			if(index == -1) index = airport.getPhysicalRunways().indexOf(airport.getCurrentPhysicalRunway());
 			// set the values to what's in the JTextFields
+			airport.getPhysicalRunways().get(index).getRunway(0).setName(LNAME.getText());
 			airport.getPhysicalRunways().get(index).getRunway(0).setASDA(0, doubleParser.parse(LASDA.getText()));
 			airport.getPhysicalRunways().get(index).getRunway(0).setTORA(0, doubleParser.parse(LTORA.getText()));
 			airport.getPhysicalRunways().get(index).getRunway(0).setTODA(0, doubleParser.parse(LTODA.getText()));
 			airport.getPhysicalRunways().get(index).getRunway(0).setLDA(0, doubleParser.parse(LLDA.getText()));
 			airport.getPhysicalRunways().get(index).getRunway(0).setDisplacedThreshold(0, doubleParser.parse(LDT.getText()));
+			
+			airport.getPhysicalRunways().get(index).getRunway(1).setName(RNAME.getText());
 			airport.getPhysicalRunways().get(index).getRunway(1).setASDA(0, doubleParser.parse(RASDA.getText()));
 			airport.getPhysicalRunways().get(index).getRunway(1).setTORA(0, doubleParser.parse(RTORA.getText()));
 			airport.getPhysicalRunways().get(index).getRunway(1).setTODA(0, doubleParser.parse(RTODA.getText()));
 			airport.getPhysicalRunways().get(index).getRunway(1).setLDA(0, doubleParser.parse(RLDA.getText()));
 			airport.getPhysicalRunways().get(index).getRunway(1).setDisplacedThreshold(0, doubleParser.parse(RDT.getText()));
-			airport.getPhysicalRunways().get(index).getRunway(0).setName(LNAME.getText());
-			airport.getPhysicalRunways().get(index).getRunway(1).setName(RNAME.getText());
 	
 			
 			airport.getPhysicalRunways().get(index).setId(LNAME.getText() + "/" + RNAME.getText());
@@ -292,9 +295,9 @@ class ERDokListener implements ActionListener{
 		} else { // add a new physical runway and assign the values
 			//THIS LOOKS TRUELY INFANTILE!!!
 			airport.addPhysicalRunway(
-					new PhysicalRunway(RNAME.getText() + "/" + LNAME.getText(), 
-							new Runway(RNAME.getText(), doubleParser.parse(RTORA.getText()), doubleParser.parse(RASDA.getText()), doubleParser.parse(RTODA.getText()), doubleParser.parse(RLDA.getText()), doubleParser.parse(RDT.getText())), 
-							new Runway(LNAME.getText(), doubleParser.parse(LTORA.getText()), doubleParser.parse(LASDA.getText()), doubleParser.parse(LTODA.getText()), doubleParser.parse(LLDA.getText()), doubleParser.parse(LDT.getText()))));	
+					new PhysicalRunway( LNAME.getText() + "/" +  RNAME.getText(), 
+							new Runway(LNAME.getText(), doubleParser.parse(LTORA.getText()), doubleParser.parse(LASDA.getText()), doubleParser.parse(LTODA.getText()), doubleParser.parse(LLDA.getText()), doubleParser.parse(LDT.getText())),	
+							new Runway(RNAME.getText(), doubleParser.parse(RTORA.getText()), doubleParser.parse(RASDA.getText()), doubleParser.parse(RTODA.getText()), doubleParser.parse(RLDA.getText()), doubleParser.parse(RDT.getText())))); 
 			if(airport.getPhysicalRunways().size() == 1){
 				airport.setCurrentPhysicalRunway(airport.getPhysicalRunways().get(0));
 				airport.setCurrentRunway(airport.getCurrentPhysicalRunway().getRunway(0));
@@ -311,7 +314,7 @@ class ERDokListener implements ActionListener{
 		}
 		physicalRunwayJList.setModel(pr);
 		physicalRunwayJList.setSelectedIndex(0);
-		jd.setVisible(false);
+		jd.dispose();
 		
 		notifyAirportObservers();
 		
