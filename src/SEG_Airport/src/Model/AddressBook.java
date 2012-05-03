@@ -1,6 +1,7 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class contains a list of contact details 
@@ -42,6 +43,17 @@ public class AddressBook {
 		return true;
 	}
 
+	/**
+	 * @param contacts Contacts to add
+	 * @return true if successful
+	 */
+	public boolean addContacts(List<Contact> contacts) {
+		for(Contact c : contacts){
+			if (!this.addContact(c)) return false;
+		}
+		return true;
+	}
+	
 	/**
 	 * @param firstName The first name of the contact to search for
 	 * @return All contacts with the given first name
@@ -105,4 +117,18 @@ public class AddressBook {
 		}
 		return false;
 	}
+	
+	/**
+	 * Saves the addressBook to an xml file on disk
+	 */
+	public void saveToXML(){
+		try {
+			@SuppressWarnings("unused")
+			SaveToXMLFile xmlFile = new SaveToXMLFile(this.getContacts());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+	
 }

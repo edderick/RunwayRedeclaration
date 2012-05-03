@@ -70,6 +70,7 @@ public class EditContactDialog extends JDialog {
 				contactCopy.setLastName(tfLastName.getText());
 				contactCopy.setEmail(tfEmail.getText());
 				tblContactsCopy.updateUI();
+				((AddressBookTableModel)tblContactsCopy.getModel()).getAddressBook().saveToXML();
 				dispose();
 			}
 		});

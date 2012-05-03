@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.AbstractTableModel;
 import net.miginfocom.swing.MigLayout;
@@ -49,7 +50,8 @@ public class AddressBookDialog extends JDialog {
 		tblContacts.setModel(new AddressBookTableModel(addressBook));
 		tblContacts.getColumnModel().getColumn(0).setResizable(false);
 		tblContacts.getColumnModel().getColumn(0).setPreferredWidth(50);
-
+		tblContacts.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);  
+		
 		scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, "cell 0 0,grow");
 		scrollPane.setViewportView(tblContacts);
@@ -92,6 +94,7 @@ public class AddressBookDialog extends JDialog {
 				if(tblContacts.getSelectedRow() != -1){
 					String email = ((AddressBookTableModel)tblContacts.getModel()).getAddressBook().getContacts().get(tblContacts.getSelectedRow()).getEmail();
 					((AddressBookTableModel)tblContacts.getModel()).getAddressBook().removeContactByEmail(email);
+					((AddressBookTableModel)tblContacts.getModel()).getAddressBook().saveToXML();
 					tblContacts.updateUI();
 				}
 			}
