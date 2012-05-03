@@ -33,6 +33,15 @@ import net.miginfocom.swing.MigLayout;
 
 import Controller.*;
 import Model.*;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JSlider;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
+import java.awt.Color;
 
 
 @SuppressWarnings("serial")
@@ -54,6 +63,8 @@ public class MainFrame extends JFrame implements AirportObserver{
 	private final ButtonGroup topPanelButtonGroup = new ButtonGroup();
 	private final ButtonGroup bottomPanelButtonGroup = new ButtonGroup();
 
+	TopView topTopView;
+	
 	private Airport airport;
 	private AddressBook addressBook;
 
@@ -272,12 +283,12 @@ public class MainFrame extends JFrame implements AirportObserver{
 		JRadioButtonMenuItem rdbtnmntmTopPanelTopView = new JRadioButtonMenuItem("Top View");
 		topPanelButtonGroup.add(rdbtnmntmTopPanelTopView);
 		mnTopPanel.add(rdbtnmntmTopPanelTopView);
-		TopView topTopView = new TopView(airport);
+		topTopView = new TopView(airport);
 		rdbtnmntmTopPanelTopView.addActionListener(new SelectViewListener(rightSplitPane, topTopView, true));
 		rightSplitPane.setLeftComponent(topTopView);
 		airportObservers.add(topTopView);
-		topTopView.setVisible(true);
-		
+
+			
 		JRadioButtonMenuItem rdbtnmntmTopPanelSideView = new JRadioButtonMenuItem("Side View");
 		topPanelButtonGroup.add(rdbtnmntmTopPanelSideView);
 		mnTopPanel.add(rdbtnmntmTopPanelSideView);

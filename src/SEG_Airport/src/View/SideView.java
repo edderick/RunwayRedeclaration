@@ -6,6 +6,11 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
+import javax.swing.JSlider;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
+import net.miginfocom.swing.MigLayout;
 
 import Model.Airport;
 import Model.AirportObserver;
@@ -22,7 +27,7 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 	final int tagBorder = 10;
 	
 	//this value determines how much of the width of the panel the runway takes up.
-	final double ratio = 0.75;
+	double ratio = 0.75;
 	
 	//this value determines how much of the width of the runway the runwayTag takes up.
 	final double fontRatio = 0.5;
@@ -60,10 +65,20 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 		super();
 		setSize(300,200);
 		this.setBackground(new Color(154, 205, 50));
-		setVisible(true);
+
 		updateAirport(airport);
+		
+		setLayout(new MigLayout("", "[grow]", "[grow][]"));
+		
+		createSlider();
+		
 		setValues();
+		setVisible(true);
 			
+	}
+	
+	public void setZoom(double ratio){
+		this.ratio = ratio;
 	}
 	
 	public void setVisible(boolean b){
@@ -81,6 +96,24 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 		declaredRunwaysCreation(g2d);
 		}
 			
+	}
+	
+	public void createSlider(){
+		JSlider zoomSlider = new JSlider();
+		zoomSlider.setMinorTickSpacing(1);
+		zoomSlider.setBackground(new Color(154, 205, 50));
+		zoomSlider.setValue(100);
+		zoomSlider.setMinimum(100);
+		zoomSlider.setMaximum(600);
+		zoomSlider.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				JSlider slider = ((JSlider)e.getSource());
+				setZoom(slider.getValue() / 100);
+				repaint();
+				updateUI();
+			}
+		});
+		add(zoomSlider, "cell 0 1,alignx right,aligny bottom");
 	}
 	
 	public void runwayCreation(Graphics2D g2d){
@@ -179,6 +212,8 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 		
 	}
 
+	
+	
 	public void updateAirport(Airport airport) {
 		this.airport=airport;
 		if(airport!=null && airport.getCurrentRunway() != null &&
