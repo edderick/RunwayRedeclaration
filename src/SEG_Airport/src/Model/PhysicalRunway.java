@@ -411,6 +411,8 @@ public class PhysicalRunway {
 				if (obstacle == null) {
 					result.append("There are no obstacle on runway at the moment.\n");
 				} else {
+					result.append("Obstacle name: " + obstacle.getName() + "\n");
+					result.append("The obstacle is closer to "+closeTo.getName()+"'s threshold\n");
 					result.append("The obstacle is "
 							+ Math.abs(distanceAwayFromCenterLine)
 							+ " away from center line. No new calculation needed.\n");
@@ -425,6 +427,8 @@ public class PhysicalRunway {
 			} else {
 				result.append("Calcuations on runway " + closeTo.getName()
 						+ ":\n");
+				result.append("Obstacle name: " + obstacle.getName() + "\n");
+				result.append("The obstacle is closer to "+closeTo.getName()+"'s threshold\n");
 				result.append("Obstacle height: " + obstacle.getHeight()
 						+ "m\n");
 				result.append("Distance away from threshold: "
@@ -457,7 +461,7 @@ public class PhysicalRunway {
 						+ " - " + distanceAwayFromThreshold + " - ("
 						+ obstacle.getHeight() + " * "
 						+ angleOfSlope[REDECLARED] + ") - "
-						+ stopway[REDECLARED] + ") = "
+						+ stopway[REDECLARED] + " = "
 						+ closeTo.getLDA(Runway.REDECLARED) + "m\n");
 			}
 		} else {
@@ -466,6 +470,8 @@ public class PhysicalRunway {
 				if (obstacle == null) {
 					result.append("There are no obstacle on runway at the moment.\n");
 				} else {
+					result.append("Obstacle name: " + obstacle.getName() + "\n");
+					result.append("The obstacle is closer to "+closeTo.getName()+"'s threshold\n");
 					result.append("The obstacle is "
 							+ Math.abs(distanceAwayFromCenterLine)
 							+ " away from center line. No new calculation needed.\n");
@@ -481,6 +487,8 @@ public class PhysicalRunway {
 			} else {
 				result.append("Calcuations on runway " + awayFrom.getName()
 						+ ":\n");
+				result.append("Obstacle name: " + obstacle.getName() + "\n");
+				result.append("The obstacle is closer to "+closeTo.getName()+"'s threshold\n");
 				result.append("Obstacle height: " + obstacle.getHeight()
 						+ "m\n");
 				result.append("Distance away from threshold: "
@@ -488,7 +496,7 @@ public class PhysicalRunway {
 				result.append("Blash allowance: " + blastAllowance[REDECLARED]
 						+ "m\n");
 				result.append("Displaced threshold: "
-						+ awayFrom.getDisplacedThreshold(Runway.REDECLARED)
+						+ closeTo.getDisplacedThreshold(Runway.REDECLARED)
 						+ "m\n");
 				result.append("Angle of slope: " + angleOfSlope[REDECLARED]
 						+ "\n");
