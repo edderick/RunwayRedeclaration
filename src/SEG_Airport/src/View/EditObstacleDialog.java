@@ -15,6 +15,7 @@ import Model.Airport;
 import Model.AirportObserver;
 import Model.Obstacle;
 import Model.PhysicalRunway;
+import Model.Runway;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -151,13 +152,14 @@ public class EditObstacleDialog extends JDialog {
 	
 	class ApplyListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			obstacle.setHeight(doubleParser.parse(tfHeight.getText()));
-			airport.getCurrentPhysicalRunway().setDistanceAwayFromThreshold(doubleParser.parse(tfThresholdDistance.getText()));
-			airport.getCurrentPhysicalRunway().setDistanceAwayFromCenterLine(doubleParser.parse(tfCentreLineDistance.getText()));
-			airport.getCurrentPhysicalRunway().setCloserToWhichThreshold(comboBoxCloserTo.getName());
+			obstacle.setHeight(DoubleParser.parse(tfHeight.getText()));
+			airport.getCurrentPhysicalRunway().setDistanceAwayFromThreshold(DoubleParser.parse(tfThresholdDistance.getText()));
+			airport.getCurrentPhysicalRunway().setDistanceAwayFromCenterLine(DoubleParser.parse(tfCentreLineDistance.getText()));
+			airport.getCurrentPhysicalRunway().setCloserToWhichThreshold(((Runway)comboBoxCloserTo.getSelectedItem()).getName());
 			obstacle.setName(tfName.getText());
 			
 			notifyAirportObservers();
+			dispose();
 		}
 	}
 }

@@ -38,9 +38,13 @@ import Model.*;
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame implements AirportObserver{
 
+	//TODO: Check saved and show dialog
+	
+	//TODO: Implement zooming and panning
+	
 	private static final int MAX_HISTORY = 10;
 	private static final int HISTORY_TO_SHOW = 5;
-
+	
 	private JPanel contentPane;
 	private JSplitPane rightSplitPane;
 	private JTable OriginalParametersTable;

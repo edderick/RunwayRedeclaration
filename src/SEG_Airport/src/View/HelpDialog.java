@@ -1,10 +1,6 @@
 package View;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
-import java.io.File;
-import java.io.IOException;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -12,11 +8,14 @@ import javax.swing.JEditorPane;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.ScrollPaneConstants;
+import java.io.File;
+import java.io.IOException;
 
 import Controller.HelpHyperlinkListener;
 
 public class HelpDialog extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JSplitPane splitPane;
 	private JScrollPane leftScrollPane;
@@ -24,25 +23,6 @@ public class HelpDialog extends JFrame {
 	private JEditorPane navigation;
 	private JEditorPane body;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					HelpDialog frame = new HelpDialog();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public HelpDialog() {
 		setTitle("Help");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -79,8 +59,9 @@ public class HelpDialog extends JFrame {
 			body.setPage(new File("man/index.html").toURI().toURL());
 			navigation.setPage(new File("man/nav.html").toURI().toURL());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Cannot load help files!");
+			dispose();
+			return;
 		}
 		
 		navigation.addHyperlinkListener(new HelpHyperlinkListener(body));

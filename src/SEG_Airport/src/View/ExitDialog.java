@@ -1,17 +1,17 @@
 package View;
 
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.JTextArea;
 
 import net.miginfocom.swing.MigLayout;
-import javax.swing.JTextArea;
-import java.awt.SystemColor;
 
 public class ExitDialog extends JFrame{
+
+	private static final long serialVersionUID = 1L;
 
 	public static void main(String[] args) {
 		new ExitDialog();
@@ -34,15 +34,22 @@ public class ExitDialog extends JFrame{
 		getContentPane().add(btnSave, "flowx,cell 0 2");
 		
 		JButton btnOk = new JButton("Cancel");
+		getContentPane().add(btnOk, "cell 0 2,alignx center");
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
 			}
 		});
 		
-		JButton btnExitWithoutSaving = new JButton("Exit without saving");
+		JButton btnExitWithoutSaving = new JButton("Exit without saving");		
 		getContentPane().add(btnExitWithoutSaving, "cell 0 2");
-		getContentPane().add(btnOk, "cell 0 2,alignx center");
+		btnExitWithoutSaving.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});		
+	
 		this.setVisible(true);
 	}
 	
