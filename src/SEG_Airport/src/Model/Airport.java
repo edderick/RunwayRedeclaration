@@ -6,14 +6,14 @@ import java.util.ArrayList;
  * Represents an airport, contains runways
  * @author Oscar
  */
-public class Airport {
+public class Airport implements Saveable{
 
 	//List of physical runways
 	private ArrayList<PhysicalRunway> runways;
 	private String name;
 	
 	//True when the current runway has been saved
-	private boolean saved = false;
+	private boolean saved = true;
 	
 	Runway currentRunway;
 	PhysicalRunway currentPhysicalRunway;

@@ -30,7 +30,7 @@ public class AdvancedParametersDialog extends JDialog {
 	private JTextField tfObstacleWidth;
 	private JTextField tfObstacleLength;
 	
-	private Airport airport;
+	private Airport airportCopy;
 	private PhysicalRunway physicalRunway;
 	private List<AirportObserver> airportObservers;
 	
@@ -40,7 +40,7 @@ public class AdvancedParametersDialog extends JDialog {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 310, 330);
 		
-		this.airport = airport;
+		this.airportCopy = airport;
 		physicalRunway = airport.getCurrentPhysicalRunway();
 		this.airportObservers = airportObservers;
 		
@@ -158,6 +158,9 @@ public class AdvancedParametersDialog extends JDialog {
 				
 				if(physicalRunway.getObstacle() != null) physicalRunway.getObstacle().resetSize();
 				
+				airportCopy.setModified();
+				obstacle.setModified();
+				
 				notifyAirportObservers();
 				setFormValues();
 			}
@@ -180,7 +183,11 @@ public class AdvancedParametersDialog extends JDialog {
 					physicalRunway.getObstacle().setLength(Double.parseDouble(tfObstacleLength.getText()));
 				}
 				
+				airportCopy.setModified();
+				obstacle.setModified();
+				
 				notifyAirportObservers();
+				dispose();
 			}
 		});
 
@@ -199,7 +206,7 @@ public class AdvancedParametersDialog extends JDialog {
 	
 	void notifyAirportObservers(){
 		for(AirportObserver ao: airportObservers){
-			ao.updateAirport(airport);
+			ao.updateAirport(airportCopy);
 		}
 	}
 	

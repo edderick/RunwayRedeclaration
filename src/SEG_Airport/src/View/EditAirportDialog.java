@@ -110,8 +110,9 @@ public class EditAirportDialog extends JDialog {
 		public void actionPerformed(ActionEvent e) {
 			airport.setName(tfAirportName.getText());
 			System.out.println(airport.getPhysicalRunways().size());
-			setVisible(false);
+			airport.setModified();
 			notifyAirportObservers();
+			dispose();
 		}
 	}
 

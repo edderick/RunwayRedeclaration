@@ -159,6 +159,8 @@ public class EditObstacleDialog extends JDialog {
 			airport.getCurrentPhysicalRunway().setCloserToWhichThreshold(((Runway)comboBoxCloserTo.getSelectedItem()).getName());
 			obstacle.setName(tfName.getText());
 			
+			obstacle.setModified();
+			
 			notifyAirportObservers();
 			dispose();
 		}

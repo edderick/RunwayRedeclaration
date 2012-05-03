@@ -38,8 +38,6 @@ import Model.*;
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame implements AirportObserver{
 
-	//TODO: Check saved and show dialog
-	
 	//TODO: Implement zooming and panning
 	
 	private static final int MAX_HISTORY = 10;
@@ -83,8 +81,6 @@ public class MainFrame extends JFrame implements AirportObserver{
 
 	public MainFrame() {
 
-
-
 		//TODO: Load addressbook on application start;
 		addressBook = new AddressBook();
 		//LoadXMLFile lf = new LoadXMLFile();
@@ -112,7 +108,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		}
 
 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
 
 		JMenuBar menuBar = new JMenuBar();
@@ -216,11 +212,15 @@ public class MainFrame extends JFrame implements AirportObserver{
 		JSeparator separator_1 = new JSeparator();
 		mnFile.add(separator_1);
 
+		ExitListener exitListener = new ExitListener(airport);
+		
 		JMenuItem mntmExit = new JMenuItem("Exit");
 		mntmExit.setMnemonic('x');
-		mntmExit.addActionListener(new ExitListener());
+		mntmExit.addActionListener(exitListener);
 		mnFile.add(mntmExit);
-
+		
+		addWindowListener(exitListener);
+		
 		JMenu mnEdit = new JMenu("Edit");
 		mnEdit.setMnemonic('e');
 		menuBar.add(mnEdit);

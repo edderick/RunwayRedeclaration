@@ -1,40 +1,49 @@
 package View;
 
-import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JTextArea;
+import Model.Saveable;
 
 import net.miginfocom.swing.MigLayout;
+import javax.swing.JLabel;
 
 public class ExitDialog extends JFrame{
 
 	private static final long serialVersionUID = 1L;
-
-	public static void main(String[] args) {
-		new ExitDialog();
-	}
+	private List<Saveable> saves;
 	
-	public ExitDialog() {
+	public ExitDialog(List<Saveable> toSave) {
+		
+		saves = toSave;
 		
 		setBounds(100, 100, 335, 158);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
-		getContentPane().setLayout(new MigLayout("", "[grow]", "[50,grow][][grow]"));
+		getContentPane().setLayout(new MigLayout("", "[grow]", "[][][grow][]"));
 		
-		JTextArea txtrYouHaveOne = new JTextArea();
-		txtrYouHaveOne.setBackground(SystemColor.control);
-		txtrYouHaveOne.setLineWrap(true);
-		txtrYouHaveOne.setText("You have one or more unsaved changes, are you sure you wish to exit?");
-		getContentPane().add(txtrYouHaveOne, "cell 0 0,alignx center,grow");
+		JLabel lblMessage1 = new JLabel("You have one or more unsaved changes,");
+		getContentPane().add(lblMessage1, "cell 0 0");
+		
+		JLabel lblNewLabel = new JLabel("are you sure you wish to exit?");
+		getContentPane().add(lblNewLabel, "cell 0 1,alignx left");
 		
 		JButton btnSave = new JButton("Save & Exit");
-		getContentPane().add(btnSave, "flowx,cell 0 2");
+		getContentPane().add(btnSave, "flowx,cell 0 3");
+		btnSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				for(Saveable s: saves){
+					s.saveToXML();
+				}
+				dispose();
+			}
+		});
 		
 		JButton btnOk = new JButton("Cancel");
-		getContentPane().add(btnOk, "cell 0 2,alignx center");
+		getContentPane().add(btnOk, "cell 0 3,alignx center");
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
@@ -42,7 +51,7 @@ public class ExitDialog extends JFrame{
 		});
 		
 		JButton btnExitWithoutSaving = new JButton("Exit without saving");		
-		getContentPane().add(btnExitWithoutSaving, "cell 0 2");
+		getContentPane().add(btnExitWithoutSaving, "cell 0 3");
 		btnExitWithoutSaving.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

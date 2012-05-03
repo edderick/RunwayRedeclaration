@@ -4,13 +4,16 @@ package Model;
  * Represents an obstacle that can be placed on a runway
  * @author Kelvin
  */
-public class Obstacle {
+public class Obstacle implements Saveable{
 
 	private String name;
 	private double height, width, length;
 	private final double DEFAULT_WIDTH = 100;
 	private final double DEFAULT_LENGTH = 100;
-
+	
+	//True when obstacle has been saved
+	private boolean saved = true;
+	
 	/**
 	 * Default constructor for an obstacle
 	 * @param name Name of obstacle
@@ -98,6 +101,22 @@ public class Obstacle {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		saved = true;
 	}
+	
+	/**
+	 * Called whenever airport is modified
+	 */
+	public void setModified(){
+		this.saved = false;
+	}
+	
+	/**
+	 * @return Whether or not the airport has been saved
+	 */
+	public boolean getSaved(){
+		return this.saved;
+	}
+
 
 }

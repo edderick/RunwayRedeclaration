@@ -332,6 +332,8 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 			physicalRunwayJList.setModel(physicalRunwayListModel);
 			physicalRunwayJList.setSelectedIndex(0);
 
+			airport.setModified();
+			
 			notifyAirportObservers();
 			dispose();
 		}
