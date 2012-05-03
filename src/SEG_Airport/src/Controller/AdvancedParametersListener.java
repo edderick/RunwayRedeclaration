@@ -39,7 +39,4 @@ public class AdvancedParametersListener implements ActionListener, AirportObserv
 			ao.updateAirport(airport);
 		}
 	}
-	
-	
-	
 }

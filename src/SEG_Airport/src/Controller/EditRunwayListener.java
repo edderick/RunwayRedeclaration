@@ -3,16 +3,11 @@ package Controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-
 import javax.swing.JList;
-import javax.swing.JOptionPane;
 
 import Model.Airport;
 import Model.AirportObserver;
-import Model.PhysicalRunway;
-import Model.Runway;
 import View.EditRunwayDialog;
-import View.MainFrame;
 
 public class EditRunwayListener implements ActionListener, AirportObserver{
 
@@ -28,6 +23,7 @@ public class EditRunwayListener implements ActionListener, AirportObserver{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(airport.getPhysicalRunways().size() == 0){
+			@SuppressWarnings("unused")
 			EditRunwayDialog erd = new EditRunwayDialog(airport, new JList(), true, airportObservers);
 			notifyAirportObservers();
 		}else{
@@ -48,11 +44,3 @@ public class EditRunwayListener implements ActionListener, AirportObserver{
 		}
 	}
 }
-
-/*
-ActionEvent e) {
-@SuppressWarnings("unused")
-EditRunwayDialog erd = new EditRunwayDialog(airport, new JList(), false);
-}
-}
- */

@@ -3,16 +3,12 @@ package Controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-
 import javax.swing.JOptionPane;
 
 import Model.Airport;
 import Model.AirportObserver;
 import Model.Obstacle;
-import Model.PhysicalRunway;
-import View.EditAirportDialog;
 import View.EditObstacleDialog;
-import View.MainFrame;
 
 public class EditObstacleListener implements ActionListener, AirportObserver{
 
@@ -33,13 +29,14 @@ public class EditObstacleListener implements ActionListener, AirportObserver{
 		} else if (airport.getCurrentPhysicalRunway().getObstacle() == null){
 			Obstacle old = new Obstacle("", 0 );
 			Obstacle obstacle = new Obstacle("", 0);
+			@SuppressWarnings("unused")
 			EditObstacleDialog eod = new EditObstacleDialog(obstacle, old, airport, airportObservers);
 			airport.getCurrentPhysicalRunway().setObstacle(obstacle);			
 		}
 		else {
-			//This comment should be removed
 			Obstacle old = airport.getCurrentPhysicalRunway().getObstacle();
 			Obstacle obstacle = airport.getCurrentPhysicalRunway().getObstacle();
+			@SuppressWarnings("unused")
 			EditObstacleDialog eod = new EditObstacleDialog(obstacle, old, airport, airportObservers);
 			airport.getCurrentPhysicalRunway().setObstacle(obstacle);			
 		}	
@@ -55,15 +52,4 @@ public class EditObstacleListener implements ActionListener, AirportObserver{
 			ao.updateAirport(airport);
 		}
 	}
-
 }
-
-/*
-new ActionListener() {
-public void actionPerformed(ActionEvent arg0) {
-	Obstacle old = obstacle;
-	@SuppressWarnings("unused")
-	EditObstacleDialog ead = new EditObstacleDialog(obstacle, old);
-}
-}
- */

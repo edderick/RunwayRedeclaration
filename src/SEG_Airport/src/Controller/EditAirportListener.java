@@ -37,18 +37,4 @@ public class EditAirportListener implements ActionListener, AirportObserver{
 			ao.updateAirport(airport);
 		}
 	}
-
-	
 }
-
-
-/*(
-new ActionListener() {
-	public void actionPerformed(ActionEvent arg0) {
-		System.out.println("airport you are editing: " + airport.getName());
-		Airport old = airport;
-		@SuppressWarnings("unused")
-		EditAirportDialog ead = new EditAirportDialog(airport, old);
-	}
-}
-*/

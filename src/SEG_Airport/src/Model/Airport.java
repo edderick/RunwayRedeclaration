@@ -12,6 +12,9 @@ public class Airport {
 	private ArrayList<PhysicalRunway> runways;
 	private String name;
 	
+	//True when the current runway has been saved
+	private boolean saved = false;
+	
 	Runway currentRunway;
 	PhysicalRunway currentPhysicalRunway;
 
@@ -112,10 +115,25 @@ public class Airport {
 		try {
 			@SuppressWarnings("unused")
 			SaveToXMLFile xmlFile = new SaveToXMLFile(this);
+			saved = true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
+	}
+	
+	/**
+	 * Called whenever airport is modified
+	 */
+	public void setModified(){
+		this.saved = false;
+	}
+	
+	/**
+	 * @return Whether or not the airport has been saved
+	 */
+	public boolean getSaved(){
+		return this.saved;
 	}
 
 }
