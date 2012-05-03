@@ -566,9 +566,13 @@ public class PhysicalRunway {
 				|| Math.abs(distanceAwayFromCenterLine) > runwayStripWidth[REDECLARED]) {
 			closeTo.setLDA(Runway.REDECLARED, closeTo.getLDA(Runway.DEFAULT));
 		} else {
+			double actualResa = obstacle.getHeight() * angleOfSlope[REDECLARED];
+			if(actualResa < RESA[REDECLARED]){
+				actualResa = RESA[REDECLARED];
+			}	
 			double result = closeTo.getLDA(Runway.DEFAULT)
 					- distanceAwayFromThreshold
-					- (obstacle.getHeight() * angleOfSlope[REDECLARED])
+					- actualResa
 					- stopway[REDECLARED];
 			closeTo.setLDA(Runway.REDECLARED, (result >= 0 ? result : 0));
 		}
@@ -606,9 +610,13 @@ public class PhysicalRunway {
 			awayFrom.setTORA(Runway.REDECLARED,
 					awayFrom.getTORA(Runway.DEFAULT));
 		} else {
+			double actualResa = obstacle.getHeight() * angleOfSlope[REDECLARED];
+			if(actualResa < RESA[REDECLARED]){
+				actualResa = RESA[REDECLARED];
+			}	
 			double result = awayFrom.getTORA(Runway.DEFAULT)
 					- distanceAwayFromThreshold
-					- (obstacle.getHeight() * angleOfSlope[REDECLARED])
+					- actualResa
 					- stopway[REDECLARED]
 					- closeTo.getDisplacedThreshold(Runway.REDECLARED);
 			awayFrom.setTORA(Runway.REDECLARED, (result >= 0 ? result : 0));
@@ -647,9 +655,13 @@ public class PhysicalRunway {
 			awayFrom.setASDA(Runway.REDECLARED,
 					awayFrom.getASDA(Runway.DEFAULT));
 		} else {
+			double actualResa = obstacle.getHeight() * angleOfSlope[REDECLARED];
+			if(actualResa < RESA[REDECLARED]){
+				actualResa = RESA[REDECLARED];
+			}	
 			double result = awayFrom.getASDA(Runway.DEFAULT)
 					- distanceAwayFromThreshold
-					- (obstacle.getHeight() * angleOfSlope[REDECLARED])
+					- actualResa
 					- stopway[REDECLARED]
 					- closeTo.getDisplacedThreshold(Runway.REDECLARED);
 			awayFrom.setASDA(Runway.REDECLARED, (result >= 0 ? result : 0));
@@ -688,9 +700,13 @@ public class PhysicalRunway {
 			awayFrom.setTODA(Runway.REDECLARED,
 					awayFrom.getTODA(Runway.DEFAULT));
 		} else {
+			double actualResa = obstacle.getHeight() * angleOfSlope[REDECLARED];
+			if(actualResa < RESA[REDECLARED]){
+				actualResa = RESA[REDECLARED];
+			}	
 			double result = awayFrom.getTODA(Runway.DEFAULT)
 					- distanceAwayFromThreshold
-					- (obstacle.getHeight() * angleOfSlope[REDECLARED])
+					- actualResa
 					- stopway[REDECLARED]
 					- closeTo.getDisplacedThreshold(Runway.REDECLARED);
 			awayFrom.setTODA(Runway.REDECLARED, (result >= 0 ? result : 0));
