@@ -132,6 +132,7 @@ public class EditObstacleDialog extends JDialog {
 			PhysicalRunway r = airport.getCurrentPhysicalRunway();
 			comboBoxCloserTo.addItem(r.getRunway(0));
 			comboBoxCloserTo.addItem(r.getRunway(1));
+			comboBoxCloserTo.setSelectedItem(airport.getCurrentPhysicalRunway().closeTo());
 		}
 
 		JPanel panel_Spacer = new JPanel();
