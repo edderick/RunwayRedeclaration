@@ -60,7 +60,6 @@ public class Runway {
 	}
 
 	/**
-	 * @param option Runway.DEFAULT or Runway.REDECLARED
 	 * @return Value of TORA
 	 */
 	public double getTORA(int option) {
@@ -68,7 +67,6 @@ public class Runway {
 	}
 
 	/**
-	 * @param option Runway.DEFAULT or Runway.REDECLARED
 	 * @param tORA New value for TORA
 	 */
 	public void setTORA(int option, double tORA) {
@@ -76,7 +74,6 @@ public class Runway {
 	}
 
 	/**
-	 * @param option Runway.DEFAULT or Runway.REDECLARED
 	 * @return Value of ASDA
 	 */
 	public double getASDA(int option) {
@@ -84,7 +81,6 @@ public class Runway {
 	}
 
 	/**
-	 * @param option Runway.DEFAULT or Runway.REDECLARED
 	 * @param aSDA New value of ASDA
 	 */
 	public void setASDA(int option, double aSDA) {
@@ -92,7 +88,6 @@ public class Runway {
 	}
 
 	/**
-	 * @param option  Runway.DEFAULT or Runway.REDECLARED
 	 * @return Value of TODA
 	 */
 	public double getTODA(int option) {
@@ -100,7 +95,6 @@ public class Runway {
 	}
 
 	/**
-	 * @param option Runway.DEFAULT or Runway.REDECLARED
 	 * @param tODA New value for TODA
 	 */
 	public void setTODA(int option, double tODA) {
@@ -108,7 +102,6 @@ public class Runway {
 	}
 
 	/**
-	 * @param option Runway.DEFAULT or Runway.REDECLARED
 	 * @return Value of LDA
 	 */
 	public double getLDA(int option) {
@@ -116,7 +109,6 @@ public class Runway {
 	}
 
 	/**
-	 * @param option Runway.DEFAULT or Runway.REDECLARED
 	 * @param lDA The new value for LDA
 	 */
 	public void setLDA(int option, double lDA) {
@@ -124,7 +116,6 @@ public class Runway {
 	}
 
 	/**
-	 * @param option Runway.DEFAULT or Runway.REDECLARED
 	 * @return The value of the displacement threshold
 	 */
 	public double getDisplacedThreshold(int option) {
@@ -132,7 +123,6 @@ public class Runway {
 	}
 
 	/**
-	 * @param option Runway.DEFAULT or Runway.REDECLARED
 	 * @param displacedThreshold The new value for displacement threshold
 	 */
 	public void setDisplacedThreshold(int option, double displacedThreshold) {

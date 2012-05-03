@@ -1,22 +1,3 @@
-
-//=================================================
-
-//Sorry about this ugly comment block!
-
-//Do we need to cast the nodes to elements?
-
-//Would the line: 
-// String obstacleName = doc.getElementsByTagName("Obstacle_Name").item(0).getTextContent();
-// do the same thing?
-
-// Also, I am personally (I admit this is a matter of opinion), 
-// not a fan of shortened variable names e.g "len" vs. "length"
-
-//Finally - See last method, it needs a javadoc, and I don't know what it is doing :p
-
-//==================================================
-
-
 package Model;
 
 import javax.swing.JFileChooser;
@@ -47,7 +28,7 @@ public class LoadXMLFile {
 	String fileAddress = "";
 
 	/**
-	 * TODO: this
+	 * TODO: remove this?
 	 */
 	public LoadXMLFile() {
 		// this.loadFile();

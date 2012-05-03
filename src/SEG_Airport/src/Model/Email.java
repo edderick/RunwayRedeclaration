@@ -27,7 +27,6 @@ public class Email {
 	private Properties props = System.getProperties(); 
 	private Session session;
 	
-	//TODO: Maybe stored these settings in a file to be read in.
 	private String host = "smtp.gmail.com";
 	private String from = "seg2012gp9@gmail.com";
 	private String password = "SasanMaleki";
@@ -138,7 +137,5 @@ public class Email {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
-
 }

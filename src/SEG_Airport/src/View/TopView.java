@@ -1,5 +1,3 @@
-//This class and it's bro need to have a common parent that is more specific that JPanel ;)
-
 package View;
 import java.awt.Color;
 import java.awt.Font;

@@ -1,5 +1,3 @@
-//TODO: This class and it's bros need to have a common parent that is more specific that JPanel ;)
-
 package View;
 
 

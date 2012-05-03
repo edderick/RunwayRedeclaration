@@ -168,7 +168,6 @@ public class AdvancedParametersDialog extends JDialog {
 		buttonsPanel.add(btnApply, "cell 3 1");
 		btnApply.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//TODO: Implement this
 				physicalRunway.setAngleOfSlope(Double.parseDouble(tfAngleOfSlope.getText()));
 				physicalRunway.setBlastAllowance(Double.parseDouble(tfBlastAllowance.getText()));
 				physicalRunway.setClearedAndGradedWidth(Double.parseDouble(tfClearAndGradedWidth.getText()));
