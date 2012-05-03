@@ -16,6 +16,12 @@ import Model.Obstacle;
 import Model.Runway;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseMotionAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseAdapter;
 
 
 @SuppressWarnings("serial")
@@ -70,6 +76,8 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 	int xObstacle;
 	int yObstacle;
 
+	int mousex;
+	int mousey;
 
 	public TopView(Airport airport){
 		super();
@@ -81,7 +89,7 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 		setLayout(new MigLayout("", "[grow]", "[grow][]"));
 		
 		createSlider();
-		
+		createDraggingListeners();
 		setVisible(true);
 		
 	}
@@ -97,7 +105,6 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 			obstacleCreation(g2d);
 			declaredRunwaysCreation(g2d);
 		}
-		paintComponents(g);
 	}
 
 	public void setVisible(boolean b){
@@ -119,6 +126,31 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 			}
 		});
 		add(zoomSlider, "cell 0 1,alignx right,aligny bottom");
+	}
+	
+	public void createDraggingListeners(){
+		addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				mousex = arg0.getX();
+				mousey = arg0.getY();
+			}
+		});
+		addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseDragged(MouseEvent arg0) {
+			
+				int deltaMouseX = arg0.getX() - mousex;
+				int deltaMouseY = arg0.getY() - mousey;
+				
+				mousex = arg0.getX();
+				mousey = arg0.getY();
+				
+				setOffset(xOffset + deltaMouseX, yOffset + deltaMouseY);
+				repaint();
+				updateUI();
+			}
+		});
 	}
 	
 	public void runwayCreation(Graphics2D g2d){
