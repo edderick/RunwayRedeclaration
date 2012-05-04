@@ -1,10 +1,14 @@
 package View;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.PaintContext;
+import java.awt.Point;
+import java.awt.Toolkit;
 
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
@@ -93,6 +97,7 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 
 		setLayout(new MigLayout("", "[grow]", "[grow][]"));
 
+		setDragCursor(this);
 		createSlider();
 		createDraggingListeners();
 		setVisible(true);
@@ -126,6 +131,7 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 
 	public void createSlider(){
 		JSlider zoomSlider = new JSlider();
+		setDragCursor(zoomSlider);
 		zoomSlider.setBackground(null);
 		zoomSlider.setValue(1000);
 		zoomSlider.setMinimum(1000);
@@ -393,10 +399,10 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 				this.yObstacle = runwayHeight/2; //there will be a getter for this!!! :D
 				this.obstacleLength =(int) obstacle.getLength();
 				this.obstacleWidth = (int) obstacle.getWidth();
-				this.LDAStart=(int) (xRunway-(obstacleLength*airport.getCurrentPhysicalRunway().getAngleOfSlope()));
+				this.LDAStart=(int) (xObstacle-((obstacleLength*airport.getCurrentPhysicalRunway().getAngleOfSlope()+airport.getCurrentPhysicalRunway().getStopway()+LDA)*r));
 				this.TORAStart=0;
-				this.TODAStart=TORAStart+TORA;
-				this.ASDAStart=TORAStart+TORA;
+				this.TODAStart=(int) (TORAStart+((TORA-TODA)*r));
+				this.ASDAStart=(int) (TORAStart+((TORA-ASDA)*r));
 			}	
 		}
 	}
@@ -416,31 +422,35 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 	}
 
 
-	//TODO: Remove redundant methods
-	public void zoomIn(){
-		ratio=ratio+ratioIncrement;
-		repaint();
-	}
-
-	//TODO: Remove redundant methods
-	public void zoomOut(){
-		ratio=ratio-ratioIncrement;
-		repaint();
-	}
-
 	public void setZoom(double ratio){
 		this.ratio = ratio;
 	}
 
-	//TODO: Remove redundant methods
-	public void resetZoom(){
-		this.ratioIncrement=0.95;
-	}
-
-
 	public void setOffset(int x, int y){
 		this.xOffset=x;
 		this.yOffset=y;
+	}
+	
+	public void setDragCursor(final JComponent component){
+		Cursor openHandCursor = Toolkit.getDefaultToolkit().createCustomCursor(Toolkit.getDefaultToolkit().getImage("data/opengrab.png"), new Point(16,16), "closed");
+		component.setCursor(openHandCursor);	
+
+		addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				super.mousePressed(e);
+				Cursor closedHandCursor = Toolkit.getDefaultToolkit().createCustomCursor(Toolkit.getDefaultToolkit().getImage("data/closedgrab.png"), new Point(16,16), "closed");
+				component.setCursor(closedHandCursor);	
+
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				super.mouseReleased(e);
+				Cursor openHandCursor = Toolkit.getDefaultToolkit().createCustomCursor(Toolkit.getDefaultToolkit().getImage("data/opengrab.png"), new Point(16,16), "closed");
+				component.setCursor(openHandCursor);	
+			}
+		});
 	}
 }
 
