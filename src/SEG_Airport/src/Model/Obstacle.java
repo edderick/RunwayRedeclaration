@@ -4,7 +4,7 @@ package Model;
  * Represents an obstacle that can be placed on a runway
  * @author Kelvin
  */
-public class Obstacle /*implements Saveable*/{
+public class Obstacle implements Saveable{
 
 	private String name;
 	private double height, width, length;

@@ -51,7 +51,12 @@ public class OpenAirportListener implements ActionListener, AirportObserver{
 		} catch (Exception ex) {}
 		if (ap != null) {
 			this.airport = ap;
-			System.out.println("name of opened airport: " + ap.getName());
+			
+			if(airport.getPhysicalRunways().size() != 0) { 
+				airport.setCurrentPhysicalRunway(airport.getPhysicalRunways().get(0));
+				airport.setCurrentRunway(airport.getCurrentPhysicalRunway().getRunway(0));
+			}
+			
 			notifyAirportObservers();
 			try {
 				MainFrame.saveRecentFile(ap, lf.getFilename());

@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Represents an airport, contains runways
  * @author Oscar
  */
-public class Airport /*implements Saveable*/{
+public class Airport implements Saveable{
 
 	//List of physical runways
 	private ArrayList<PhysicalRunway> runways;
