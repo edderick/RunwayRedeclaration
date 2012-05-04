@@ -347,31 +347,17 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 
 	public void declaredRunwaysCreation(Graphics2D g2d){
 		if(airport!=null && runway!=null){
-			//		Color toraColor = new Color(0, 255, 0, 70);
-			//		Color todaColor = new Color(255, 0, 0, 70);
-			//		Color asdaColor = new Color(0, 0, 255, 70);
-			//		Color ldaColor = new Color(255, 0, 255, 70);
-
-
-			//			g2d.setColor(toraColor);
-			//			g2d.fillRect(xRunway+TORAStart, (int) (yRunway+offset), (int) (TORA*r), (int) ((3*(runwayHeight*r)/8)-(r*runwayHeight *0.05)));
-			//			g2d.setColor(todaColor);
-			//			g2d.fillRect(xRunway+TODAStart, (int) (yRunway -((3*(runwayHeight*r)/8))+offset), (int) (TODA*r), (int) ((3*(runwayHeight*r)/8)-(r*runwayHeight *0.05)));
-			//			g2d.setColor(asdaColor);
-			//			g2d.fillRect(xRunway+ASDAStart, (int) (yRunway +((3*(runwayHeight*r)/8))+offset), (int) (ASDA*r), (int) ((3*(runwayHeight*r)/8)-(r*runwayHeight *0.05)));
-			//			g2d.setColor(ldaColor);
-			//			g2d.fillRect(xRunway+LDAStart, (int) (yRunway + (2* ((3*(runwayHeight*r)/8)))+offset), (int) (LDA*r), (int) ((3*(runwayHeight*r)/8)-(r*runwayHeight *0.05)));
-			int yInc = (int) ((runwayHeight/2)*meterToPixel);
+			int yInc = meterToPixel(runwayHeight/2);
 			g2d.setFont(new Font("key", 1, 15));
 			int width = 3;
 			g2d.setColor(toraColor);
-			g2d.fillRect(xRunway+TORAStart, (int) (yRunway-yInc), (int) (TORA*meterToPixel), width);
+			g2d.fillRect(xRunway+TORAStart,  (yRunway-yInc),  meterToPixel(TORA), width);
 			g2d.setColor(todaColor);
-			g2d.fillRect(xRunway+TODAStart, (int) (yRunway -yInc*2), (int) (TODA*meterToPixel), width);
+			g2d.fillRect(xRunway+TODAStart, (yRunway -yInc*2),  meterToPixel(TODA), width);
 			g2d.setColor(asdaColor);
-			g2d.fillRect(xRunway+ASDAStart, (int) (yRunway -yInc*3), (int) (ASDA*meterToPixel), width);
+			g2d.fillRect(xRunway+ASDAStart, (yRunway -yInc*3),  meterToPixel(ASDA), width);
 			g2d.setColor(ldaColor);
-			g2d.fillRect(xRunway+LDAStart, (int) (yRunway + yInc + (runwayHeight*meterToPixel)), (int) (LDA*meterToPixel), width);
+			g2d.fillRect(xRunway+LDAStart, (yRunway + yInc + meterToPixel(runwayHeight)),  meterToPixel(LDA), width);
 		}
 	}
 
