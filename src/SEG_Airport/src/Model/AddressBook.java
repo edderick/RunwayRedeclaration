@@ -124,7 +124,7 @@ public class AddressBook {
 	public void saveToXML(){
 		try {
 			@SuppressWarnings("unused")
-			SaveToXMLFile xmlFile = new SaveToXMLFile(this.getContacts());
+			SaveToXMLFile xmlFile = new SaveToXMLFile(this.getContacts(), false);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
