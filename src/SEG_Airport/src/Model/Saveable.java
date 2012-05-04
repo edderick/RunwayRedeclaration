@@ -1,16 +1,24 @@
 package Model;
-
+/**
+ * This Interface should be implemented by any model object that
+ * can be saved to an xmlfile
+ * @author Edward
+ */
 public interface Saveable {
-
-	public void saveToXML();
+	
 	/**
-	 * Called whenever airport is modified
+	 * Called whenever object is modified
 	 */
 	public void setModified();
 	
 	/**
-	 * @return Whether or not the airport has been saved
+	 * @return Whether or not the object has been saved
 	 */
 	public boolean getSaved();
 	
+	/**
+	 * Saves the object to an xml file on disk
+	 */
+	public void saveToXML();
+
 }
