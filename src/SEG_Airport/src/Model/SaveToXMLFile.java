@@ -71,15 +71,19 @@ public class SaveToXMLFile {
 	 * @param contacts The list of contacts to save
 	 * @throws Exception Relating to reading files or generating xml
 	 */
-	public SaveToXMLFile(ArrayList<Contact> contacts) throws Exception{
+	public SaveToXMLFile(ArrayList<Contact> contacts, boolean silentOrNot) throws Exception{
 
 		String root = "Contacts";
 		this.createDocBuilderFactory(root);
 
 		this.addNodesAndElementsContacts(contacts);
 
-		//Creating JFileChooser object and storing its return value
-		this.createFChooserAndStore();
+		if (!silentOrNot){
+			//Creating JFileChooser object and storing its return value
+			this.createFChooserAndStore();
+		}else{
+			silentSaveContacts("~/file.xml");
+		}
 	}
 
 	/**
@@ -299,6 +303,25 @@ public class SaveToXMLFile {
 		} else {
 			System.out.println("Save command cancelled by user.");
 		}
+
+	}
+	
+	public void silentSaveContacts(String address) throws IOException, TransformerException {
+
+		file = new File("address");
+		
+		TransformerFactory transformerFactory = TransformerFactory
+				.newInstance();
+		Transformer transformer = transformerFactory.newTransformer();
+		transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+		
+		StreamResult result = new StreamResult(file/*System.out*/);
+		DOMSource source = new DOMSource(document);
+		file.createNewFile();
+		
+		transformer.transform(source, result);
+		
+		
 
 	}
 
