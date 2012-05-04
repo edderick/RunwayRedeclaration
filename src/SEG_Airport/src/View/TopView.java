@@ -90,12 +90,11 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 
 	public TopView(Airport airport){
 		super();
-
 		this.setBackground(new Color(154, 205, 50));
+		setLayout(new MigLayout("", "[grow]", "[grow][]"));
+		
 		updateAirport(airport);
 		setValues();
-
-		setLayout(new MigLayout("", "[grow]", "[grow][]"));
 
 		setDragCursor(this);
 		createSlider();
@@ -108,12 +107,8 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 		super.paint(g);
 		if(visible){
 			setValues();
-
 			Graphics2D g2d = (Graphics2D)g;
-
-			drawKey(g2d);
-			drawScale(g2d);
-
+			
 			g.translate(xOffset, yOffset);
 
 			runwayCreation(g2d);
@@ -122,6 +117,8 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 			
 			g.translate(-xOffset, -yOffset);
 			paintComponents(g);
+			drawKey(g2d);
+			drawScale(g2d);
 		}
 	}
 
@@ -427,6 +424,20 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 	}
 
 	public void setOffset(int x, int y){
+		int a = this.getWidth();
+		int b = this.getHeight();
+		if(x>a-50){
+			x=a-50;
+		}
+		if(y>b-150){
+			y=b-150;
+		}
+		if(x<-a+50){
+			x=-a+50;
+		}
+		if(y<-b+150){
+			y=-b+150;
+		}
 		this.xOffset=x;
 		this.yOffset=y;
 	}
