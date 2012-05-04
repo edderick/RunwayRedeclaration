@@ -341,7 +341,7 @@ public class Tests_Oscar {
 		
 		// Step 1.
 		try {
-			SaveToXMLFile saveTo = new SaveToXMLFile(contactsList);
+			SaveToXMLFile saveTo = new SaveToXMLFile(contactsList, false);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
