@@ -68,7 +68,7 @@ public class SaveToXMLFile {
 	
 	/**
 	 * Constructor for contacts
-	 * @param contacts The list of contacts to save
+	 * @param contacts The list of contacts to save, boolean indicating silent save or not
 	 * @throws Exception Relating to reading files or generating xml
 	 */
 	public SaveToXMLFile(ArrayList<Contact> contacts, boolean silentOrNot) throws Exception{
