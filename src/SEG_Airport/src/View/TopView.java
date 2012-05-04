@@ -131,7 +131,6 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 
 	public void createSlider(){
 		JSlider zoomSlider = new JSlider();
-		setDragCursor(zoomSlider);
 		zoomSlider.setBackground(null);
 		zoomSlider.setValue(1000);
 		zoomSlider.setMinimum(1000);
@@ -145,6 +144,7 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 			}
 		});
 		add(zoomSlider, "cell 0 1,alignx right,aligny bottom");
+		zoomSlider.setCursor(Cursor.getDefaultCursor());
 	}
 
 	public void createDraggingListeners(){
