@@ -28,7 +28,7 @@ public class OpenRecentObstacleListener implements ActionListener, AirportObserv
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
+		
 		if(airport.getPhysicalRunways().size() == 0){
 			JOptionPane.showMessageDialog(null, "Airport does not contain any physical runways\r\nPlease add one by going to Edit > Airport", "", JOptionPane.ERROR_MESSAGE);
 		} else if (airport.getCurrentPhysicalRunway() == null){
@@ -55,7 +55,7 @@ public class OpenRecentObstacleListener implements ActionListener, AirportObserv
 				e1.printStackTrace();
 			}
 		}
-		
+
 	}
 
 	@Override

@@ -1,7 +1,11 @@
 package View;
 
 import java.awt.BorderLayout;
+import java.awt.Cursor;
 import java.awt.EventQueue;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
@@ -21,6 +25,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import javax.swing.ImageIcon;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
@@ -48,10 +53,10 @@ import java.awt.Color;
 public class MainFrame extends JFrame implements AirportObserver{
 
 	//TODO: Implement zooming and panning
-	
+
 	private static final int MAX_HISTORY = 10;
 	private static final int HISTORY_TO_SHOW = 5;
-	
+
 	private JPanel contentPane;
 	private JSplitPane rightSplitPane;
 	private JTable OriginalParametersTable;
@@ -64,7 +69,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 	private final ButtonGroup bottomPanelButtonGroup = new ButtonGroup();
 
 	TopView topTopView;
-	
+
 	private Airport airport;
 	private AddressBook addressBook;
 
@@ -92,11 +97,13 @@ public class MainFrame extends JFrame implements AirportObserver{
 
 	public MainFrame() {
 
-		//TODO: Load addressbook on application start;
+
+
+
 		addressBook = new AddressBook();
 		LoadXMLFile lf = new LoadXMLFile();
 		if(!addressBook.addContacts(lf.silentLoadContacts("data/AddressBook.xml"))) System.out.println("Contact Load failed");
-		
+
 		rightSplitPane = new JSplitPane();
 
 		airport = new Airport("");
@@ -224,14 +231,14 @@ public class MainFrame extends JFrame implements AirportObserver{
 		mnFile.add(separator_1);
 
 		ExitListener exitListener = new ExitListener(airport);
-		
+
 		JMenuItem mntmExit = new JMenuItem("Exit");
 		mntmExit.setMnemonic('x');
 		mntmExit.addActionListener(exitListener);
 		mnFile.add(mntmExit);
-		
+
 		addWindowListener(exitListener);
-		
+
 		JMenu mnEdit = new JMenu("Edit");
 		mnEdit.setMnemonic('e');
 		menuBar.add(mnEdit);
@@ -288,21 +295,21 @@ public class MainFrame extends JFrame implements AirportObserver{
 		rightSplitPane.setLeftComponent(topTopView);
 		airportObservers.add(topTopView);
 
-			
+
 		JRadioButtonMenuItem rdbtnmntmTopPanelSideView = new JRadioButtonMenuItem("Side View");
 		topPanelButtonGroup.add(rdbtnmntmTopPanelSideView);
 		mnTopPanel.add(rdbtnmntmTopPanelSideView);
 		SideView topSideView = new SideView(airport); 
 		rdbtnmntmTopPanelSideView.addActionListener(new SelectViewListener(rightSplitPane, topSideView, true));
 		airportObservers.add(topSideView);
-		
+
 		JRadioButtonMenuItem rdbtnmntmTopPanelCalculations = new JRadioButtonMenuItem("Calculations");
 		topPanelButtonGroup.add(rdbtnmntmTopPanelCalculations);
 		mnTopPanel.add(rdbtnmntmTopPanelCalculations);
 		CalculationsView topCalcView = new CalculationsView(airport);
 		rdbtnmntmTopPanelCalculations.addActionListener(new SelectViewListener(rightSplitPane, topCalcView, true));
 		airportObservers.add(topCalcView);
-		
+
 		JRadioButtonMenuItem rdbtnmntmTopPanelNone = new JRadioButtonMenuItem("None");
 		topPanelButtonGroup.add(rdbtnmntmTopPanelNone);
 		mnTopPanel.add(rdbtnmntmTopPanelNone);
@@ -330,14 +337,14 @@ public class MainFrame extends JFrame implements AirportObserver{
 		airportObservers.add(bottomSideView);
 		rightSplitPane.setRightComponent(bottomSideView);
 		bottomSideView.setVisible(true);
-		
+
 		JRadioButtonMenuItem rdbtnmntmBottomPanelCalculations = new JRadioButtonMenuItem("Calculations");
 		bottomPanelButtonGroup.add(rdbtnmntmBottomPanelCalculations);
 		mnNewMenu_1.add(rdbtnmntmBottomPanelCalculations);
 		CalculationsView bottomCalcView = new CalculationsView(airport);
 		rdbtnmntmBottomPanelCalculations.addActionListener(new SelectViewListener(rightSplitPane, bottomCalcView, false));
 		airportObservers.add(bottomCalcView);
-		
+
 		JRadioButtonMenuItem rdbtnmntmBottomPanelNone = new JRadioButtonMenuItem("None");
 		bottomPanelButtonGroup.add(rdbtnmntmBottomPanelNone);
 		mnNewMenu_1.add(rdbtnmntmBottomPanelNone);
@@ -419,7 +426,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 				new String[] {
 						"New column", "New column"
 				}
-		));
+				));
 		leftTopPanel.add(OriginalParametersTable, BorderLayout.CENTER);
 
 		JPanel leftMiddlePanel = new JPanel();
@@ -441,7 +448,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 				new String[] {
 						"New column", "New column"
 				}
-		));
+				));
 		leftMiddlePanel.add(RedeclaredParametersTable, BorderLayout.CENTER);
 
 		JPanel leftUpperBottomPanel = new JPanel();
@@ -462,14 +469,14 @@ public class MainFrame extends JFrame implements AirportObserver{
 				new String[] {
 						"Property", "Value"
 				}
-		));
+				));
 		leftUpperBottomPanel.add(ObstacleDetailsTable);
-		
+
 		JPanel leftLowerBottomPanel = new JPanel();
 		leftLowerBottomPanel.setBorder(new TitledBorder(null, "Advanced Parameters", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		leftPanel.add(leftLowerBottomPanel, "cell 0 4,grow");
 		leftLowerBottomPanel.setLayout(new BorderLayout(0, 0));
-		
+
 		AdvancedParametersTable = new JTable();
 		AdvancedParametersTable.setEnabled(false);
 		AdvancedParametersTable.setRowSelectionAllowed(false);
@@ -484,10 +491,10 @@ public class MainFrame extends JFrame implements AirportObserver{
 				new String[] {
 						"Property", "Value"
 				}
-		));
+				));
 		leftLowerBottomPanel.add(AdvancedParametersTable);
-		
-	
+
+
 
 		contentPane.add(rightSplitPane, "cell 1 0,grow");
 		rightSplitPane.setResizeWeight(0.5);
@@ -595,7 +602,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 			currentRunwayCombo.addItemListener(new SelectRunwayListener(airport, airportObservers));
 		}
 	}
-	
+
 	private void  generatePhysicalRunwayRadioButtons(JMenu parentMenuItem){
 		parentMenuItem.removeAll();
 		for(PhysicalRunway r : airport.getPhysicalRunways()){
@@ -611,14 +618,14 @@ public class MainFrame extends JFrame implements AirportObserver{
 
 		if(airport.getCurrentRunway() != null){
 			Runway runway = airport.getCurrentRunway();
-			
+
 			TableModel original = OriginalParametersTable.getModel();
 			original.setValueAt(runway.getTORA(Runway.DEFAULT) + "m", 0, 1);
 			original.setValueAt(runway.getTODA(Runway.DEFAULT) + "m", 1, 1);
 			original.setValueAt(runway.getASDA(Runway.DEFAULT) + "m", 2, 1);
 			original.setValueAt(runway.getLDA(Runway.DEFAULT) + "m", 3, 1);
 			original.setValueAt(runway.getDisplacedThreshold(Runway.DEFAULT) + "m", 4, 1);
-			
+
 			TableModel redeclared = RedeclaredParametersTable.getModel();
 			redeclared.setValueAt(runway.getTORA(Runway.REDECLARED) + "m", 0, 1);
 			redeclared.setValueAt(runway.getTODA(Runway.REDECLARED) + "m", 1, 1);
@@ -626,21 +633,21 @@ public class MainFrame extends JFrame implements AirportObserver{
 			redeclared.setValueAt(runway.getLDA(Runway.REDECLARED) + "m", 3, 1);
 			redeclared.setValueAt(runway.getDisplacedThreshold(Runway.REDECLARED) + "m", 4, 1);
 		}
-		
+
 		if(airport.getCurrentPhysicalRunway() != null && airport.getCurrentPhysicalRunway().getObstacle() != null){
 			PhysicalRunway physicalRunway = airport.getCurrentPhysicalRunway();
 			Obstacle obstacle = physicalRunway.getObstacle();
-			
+
 			TableModel obstacleTab = ObstacleDetailsTable.getModel();
 			obstacleTab.setValueAt(obstacle.getName(), 0, 1);
 			obstacleTab.setValueAt(obstacle.getHeight(), 1, 1);
 			obstacleTab.setValueAt(physicalRunway.getDistanceAwayFromThreshold(), 2, 1);
 			obstacleTab.setValueAt(physicalRunway.closeTo(), 3, 1);
 		}
-		
+
 		if(airport.getCurrentPhysicalRunway() != null){
 			PhysicalRunway physicalRunway = airport.getCurrentPhysicalRunway();
-			
+
 			TableModel advancedParametersTab = AdvancedParametersTable.getModel();
 			advancedParametersTab.setValueAt(physicalRunway.getRESA(), 0, 1);
 			advancedParametersTab.setValueAt(physicalRunway.getStopway(), 1, 1);
