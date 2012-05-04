@@ -399,7 +399,7 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 				this.yObstacle = runwayHeight/2; //there will be a getter for this!!! :D
 				this.obstacleLength =(int) obstacle.getLength();
 				this.obstacleWidth = (int) obstacle.getWidth();
-				this.LDAStart=(int) (xObstacle-((obstacleLength*airport.getCurrentPhysicalRunway().getAngleOfSlope()+airport.getCurrentPhysicalRunway().getStopway()+LDA)*r));
+				this.LDAStart=0;
 				this.TORAStart=0;
 				this.TODAStart=(int) (TORAStart+((TORA-TODA)*r));
 				this.ASDAStart=(int) (TORAStart+((TORA-ASDA)*r));
