@@ -114,6 +114,9 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 			runwayCreation(g2d);
 			obstacleCreation(g2d);
 			declaredRunwaysCreation(g2d);
+			
+			g.translate(-xOffset, -yOffset);
+			paintComponents(g);
 		}
 	}
 
@@ -123,7 +126,7 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 
 	public void createSlider(){
 		JSlider zoomSlider = new JSlider();
-		zoomSlider.setBackground(new Color(154, 205, 50));
+		zoomSlider.setBackground(null);
 		zoomSlider.setValue(1000);
 		zoomSlider.setMinimum(1000);
 		zoomSlider.setMaximum(6000);
@@ -405,6 +408,7 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 		{
 			runway=airport.getCurrentRunway();
 			obstacle=airport.getCurrentPhysicalRunway().getObstacle();
+			setOffset(0, 0);
 			setValues();
 			repaint();
 		}
