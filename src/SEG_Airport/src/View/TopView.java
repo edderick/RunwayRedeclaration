@@ -18,6 +18,7 @@ import javax.swing.event.ChangeListener;
 import Model.Airport;
 import Model.AirportObserver;
 import Model.Obstacle;
+import Model.PhysicalRunway;
 import Model.Runway;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.BoxLayout;
@@ -55,6 +56,7 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 	Color ldaColor = new Color(255, 0, 255);
 
 	double meterToPixel;
+	int oppositeDT;
 	int TORA;
 	int TODA;
 	int ASDA;
@@ -82,6 +84,8 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 	Obstacle obstacle;
 	String threshold;
 	int spaceForScale;
+	int leftDT;
+	int rightDT;
 
 	//relative to panel
 	int xRunway;
@@ -239,18 +243,19 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 			drawRunwayMarkings(g2d);
 			
 			
-			
+			g2d.setColor(Color.WHITE);
 			for(int i=0; i<1000; i++){
 				Font f = new Font("tag", 1, 1000-i);
 				g2d.setFont(f);
 				if(g2d.getFontMetrics().stringWidth(leftTag)<=(fontRatio*height))break;
 			}			
-			g2d.rotate(0.5 * Math.PI,  xRunway+tagBorder, yRunway+(height/8));
-			g2d.drawString(leftTag, xRunway+ tagBorder, yRunway+(height/8));
-			g2d.rotate(-0.5 * Math.PI,  xRunway + tagBorder, yRunway+(height/8));
-			g2d.rotate(-0.5 * Math.PI,  xRunway + width - tagBorder, yRunway+(7*(height/8)));
-			g2d.drawString(rightTag, xRunway+ width - tagBorder, yRunway+(7*(height/8)));
-			g2d.rotate(0.5 * Math.PI,  xRunway + width - tagBorder, yRunway+(7*(height/8)));
+			g2d.rotate(0.5 * Math.PI,  xRunway+tagBorder+ meterToPixel(leftDT), yRunway+(height/8));
+			g2d.drawString(leftTag, xRunway+ tagBorder+ meterToPixel(leftDT), yRunway+(height/8));
+			g2d.rotate(-0.5 * Math.PI,  xRunway + tagBorder+ meterToPixel(leftDT), yRunway+(height/8));
+			
+			g2d.rotate(-0.5 * Math.PI,  xRunway + width - tagBorder -meterToPixel(rightDT), yRunway+(7*(height/8)));
+			g2d.drawString(rightTag, xRunway+ width - tagBorder-meterToPixel(rightDT), yRunway+(7*(height/8)));
+			g2d.rotate(0.5 * Math.PI,  xRunway + width - tagBorder-meterToPixel(rightDT), yRunway+(7*(height/8)));
 			
 			
 
@@ -306,7 +311,7 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 		}
 		int gaps = 25;
 		int ratioOfDashesToThresholdMarker = 4;
-		for(int i = dashesLength*ratioOfDashesToThresholdMarker; i<runwayWidth-(dashesLength*ratioOfDashesToThresholdMarker+1); i=i+gaps+dashesLength){
+		for(int i = dashesLength*ratioOfDashesToThresholdMarker+leftDT; i<runwayWidth-(dashesLength*ratioOfDashesToThresholdMarker)-rightDT; i=i+gaps+dashesLength){
 			g2d.fillRect(xRunway+meterToPixel(i), dashesY, meterToPixel(dashesLength), meterToPixel(dashesWidth));
 		}
 		
@@ -320,16 +325,48 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 		dashesWidth=(runwayHeight/ratioOfThresholdDashesWidthToRunwayHeight);
 		if (dashesWidth == 0) dashesWidth = 1;
 		gaps=dashesWidth;
-		int dashesX = xRunway + meterToPixel(dashesLength/2);
+		int dashesX = xRunway + meterToPixel((dashesLength/2)+leftDT);
 		dashesLength=dashesLength*ratioOfDashesToThresholdDashes;
 
 		for(int i = gaps; i<runwayHeight-(gaps*2); i=i+gaps+dashesWidth){
 			g2d.fillRect(dashesX, meterToPixel(i)+yRunway, meterToPixel(dashesLength), meterToPixel(dashesWidth));
 		}
 
-		dashesX = xRunway + meterToPixel(runwayWidth)  - meterToPixel(dashesLength/ratioOfDashesToThresholdMarker) - meterToPixel(dashesLength);
+		dashesX = xRunway + meterToPixel(runwayWidth)  - meterToPixel(dashesLength/ratioOfDashesToThresholdMarker) - meterToPixel(dashesLength) - meterToPixel(rightDT);
 		for(int i = gaps; i<runwayHeight-(gaps*2); i=i+gaps+dashesWidth){
 			g2d.fillRect(dashesX, meterToPixel(i)+yRunway, meterToPixel(dashesLength), meterToPixel(dashesWidth));
+		}
+		
+		displaceThresholdMarkings(g2d);
+	}
+	
+	public void displaceThresholdMarkings(Graphics g2d){
+		int dashesLength = 35;
+		int gaps=25;
+		int dashesWidth = 1;
+		if(meterToPixel(dashesWidth)<3){
+			dashesWidth=pixelToMeter(3);
+		}
+		if(leftDT>0){
+			
+			for(int i = 0; i<leftDT-dashesLength; i=i+dashesLength+gaps){
+				g2d.drawLine(xRunway+meterToPixel(i), yRunway+meterToPixel(runwayHeight/2), xRunway+meterToPixel(i+dashesLength), yRunway+meterToPixel(runwayHeight/2));
+				g2d.drawLine(xRunway+meterToPixel(i+dashesLength), yRunway+meterToPixel(runwayHeight/2), xRunway+meterToPixel(i+(7*dashesLength/8)), yRunway+meterToPixel(dashesWidth*2+runwayHeight/2));
+				g2d.drawLine(xRunway+meterToPixel(i+dashesLength), yRunway+meterToPixel(runwayHeight/2), xRunway+meterToPixel(i+(7*dashesLength/8)), yRunway+meterToPixel(-(dashesWidth*2)+runwayHeight/2));
+				
+			}
+			g2d.setColor(Color.YELLOW);
+			g2d.drawLine(xRunway+meterToPixel(leftDT), yRunway, xRunway+meterToPixel(leftDT), yRunway+meterToPixel(runwayHeight));
+		}
+		if(rightDT>0){
+			for(int i = xRunway+meterToPixel(runwayWidth); i>xRunway+meterToPixel(runwayWidth-rightDT+dashesLength); i=i-dashesLength-gaps){
+				g2d.drawLine(xRunway+i, yRunway+meterToPixel(runwayHeight/2), xRunway+i+meterToPixel(dashesLength), yRunway+meterToPixel(runwayHeight/2));
+				g2d.drawLine(xRunway+i, yRunway+meterToPixel(runwayHeight/2), xRunway+i+meterToPixel(dashesLength/8), yRunway+meterToPixel(dashesWidth*2+runwayHeight/2));
+				g2d.drawLine(xRunway+i, yRunway+meterToPixel(runwayHeight/2), xRunway+i+meterToPixel(dashesLength/8), yRunway+meterToPixel(-(dashesWidth*2)+runwayHeight/2));
+				
+			}
+			g2d.setColor(Color.YELLOW);
+			g2d.drawLine(xRunway+meterToPixel(runwayWidth-oppositeDT), yRunway, xRunway+meterToPixel(runwayWidth-rightDT), yRunway+meterToPixel(runwayHeight));
 		}
 	}
 	
@@ -446,7 +483,7 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 		if(airport!=null && runway!=null){
 			this.runwayWidth = (int) runway.getTORA(Runway.DEFAULT);
 			this.runwayHeight = 60;
-
+			
 			this.TORA = (int) runway.getTORA(Runway.REDECLARED);
 			this.TODA = (int) runway.getTODA(Runway.REDECLARED);
 			this.ASDA = (int) runway.getASDA(Runway.REDECLARED);
@@ -461,7 +498,7 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 			this.stopway = (int) airport.getCurrentPhysicalRunway().getStopway();
 			this.leftTag= airport.getCurrentPhysicalRunway().getRunway(0).getName();
 			this.rightTag = airport.getCurrentPhysicalRunway().getRunway(1).getName();
-
+			
 			if(obstacle!=null){
 				int distance = (int) airport.getCurrentPhysicalRunway().getDistanceAwayFromThreshold();
 				this.threshold=airport.getCurrentPhysicalRunway().closeTo().getName(); 
@@ -475,7 +512,16 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 					this.ANGLE=(int) (obstacle.getHeight()*airport.getCurrentPhysicalRunway().getAngleOfSlope());
 //				}
 				
-			}	
+			}
+			
+			if(leftTag.equals(airport.getCurrentPhysicalRunway().getRunway(1).getName())){
+				leftDT =(int) airport.getCurrentPhysicalRunway().getRunway(1).getDisplacedThreshold(0);
+				rightDT=(int) airport.getCurrentPhysicalRunway().getRunway(0).getDisplacedThreshold(0);
+			}else{
+				leftDT =(int) airport.getCurrentPhysicalRunway().getRunway(0).getDisplacedThreshold(0);
+				rightDT=(int) airport.getCurrentPhysicalRunway().getRunway(1).getDisplacedThreshold(0);
+			}
+			
 		}
 	}
 
