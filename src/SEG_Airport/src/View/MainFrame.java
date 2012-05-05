@@ -649,6 +649,12 @@ public class MainFrame extends JFrame implements AirportObserver{
 			obstacleTab.setValueAt(obstacle.getHeight(), 1, 1);
 			obstacleTab.setValueAt(physicalRunway.getDistanceAwayFromThreshold(), 2, 1);
 			obstacleTab.setValueAt(physicalRunway.closeTo(), 3, 1);
+		} else {
+			TableModel obstacleTab = ObstacleDetailsTable.getModel();
+			obstacleTab.setValueAt("", 0, 1);
+			obstacleTab.setValueAt("", 1, 1);
+			obstacleTab.setValueAt("", 2, 1);
+			obstacleTab.setValueAt("", 3, 1);
 		}
 
 		if(airport.getCurrentPhysicalRunway() != null){
