@@ -7,6 +7,8 @@ import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 
 import javax.swing.JPanel;
 import javax.swing.JSlider;
@@ -110,21 +112,28 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 	}
 
 	public void createSlider(){
-		JSlider zoomSlider = new JSlider();
+		final JSlider zoomSlider = new JSlider();
 		zoomSlider.setMinorTickSpacing(1);
 		zoomSlider.setBackground(new Color(154, 205, 50));
-		zoomSlider.setValue(100);
-		zoomSlider.setMinimum(100);
-		zoomSlider.setMaximum(600);
+		zoomSlider.setValue(950);
+		zoomSlider.setMinimum(950);
+		zoomSlider.setMaximum(6000);
 		zoomSlider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				JSlider slider = ((JSlider)e.getSource());
-				setZoom(slider.getValue() / 100);
+				setZoom((double)slider.getValue() / (double)1000);
 				repaint();
 				updateUI();
 			}
 		});
 		add(zoomSlider, "cell 0 1,alignx right,aligny bottom");
+		
+		addMouseWheelListener(new MouseWheelListener() {
+			public void mouseWheelMoved(MouseWheelEvent arg0) {
+				zoomSlider.setValue(zoomSlider.getValue() - (arg0.getWheelRotation() * 100));
+			}
+		});
+		
 	}
 
 	public void createDraggingListeners(){

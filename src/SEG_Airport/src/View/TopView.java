@@ -27,6 +27,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
+import java.awt.event.MouseWheelListener;
+import java.awt.event.MouseWheelEvent;
 
 
 @SuppressWarnings("serial")
@@ -94,6 +96,7 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 
 	public TopView(Airport airport){
 		super();
+
 		this.setBackground(new Color(154, 205, 50));
 		setLayout(new MigLayout("", "[grow]", "[grow][]"));
 		
@@ -148,21 +151,28 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 	}
 
 	public void createSlider(){
-		JSlider zoomSlider = new JSlider();
+		final JSlider zoomSlider = new JSlider();
 		zoomSlider.setBackground(null);
-		zoomSlider.setValue(1000);
-		zoomSlider.setMinimum(1000);
+		zoomSlider.setValue(950);
+		zoomSlider.setMinimum(900);
 		zoomSlider.setMaximum(6000);
 		zoomSlider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				JSlider slider = ((JSlider)e.getSource());
-				setZoom(slider.getValue() / 1000);
+				setZoom((double)slider.getValue() / (double)1000);
 				repaint();
 				updateUI();
 			}
 		});
 		add(zoomSlider, "cell 0 1,alignx right,aligny bottom");
 		zoomSlider.setCursor(Cursor.getDefaultCursor());
+		
+		addMouseWheelListener(new MouseWheelListener() {
+			public void mouseWheelMoved(MouseWheelEvent arg0) {
+				zoomSlider.setValue(zoomSlider.getValue() - (arg0.getWheelRotation() * 100));
+			}
+		});
+		
 	}
 
 	public void createDraggingListeners(){
