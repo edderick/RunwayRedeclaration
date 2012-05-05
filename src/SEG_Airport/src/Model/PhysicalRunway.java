@@ -424,7 +424,7 @@ public class PhysicalRunway {
 						+ "m\n");
 				result.append("Distance away from threshold: "
 						+ distanceAwayFromThreshold + "m\n");
-				result.append("Blash allowance: " + blastAllowance[REDECLARED]
+				result.append("Blast allowance: " + blastAllowance[REDECLARED]
 						+ "m\n");
 				result.append("Displaced threshold: "
 						+ closeTo.getDisplacedThreshold(Runway.REDECLARED)
@@ -486,7 +486,7 @@ public class PhysicalRunway {
 						+ "m\n");
 				result.append("Distance away from threshold: "
 						+ distanceAwayFromThreshold + "m\n");
-				result.append("Blash allowance: " + blastAllowance[REDECLARED]
+				result.append("Blast allowance: " + blastAllowance[REDECLARED]
 						+ "m\n");
 				result.append("Displaced threshold: "
 						+ closeTo.getDisplacedThreshold(Runway.REDECLARED)
