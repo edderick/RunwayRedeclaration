@@ -194,6 +194,10 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 		return (int) (meterToPixel*x);
 	}
 	
+	public int pixelToMeter(int x){
+		return (int) (x/meterToPixel);
+	}
+	
 	public void runwayCreation(Graphics2D g2d){
 		if(airport!=null && runway!=null){
 
@@ -315,7 +319,6 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 			g2d.fillRect(meterToPixel(xObstacle)+xRunway, meterToPixel(yObstacle)+yRunway, meterToPixel(obstacleLength), meterToPixel(obstacleWidth));
 		}
 	}
-
 	
 	public void drawKey(Graphics2D g2d){
 		g2d.setFont(new Font("key", 1, 15));
@@ -335,9 +338,9 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 	
 	public void drawScale(Graphics2D g2d){
 		if(airport!=null && runway!=null){
+			int scaleWidth = Math.round(pixelToMeter(this.getWidth()/3)/100)*100;
 			g2d.setColor(Color.BLACK);
-			g2d.setFont(new Font("scale", 1, 8));
-			int scaleWidth=runwayWidth/10;
+			g2d.setFont(new Font("scale", 1, 10));
 			g2d.fillRect(10, (int) this.getHeight()-10, (int) (scaleWidth*meterToPixel), 2);	
 			g2d.fillRect(10, (int) this.getHeight()-15, (int) 2, 5);
 			g2d.fillRect((int) (8+(scaleWidth*meterToPixel)), (int) this.getHeight()-15, (int) 2, 5);
@@ -383,7 +386,7 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 				if(threshold.equals(airport.getCurrentPhysicalRunway().getRunway(0).getName())){this.leftTag=airport.getCurrentPhysicalRunway().getRunway(1).getName();}else{this.leftTag=airport.getCurrentPhysicalRunway().getRunway(0).getName();}
 				this.rightTag=threshold;
 				this.xObstacle=runwayWidth-distance;
-				this.yObstacle = runwayHeight/2; //there will be a getter for this!!! :D
+				this.yObstacle = (int) airport.getCurrentPhysicalRunway().getDistanceAwayFromCenterLine();
 				this.obstacleLength =(int) obstacle.getLength();
 				this.obstacleWidth = (int) obstacle.getWidth();
 				this.LDAStart=0;
