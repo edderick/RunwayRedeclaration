@@ -415,6 +415,10 @@ public class PhysicalRunway {
 						+ "m\n");
 				result.append("LDA : " + closeTo.getLDA(Runway.DEFAULT) + "m\n");
 			} else {
+				String resa = (obstacle.getHeight() * angleOfSlope[REDECLARED] < RESA[REDECLARED] ? String
+						.valueOf(RESA[REDECLARED]) : "(" + obstacle.getHeight()
+						+ " * " + angleOfSlope[REDECLARED] + ")");
+
 				result.append("Calcuations on runway " + closeTo.getName()
 						+ ":\n");
 				result.append("Obstacle name: " + obstacle.getName() + "\n");
@@ -431,6 +435,7 @@ public class PhysicalRunway {
 						+ "m\n");
 				result.append("Angle of slope: " + angleOfSlope[REDECLARED]
 						+ "\n");
+				result.append("RESA: " + RESA[REDECLARED]+ "m\n");
 				result.append("Stopway: " + stopway[REDECLARED] + "m\n");
 				result.append("\n--Any negative result will be assigned as zero--\n");
 				result.append("New TORA : " + closeTo.getTORA(Runway.DEFAULT)
@@ -449,10 +454,8 @@ public class PhysicalRunway {
 						+ closeTo.getDisplacedThreshold(Runway.REDECLARED)
 						+ " = " + closeTo.getTODA(Runway.REDECLARED) + "m\n");
 				result.append("New LDA : " + closeTo.getLDA(Runway.DEFAULT)
-						+ " - " + distanceAwayFromThreshold + " - ("
-						+ obstacle.getHeight() + " * "
-						+ angleOfSlope[REDECLARED] + ") - "
-						+ stopway[REDECLARED] + " = "
+						+ " - " + distanceAwayFromThreshold + " - " + resa
+						+ " - " + stopway[REDECLARED] + " = "
 						+ closeTo.getLDA(Runway.REDECLARED) + "m\n");
 			}
 		} else {
@@ -477,6 +480,10 @@ public class PhysicalRunway {
 				result.append("LDA : " + awayFrom.getLDA(Runway.DEFAULT)
 						+ "m\n");
 			} else {
+				String resa = (obstacle.getHeight() * angleOfSlope[REDECLARED] < RESA[REDECLARED] ? String
+						.valueOf(RESA[REDECLARED]) : "(" + obstacle.getHeight()
+						+ " * " + angleOfSlope[REDECLARED] + ")");
+
 				result.append("Calcuations on runway " + awayFrom.getName()
 						+ ":\n");
 				result.append("Obstacle name: " + obstacle.getName() + "\n");
@@ -493,27 +500,22 @@ public class PhysicalRunway {
 						+ "m\n");
 				result.append("Angle of slope: " + angleOfSlope[REDECLARED]
 						+ "\n");
+				result.append("RESA: " + RESA[REDECLARED]+ "m\n");
 				result.append("Stopway: " + stopway[REDECLARED] + "m\n");
 				result.append("\n--Any negative result will be assigned as zero--\n");
 				result.append("New TORA : " + awayFrom.getTORA(Runway.DEFAULT)
-						+ " - " + distanceAwayFromThreshold + " - ("
-						+ obstacle.getHeight() + " * "
-						+ angleOfSlope[REDECLARED] + ") - "
-						+ stopway[REDECLARED] + " - "
+						+ " - " + distanceAwayFromThreshold + " - " + resa
+						+ " - " + stopway[REDECLARED] + " - "
 						+ closeTo.getDisplacedThreshold(Runway.REDECLARED)
 						+ " = " + awayFrom.getTORA(Runway.REDECLARED) + "m\n");
 				result.append("New ASDA : " + awayFrom.getASDA(Runway.DEFAULT)
-						+ " - " + distanceAwayFromThreshold + " - ("
-						+ obstacle.getHeight() + " * "
-						+ angleOfSlope[REDECLARED] + ") - "
-						+ stopway[REDECLARED] + " - "
+						+ " - " + distanceAwayFromThreshold + " - " + resa
+						+ " - " + stopway[REDECLARED] + " - "
 						+ closeTo.getDisplacedThreshold(Runway.REDECLARED)
 						+ " = " + awayFrom.getASDA(Runway.REDECLARED) + "m\n");
 				result.append("New TODA : " + awayFrom.getTODA(Runway.DEFAULT)
-						+ " - " + distanceAwayFromThreshold + " - ("
-						+ obstacle.getHeight() + " * "
-						+ angleOfSlope[REDECLARED] + ") - "
-						+ stopway[REDECLARED] + " - "
+						+ " - " + distanceAwayFromThreshold + " - " + resa
+						+ " - " + stopway[REDECLARED] + " - "
 						+ closeTo.getDisplacedThreshold(Runway.REDECLARED)
 						+ " = " + awayFrom.getTODA(Runway.REDECLARED) + "m\n");
 				result.append("New LDA  : " + awayFrom.getLDA(Runway.DEFAULT)
