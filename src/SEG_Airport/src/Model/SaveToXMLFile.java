@@ -294,6 +294,12 @@ public class SaveToXMLFile {
 
 		if (returnValue == JFileChooser.APPROVE_OPTION) {
 			file = fileChooser.getSelectedFile();
+			String filePath = file.getPath();
+			if(!filePath.toLowerCase().endsWith(".xml"))
+			{
+			    file = new File(filePath + ".xml");
+			}
+			
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
