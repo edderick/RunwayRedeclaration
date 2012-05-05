@@ -346,15 +346,24 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 		spaceForScale = 30;
 		int spaceFromLeftEdge = 10;
 		g2d.setColor(toraColor);
-		g2d.drawString("TORA", spaceFromLeftEdge, this.getHeight()- spaceForScale-(2*textDistance));
+		g2d.drawString("TORA", spaceFromLeftEdge, this.getHeight()- spaceForScale-textDistance);
 		g2d.setColor(todaColor);
-		g2d.drawString("TODA", spaceFromLeftEdge, this.getHeight()- spaceForScale-(3*textDistance) );
+		g2d.drawString("TODA", spaceFromLeftEdge, this.getHeight()- spaceForScale-(2*textDistance) );
 		g2d.setColor(asdaColor);
-		g2d.drawString("ASDA",spaceFromLeftEdge, this.getHeight()- spaceForScale- (4*textDistance));
+		g2d.drawString("ASDA",spaceFromLeftEdge, this.getHeight()- spaceForScale- (3*textDistance));
 		g2d.setColor(ldaColor);
-		g2d.drawString("LDA", spaceFromLeftEdge, this.getHeight()- spaceForScale-textDistance);
+		g2d.drawString("LDA", spaceFromLeftEdge, this.getHeight()- spaceForScale);
+		
+		
 		g2d.setColor(dtColor);
-		g2d.drawString("DT", spaceFromLeftEdge, this.getHeight()- spaceForScale);
+		g2d.drawString("DT", (2*spaceFromLeftEdge)+g2d.getFontMetrics().stringWidth("TODA"), this.getHeight()- spaceForScale);
+		g2d.setColor(Color.WHITE);
+		g2d.drawString("STOPWAY", (2*spaceFromLeftEdge)+g2d.getFontMetrics().stringWidth("TODA"), this.getHeight()- spaceForScale-textDistance);
+		g2d.setColor(Color.BLACK);
+		g2d.drawString("RESA", (2*spaceFromLeftEdge)+g2d.getFontMetrics().stringWidth("TODA"), this.getHeight()- spaceForScale-(2*textDistance));
+		g2d.drawString("ANGLE", (2*spaceFromLeftEdge)+g2d.getFontMetrics().stringWidth("TODA"), this.getHeight()- spaceForScale-(3*textDistance));
+//		int stringWidth = g2d.getFontMetrics().stringWidth("TODA")+ g2d.getFontMetrics().stringWidth("STOPWAY");
+//		g2d.drawRect(5, this.getHeight()+ spaceForScale+ (3*textDistance),  (spaceFromLeftEdge*2) + stringWidth, this.getHeight()-spaceForScale);
 	}
 	
 	public void drawScale(Graphics2D g2d){
