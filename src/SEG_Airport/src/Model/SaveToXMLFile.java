@@ -287,7 +287,9 @@ public class SaveToXMLFile {
 	public void createFChooserAndStore() throws IOException, TransformerException {
 
 		JFileChooser fileChooser = new JFileChooser();
-
+		
+		fileChooser.setFileFilter(new XMLFileFilter());
+		
 		int returnValue = fileChooser.showSaveDialog(null);
 
 		if (returnValue == JFileChooser.APPROVE_OPTION) {
