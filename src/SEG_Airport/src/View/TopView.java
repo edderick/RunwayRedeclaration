@@ -295,7 +295,10 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 		g2d.setColor(Color.WHITE);
 		int dashesY = (int) (yRunway+meterToPixel(runwayHeight/2));
 		int dashesLength = 35;
-		int dashesWidth = 3;
+		int dashesWidth = 1;
+		if(meterToPixel(dashesWidth)<3){
+			dashesWidth=pixelToMeter(3);
+		}
 		int gaps = 25;
 		int ratioOfDashesToThresholdMarker = 4;
 		for(int i = dashesLength*ratioOfDashesToThresholdMarker; i<runwayWidth-(dashesLength*ratioOfDashesToThresholdMarker+1); i=i+gaps+dashesLength){
