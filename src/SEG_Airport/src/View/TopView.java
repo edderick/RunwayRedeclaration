@@ -1,4 +1,5 @@
 package View;
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
@@ -126,9 +127,19 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 	}
 
 	public void drawDirection(Graphics2D g2d){
+		if(airport.getCurrentRunway()!=null){
 		g2d.setColor(Color.RED);
-		g2d.fillRect(xRunway+meterToPixel(runwayWidth/4), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2), meterToPixel(runwayWidth/2), meterToPixel(runwayStripWidthFromCentreLine/4));
-		
+		g2d.setStroke(new BasicStroke(3));
+		g2d.drawLine(xRunway+meterToPixel(runwayWidth/4), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2), xRunway+meterToPixel(3*runwayWidth/4), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2));
+
+		if(airport.getCurrentRunway().getName().equals(leftTag)){
+			g2d.drawLine(xRunway+meterToPixel(3*runwayWidth/4), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2), xRunway+meterToPixel(11*runwayWidth/16), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2)+meterToPixel(runwayStripWidthFromCentreLine/4));
+			g2d.drawLine(xRunway+meterToPixel(3*runwayWidth/4), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2), xRunway+meterToPixel(11*runwayWidth/16), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2)-meterToPixel(runwayStripWidthFromCentreLine/4));
+		}else{
+			g2d.drawLine(xRunway+meterToPixel(runwayWidth/4), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2), xRunway+meterToPixel(5*runwayWidth/16), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2)+meterToPixel(runwayStripWidthFromCentreLine/4));
+			g2d.drawLine(xRunway+meterToPixel(runwayWidth/4),yRunway-meterToPixel(runwayStripWidthFromCentreLine*2), xRunway+meterToPixel(5*runwayWidth/16), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2)-meterToPixel(runwayStripWidthFromCentreLine/4));
+		}
+		}
 	}
 	
 	
