@@ -48,6 +48,8 @@ public class OpenAirportListener implements ActionListener, AirportObserver{
 						);
 			}
 
+			airport = ap;
+			
 			if(airport.getPhysicalRunways().size() != 0) { 
 				airport.setCurrentPhysicalRunway(airport.getPhysicalRunways().get(0));
 				airport.setCurrentRunway(airport.getCurrentPhysicalRunway().getRunway(0));
@@ -61,7 +63,7 @@ public class OpenAirportListener implements ActionListener, AirportObserver{
 				e1.printStackTrace();
 			}
 			
-		} catch (Exception ex) {}
+		} catch (Exception ex) {System.out.println(ex);}
 
 
 	}
