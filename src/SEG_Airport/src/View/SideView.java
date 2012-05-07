@@ -2,14 +2,18 @@ package View;
 
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
@@ -84,6 +88,8 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 		createSlider();
 		createDraggingListeners();
 		
+		setDragCursor(this);
+		
 		setValues();
 		setVisible(true);
 
@@ -128,11 +134,15 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 		});
 		add(zoomSlider, "cell 0 1,alignx right,aligny bottom");
 		
+		zoomSlider.setCursor(Cursor.getDefaultCursor());
+		
 		addMouseWheelListener(new MouseWheelListener() {
 			public void mouseWheelMoved(MouseWheelEvent arg0) {
 				zoomSlider.setValue(zoomSlider.getValue() - (arg0.getWheelRotation() * 100));
 			}
 		});
+		
+		zoomSlider.setPaintLabels(false);
 		
 	}
 
@@ -276,6 +286,28 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 		this.yOffset=y;
 	}
 
+	public void setDragCursor(final JComponent component){
+		Cursor openHandCursor = Toolkit.getDefaultToolkit().createCustomCursor(Toolkit.getDefaultToolkit().getImage("data/opengrab.png"), new Point(16,16), "closed");
+		component.setCursor(openHandCursor);	
+
+		addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				super.mousePressed(e);
+				Cursor closedHandCursor = Toolkit.getDefaultToolkit().createCustomCursor(Toolkit.getDefaultToolkit().getImage("data/closedgrab.png"), new Point(16,16), "closed");
+				component.setCursor(closedHandCursor);	
+
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				super.mouseReleased(e);
+				Cursor openHandCursor = Toolkit.getDefaultToolkit().createCustomCursor(Toolkit.getDefaultToolkit().getImage("data/opengrab.png"), new Point(16,16), "closed");
+				component.setCursor(openHandCursor);	
+			}
+		});
+	}
+	
 }
 
 
