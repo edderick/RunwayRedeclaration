@@ -9,9 +9,7 @@ import javax.swing.JOptionPane;
 import Model.Airport;
 import Model.AirportObserver;
 import Model.Obstacle;
-import Model.PhysicalRunway;
 import View.EditObstacleDialog;
-import View.MainFrame;
 
 
 public class NewObstacleListener implements ActionListener, AirportObserver{
@@ -33,6 +31,7 @@ public class NewObstacleListener implements ActionListener, AirportObserver{
 		} else if (airport.getCurrentPhysicalRunway().getObstacle() == null){
 			Obstacle old = new Obstacle("", 0);
 			Obstacle obstacle = new Obstacle("", 0);
+			@SuppressWarnings("unused")
 			EditObstacleDialog eod = new EditObstacleDialog(obstacle, old, airport, airportObservers);
 			airport.getCurrentPhysicalRunway().setObstacle(obstacle);			
 		}
@@ -40,6 +39,7 @@ public class NewObstacleListener implements ActionListener, AirportObserver{
 			//This comment should be removed
 			Obstacle old = airport.getCurrentPhysicalRunway().getObstacle();
 			Obstacle obstacle = airport.getCurrentPhysicalRunway().getObstacle();
+			@SuppressWarnings("unused")
 			EditObstacleDialog eod = new EditObstacleDialog(obstacle, old, airport, airportObservers);
 			airport.getCurrentPhysicalRunway().setObstacle(obstacle);			
 		}		

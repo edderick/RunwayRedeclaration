@@ -7,8 +7,6 @@ import javax.swing.JOptionPane;
 
 import Model.Airport;
 import Model.AirportObserver;
-import Model.SaveToXMLFile;
-import View.MainFrame;
 
 public class SaveObstacleListener implements ActionListener, AirportObserver{
 

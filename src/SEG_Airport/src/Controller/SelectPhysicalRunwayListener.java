@@ -7,7 +7,6 @@ import java.util.List;
 import Model.Airport;
 import Model.AirportObserver;
 import Model.PhysicalRunway;
-import Model.Runway;
 
 public class SelectPhysicalRunwayListener implements ActionListener{
 	//I am not sure how to select a runway. 

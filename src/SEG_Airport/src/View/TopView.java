@@ -5,12 +5,10 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.PaintContext;
 import java.awt.Point;
 import java.awt.Toolkit;
 
 import javax.swing.JComponent;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
@@ -19,21 +17,13 @@ import javax.swing.event.ChangeListener;
 import Model.Airport;
 import Model.AirportObserver;
 import Model.Obstacle;
-import Model.PhysicalRunway;
 import Model.Runway;
 import net.miginfocom.swing.MigLayout;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseWheelListener;
 import java.awt.event.MouseWheelEvent;
-import java.util.Dictionary;
-import java.util.Enumeration;
-import java.util.Hashtable;
 
 
 @SuppressWarnings("serial")

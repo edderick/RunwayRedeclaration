@@ -3,13 +3,10 @@ package Controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JPanel;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JSplitPane;
 
-import View.TopView;
 import View.ViewPanel;
 
 public class SelectViewListener implements ActionListener{

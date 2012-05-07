@@ -7,7 +7,6 @@ import java.util.List;
 import Model.Airport;
 import Model.AirportObserver;
 import View.EditAirportDialog;
-import View.MainFrame;
 
 public class NewAirportListener implements ActionListener, AirportObserver{
 

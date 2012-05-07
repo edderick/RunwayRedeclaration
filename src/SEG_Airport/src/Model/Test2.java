@@ -5,7 +5,8 @@ import java.util.*;
 public class Test2 {
 	
 	public static void main(String[] args) throws Exception {
-	    Scanner in = new Scanner(System.in);
+	    @SuppressWarnings("unused")
+		Scanner in = new Scanner(System.in);
 	    
 	    /*
 	     * Testing for AddressBook and Contacts

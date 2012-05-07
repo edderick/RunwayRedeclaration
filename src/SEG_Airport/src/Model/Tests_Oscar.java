@@ -154,6 +154,7 @@ public class Tests_Oscar {
 		 */
 		System.out.println("************\nTEST 3\n************");
 		
+		@SuppressWarnings("unused")
 		Airport airport2 = null;
 		LoadXMLFile loadFile1 = new LoadXMLFile();
 		try {
@@ -341,6 +342,7 @@ public class Tests_Oscar {
 		
 		// Step 1.
 		try {
+			@SuppressWarnings("unused")
 			SaveToXMLFile saveTo = new SaveToXMLFile(contactsList);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -11,7 +11,6 @@ import Model.Airport;
 import Model.AirportObserver;
 import Model.LoadXMLFile;
 import Model.Obstacle;
-import View.EditObstacleDialog;
 import View.MainFrame;
 
 public class OpenObstacleListener implements ActionListener, AirportObserver{
