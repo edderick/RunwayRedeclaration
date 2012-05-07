@@ -373,7 +373,7 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 			g2d.setColor(Color.BLACK);
 			g2d.drawRect(meterToPixel(xObstacle-rightDT)+xRunway, meterToPixel(yObstacle+(obstacleWidth/2))+yRunway, meterToPixel(obstacleLength), meterToPixel(obstacleWidth));
 			g2d.drawLine(meterToPixel(xObstacle-rightDT)+xRunway, meterToPixel(yObstacle+(obstacleWidth/2))+yRunway, meterToPixel(xObstacle-rightDT)+xRunway+meterToPixel(obstacleLength), meterToPixel(yObstacle+(obstacleWidth/2))+yRunway+meterToPixel(obstacleWidth));
-			g2d.drawLine(meterToPixel(xObstacle-rightDT)+xRunway+meterToPixel(obstacleLength), meterToPixel(yObstacle)+yRunway, meterToPixel(xObstacle-rightDT)+xRunway, meterToPixel(yObstacle+(obstacleWidth/2))+yRunway+meterToPixel(obstacleWidth));
+			g2d.drawLine(meterToPixel(xObstacle-rightDT)+xRunway+meterToPixel(obstacleLength), meterToPixel(yObstacle+(obstacleWidth/2))+yRunway, meterToPixel(xObstacle-rightDT)+xRunway, meterToPixel(yObstacle+(obstacleWidth/2))+yRunway+meterToPixel(obstacleWidth));
 			
 			
 		}
