@@ -521,16 +521,17 @@ public class PhysicalRunway {
 						+ " - " + stopway[REDECLARED] + " - "
 						+ closeTo.getDisplacedThreshold(Runway.REDECLARED)
 						+ " = " + awayFrom.getTORA(Runway.REDECLARED) + "m\n");
-				result.append("New ASDA : " + awayFrom.getASDA(Runway.DEFAULT)
-						+ " - " + distanceAwayFromThreshold + " - " + resa
-						+ " - " + stopway[REDECLARED] + " - "
-						+ closeTo.getDisplacedThreshold(Runway.REDECLARED)
-						+ " = " + awayFrom.getASDA(Runway.REDECLARED) + "m\n");
+			
 				result.append("New TODA : " + awayFrom.getTODA(Runway.DEFAULT)
 						+ " - " + distanceAwayFromThreshold + " - " + resa
 						+ " - " + stopway[REDECLARED] + " - "
 						+ closeTo.getDisplacedThreshold(Runway.REDECLARED)
 						+ " = " + awayFrom.getTODA(Runway.REDECLARED) + "m\n");
+				result.append("New ASDA : " + awayFrom.getASDA(Runway.DEFAULT)
+						+ " - " + distanceAwayFromThreshold + " - " + resa
+						+ " - " + stopway[REDECLARED] + " - "
+						+ closeTo.getDisplacedThreshold(Runway.REDECLARED)
+						+ " = " + awayFrom.getASDA(Runway.REDECLARED) + "m\n");
 				result.append("New LDA  : " + awayFrom.getLDA(Runway.DEFAULT)
 						+ " - "
 						+ closeTo.getDisplacedThreshold(Runway.REDECLARED)
@@ -665,7 +666,7 @@ public class PhysicalRunway {
 			if (actualResa < RESA[REDECLARED]) {
 				actualResa = RESA[REDECLARED];
 			}
-			double result = awayFrom.getASDA(Runway.DEFAULT)
+			double result = awayFrom.getTORA(Runway.DEFAULT)
 					- distanceAwayFromThreshold - actualResa
 					- stopway[REDECLARED]
 					- closeTo.getDisplacedThreshold(Runway.REDECLARED);
@@ -709,7 +710,7 @@ public class PhysicalRunway {
 			if (actualResa < RESA[REDECLARED]) {
 				actualResa = RESA[REDECLARED];
 			}
-			double result = awayFrom.getTODA(Runway.DEFAULT)
+			double result = awayFrom.getTORA(Runway.DEFAULT)
 					- distanceAwayFromThreshold - actualResa
 					- stopway[REDECLARED]
 					- closeTo.getDisplacedThreshold(Runway.REDECLARED);
