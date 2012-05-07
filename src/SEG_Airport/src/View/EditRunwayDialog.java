@@ -64,33 +64,33 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 
 		JPanel leftFeildsPanel = new JPanel();
 		contentPane.add(leftFeildsPanel, "cell 0 1,grow");
-		leftFeildsPanel.setLayout(new MigLayout("", "[37px][37px,grow]", "[15px][][][][]"));
-
-		JLabel lblLeftASDA = new JLabel("ASDA");
-		lblLeftASDA.setToolTipText("Accelerate Stop Distance Available");
-		leftFeildsPanel.add(lblLeftASDA, "cell 0 0,alignx trailing,aligny top");
-
-		tfLeftASDA = new JTextField();
-		leftFeildsPanel.add(tfLeftASDA, "cell 1 0,growx");
-		tfLeftASDA.setColumns(10);
+		leftFeildsPanel.setLayout(new MigLayout("", "[37px][37px,grow]", "[][][][][]"));
 
 		JLabel lblLeftTORA = new JLabel("TORA");
 		lblLeftTORA.setToolTipText("Take-Off Run Available ");
-		leftFeildsPanel.add(lblLeftTORA, "cell 0 1,alignx trailing,aligny top");
+		leftFeildsPanel.add(lblLeftTORA, "cell 0 0,alignx trailing,aligny top");
 
 		tfLeftTORA = new JTextField();
 		lblLeftTORA.setLabelFor(tfLeftTORA);
-		leftFeildsPanel.add(tfLeftTORA, "flowx,cell 1 1,growx");
+		leftFeildsPanel.add(tfLeftTORA, "flowx,cell 1 0,growx");
 		tfLeftTORA.setColumns(10);
 
 		JLabel lblLeftTODA = new JLabel("TODA");
 		lblLeftTODA.setToolTipText("Take-Off Distance Available");
-		leftFeildsPanel.add(lblLeftTODA, "cell 0 2,alignx trailing");
+		leftFeildsPanel.add(lblLeftTODA, "cell 0 1,alignx trailing");
 
 		tfLeftTODA = new JTextField();
 		lblLeftTODA.setLabelFor(tfLeftTODA);
-		leftFeildsPanel.add(tfLeftTODA, "flowx,cell 1 2,growx");
+		leftFeildsPanel.add(tfLeftTODA, "flowx,cell 1 1,growx");
 		tfLeftTODA.setColumns(10);
+		
+				JLabel lblLeftASDA = new JLabel("ASDA");
+				lblLeftASDA.setToolTipText("Accelerate Stop Distance Available");
+				leftFeildsPanel.add(lblLeftASDA, "cell 0 2,alignx trailing,aligny top");
+		
+				tfLeftASDA = new JTextField();
+				leftFeildsPanel.add(tfLeftASDA, "flowx,cell 1 2,growx");
+				tfLeftASDA.setColumns(10);
 
 		JLabel lbLeftLDA = new JLabel("LDA");
 		lbLeftLDA.setToolTipText("Landing Distance Available");
@@ -101,14 +101,11 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 		leftFeildsPanel.add(tfLeftLDA, "flowx,cell 1 3,growx");
 		tfLeftLDA.setColumns(10);
 
-		JLabel lblm1 = new JLabel("m");
-		leftFeildsPanel.add(lblm1, "cell 1 0");
-
 		JLabel lblm2 = new JLabel("m");
-		leftFeildsPanel.add(lblm2, "cell 1 1");
+		leftFeildsPanel.add(lblm2, "cell 1 0");
 
 		JLabel lblm4 = new JLabel("m");
-		leftFeildsPanel.add(lblm4, "cell 1 2");
+		leftFeildsPanel.add(lblm4, "cell 1 1");
 
 		JLabel lblm3 = new JLabel("m");
 		leftFeildsPanel.add(lblm3, "cell 1 3");
@@ -123,6 +120,9 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 
 		JLabel lblm5 = new JLabel("m");
 		leftFeildsPanel.add(lblm5, "cell 1 4");
+		
+				JLabel lblm1 = new JLabel("m");
+				leftFeildsPanel.add(lblm1, "cell 1 2");
 
 		JPanel leftNamePanel = new JPanel();
 		contentPane.add(leftNamePanel, "cell 0 0,grow");
@@ -142,32 +142,29 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 		contentPane.add(rightFeildsPanel, "cell 2 1,grow");
 		rightFeildsPanel.setLayout(new MigLayout("", "[][grow]", "[][][][][]"));
 
-		JLabel lblRightASDA = new JLabel("ASDA");
-		lblRightASDA.setToolTipText("Accelerate Stop Distance Available");
-		rightFeildsPanel.add(lblRightASDA, "cell 0 0,alignx trailing");
-
-		tfRightASDA = new JTextField();
-		tfRightASDA.setColumns(10);
-		rightFeildsPanel.add(tfRightASDA, "flowx,cell 1 0,growx");
-
-		JLabel label_m6 = new JLabel("m");
-		rightFeildsPanel.add(label_m6, "cell 1 0");
-
 		JLabel lblRightTORA = new JLabel("TORA");
 		lblRightTORA.setToolTipText("Take-Off Run Available ");
-		rightFeildsPanel.add(lblRightTORA, "cell 0 1,alignx trailing");
+		rightFeildsPanel.add(lblRightTORA, "cell 0 0,alignx trailing");
 
 		tfRightTORA = new JTextField();
 		tfRightTORA.setColumns(10);
-		rightFeildsPanel.add(tfRightTORA, "flowx,cell 1 1,growx");
+		rightFeildsPanel.add(tfRightTORA, "flowx,cell 1 0,growx");
 
 		JLabel lblRightTODA = new JLabel("TODA");
 		lblRightTODA.setToolTipText("Take-Off Distance Available");
-		rightFeildsPanel.add(lblRightTODA, "cell 0 2,alignx trailing");
+		rightFeildsPanel.add(lblRightTODA, "cell 0 1,alignx trailing");
 
 		tfRightTODA = new JTextField();
 		tfRightTODA.setColumns(10);
-		rightFeildsPanel.add(tfRightTODA, "flowx,cell 1 2,growx");
+		rightFeildsPanel.add(tfRightTODA, "flowx,cell 1 1,growx");
+		
+				JLabel lblRightASDA = new JLabel("ASDA");
+				lblRightASDA.setToolTipText("Accelerate Stop Distance Available");
+				rightFeildsPanel.add(lblRightASDA, "cell 0 2,alignx trailing");
+		
+				tfRightASDA = new JTextField();
+				tfRightASDA.setColumns(10);
+				rightFeildsPanel.add(tfRightASDA, "flowx,cell 1 2,growx");
 
 		JLabel lblRightLDA = new JLabel("LDA");
 		lblRightLDA.setToolTipText("Landing Distance Available");
@@ -178,10 +175,10 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 		rightFeildsPanel.add(tfRightLDA, "flowx,cell 1 3,growx");
 
 		JLabel labelm7 = new JLabel("m");
-		rightFeildsPanel.add(labelm7, "cell 1 1");
+		rightFeildsPanel.add(labelm7, "cell 1 0");
 
 		JLabel labelm8 = new JLabel("m");
-		rightFeildsPanel.add(labelm8, "cell 1 2");
+		rightFeildsPanel.add(labelm8, "cell 1 1");
 
 		JLabel labelm9 = new JLabel("m");
 		rightFeildsPanel.add(labelm9, "cell 1 3");
@@ -196,6 +193,9 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 
 		JLabel labelm10 = new JLabel("m");
 		rightFeildsPanel.add(labelm10, "cell 1 4");
+		
+				JLabel label_m6 = new JLabel("m");
+				rightFeildsPanel.add(label_m6, "cell 1 2");
 
 		JPanel rightNamePanel = new JPanel();
 		contentPane.add(rightNamePanel, "cell 2 0,grow");

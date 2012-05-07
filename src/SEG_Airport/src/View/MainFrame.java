@@ -486,6 +486,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 						{"Name", ""},
 						{"Height", ""},
 						{"Distance from Threshold", ""},
+						{"Distance from Centre Line", ""},
 						{"Closest To", ""},
 				},
 				new String[] {
@@ -664,13 +665,15 @@ public class MainFrame extends JFrame implements AirportObserver{
 			obstacleTab.setValueAt(obstacle.getName(), 0, 1);
 			obstacleTab.setValueAt(obstacle.getHeight(), 1, 1);
 			obstacleTab.setValueAt(physicalRunway.getDistanceAwayFromThreshold(), 2, 1);
-			obstacleTab.setValueAt(physicalRunway.closeTo(), 3, 1);
+			obstacleTab.setValueAt(physicalRunway.getDistanceAwayFromCenterLine(), 3, 1);
+			obstacleTab.setValueAt(physicalRunway.closeTo(), 4, 1);
 		} else {
 			TableModel obstacleTab = ObstacleDetailsTable.getModel();
 			obstacleTab.setValueAt("", 0, 1);
 			obstacleTab.setValueAt("", 1, 1);
 			obstacleTab.setValueAt("", 2, 1);
-			obstacleTab.setValueAt("", 3, 1);
+			obstacleTab.setValueAt("", 3, 1);	
+			obstacleTab.setValueAt("", 4, 1);
 		}
 
 		if(airport.getCurrentPhysicalRunway() != null){
