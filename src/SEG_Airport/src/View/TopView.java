@@ -372,7 +372,7 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 	
 	public void obstacleCreation(Graphics2D g2d){
 		if(obstacle!=null){
-			g2d.setColor(Color.RED);
+			g2d.setColor(new Color(73, 201, 63));
 			g2d.fillRect(meterToPixel(xObstacle)+xRunway, meterToPixel(yObstacle)+yRunway, meterToPixel(obstacleLength), meterToPixel(obstacleWidth));
 		}
 	}
@@ -438,7 +438,7 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 			g2d.setColor(dtColor);
 			g2d.fillRect(xRunway+DTStart, (yRunway + yInc*2 + meterToPixel(runwayHeight)),  meterToPixel(DT), width);
 			
-			if(obstacle!=null){
+	
 			g2d.setColor(Color.WHITE);
 			g2d.fillRect(xRunway+TORAStart+ meterToPixel(TORA),  (yRunway-yInc),  meterToPixel(stopway), width);
 
@@ -448,10 +448,12 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 
 			g2d.fillRect(xRunway+LDAStart+ meterToPixel(LDA),  (yRunway+yInc+meterToPixel(runwayHeight)),  meterToPixel(stopway), width);
 			
+			if(obstacle!=null){
 			int greater = RESA;
 			if(greater<ANGLE){
 				greater=ANGLE;
 			}
+			
 			
 			if(airport.getCurrentRunway().getName().equals(leftTag)){
 				g2d.setColor(Color.BLACK);
@@ -498,6 +500,9 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 			this.stopway = (int) airport.getCurrentPhysicalRunway().getStopway();
 			this.leftTag= airport.getCurrentPhysicalRunway().getRunway(0).getName();
 			this.rightTag = airport.getCurrentPhysicalRunway().getRunway(1).getName();
+			runwayStripWidthFromCentreLine=150;
+			runwayToEdgeOfCnGArea = stopway;
+			CnGAreaWidthFromCentreLine = 75;
 			
 			if(obstacle!=null){
 				int distance = (int) airport.getCurrentPhysicalRunway().getDistanceAwayFromThreshold();
