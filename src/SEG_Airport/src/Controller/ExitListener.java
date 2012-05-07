@@ -45,12 +45,10 @@ public class ExitListener extends WindowAdapter implements ActionListener, Airpo
 			
 			if(!airport.getSaved()){
 				toSave.add(airport);
-				System.out.println("Gotta save Airport!");
 			}
 			
 			if(obstacle != null && !obstacle.getSaved()){
 				toSave.add(obstacle);
-				System.out.println("Gotta save Obstacle!");
 			}
 			
 			new ExitDialog(toSave);

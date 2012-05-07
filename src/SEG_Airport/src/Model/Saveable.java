@@ -20,5 +20,9 @@ public interface Saveable {
 	 * Saves the object to an xml file on disk
 	 */
 	public void saveToXML();
-
+	
+	/**
+	 * @return The type of model enitity
+	 */
+	public String getType();
 }

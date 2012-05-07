@@ -31,6 +31,16 @@ public class ExitDialog extends JFrame{
 		JLabel lblNewLabel = new JLabel("are you sure you wish to exit?");
 		getContentPane().add(lblNewLabel, "cell 0 1,alignx left");
 		
+		StringBuffer sb = new StringBuffer("Files to save: ");
+		for(Saveable s : toSave){
+			sb.append(s.getType());
+			sb.append(" ");
+		}
+		
+		JLabel lblToSave = new JLabel(sb.toString());
+		getContentPane().add(lblToSave, "cell 0 2");
+		
+		
 		JButton btnSave = new JButton("Save & Exit");
 		getContentPane().add(btnSave, "flowx,cell 0 3");
 		btnSave.addActionListener(new ActionListener() {

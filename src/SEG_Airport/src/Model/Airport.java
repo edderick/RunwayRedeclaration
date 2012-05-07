@@ -136,4 +136,9 @@ public class Airport implements Saveable{
 		return this.saved;
 	}
 
+	@Override
+	public String getType() {
+		return "Airport";
+	}
+
 }

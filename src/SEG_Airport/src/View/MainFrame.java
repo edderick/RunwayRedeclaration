@@ -11,7 +11,6 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.jws.Oneway;
 import javax.swing.ButtonGroup;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -109,9 +108,6 @@ public class MainFrame extends JFrame implements AirportObserver{
 	}
 
 	public MainFrame() {
-
-
-
 
 		addressBook = new AddressBook();
 		LoadXMLFile lf = new LoadXMLFile();
@@ -534,7 +530,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		rightSplitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
 
 		try {
-			this.loadRecentFiles(5);
+			this.loadRecentFiles(HISTORY_TO_SHOW);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

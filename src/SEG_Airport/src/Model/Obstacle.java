@@ -118,5 +118,8 @@ public class Obstacle implements Saveable{
 		return this.saved;
 	}
 
+	public String getType(){
+		return "Obstacle";
+	}
 
 }
