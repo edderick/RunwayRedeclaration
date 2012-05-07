@@ -415,10 +415,6 @@ public class PhysicalRunway {
 						+ "m\n");
 				result.append("LDA : " + closeTo.getLDA(Runway.DEFAULT) + "m\n");
 			} else {
-				String resa = (obstacle.getHeight() * angleOfSlope[REDECLARED] < RESA[REDECLARED] ? String
-						.valueOf(RESA[REDECLARED]) : "(" + obstacle.getHeight()
-						+ " * " + angleOfSlope[REDECLARED] + ")");
-
 				result.append("Calcuations on runway " + closeTo.getName()
 						+ ":\n");
 				result.append("Obstacle name: " + obstacle.getName() + "\n");
@@ -435,8 +431,18 @@ public class PhysicalRunway {
 						+ "m\n");
 				result.append("Angle of slope: " + angleOfSlope[REDECLARED]
 						+ "\n");
-				result.append("RESA: " + RESA[REDECLARED]+ "m\n");
 				result.append("Stopway: " + stopway[REDECLARED] + "m\n");
+
+				String resa = "";
+
+				if (obstacle.getHeight() * angleOfSlope[REDECLARED] < RESA[REDECLARED]) {
+					result.append("RESA: " + RESA[REDECLARED] + "m\n");
+					resa = String.valueOf(RESA[REDECLARED]);
+				} else {
+					resa = "(" + obstacle.getHeight() + " * "
+							+ angleOfSlope[REDECLARED] + ")";
+				}
+
 				result.append("\n--Any negative result will be assigned as zero--\n");
 				result.append("New TORA : " + closeTo.getTORA(Runway.DEFAULT)
 						+ " - " + distanceAwayFromThreshold + " - "
@@ -480,9 +486,6 @@ public class PhysicalRunway {
 				result.append("LDA : " + awayFrom.getLDA(Runway.DEFAULT)
 						+ "m\n");
 			} else {
-				String resa = (obstacle.getHeight() * angleOfSlope[REDECLARED] < RESA[REDECLARED] ? String
-						.valueOf(RESA[REDECLARED]) : "(" + obstacle.getHeight()
-						+ " * " + angleOfSlope[REDECLARED] + ")");
 
 				result.append("Calcuations on runway " + awayFrom.getName()
 						+ ":\n");
@@ -500,8 +503,18 @@ public class PhysicalRunway {
 						+ "m\n");
 				result.append("Angle of slope: " + angleOfSlope[REDECLARED]
 						+ "\n");
-				result.append("RESA: " + RESA[REDECLARED]+ "m\n");
+				result.append("RESA: " + RESA[REDECLARED] + "m\n");
 				result.append("Stopway: " + stopway[REDECLARED] + "m\n");
+
+				String resa = "";
+
+				if (obstacle.getHeight() * angleOfSlope[REDECLARED] < RESA[REDECLARED]) {
+					resa = String.valueOf(RESA[REDECLARED]);
+				} else {
+					resa = "(" + obstacle.getHeight() + " * "
+							+ angleOfSlope[REDECLARED] + ")";
+				}
+
 				result.append("\n--Any negative result will be assigned as zero--\n");
 				result.append("New TORA : " + awayFrom.getTORA(Runway.DEFAULT)
 						+ " - " + distanceAwayFromThreshold + " - " + resa
