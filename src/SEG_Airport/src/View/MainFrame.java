@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.jws.Oneway;
 import javax.swing.ButtonGroup;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -407,7 +408,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[270px][grow]", "[grow]"));
+		contentPane.setLayout(new MigLayout("", "[220px][grow]", "[grow]"));
 
 		JPanel leftPanel = new JPanel();
 		contentPane.add(leftPanel, "cell 0 0,alignx center,aligny top");
@@ -455,6 +456,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 				}
 				));
 		leftTopPanel.add(OriginalParametersTable, BorderLayout.CENTER);
+		OriginalParametersTable.getColumnModel().getColumn(0).setPreferredWidth(150);
 
 		JPanel leftMiddlePanel = new JPanel();
 		leftMiddlePanel.setBorder(new TitledBorder(null, "Redeclared Parameters", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -477,6 +479,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 				}
 				));
 		leftMiddlePanel.add(RedeclaredParametersTable, BorderLayout.CENTER);
+		RedeclaredParametersTable.getColumnModel().getColumn(0).setPreferredWidth(150);
 
 		JPanel leftUpperBottomPanel = new JPanel();
 		leftUpperBottomPanel.setBorder(new TitledBorder(null, "Obstacle Details", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -499,7 +502,8 @@ public class MainFrame extends JFrame implements AirportObserver{
 				}
 				));
 		leftUpperBottomPanel.add(ObstacleDetailsTable);
-
+		ObstacleDetailsTable.getColumnModel().getColumn(0).setPreferredWidth(150);
+		
 		JPanel leftLowerBottomPanel = new JPanel();
 		leftLowerBottomPanel.setBorder(new TitledBorder(null, "Advanced Parameters", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		leftPanel.add(leftLowerBottomPanel, "cell 0 4,grow");
@@ -522,6 +526,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 				));
 		leftLowerBottomPanel.add(AdvancedParametersTable);
 
+		AdvancedParametersTable.getColumnModel().getColumn(0).setPreferredWidth(150);
 
 
 		contentPane.add(rightSplitPane, "cell 1 0,grow");
