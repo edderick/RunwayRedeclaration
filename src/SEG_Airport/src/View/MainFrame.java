@@ -289,9 +289,9 @@ public class MainFrame extends JFrame implements AirportObserver{
 		airportObservers.add(opl);
 
 		JMenuItem mntmRemoveObstacle = new JMenuItem("Remove Obstacle");
-		RemoveObstacleListener rol = new RemoveObstacleListener(airport, airportObservers);
-		mntmRemoveObstacle.addActionListener(rol);
-		airportObservers.add(rol);
+//		RemoveObstacleListener rol = new RemoveObstacleListener(airport, airportObservers);
+		//mntmRemoveObstacle.addActionListener(rol);
+	//	airportObservers.add(rol);
 		mnEdit.add(mntmRemoveObstacle);
 		mnEdit.add(mntmPositionObstacle);
 

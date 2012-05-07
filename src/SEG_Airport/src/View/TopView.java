@@ -369,11 +369,11 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 	public void obstacleCreation(Graphics2D g2d){
 		if(obstacle!=null){
 			g2d.setColor(Color.WHITE);
-			g2d.fillRect(meterToPixel(xObstacle-rightDT)+xRunway, meterToPixel(yObstacle)+yRunway, meterToPixel(obstacleLength), meterToPixel(obstacleWidth));
+			g2d.fillRect(meterToPixel(xObstacle-rightDT)+xRunway, meterToPixel(yObstacle+(obstacleWidth/2))+yRunway, meterToPixel(obstacleLength), meterToPixel(obstacleWidth));
 			g2d.setColor(Color.BLACK);
-			g2d.drawRect(meterToPixel(xObstacle-rightDT)+xRunway, meterToPixel(yObstacle)+yRunway, meterToPixel(obstacleLength), meterToPixel(obstacleWidth));
-			g2d.drawLine(meterToPixel(xObstacle-rightDT)+xRunway, meterToPixel(yObstacle)+yRunway, meterToPixel(xObstacle-rightDT)+xRunway+meterToPixel(obstacleLength), meterToPixel(yObstacle)+yRunway+meterToPixel(obstacleWidth));
-			g2d.drawLine(meterToPixel(xObstacle-rightDT)+xRunway+meterToPixel(obstacleLength), meterToPixel(yObstacle)+yRunway, meterToPixel(xObstacle-rightDT)+xRunway, meterToPixel(yObstacle)+yRunway+meterToPixel(obstacleWidth));
+			g2d.drawRect(meterToPixel(xObstacle-rightDT)+xRunway, meterToPixel(yObstacle+(obstacleWidth/2))+yRunway, meterToPixel(obstacleLength), meterToPixel(obstacleWidth));
+			g2d.drawLine(meterToPixel(xObstacle-rightDT)+xRunway, meterToPixel(yObstacle+(obstacleWidth/2))+yRunway, meterToPixel(xObstacle-rightDT)+xRunway+meterToPixel(obstacleLength), meterToPixel(yObstacle+(obstacleWidth/2))+yRunway+meterToPixel(obstacleWidth));
+			g2d.drawLine(meterToPixel(xObstacle-rightDT)+xRunway+meterToPixel(obstacleLength), meterToPixel(yObstacle)+yRunway, meterToPixel(xObstacle-rightDT)+xRunway, meterToPixel(yObstacle+(obstacleWidth/2))+yRunway+meterToPixel(obstacleWidth));
 			
 			
 		}
@@ -442,7 +442,7 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 			
 			g2d.fillRect(xRunway+DTStart, (yRunway + yInc*2 + meterToPixel(runwayHeight)),  meterToPixel(DT), width);
 			
-	
+			if(obstacle!=null){
 			g2d.setColor(Color.WHITE);
 			g2d.fillRect(xRunway+TORAStart+ meterToPixel(TORA),  (yRunway-yInc),  meterToPixel(stopway), width);
 
@@ -452,7 +452,7 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 
 			g2d.fillRect(xRunway+LDAStart+ meterToPixel(LDA),  (yRunway+yInc+meterToPixel(runwayHeight)),  meterToPixel(stopway), width);
 			
-			if(obstacle!=null){
+			
 			int greater = RESA;
 			g2d.setColor(resaColor);
 			if(greater<ANGLE){
