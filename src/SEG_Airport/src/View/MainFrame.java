@@ -248,6 +248,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		EditRunwayListener erl = new EditRunwayListener(airport, airportObservers);
 		mntmNewMenuItem_6.addActionListener(erl);
 		mnEdit.add(mntmNewMenuItem_6);
+		airportObservers.add(erl);
 
 		JMenuItem mntmAirport_1 = new JMenuItem("Airport");
 		mntmAirport_1.setMnemonic('a');

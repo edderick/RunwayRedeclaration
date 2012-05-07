@@ -21,7 +21,9 @@ public class EditRunwayListener implements ActionListener, AirportObserver{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		
+		System.out.println(airport.getPhysicalRunways().size());
+		
 		if(airport.getPhysicalRunways().size() == 0){
 			@SuppressWarnings("unused")
 			EditRunwayDialog erd = new EditRunwayDialog(airport, new JList(), true, airportObservers);

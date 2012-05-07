@@ -10,6 +10,7 @@ import java.awt.Point;
 import java.awt.Toolkit;
 
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
@@ -30,6 +31,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseWheelListener;
 import java.awt.event.MouseWheelEvent;
+import java.util.Dictionary;
+import java.util.Enumeration;
+import java.util.Hashtable;
 
 
 @SuppressWarnings("serial")
@@ -184,6 +188,8 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 				zoomSlider.setValue(zoomSlider.getValue() - (arg0.getWheelRotation() * 100));
 			}
 		});
+		
+		zoomSlider.setPaintLabels(false);
 		
 	}
 
