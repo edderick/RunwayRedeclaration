@@ -69,6 +69,7 @@ public class ExitDialog extends JFrame{
 			}
 		});		
 	
+		setAlwaysOnTop(true);
 		this.setVisible(true);
 	}
 	

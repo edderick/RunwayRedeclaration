@@ -76,6 +76,7 @@ public class EditContactDialog extends JDialog {
 		});
 
 		getRootPane().setDefaultButton(null);
+		setAlwaysOnTop(true);
 		setVisible(true);
 	}
 }

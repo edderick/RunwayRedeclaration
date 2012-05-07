@@ -202,6 +202,7 @@ public class AdvancedParametersDialog extends JDialog {
 		});
 
 		setFormValues();
+		setAlwaysOnTop(true);
 		setVisible(true);
 	}
 	

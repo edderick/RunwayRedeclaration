@@ -66,6 +66,7 @@ public class HelpDialog extends JFrame {
 		
 		navigation.addHyperlinkListener(new HelpHyperlinkListener(body));
 		
+		setAlwaysOnTop(true);
 		setVisible(true);
 	}
 

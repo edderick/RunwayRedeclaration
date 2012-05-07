@@ -108,6 +108,7 @@ public class AddressBookDialog extends JDialog {
 			}
 		});
 
+		setAlwaysOnTop(true);
 		setVisible(true);
 	}
 }

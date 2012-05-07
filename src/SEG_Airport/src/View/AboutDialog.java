@@ -45,6 +45,7 @@ public class AboutDialog extends JDialog{
 		});
 
 		getContentPane().add(btnOk, "cell 1 4, alignx center");
+		setAlwaysOnTop(true);
 		this.setVisible(true);
 	}
 

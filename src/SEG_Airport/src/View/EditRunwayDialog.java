@@ -251,6 +251,7 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 			tfRightDisplacedThreshold.setText(Double.toString(rightRunway.getDisplacedThreshold(0)));
 		}		
 
+		setAlwaysOnTop(true);
 		setVisible(true);
 	}
 

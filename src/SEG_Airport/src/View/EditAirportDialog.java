@@ -95,6 +95,7 @@ public class EditAirportDialog extends JDialog {
 		lblNameOfAirport.setBounds(20, 14, 46, 14);
 		getContentPane().add(lblNameOfAirport);
 
+		setAlwaysOnTop(true);
 		setVisible(true);
 
 	}

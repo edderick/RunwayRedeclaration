@@ -141,6 +141,7 @@ public class EditObstacleDialog extends JDialog {
 		JPanel panel_Spacer2 = new JPanel();
 		fieldsPanel.add(panel_Spacer2, "cell 1 0");
 
+		setAlwaysOnTop(true);
 		setVisible(true);
 	}
 

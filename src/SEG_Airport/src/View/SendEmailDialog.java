@@ -95,6 +95,7 @@ public class SendEmailDialog extends JDialog {
 			}
 		});
 		buttonPanel.add(btnCancel, "cell 0 2,grow");
+		setAlwaysOnTop(true);
 		setVisible(true);
 	}
 
