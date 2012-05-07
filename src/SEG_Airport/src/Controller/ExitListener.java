@@ -8,11 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Model.Airport;
+import Model.AirportObserver;
 import Model.Obstacle;
 import Model.Saveable;
 import View.ExitDialog;
 
-public class ExitListener extends WindowAdapter implements ActionListener{
+public class ExitListener extends WindowAdapter implements ActionListener, AirportObserver{
 
 	Airport airport;
 	Obstacle obstacle;
@@ -54,6 +55,16 @@ public class ExitListener extends WindowAdapter implements ActionListener{
 			
 			new ExitDialog(toSave);
 			
+		}
+	}
+
+	@Override
+	public void updateAirport(Airport airport) {
+		this.airport = airport;
+		if(airport.getCurrentPhysicalRunway() != null ){
+			obstacle = airport.getCurrentPhysicalRunway().getObstacle();
+		} else {
+			obstacle = null;
 		}
 	}
 	

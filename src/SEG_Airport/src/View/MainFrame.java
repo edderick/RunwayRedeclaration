@@ -1,11 +1,7 @@
 package View;
 
 import java.awt.BorderLayout;
-import java.awt.Cursor;
 import java.awt.EventQueue;
-import java.awt.Image;
-import java.awt.Point;
-import java.awt.Toolkit;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
@@ -14,45 +10,60 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JSplitPane;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JRadioButtonMenuItem;
+import javax.swing.JSeparator;
+import javax.swing.JSplitPane;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-import javax.swing.ImageIcon;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JSeparator;
-import javax.swing.JRadioButtonMenuItem;
-import javax.swing.ButtonGroup;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import javax.swing.JComboBox;
-import net.miginfocom.swing.MigLayout;
 
-import Controller.*;
-import Model.*;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import javax.swing.JSlider;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.ChangeEvent;
-import java.awt.Color;
+import net.miginfocom.swing.MigLayout;
+import Controller.AdvancedParametersListener;
+import Controller.EditAirportListener;
+import Controller.EditObstacleListener;
+import Controller.EditRunwayListener;
+import Controller.ExitListener;
+import Controller.NewAirportListener;
+import Controller.NewObstacleListener;
+import Controller.OpenAirportListener;
+import Controller.OpenObstacleListener;
+import Controller.OpenRecentAirportListener;
+import Controller.OpenRecentObstacleListener;
+import Controller.RemoveObstacleListener;
+import Controller.SaveAirportListener;
+import Controller.SaveObstacleListener;
+import Controller.SelectPhysicalRunwayListener;
+import Controller.SelectRunwayListener;
+import Controller.SelectViewListener;
+import Controller.ShowAboutListener;
+import Controller.ShowAddressBookListener;
+import Controller.ShowEmailDialogListener;
+import Controller.ShowHelpListener;
+import Model.AddressBook;
+import Model.Airport;
+import Model.AirportObserver;
+import Model.LoadXMLFile;
+import Model.Obstacle;
+import Model.PhysicalRunway;
+import Model.Runway;
 
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame implements AirportObserver{
-
-	//TODO: Implement zooming and panning
 
 	private static final int MAX_HISTORY = 10;
 	private static final int HISTORY_TO_SHOW = 5;
@@ -231,12 +242,12 @@ public class MainFrame extends JFrame implements AirportObserver{
 		mnFile.add(separator_1);
 
 		ExitListener exitListener = new ExitListener(airport);
-
 		JMenuItem mntmExit = new JMenuItem("Exit");
 		mntmExit.setMnemonic('x');
 		mntmExit.addActionListener(exitListener);
 		mnFile.add(mntmExit);
-
+		airportObservers.add(exitListener);
+		
 		addWindowListener(exitListener);
 
 		JMenu mnEdit = new JMenu("Edit");

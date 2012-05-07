@@ -20,13 +20,12 @@ public class SaveAirportListener implements ActionListener, AirportObserver{
 	public void actionPerformed(ActionEvent e) {
 
 		try {
-			new SaveToXMLFile(airport);
+			airport.saveToXML();
 			System.out.println("Saved Airport: " + airport.getName());
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
 		
 	}
 

@@ -22,7 +22,7 @@ public class SaveObstacleListener implements ActionListener, AirportObserver{
 	public void actionPerformed(ActionEvent e) {		
 		if((airport.getCurrentPhysicalRunway() != null) && (airport.getCurrentPhysicalRunway().getObstacle() != null)){
 			try {
-				new SaveToXMLFile(airport.getCurrentPhysicalRunway().getObstacle());
+				airport.getCurrentPhysicalRunway().getObstacle().saveToXML();
 				System.out.println("Saved Obstacle: " + airport.getCurrentPhysicalRunway().getObstacle().getName());
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
