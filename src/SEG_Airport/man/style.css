@@ -1,8 +1,10 @@
 body {
 	background-color: white;
+	font: sans-serif;
 }
 
 h1 {
+	padding: 0px;
 	color: red;
 }
 

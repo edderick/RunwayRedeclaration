@@ -6,6 +6,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.mail.AuthenticationFailedException;
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JDialog;
@@ -128,12 +131,19 @@ public class SendEmailDialog extends JDialog {
 						email.addRecipients(contacts);
 						email.setSubject(subject);
 						email.setBody(body);
-						email.send();
+						try {
+							email.send();
+						} catch (AddressException e) {
+							JOptionPane.showMessageDialog(null, "There is a problem with one or more recipients email address(es).", "", JOptionPane.ERROR_MESSAGE);
+						} catch (MessagingException e) {
+							JOptionPane.showMessageDialog(null, "There has been an error sending the email, please check the settings and try again.", "", JOptionPane.ERROR_MESSAGE);
+						}
 					}
+					JOptionPane.showMessageDialog(null, "Emails have been sent", "", JOptionPane.ERROR_MESSAGE);
 				}
 			}.start();
 			
-			JOptionPane.showMessageDialog(null, "Emails have been sent", "", JOptionPane.ERROR_MESSAGE);
+
 			
 		}
 	}

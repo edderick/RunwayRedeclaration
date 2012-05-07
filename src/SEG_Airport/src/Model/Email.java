@@ -23,10 +23,10 @@ import javax.mail.internet.MimeMessage;
  * @author Edward
  */
 public class Email {
-	
+
 	private Properties props = System.getProperties(); 
 	private Session session;
-	
+
 	private String host = "smtp.gmail.com";
 	private String from = "seg2012gp9@gmail.com";
 	private String password = "SasanMaleki";
@@ -34,13 +34,13 @@ public class Email {
 	private String subject = "";
 	private String body = "";
 	private ArrayList<Contact> recipients = new ArrayList<Contact>();
-	
+
 	/**
 	 * Default constructor for email class
 	 * Sets up the properties for a message to be sent
 	 */
 	public Email(){
-		
+
 		try{
 			loadSettings();
 		}
@@ -50,7 +50,7 @@ public class Email {
 			from = "seg2012gp9@gmail.com";
 			password = "SasanMaleki";
 		}
-		
+
 		props.put("mail.smtp.starttls.enable", "true");
 		props.put("mail.smtp.host", host);
 		props.put("mail.smtp.user", from);
@@ -75,7 +75,7 @@ public class Email {
 		line = br.readLine();
 		if (line != null) password = line;
 	}
-	
+
 	/**
 	 * Sets the subject of the email to be sent
 	 * @param subject The subject of the email
@@ -83,7 +83,7 @@ public class Email {
 	public void setSubject(String subject){
 		this.subject = subject;
 	}
-	
+
 	/**
 	 * Sets the body text of the email to be sent
 	 * @param subject The body text of the email
@@ -91,14 +91,14 @@ public class Email {
 	public void setBody(String body){
 		this.body = body;
 	}
-	
+
 	/**
 	 * @param contact Contact to add to recipients
 	 */
 	public void addRecipient(Contact contact){
 		recipients.add(contact);
 	}
-	
+
 	/**
 	 * @param contacts List of contact to add to recipients
 	 */
@@ -107,35 +107,27 @@ public class Email {
 			recipients.add(c);
 		}
 	}
-	
+
 	/**
 	 * Sends the email
+	 * @throws MessagingException 
+	 * @throws AddressException 
 	 */
-	public void send(){
+	public void send() throws AddressException, MessagingException{
 		Message message = new MimeMessage(session);
-		try {
-			message.setFrom(new InternetAddress(from));
-		
-			for( Contact c : recipients ) {
-				message.addRecipient(Message.RecipientType.TO, new InternetAddress(c.getEmail())); 
-			}
-			
-			message.setSubject(subject);
-			message.setText(body);
-			Transport transport = session.getTransport("smtp");
-			transport.connect(host, from, password);
-			transport.sendMessage(message, message.getAllRecipients());
-			transport.close();
 
-		} catch (AuthenticationFailedException e){
-			System.out.println("Unable to authenticate");
-		} catch (AddressException e) {
-			// TODO Auto-generated catch block
-			//Might just throw these up to a higher power :p
-			e.printStackTrace();
-		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		message.setFrom(new InternetAddress(from));
+
+		for( Contact c : recipients ) {
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(c.getEmail())); 
 		}
+
+		message.setSubject(subject);
+		message.setText(body);
+		Transport transport = session.getTransport("smtp");
+		transport.connect(host, from, password);
+		transport.sendMessage(message, message.getAllRecipients());
+		transport.close();
+
 	}
 }

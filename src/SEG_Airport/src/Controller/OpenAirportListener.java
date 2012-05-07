@@ -24,7 +24,7 @@ public class OpenAirportListener implements ActionListener, AirportObserver{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		LoadXMLFile lf = new LoadXMLFile();
-		Airport ap = new Airport("");
+		Airport ap;
 
 		try {
 			ap = lf.loadAirport();
@@ -48,10 +48,6 @@ public class OpenAirportListener implements ActionListener, AirportObserver{
 						);
 			}
 
-		} catch (Exception ex) {}
-		if (ap != null) {
-			this.airport = ap;
-			
 			if(airport.getPhysicalRunways().size() != 0) { 
 				airport.setCurrentPhysicalRunway(airport.getPhysicalRunways().get(0));
 				airport.setCurrentRunway(airport.getCurrentPhysicalRunway().getRunway(0));
@@ -64,7 +60,8 @@ public class OpenAirportListener implements ActionListener, AirportObserver{
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-		}
+			
+		} catch (Exception ex) {}
 
 
 	}

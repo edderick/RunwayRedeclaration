@@ -117,6 +117,7 @@ public class Airport implements Saveable{
 			SaveToXMLFile xmlFile = new SaveToXMLFile(this);
 			saved = true;
 		} catch (Exception e) {
+			//TODO: Sort out dodgy catch
 			e.printStackTrace();
 		}
 

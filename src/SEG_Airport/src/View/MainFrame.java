@@ -245,7 +245,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		mntmExit.addActionListener(exitListener);
 		mnFile.add(mntmExit);
 		airportObservers.add(exitListener);
-		
+
 		addWindowListener(exitListener);
 
 		JMenu mnEdit = new JMenu("Edit");
@@ -287,7 +287,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		AdvancedParametersListener opl = new AdvancedParametersListener(airport, airportObservers);
 		mntmPositionObstacle.addActionListener(opl);
 		airportObservers.add(opl);
-		
+
 		JMenuItem mntmRemoveObstacle = new JMenuItem("Remove Obstacle");
 		RemoveObstacleListener rol = new RemoveObstacleListener(airport, airportObservers);
 		mntmRemoveObstacle.addActionListener(rol);
@@ -418,7 +418,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		lblCurrentAirport.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel.add(lblCurrentAirport, "cell 0 0,alignx left,aligny top");
 
-		lblAirportName = new JLabel("None");
+		lblAirportName = new JLabel("<untitled>");
 		panel.add(lblAirportName, "cell 1 0");
 
 		JLabel lblCurrentRunway = new JLabel("Current Runway:");
@@ -429,7 +429,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		SelectRunwayListener srl = new SelectRunwayListener(airport, airportObservers);
 		currentRunwayCombo.addItemListener(srl);
 		airportObservers.add(srl);
-		
+
 
 		JPanel leftTopPanel = new JPanel();
 		leftTopPanel.setBorder(new TitledBorder(null, "Original Parameters", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -499,7 +499,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 				));
 		leftUpperBottomPanel.add(ObstacleDetailsTable);
 		ObstacleDetailsTable.getColumnModel().getColumn(0).setPreferredWidth(150);
-		
+
 		JPanel leftLowerBottomPanel = new JPanel();
 		leftLowerBottomPanel.setBorder(new TitledBorder(null, "Advanced Parameters", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		leftPanel.add(leftLowerBottomPanel, "cell 0 4,grow");
@@ -613,12 +613,16 @@ public class MainFrame extends JFrame implements AirportObserver{
 	@Override
 	public void updateAirport(Airport airport) {
 		this.airport = airport;
-		lblAirportName.setText(airport.getName());
-		
+		if(airport.getName().equals("")){
+			lblAirportName.setText("<untitled>");
+		}else{
+			lblAirportName.setText(airport.getName());
+		}	
 		generateRunwayComboBox(currentRunwayCombo);
 		generatePhysicalRunwayRadioButtons(physicalRunwayMenu);
 		//currentRunwayCombo.setSelectedIndex(0);
 		updateTables();
+
 	}
 
 	private void generateRunwayComboBox(JComboBox currentRunwayComboBox){
