@@ -125,6 +125,7 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 	public void paint (Graphics g){
 		super.paint(g);
 		if(visible){
+			getRatio();
 			setValues();
 			Graphics2D g2d = (Graphics2D)g;
 			
@@ -218,6 +219,21 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 	public int pixelToMeter(int x){
 		return (int) (x/meterToPixel);
 	}
+	
+	public void getRatio(){
+		int pWidth = this.getWidth();
+		int pHeight = this.getHeight();
+
+		int width = (int) (ratio*pWidth);
+		meterToPixel=width/(double)runwayWidth;
+
+		int height = meterToPixel(runwayHeight);
+
+		//calculates the x and y values to position the runway on the view
+		xRunway = (int) (((1.0-ratio)/2) * pWidth);
+		yRunway = (pHeight - height)/2;
+	}
+	
 	
 	public void runwayCreation(Graphics2D g2d){
 		if(airport!=null && runway!=null){
@@ -323,7 +339,7 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 		int ratioOfDashesToThresholdDashes = 2;
 		
 		dashesWidth=(runwayHeight/ratioOfThresholdDashesWidthToRunwayHeight);
-		if (dashesWidth == 0) dashesWidth = 1;
+		if (dashesWidth == 0) dashesWidth = 3;
 		gaps=dashesWidth;
 		int dashesX = xRunway + meterToPixel((dashesLength/2)+leftDT);
 		dashesLength=dashesLength*ratioOfDashesToThresholdDashes;
@@ -366,7 +382,7 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 				
 			}
 			g2d.setColor(Color.YELLOW);
-			g2d.drawLine(xRunway+meterToPixel(runwayWidth-oppositeDT), yRunway, xRunway+meterToPixel(runwayWidth-rightDT), yRunway+meterToPixel(runwayHeight));
+			g2d.drawLine(xRunway+meterToPixel(runwayWidth-rightDT), yRunway, xRunway+meterToPixel(runwayWidth-rightDT), yRunway+meterToPixel(runwayHeight));
 		}
 	}
 	
@@ -513,9 +529,9 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 				this.yObstacle = (int) airport.getCurrentPhysicalRunway().getDistanceAwayFromCenterLine();
 				this.obstacleLength =(int) obstacle.getLength();
 				this.obstacleWidth = (int) obstacle.getWidth();
-//				if(RESA<obstacle.getHeight()*airport.getCurrentPhysicalRunway().getAngleOfSlope()){
-					this.ANGLE=(int) (obstacle.getHeight()*airport.getCurrentPhysicalRunway().getAngleOfSlope());
-//				}
+
+				this.ANGLE=(int) (obstacle.getHeight()*airport.getCurrentPhysicalRunway().getAngleOfSlope());
+				
 				
 			}
 			
@@ -526,6 +542,17 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 				leftDT =(int) airport.getCurrentPhysicalRunway().getRunway(0).getDisplacedThreshold(0);
 				rightDT=(int) airport.getCurrentPhysicalRunway().getRunway(1).getDisplacedThreshold(0);
 			}
+			
+			if(obstacle!=null){
+				if(rightDT>0 && DT>0){
+					DTStart=runwayWidth-meterToPixel(DT);
+					LDAStart=0;
+				}
+				
+			}
+			
+			
+			
 			
 		}
 	}
