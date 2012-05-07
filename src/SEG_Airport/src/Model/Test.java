@@ -121,7 +121,7 @@ public class Test {
 		contactsList.add(cont2);
 		
 		try {
-			SaveToXMLFile saveTo = new SaveToXMLFile(contactsList, false);
+			SaveToXMLFile saveTo = new SaveToXMLFile(contactsList, "testAddress.xml");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

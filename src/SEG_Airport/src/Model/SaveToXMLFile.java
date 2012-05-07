@@ -65,25 +65,39 @@ public class SaveToXMLFile {
 		//Creating JFileChooser object and storing its return value
 		this.createFChooserAndStore();
 	}
-	
+
 	/**
 	 * Constructor for contacts
 	 * @param contacts The list of contacts to save, boolean indicating silent save or not
 	 * @throws Exception Relating to reading files or generating xml
 	 */
-	public SaveToXMLFile(ArrayList<Contact> contacts, boolean silentOrNot) throws Exception{
+	public SaveToXMLFile(ArrayList<Contact> contacts) throws Exception{
 
 		String root = "Contacts";
 		this.createDocBuilderFactory(root);
 
 		this.addNodesAndElementsContacts(contacts);
 
-		if (!silentOrNot){
-			//Creating JFileChooser object and storing its return value
-			this.createFChooserAndStore();
-		}else{
-			silentSaveContacts("~/file.xml");
-		}
+		//Creating JFileChooser object and storing its return value
+		this.createFChooserAndStore();
+
+	}
+
+	/**
+	 * Constructor for contacts
+	 * @param contacts The list of contacts to save, boolean indicating silent save or not
+	 * @param path The path in which to save
+	 * @throws Exception Relating to reading files or generating xml
+	 */
+	public SaveToXMLFile(ArrayList<Contact> contacts, String path) throws Exception{
+
+		String root = "Contacts";
+		this.createDocBuilderFactory(root);
+
+		this.addNodesAndElementsContacts(contacts);
+
+		silentSaveContacts(path);
+		System.out.print("saved");
 	}
 
 	/**
@@ -110,7 +124,7 @@ public class SaveToXMLFile {
 		//for (PhysicalRunway runway: airport.runways()) { 
 
 
-			/*Element physicalRunway = document.createElement("PhysicalRunway");
+		/*Element physicalRunway = document.createElement("PhysicalRunway");
 			String namePhysicalRunwayString = runway.getId();
 			// physicalRunway.appendChild(document.createTextNode(nam));
 
@@ -118,36 +132,36 @@ public class SaveToXMLFile {
 			physicalRunwayName.appendChild(document.createTextNode(namePhysicalRunwayString));
 			physicalRunway.appendChild(physicalRunwayName);*/
 
-			for (int i = 0; i < contactList.size(); i++) { // looping through each contact
-				
-				Contact thisContact = contactList.get(i);// grabbing a contact
+		for (int i = 0; i < contactList.size(); i++) { // looping through each contact
 
-				// Creating contact element and appending to root element
-				Element element = document.createElement("Contact");
+			Contact thisContact = contactList.get(i);// grabbing a contact
 
-				// Creating each of the contact's elements and appending to the contact element
-				Element firstName = document.createElement("First_Name");
-				firstName.appendChild(document.createTextNode(thisContact.getFirstName()));
-				element.appendChild(firstName);
+			// Creating contact element and appending to root element
+			Element element = document.createElement("Contact");
 
-				Element lastName = document.createElement("Last_Name");
-				lastName.appendChild(document.createTextNode(thisContact.getLastName()));
-				element.appendChild(lastName);
+			// Creating each of the contact's elements and appending to the contact element
+			Element firstName = document.createElement("First_Name");
+			firstName.appendChild(document.createTextNode(thisContact.getFirstName()));
+			element.appendChild(firstName);
 
-				Element email = document.createElement("Email_Address");
-				email.appendChild(document.createTextNode(thisContact.getEmail()));
-				element.appendChild(email);
+			Element lastName = document.createElement("Last_Name");
+			lastName.appendChild(document.createTextNode(thisContact.getLastName()));
+			element.appendChild(lastName);
+
+			Element email = document.createElement("Email_Address");
+			email.appendChild(document.createTextNode(thisContact.getEmail()));
+			element.appendChild(email);
 
 
-				rootElement.appendChild(element);
-				// rootElement.appendChild(em);
-			}
+			rootElement.appendChild(element);
+			// rootElement.appendChild(em);
+		}
 
-		
+
 
 	}
-	
-	
+
+
 	/**
 	 * Adds the nodes and elements to the xml
 	 * @param airport The airport to be saved
@@ -166,48 +180,48 @@ public class SaveToXMLFile {
 			Element physicalRunwayName = document.createElement("Name");
 			physicalRunwayName.appendChild(document.createTextNode(namePhysicalRunwayString));
 			physicalRunway.appendChild(physicalRunwayName);
-			
+
 			Element resa = document.createElement("RESA");
 			String resaString = Double.toString(runway.getRESA()/*.getRESA()*/);
 			resa.appendChild(document.createTextNode(resaString));
 			physicalRunway.appendChild(resa);
-			
+
 			Element stopway = document.createElement("Stopway");
 			String stopwayString = Double.toString(runway.getStopway());
 			stopway.appendChild(document.createTextNode(stopwayString));
 			physicalRunway.appendChild(stopway);
-			
+
 			Element blastAllowance = document.createElement("Blast_Allowance");
 			String blastString = Double.toString(runway.getBlastAllowance());
 			blastAllowance.appendChild(document.createTextNode(blastString));
 			physicalRunway.appendChild(blastAllowance);
-			
+
 			Element runwayStripWidth = document.createElement("Runway_Strip_Width");
 			String runwayWidthString = Double.toString(runway.getRunwayStripWidth());
 			runwayStripWidth.appendChild(document.createTextNode(runwayWidthString));
 			physicalRunway.appendChild(runwayStripWidth);
-			
+
 			Element clearAndGradedWidth = document.createElement("Clear_And_Graded_Width");
 			String clearWidthString = Double.toString(runway.getClearedAndGradedWidth());
 			clearAndGradedWidth.appendChild(document.createTextNode(clearWidthString));
 			physicalRunway.appendChild(clearAndGradedWidth);
-			
+
 			Element distanceAwayFromThreshold = document.createElement("Distance_Away_From_Threshold");
 			String distanceFromThresString = Double.toString(runway.getDistanceAwayFromThreshold());
 			distanceAwayFromThreshold.appendChild(document.createTextNode(distanceFromThresString));
 			physicalRunway.appendChild(distanceAwayFromThreshold);
-			
+
 			Element distanceAwayFromCenterline = document.createElement("Distance_Away_From_Centerline");
 			String distanceFromCenterString = Double.toString(runway.getDistanceAwayFromCenterLine());
 			distanceAwayFromCenterline.appendChild(document.createTextNode(distanceFromCenterString));
 			physicalRunway.appendChild(distanceAwayFromCenterline);
-			
+
 			Element angleOfSlope = document.createElement("Angle_Of_Slope");
 			String angleString = Double.toString(runway.getAngleOfSlope());
 			angleOfSlope.appendChild(document.createTextNode(angleString));
 			physicalRunway.appendChild(angleOfSlope);
-			
-			
+
+
 
 			for (int i = 0; i < 2; i++) { // looping through each actual runway (2)
 				Runway runwayObject = runway.getRunway(i);// getting a runway
@@ -241,7 +255,7 @@ public class SaveToXMLFile {
 				element.appendChild(lda);
 
 				Element displacedThreshold = document
-						.createElement("DisplacedThreshold");
+				.createElement("DisplacedThreshold");
 				String displacedThresholdString = Double.toString(runwayObject.getDisplacedThreshold(1));
 				displacedThreshold.appendChild(document.createTextNode(displacedThresholdString));
 				element.appendChild(displacedThreshold);
@@ -287,9 +301,9 @@ public class SaveToXMLFile {
 	public void createFChooserAndStore() throws IOException, TransformerException {
 
 		JFileChooser fileChooser = new JFileChooser();
-		
+
 		fileChooser.setFileFilter(new XMLFileFilter());
-		
+
 		int returnValue = fileChooser.showSaveDialog(null);
 
 		if (returnValue == JFileChooser.APPROVE_OPTION) {
@@ -297,9 +311,9 @@ public class SaveToXMLFile {
 			String filePath = file.getPath();
 			if(!filePath.toLowerCase().endsWith(".xml"))
 			{
-			    file = new File(filePath + ".xml");
+				file = new File(filePath + ".xml");
 			}
-			
+
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
@@ -313,23 +327,23 @@ public class SaveToXMLFile {
 		}
 
 	}
-	
+
 	public void silentSaveContacts(String address) throws IOException, TransformerException {
 
-		file = new File("address");
-		
+		file = new File(address);
+
 		TransformerFactory transformerFactory = TransformerFactory
-				.newInstance();
+		.newInstance();
 		Transformer transformer = transformerFactory.newTransformer();
 		transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-		
+
 		StreamResult result = new StreamResult(file/*System.out*/);
 		DOMSource source = new DOMSource(document);
 		file.createNewFile();
-		
+
 		transformer.transform(source, result);
-		
-		
+
+		System.out.println("!SAVED!");
 
 	}
 
