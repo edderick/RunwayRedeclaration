@@ -52,7 +52,7 @@ public class OpenRecentAirportListener implements ActionListener, AirportObserve
 
 						);
 			}
-
+			
 		} catch (Exception ex) {}
 		if (ap != null) {
 			this.airport = ap;

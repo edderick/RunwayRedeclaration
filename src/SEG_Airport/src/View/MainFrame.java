@@ -78,6 +78,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 	private JComboBox currentRunwayCombo;
 	private final ButtonGroup topPanelButtonGroup = new ButtonGroup();
 	private final ButtonGroup bottomPanelButtonGroup = new ButtonGroup();
+	private final ButtonGroup physicalRunwayButtonGroup = new ButtonGroup();
 
 	TopView topTopView;
 
@@ -428,6 +429,10 @@ public class MainFrame extends JFrame implements AirportObserver{
 
 		currentRunwayCombo = new JComboBox();
 		panel.add(currentRunwayCombo, "cell 1 1,growx");
+		SelectRunwayListener srl = new SelectRunwayListener(airport, airportObservers);
+		currentRunwayCombo.addItemListener(srl);
+		airportObservers.add(srl);
+		
 
 		JPanel leftTopPanel = new JPanel();
 		leftTopPanel.setBorder(new TitledBorder(null, "Original Parameters", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -608,7 +613,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 	public void updateAirport(Airport airport) {
 		this.airport = airport;
 		lblAirportName.setText(airport.getName());
-
+		
 		generateRunwayComboBox(currentRunwayCombo);
 		generatePhysicalRunwayRadioButtons(physicalRunwayMenu);
 		//currentRunwayCombo.setSelectedIndex(0);
@@ -618,11 +623,10 @@ public class MainFrame extends JFrame implements AirportObserver{
 	private void generateRunwayComboBox(JComboBox currentRunwayComboBox){
 		if ((airport.getCurrentPhysicalRunway() != null) && 
 				(airport.getCurrentPhysicalRunway().getRunway(0) != currentRunwayCombo.getItemAt(0))){
-			currentRunwayCombo.removeAllItems();
 			PhysicalRunway r = airport.getCurrentPhysicalRunway();
-			currentRunwayCombo.addItem(r.getRunway(0));
-			currentRunwayCombo.addItem(r.getRunway(1));
-			currentRunwayCombo.addItemListener(new SelectRunwayListener(airport, airportObservers));
+			currentRunwayComboBox.removeAllItems();
+			currentRunwayComboBox.addItem(r.getRunway(0));
+			currentRunwayComboBox.addItem(r.getRunway(1));
 		}
 	}
 
@@ -630,7 +634,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		parentMenuItem.removeAll();
 		for(PhysicalRunway r : airport.getPhysicalRunways()){
 			JRadioButtonMenuItem rdbtnmntmlr = new JRadioButtonMenuItem(r.getId());
-			topPanelButtonGroup.add(rdbtnmntmlr);
+			physicalRunwayButtonGroup.add(rdbtnmntmlr);
 			parentMenuItem.add(rdbtnmntmlr);
 			rdbtnmntmlr.addActionListener(new SelectPhysicalRunwayListener(airport, r, airportObservers)); 
 			if (airport.getCurrentPhysicalRunway() == r) rdbtnmntmlr.setSelected(true);

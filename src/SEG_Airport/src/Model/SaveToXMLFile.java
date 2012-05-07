@@ -235,22 +235,22 @@ public class SaveToXMLFile {
 				element.appendChild(name);
 
 				Element tora = document.createElement("TORA");
-				String toraString = Double.toString(runwayObject.getTORA(1));// getting the tora value that can be modified
+				String toraString = Double.toString(runwayObject.getTORA(Runway.DEFAULT));// getting the tora value that can be modified
 				tora.appendChild(document.createTextNode(toraString));
 				element.appendChild(tora);
 
 				Element asda = document.createElement("ASDA");
-				String asdaString = Double.toString(runwayObject.getASDA(1));
+				String asdaString = Double.toString(runwayObject.getASDA(Runway.DEFAULT));
 				asda.appendChild(document.createTextNode(asdaString));
 				element.appendChild(asda);
 
 				Element toda = document.createElement("TODA");
-				String todaString = Double.toString(runwayObject.getTODA(1));
+				String todaString = Double.toString(runwayObject.getTODA(Runway.DEFAULT));
 				toda.appendChild(document.createTextNode(todaString));
 				element.appendChild(toda);
 
 				Element lda = document.createElement("LDA");
-				String ldaString = Double.toString(runwayObject.getLDA(1));
+				String ldaString = Double.toString(runwayObject.getLDA(Runway.DEFAULT));
 				lda.appendChild(document.createTextNode(ldaString));
 				element.appendChild(lda);
 

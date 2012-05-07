@@ -19,7 +19,9 @@ public class RemoveObstacleListener implements ActionListener, AirportObserver{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		airport.getCurrentPhysicalRunway().removeObstacleAndReset();
+		if(airport.getCurrentPhysicalRunway() != null && airport.getCurrentPhysicalRunway().getObstacle() != null){
+			airport.getCurrentPhysicalRunway().removeObstacleAndReset();
+		}
 		notifyAirportObservers();
 	}
 
