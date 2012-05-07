@@ -493,7 +493,7 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 	}
 
 	public void setValues(){
-		if(airport!=null && runway!=null){
+		if(airport!=null && runway!=null && airport.getCurrentPhysicalRunway() != null){
 			this.runwayWidth = (int) runway.getTORA(Runway.DEFAULT);
 			this.runwayHeight = 60;
 			
@@ -502,7 +502,7 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 			this.ASDA = (int) runway.getASDA(Runway.REDECLARED);
 			this.LDA = (int) runway.getLDA(Runway.REDECLARED);
 			this.DT = (int) runway.getDisplacedThreshold(runway.DEFAULT);
-		
+	
 			this.RESA = (int) airport.getCurrentPhysicalRunway().getRESA();
 			this.stopway = (int) airport.getCurrentPhysicalRunway().getStopway();
 			this.leftTag= airport.getCurrentPhysicalRunway().getRunway(0).getName();
