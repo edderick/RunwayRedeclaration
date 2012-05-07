@@ -138,6 +138,8 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 
 	public void drawDirection(Graphics2D g2d){
 		if(airport.getCurrentRunway()!=null){
+		g2d.setColor(Color.BLACK);
+		g2d.drawString("Runway Direction", xRunway+meterToPixel(3*runwayWidth/8),  yRunway+-10-meterToPixel(runwayStripWidthFromCentreLine*2));
 		g2d.setColor(Color.RED);
 		g2d.setStroke(new BasicStroke(3));
 		g2d.drawLine(xRunway+meterToPixel(runwayWidth/4), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2), xRunway+meterToPixel(3*runwayWidth/4), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2));
@@ -299,10 +301,12 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 	}
 	
 	public void drawRunwayMarkings(Graphics2D g2d){
+		int ratioOfThresholdDashesWidthToRunwayHeight = 10;
+		int ratioOfDashesToThresholdDashes = 2;
 		g2d.setColor(Color.WHITE);
 		int dashesY = (int) (yRunway+meterToPixel(runwayHeight/2));
 		int dashesLength = 35;
-		int dashesWidth = 3;
+		int dashesWidth=(runwayHeight/ratioOfThresholdDashesWidthToRunwayHeight);
 		int gaps = 25;
 		int ratioOfDashesToThresholdMarker = 4;
 		for(int i = dashesLength*ratioOfDashesToThresholdMarker+leftDT; i<runwayWidth-(dashesLength*ratioOfDashesToThresholdMarker)-rightDT; i=i+gaps+dashesLength){
@@ -313,9 +317,8 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 		
 		tagBorder=(int) meterToPixel(dashesLength*ratioOfDashesToTagSize);
 			
-		int ratioOfThresholdDashesWidthToRunwayHeight = 20;
-		int ratioOfDashesToThresholdDashes = 2;
-		
+	
+		ratioOfThresholdDashesWidthToRunwayHeight = 12;
 		dashesWidth=(runwayHeight/ratioOfThresholdDashesWidthToRunwayHeight);
 		if (dashesWidth == 0) dashesWidth = 3;
 		gaps=dashesWidth;
@@ -337,7 +340,7 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 	public void displaceThresholdMarkings(Graphics g2d){
 		int dashesLength = 35;
 		int gaps=25;
-		int dashesWidth = 1;
+		int dashesWidth = 2;
 		if(leftDT>0){
 			
 			for(int i = 0; i<leftDT-dashesLength; i=i+dashesLength+gaps){
@@ -349,6 +352,7 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 			g2d.setColor(Color.YELLOW);
 			g2d.drawLine(xRunway+meterToPixel(leftDT), yRunway, xRunway+meterToPixel(leftDT), yRunway+meterToPixel(runwayHeight));
 		}
+		g2d.setColor(Color.WHITE);
 		if(rightDT>0){
 			for(int i = runwayWidth-rightDT+dashesLength; i<runwayWidth; i=i+dashesLength+gaps){
 				g2d.drawLine(xRunway+meterToPixel(i), yRunway+meterToPixel(runwayHeight/2), xRunway+meterToPixel(i)+meterToPixel(dashesLength), yRunway+meterToPixel(runwayHeight/2));
@@ -433,12 +437,7 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 			g2d.fillRect(xRunway+LDAStart, (yRunway + yInc + meterToPixel(runwayHeight)),  meterToPixel(LDA), width);
 			
 			g2d.setColor(dtColor);
-			int DT;
-			if(leftDT>0){
-				DT=leftDT;
-			}else{
-				DT=rightDT;
-			}
+			
 			g2d.fillRect(xRunway+DTStart, (yRunway + yInc*2 + meterToPixel(runwayHeight)),  meterToPixel(DT), width);
 			
 	
