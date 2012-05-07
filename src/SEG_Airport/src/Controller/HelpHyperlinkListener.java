@@ -19,7 +19,6 @@ public class HelpHyperlinkListener implements HyperlinkListener{
 		if (evt.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
 			try {
 				page.setPage(evt.getURL());
-				System.out.println("Changing page");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

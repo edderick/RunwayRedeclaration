@@ -159,7 +159,7 @@ public class AdvancedParametersDialog extends JDialog {
 				if(physicalRunway.getObstacle() != null) physicalRunway.getObstacle().resetSize();
 				
 				airportCopy.setModified();
-				obstacle.setModified();
+				if(obstacle != null) obstacle.setModified();
 				
 				notifyAirportObservers();
 				setFormValues();

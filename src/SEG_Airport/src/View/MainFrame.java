@@ -138,7 +138,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 
 
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		setBounds(100, 100, 800, 600);
+		setBounds(100, 100, 800, 645);
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
