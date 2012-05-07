@@ -16,9 +16,10 @@ public class AboutDialog extends JDialog{
 	private static final long serialVersionUID = 1L;
 
 	public AboutDialog() {
+		setAlwaysOnTop(true);
 		setTitle("About");
 
-		setBounds(100, 100, 300, 250);
+		setBounds(100, 100, 336, 232);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
 		getContentPane().setLayout(new MigLayout("", "[grow][][grow]", "[50][50][][][grow]"));

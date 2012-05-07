@@ -31,7 +31,7 @@ public class EditContactDialog extends JDialog {
 	
 	public EditContactDialog(Contact contact, JTable tblContacts) {
 		setTitle("Edit Contact");
-		setBounds(100, 100, 350, 155);
+		setBounds(100, 100, 360, 170);
 
 		this.contactCopy = contact;
 		this.tblContactsCopy = tblContacts;

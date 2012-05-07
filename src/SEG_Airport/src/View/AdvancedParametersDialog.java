@@ -38,7 +38,7 @@ public class AdvancedParametersDialog extends JDialog {
 		setResizable(false);
 		setTitle("Advanced Parameters");
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 310, 330);
+		setBounds(100, 100, 310, 370);
 		
 		this.airportCopy = airport;
 		physicalRunway = airport.getCurrentPhysicalRunway();
@@ -50,95 +50,95 @@ public class AdvancedParametersDialog extends JDialog {
 		
 		JPanel fieldsPanel = new JPanel();
 		contentPane.add(fieldsPanel, "cell 0 0,grow");
-		fieldsPanel.setLayout(new MigLayout("", "[][grow]", "[][][][][][][grow][][]"));
+		fieldsPanel.setLayout(new MigLayout("", "[170px][90px][12px]", "[19px][19px][19px][19px][19px][19px][grow][19px][19px]"));
 		
 		
 		JLabel lblRESA = new JLabel("RESA");
-		fieldsPanel.add(lblRESA, "cell 0 0,alignx trailing");
+		fieldsPanel.add(lblRESA, "cell 0 0,alignx right,aligny center");
 		
 		tfRESA = new JTextField();
-		fieldsPanel.add(tfRESA, "flowx,cell 1 0,growx");
+		fieldsPanel.add(tfRESA, "cell 1 0,growx,aligny top");
 
 		
 		JLabel labelm0 = new JLabel("m");
-		fieldsPanel.add(labelm0, "cell 1 0");
+		fieldsPanel.add(labelm0, "cell 2 0,alignx left,aligny center");
 		
 		
 		JLabel lblStopway = new JLabel("Stopway");
-		fieldsPanel.add(lblStopway, "cell 0 1,alignx trailing");
+		fieldsPanel.add(lblStopway, "cell 0 1,alignx right,aligny center");
 		
 		tfStopway = new JTextField();
-		fieldsPanel.add(tfStopway, "flowx,cell 1 1,growx");
+		fieldsPanel.add(tfStopway, "cell 1 1,growx,aligny top");
 
 		
 		JLabel labelm1 = new JLabel("m");
-		fieldsPanel.add(labelm1, "cell 1 1");
+		fieldsPanel.add(labelm1, "cell 2 1,alignx left,aligny center");
 		
 		
 		JLabel lblBlastAllowance = new JLabel("Blast allowance");
-		fieldsPanel.add(lblBlastAllowance, "cell 0 2,alignx trailing");
+		fieldsPanel.add(lblBlastAllowance, "cell 0 2,alignx right,aligny center");
 		
 		tfBlastAllowance = new JTextField();
-		fieldsPanel.add(tfBlastAllowance, "flowx,cell 1 2,grow");
+		fieldsPanel.add(tfBlastAllowance, "cell 1 2,grow");
 
 		
 		JLabel labelm2 = new JLabel("m");
-		fieldsPanel.add(labelm2, "cell 1 2");
+		fieldsPanel.add(labelm2, "cell 2 2,alignx left,aligny center");
 		
 		
 		JLabel lblAngleOfSlope = new JLabel("Angle of slope");
-		fieldsPanel.add(lblAngleOfSlope, "cell 0 3,alignx trailing");
+		fieldsPanel.add(lblAngleOfSlope, "cell 0 3,alignx right,aligny center");
 		
 		tfAngleOfSlope = new JTextField();
-		fieldsPanel.add(tfAngleOfSlope, "flowx,cell 1 3,growx");
+		fieldsPanel.add(tfAngleOfSlope, "cell 1 3,growx,aligny top");
 
 		
 		JLabel labelm3 = new JLabel("m");
-		fieldsPanel.add(labelm3, "cell 1 3");
+		fieldsPanel.add(labelm3, "cell 2 3,alignx left,aligny center");
 		
 		
 		JLabel labelRunwayStripWidth = new JLabel("Runway Strip Width");
-		fieldsPanel.add(labelRunwayStripWidth, "cell 0 4,alignx trailing");
+		fieldsPanel.add(labelRunwayStripWidth, "cell 0 4,alignx right,aligny center");
 		
 		tfRunwayStripWidth = new JTextField();
-		fieldsPanel.add(tfRunwayStripWidth, "flowx,cell 1 4,growx");
+		fieldsPanel.add(tfRunwayStripWidth, "cell 1 4,growx,aligny top");
 	
 		
 		JLabel labelm4 = new JLabel("m");
-		fieldsPanel.add(labelm4, "cell 1 4");
+		fieldsPanel.add(labelm4, "cell 2 4,alignx left,aligny center");
 		
 		
 		JLabel lblClearAndGradedWidth = new JLabel("Clear and Graded Width");
-		fieldsPanel.add(lblClearAndGradedWidth, "cell 0 5,alignx trailing");
+		fieldsPanel.add(lblClearAndGradedWidth, "cell 0 5,alignx left,aligny center");
 		
 		tfClearAndGradedWidth = new JTextField();
-		fieldsPanel.add(tfClearAndGradedWidth, "flowx,cell 1 5,growx");
+		fieldsPanel.add(tfClearAndGradedWidth, "cell 1 5,growx,aligny top");
 
 		
 		JLabel labelm5 = new JLabel("m");
-		fieldsPanel.add(labelm5, "cell 1 5");
+		fieldsPanel.add(labelm5, "cell 2 5,alignx left,aligny center");
 		
 		
 		JLabel lblNewLabel = new JLabel("Obstacle Width");
-		fieldsPanel.add(lblNewLabel, "cell 0 7,alignx trailing");
+		fieldsPanel.add(lblNewLabel, "cell 0 7,alignx right,aligny center");
 		
 		tfObstacleWidth = new JTextField();
-		fieldsPanel.add(tfObstacleWidth, "flowx,cell 1 7,growx,aligny top");
+		fieldsPanel.add(tfObstacleWidth, "cell 1 7,growx,aligny top");
 		
 
 		JLabel labelm6 = new JLabel("m");
-		fieldsPanel.add(labelm6, "cell 1 7");
+		fieldsPanel.add(labelm6, "cell 2 7,alignx left,aligny center");
 		
 		
 		JLabel lblObstacleLength = new JLabel("Obstacle Length");
-		fieldsPanel.add(lblObstacleLength, "cell 0 8,alignx trailing");
+		fieldsPanel.add(lblObstacleLength, "cell 0 8,alignx right,aligny center");
 		
 		tfObstacleLength = new JTextField();
-		fieldsPanel.add(tfObstacleLength, "flowx,cell 1 8,growx");
+		fieldsPanel.add(tfObstacleLength, "cell 1 8,growx,aligny top");
 		
 
 		JLabel labelm7 = new JLabel("m");
-		fieldsPanel.add(labelm7, "cell 1 8");
+		fieldsPanel.add(labelm7, "cell 2 8,alignx left,aligny center");
 		
 		
 		JPanel buttonsPanel = new JPanel();

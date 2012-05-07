@@ -44,10 +44,10 @@ public class EditObstacleDialog extends JDialog {
 		setResizable(false);
 		setTitle("Edit Obstacle");
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 355, 250);
+		setBounds(100, 100, 355, 260);
 		
 		contentPane = new JPanel();
-		contentPane.setLayout(new MigLayout("", "[100px:n,grow]", "[][6.00][grow][]"));
+		contentPane.setLayout(new MigLayout("", "[100px:n,grow]", "[][grow][]"));
 		setContentPane(contentPane);
 
 		JPanel fieldsPanel = new JPanel();
@@ -100,11 +100,11 @@ public class EditObstacleDialog extends JDialog {
 		fieldsPanel.add(lblmetres_3, "cell 1 4");
 
 		JPanel buttonsPanel = new JPanel();
-		contentPane.add(buttonsPanel, "cell 0 3,grow");
-		buttonsPanel.setLayout(new MigLayout("", "[grow][][]", "[grow][]"));
+		contentPane.add(buttonsPanel, "cell 0 2,grow");
+		buttonsPanel.setLayout(new MigLayout("", "[grow][][]", "[]"));
 		
 				JButton btnApply = new JButton("Apply");
-				buttonsPanel.add(btnApply, "cell 1 1");
+				buttonsPanel.add(btnApply, "cell 1 0");
 				
 						JButton btnCancel = new JButton("Cancel");
 						btnCancel.addActionListener(new ActionListener() {
@@ -113,7 +113,7 @@ public class EditObstacleDialog extends JDialog {
 								dispose();
 							}
 						});
-						buttonsPanel.add(btnCancel, "cell 2 1");
+						buttonsPanel.add(btnCancel, "cell 2 0");
 				
 						btnApply.addActionListener(new ApplyListener());
 

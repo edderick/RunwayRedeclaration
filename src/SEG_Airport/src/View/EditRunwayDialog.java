@@ -56,15 +56,14 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 		setResizable(false);
 		setTitle("Edit Runway");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 490, 291);
+		setBounds(100, 100, 490, 315);
 		contentPane = new JPanel();
 
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		contentPane.setLayout(new MigLayout("", "[212px][22px][214px]", "[34px][140px][45px]"));
 
 		JPanel leftFeildsPanel = new JPanel();
-		leftFeildsPanel.setBounds(12, 50, 212, 140);
-		contentPane.add(leftFeildsPanel);
+		contentPane.add(leftFeildsPanel, "cell 0 1,grow");
 		leftFeildsPanel.setLayout(new MigLayout("", "[37px][37px,grow]", "[15px][][][][]"));
 
 		JLabel lblLeftASDA = new JLabel("ASDA");
@@ -126,8 +125,7 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 		leftFeildsPanel.add(lblm5, "cell 1 4");
 
 		JPanel leftNamePanel = new JPanel();
-		leftNamePanel.setBounds(12, 12, 212, 34);
-		contentPane.add(leftNamePanel);
+		contentPane.add(leftNamePanel, "cell 0 0,grow");
 		leftNamePanel.setLayout(new MigLayout("", "[68.00,grow][129.00,grow]", "[24px]"));
 
 		JLabel lblLeftRunway = new JLabel("Runway");
@@ -138,12 +136,10 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 		tfLeftName.setColumns(10);
 
 		JPanel buttonsPanel = new JPanel();
-		buttonsPanel.setBounds(12, 209, 448, 45);
-		contentPane.add(buttonsPanel);
+		contentPane.add(buttonsPanel, "cell 0 2 3 1,grow");
 
 		JPanel rightFeildsPanel = new JPanel();
-		rightFeildsPanel.setBounds(246, 50, 212, 140);
-		contentPane.add(rightFeildsPanel);
+		contentPane.add(rightFeildsPanel, "cell 2 1,grow");
 		rightFeildsPanel.setLayout(new MigLayout("", "[][grow]", "[][][][][]"));
 
 		JLabel lblRightASDA = new JLabel("ASDA");
@@ -202,8 +198,7 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 		rightFeildsPanel.add(labelm10, "cell 1 4");
 
 		JPanel rightNamePanel = new JPanel();
-		rightNamePanel.setBounds(246, 12, 212, 34);
-		contentPane.add(rightNamePanel);
+		contentPane.add(rightNamePanel, "cell 2 0,grow");
 		rightNamePanel.setLayout(new MigLayout("", "[74.00][grow]", "[]"));
 
 		JLabel lblRightRunway = new JLabel("Runway");

@@ -132,6 +132,9 @@ public class SendEmailDialog extends JDialog {
 					}
 				}
 			}.start();
+			
+			JOptionPane.showMessageDialog(null, "Emails have been sent", "", JOptionPane.ERROR_MESSAGE);
+			
 		}
 	}
 
