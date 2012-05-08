@@ -48,7 +48,7 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 
 	//this value determines how much of the width of the panel the runway takes up.
 	double ratio = 0.95;
-	double ratio2 = 0.2;
+	double ratio2 = 0.25;
 
 	//this value determines how much of the width of the runway the runwayTag takes up.
 	final double fontRatio = 0.5;
@@ -155,17 +155,21 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 			paintComponents(g2d);
 			drawKey(g2d);
 			drawScale(g2d);
-			if(obstacle!=null){
-				drawScale2(g2d);
 			}
-		}
 
 	}
 	
 	public void drawDirection(Graphics2D g2d){
 		if(airport.getCurrentRunway()!=null){
+			for(int i=5; i<1000; i++){
+				Font f = new Font("tag", 1, i);
+				g2d.setFont(f);
+				if(g2d.getFontMetrics().stringWidth("Runway Take-off/Landing Direction")>=meterToPixel(runwayLength/2)){
+					f = new Font("tag", 1, i-1);break;
+				}
+			}			
 		g2d.setColor(Color.BLACK);
-		g2d.drawString("Runway Take-off/Landing Direction", xRunway+meterToPixel(3*runwayLength/8),  yRunway+-10-meterToPixel(runwayStripWidthFromCentreLine*2));
+		g2d.drawString("Runway Take-off/Landing Direction", xRunway+meterToPixel(runwayLength/4),  yRunway+-10-meterToPixel(runwayStripWidthFromCentreLine*2));
 		
 		g2d.setStroke(new BasicStroke(3));
 		g2d.drawLine(xRunway+meterToPixel(runwayLength/4), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2), xRunway+meterToPixel(3*runwayLength/4), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2));
@@ -258,8 +262,7 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 		g2d.drawString("RESA", (2*spaceFromLeftEdge)+g2d.getFontMetrics().stringWidth("TODA"), this.getHeight()- spaceForScale-(2*textDistance));
 		g2d.setColor(Color.BLACK);
 		g2d.drawString("ANGLE", (2*spaceFromLeftEdge)+g2d.getFontMetrics().stringWidth("TODA"), this.getHeight()- spaceForScale-(3*textDistance));
-//		int stringWidth = g2d.getFontMetrics().stringWidth("TODA")+ g2d.getFontMetrics().stringWidth("STOPWAY");
-//		g2d.drawRect(5, this.getHeight()+ spaceForScale+ (3*textDistance),  (spaceFromLeftEdge*2) + stringWidth, this.getHeight()-spaceForScale);
+
 	}
 	
 	public void drawScale(Graphics2D g2d){
@@ -278,21 +281,6 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 	}
 	
 	
-	public void drawScale2(Graphics2D g2d){
-		if(airport!=null && runway!=null &&obstacle!=null){
-			int scaleHeight = Math.round(pixelToMeter2(this.getHeight()/3)/100)*100;
-			g2d.setColor(Color.BLACK);
-			g2d.setFont(new Font("scale", 1, 10));
-			g2d.fillRect(this.getWidth()-10, 10, 2, 10+meterToPixel2(scaleHeight));
-			g2d.fillRect(this.getWidth()-15, 10, 5, 2);	
-//			g2d.fillRect(this.getWidth()-10, 15,  2, 5);
-//			g2d.fillRect((int) (8+(scaleWidth*meterToPixel)), (int) this.getHeight()-15, (int) 2, 5);
-//			g2d.fillRect((int) (8+(scaleWidth/2*meterToPixel)), (int) this.getHeight()-12, (int) 2, 2);
-//			g2d.drawString(Integer.toString(scaleWidth)+"m", (int) ((scaleWidth*meterToPixel)), (int) this.getHeight()-15);
-//			g2d.drawString(Integer.toString(scaleWidth/2)+"m", (int) ((scaleWidth/2*meterToPixel)), (int) this.getHeight()-12);
-//			g2d.drawString("0m", 8, (int) this.getHeight()-15);
-		}
-	}
 
 	public void runwayCreation(Graphics2D g2d){
 		if(airport!=null&& runway!=null){
@@ -317,13 +305,22 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 	}
 
 	public void obstacleCreation(Graphics2D g2d){
-	if(obstacle!=null){
-		g2d.setColor(Color.RED);
-		g2d.fillRect(meterToPixel(xObstacle)+xRunway, yRunway-meterToPixel(obstacleHeight), meterToPixel(obstacleLength), meterToPixel(obstacleHeight));
-		g2d.setStroke(new BasicStroke(1));
-		g2d.setColor(Color.BLACK);
-		g2d.drawLine(meterToPixel(xObstacle)+xRunway, yRunway-meterToPixel(obstacleHeight), xRunway+meterToPixel(xObstacle)-meterToPixel((int) (obstacle.getHeight()*airport.getCurrentPhysicalRunway().getAngleOfSlope())), yRunway);
+		if(obstacle!=null){
+			g2d.setColor(Color.WHITE);
+			g2d.fillRect(meterToPixel(xObstacle)+xRunway, yRunway-meterToPixel2(obstacleHeight), meterToPixel(obstacleLength), meterToPixel2(obstacleHeight));
+			g2d.setStroke(new BasicStroke(1));
+			g2d.setColor(Color.BLACK);
+			g2d.drawRect(meterToPixel(xObstacle)+xRunway, yRunway-meterToPixel2(obstacleHeight), meterToPixel(obstacleLength), meterToPixel2(obstacleHeight));
+			g2d.drawLine(meterToPixel(xObstacle)+xRunway, yRunway-meterToPixel2(obstacleHeight), meterToPixel(xObstacle+obstacleLength)+xRunway, yRunway);
+			g2d.drawLine(meterToPixel(xObstacle+obstacleLength)+xRunway, yRunway-meterToPixel2(obstacleHeight), meterToPixel(xObstacle)+xRunway, yRunway);
+			g2d.drawLine(meterToPixel(xObstacle)+xRunway, yRunway-meterToPixel2(obstacleHeight), xRunway+meterToPixel(xObstacle)-meterToPixel((int) (obstacle.getHeight()*airport.getCurrentPhysicalRunway().getAngleOfSlope())), yRunway);
+			g2d.drawString(Integer.toString(obstacleHeight)+"m", meterToPixel(xObstacle+obstacleLength)+xRunway+10, yRunway-meterToPixel2(obstacleHeight/2));
+			g2d.setStroke(new BasicStroke(2));
+			g2d.drawLine(meterToPixel(xObstacle+obstacleLength)+xRunway+5, yRunway-meterToPixel2(obstacleHeight), meterToPixel(xObstacle+obstacleLength)+xRunway+5, yRunway );
+			
 	}
+	
+
 	}
 
 	public void declaredRunwaysCreation(Graphics2D g2d){
@@ -427,15 +424,15 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 			this.threshold=airport.getCurrentPhysicalRunway().closeTo().getName(); 
 			if(threshold.equals(airport.getCurrentPhysicalRunway().getRunway(0).getName())){this.leftTag=airport.getCurrentPhysicalRunway().getRunway(1).getName();}else{this.leftTag=airport.getCurrentPhysicalRunway().getRunway(0).getName();}
 			this.xObstacle=runwayLength-distance;
-			int height = (int) obstacle.getHeight();
-			int l = (int) obstacle.getLength();
-			obstacleHeight = (int) (ratio2 * this.getHeight());
-			meterToPixel2 = height/obstacleHeight;
+			obstacleHeight = (int) obstacle.getHeight();
+			meterToPixel2 = (ratio2*this.getHeight())/obstacleHeight;
 			this.obstacleLength =(int) obstacle.getLength();
 			
 			this.ANGLE=(int) (obstacle.getHeight()*airport.getCurrentPhysicalRunway().getAngleOfSlope());
-			
-			
+			if(runway.getTORA(Runway.DEFAULT)==runway.getTORA(Runway.REDECLARED)){
+				ANGLE=0;
+				RESA=0;
+			}
 		}
 		int leftDT;
 		int rightDT;

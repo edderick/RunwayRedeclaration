@@ -139,8 +139,15 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 
 	public void drawDirection(Graphics2D g2d){
 		if(airport.getCurrentRunway()!=null){
+			for(int i=5; i<1000; i++){
+				Font f = new Font("tag", 1, i);
+				g2d.setFont(f);
+				if(g2d.getFontMetrics().stringWidth("Runway Take-off/Landing Direction")>=meterToPixel(runwayWidth/2)){
+					f = new Font("tag", 1, i-1);break;
+				}
+			}		
 		g2d.setColor(Color.BLACK);
-		g2d.drawString("Runway Take-off/Landing Direction", xRunway+meterToPixel(3*runwayWidth/8),  yRunway+-10-meterToPixel(runwayStripWidthFromCentreLine*2));
+		g2d.drawString("Runway Take-off/Landing Direction", xRunway+meterToPixel(runwayWidth/4),  yRunway+-10-meterToPixel(runwayStripWidthFromCentreLine*2));
 		
 		g2d.setStroke(new BasicStroke(3));
 		g2d.drawLine(xRunway+meterToPixel(runwayWidth/4), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2), xRunway+meterToPixel(3*runwayWidth/4), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2));
@@ -374,12 +381,11 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 	public void obstacleCreation(Graphics2D g2d){
 		if(obstacle!=null){
 			g2d.setColor(Color.WHITE);
-			g2d.fillRect(meterToPixel(xObstacle-rightDT)+xRunway, meterToPixel(yObstacle+(obstacleWidth/2))+yRunway, meterToPixel(obstacleLength), meterToPixel(obstacleWidth));
+			g2d.fillRect(meterToPixel(xObstacle-rightDT)+xRunway, meterToPixel(yObstacle-(obstacleWidth/2)+(runwayHeight/2))+yRunway, meterToPixel(obstacleLength), meterToPixel(obstacleWidth));
 			g2d.setColor(Color.BLACK);
-			g2d.drawRect(meterToPixel(xObstacle-rightDT)+xRunway, meterToPixel(yObstacle+(obstacleWidth/2))+yRunway, meterToPixel(obstacleLength), meterToPixel(obstacleWidth));
-			g2d.drawLine(meterToPixel(xObstacle-rightDT)+xRunway, meterToPixel(yObstacle+(obstacleWidth/2))+yRunway, meterToPixel(xObstacle-rightDT)+xRunway+meterToPixel(obstacleLength), meterToPixel(yObstacle+(obstacleWidth/2))+yRunway+meterToPixel(obstacleWidth));
-			g2d.drawLine(meterToPixel(xObstacle-rightDT)+xRunway+meterToPixel(obstacleLength), meterToPixel(yObstacle+(obstacleWidth/2))+yRunway, meterToPixel(xObstacle-rightDT)+xRunway, meterToPixel(yObstacle+(obstacleWidth/2))+yRunway+meterToPixel(obstacleWidth));
-			
+			g2d.drawRect(meterToPixel(xObstacle-rightDT)+xRunway, meterToPixel(yObstacle-(obstacleWidth/2)+(runwayHeight/2))+yRunway, meterToPixel(obstacleLength), meterToPixel(obstacleWidth));
+			g2d.drawLine(meterToPixel(xObstacle-rightDT)+xRunway, meterToPixel(yObstacle-(obstacleWidth/2)+(runwayHeight/2))+yRunway, meterToPixel(xObstacle-rightDT)+xRunway+meterToPixel(obstacleLength), meterToPixel(yObstacle-(obstacleWidth/2)+(runwayHeight/2))+yRunway+meterToPixel(obstacleWidth));
+			g2d.drawLine(meterToPixel(xObstacle-rightDT)+xRunway+meterToPixel(obstacleLength), meterToPixel(yObstacle-(obstacleWidth/2)+(runwayHeight/2))+yRunway, meterToPixel(xObstacle-rightDT)+xRunway, meterToPixel(yObstacle-(obstacleWidth/2)+(runwayHeight/2))+yRunway+meterToPixel(obstacleWidth));
 			
 		}
 	}
@@ -407,8 +413,6 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 		g2d.drawString("RESA", (2*spaceFromLeftEdge)+g2d.getFontMetrics().stringWidth("TODA"), this.getHeight()- spaceForScale-(2*textDistance));
 		g2d.setColor(Color.BLACK);
 		g2d.drawString("ANGLE", (2*spaceFromLeftEdge)+g2d.getFontMetrics().stringWidth("TODA"), this.getHeight()- spaceForScale-(3*textDistance));
-//		int stringWidth = g2d.getFontMetrics().stringWidth("TODA")+ g2d.getFontMetrics().stringWidth("STOPWAY");
-//		g2d.drawRect(5, this.getHeight()+ spaceForScale+ (3*textDistance),  (spaceFromLeftEdge*2) + stringWidth, this.getHeight()-spaceForScale);
 	}
 	
 	public void drawScale(Graphics2D g2d){
@@ -541,7 +545,10 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 				this.obstacleWidth = (int) obstacle.getWidth();
 
 				this.ANGLE=(int) (obstacle.getHeight()*airport.getCurrentPhysicalRunway().getAngleOfSlope());
-				
+				if(runway.getTORA(Runway.DEFAULT)==runway.getTORA(Runway.REDECLARED)){
+					ANGLE=0;
+					RESA=0;
+				}
 				
 			}
 			
