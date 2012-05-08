@@ -21,11 +21,21 @@ public class OpenRecentObstacleListener implements ActionListener, AirportObserv
 	List<AirportObserver> airportObservers;
 	
 	public OpenRecentObstacleListener(String filename, Airport airport, List<AirportObserver> airportObserver){
+		this.filename = systemIndependentPath(filename);
+		
 		this.airportObservers = airportObserver;
 		this.airport = airport;
-		this.filename = filename.replaceAll("/|\\\\", File.separator);
 	}
 
+	private String systemIndependentPath(String filename){
+		String separator = File.separator;
+		
+		if(separator.equals("\\")){
+			separator = "\\\\";
+		} 
+		
+		return filename.replaceAll("/|\\\\", separator);
+	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
