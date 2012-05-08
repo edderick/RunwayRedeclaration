@@ -25,7 +25,8 @@ public class SaveAirportListener implements ActionListener, AirportObserver{
 		try {
 			File f = airport.saveToXML();
 			System.out.println("Saved Airport: " + airport.getName());
-			MainFrame.saveRecentFile(airport, f.getAbsolutePath());
+						
+			MainFrame.saveRecentFile(airport, LocalPathTrimmer.trimLocalPath(f));
 			notifyAirportObservers();
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
@@ -44,5 +45,7 @@ public class SaveAirportListener implements ActionListener, AirportObserver{
 			ao.updateAirport(airport);
 		}
 	}
+	
+
 	
 }

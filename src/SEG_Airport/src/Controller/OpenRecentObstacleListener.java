@@ -40,7 +40,7 @@ public class OpenRecentObstacleListener implements ActionListener, AirportObserv
 				airport.getCurrentPhysicalRunway().setObstacle(o);
 
 				try {
-					MainFrame.saveRecentFile(o, lf.getFilename());
+					MainFrame.saveRecentFile(o, LocalPathTrimmer.trimLocalPath(lf.getFile()));
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

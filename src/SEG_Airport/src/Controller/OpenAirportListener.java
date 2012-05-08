@@ -55,13 +55,14 @@ public class OpenAirportListener implements ActionListener, AirportObserver{
 				airport.setCurrentRunway(airport.getCurrentPhysicalRunway().getRunway(0));
 			}
 			
-			notifyAirportObservers();
+			
 			try {
-				MainFrame.saveRecentFile(ap, lf.getFilename());
+				MainFrame.saveRecentFile(ap, LocalPathTrimmer.trimLocalPath(lf.getFile()));
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+			notifyAirportObservers();
 			
 		} catch (Exception ex) {System.out.println(ex);}
 

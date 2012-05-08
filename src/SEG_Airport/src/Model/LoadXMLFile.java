@@ -315,4 +315,7 @@ public class LoadXMLFile {
 		return xmlFile.getPath();
 	}
 
+	public File getFile(){
+		return xmlFile;
+	}
 }
