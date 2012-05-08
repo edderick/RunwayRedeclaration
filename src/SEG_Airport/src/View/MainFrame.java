@@ -2,6 +2,7 @@ package View;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -115,7 +116,8 @@ public class MainFrame extends JFrame implements AirportObserver{
 	}
 
 	public MainFrame() {
-
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage("data/AirplaneIcon.png"));
+		
 		addressBook = new AddressBook();
 		LoadXMLFile lf = new LoadXMLFile();
 		if(!addressBook.addContacts(lf.silentLoadContacts("data/AddressBook.xml"))) System.out.println("Contact Load failed");
@@ -245,7 +247,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 
 		ExitListener exitListener = new ExitListener(airport);
 		JMenuItem mntmExit = new JMenuItem("Exit");
-		mntmExit.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/ExitIcon.png")));
+//		mntmExit.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/ExitIcon.png")));
 		mntmExit.setMnemonic('x');
 		mntmExit.addActionListener(exitListener);
 		mnFile.add(mntmExit);
