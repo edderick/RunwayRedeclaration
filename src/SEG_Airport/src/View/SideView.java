@@ -1,8 +1,10 @@
 package View;
 
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -45,13 +47,14 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 	final int tagBorder = 10;
 
 	//this value determines how much of the width of the panel the runway takes up.
-	double ratio = 0.75;
+	double ratio = 0.95;
 
 	//this value determines how much of the width of the runway the runwayTag takes up.
 	final double fontRatio = 0.5;
 
 	final double tagRotate = 1;
 
+	int spaceForScale;
 	double meterToPixel;
 	int TORA;
 	int TODA;
@@ -76,6 +79,8 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 	String threshold;
 	boolean obstacleLeft;
 	String leftTag;
+	
+	int runwayStripWidthFromCentreLine;
 
 	//relative to panel
 	int xRunway;
@@ -132,11 +137,32 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 			setValues();
 			Graphics2D g2d = (Graphics2D)g;
 			runwayCreation(g2d);
-
+			drawDirection(g2d);
 			obstacleCreation(g2d);
 			declaredRunwaysCreation(g2d);
+			g.translate(-xOffset, -yOffset);
+			drawKey(g2d);
+			drawScale(g2d);
 		}
 
+	}
+	
+	public void drawDirection(Graphics2D g2d){
+		if(airport.getCurrentRunway()!=null){
+		g2d.setColor(Color.BLACK);
+		g2d.drawString("Runway Take-off/Landing Direction", xRunway+meterToPixel(3*runwayLength/8),  yRunway+-10-meterToPixel(runwayStripWidthFromCentreLine*2));
+		
+		g2d.setStroke(new BasicStroke(3));
+		g2d.drawLine(xRunway+meterToPixel(runwayLength/4), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2), xRunway+meterToPixel(3*runwayLength/4), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2));
+
+		if(airport.getCurrentRunway().getName().equals(leftTag)){
+			g2d.drawLine(xRunway+meterToPixel(3*runwayLength/4), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2), xRunway+meterToPixel(11*runwayLength/16), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2)+meterToPixel(runwayStripWidthFromCentreLine/4));
+			g2d.drawLine(xRunway+meterToPixel(3*runwayLength/4), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2), xRunway+meterToPixel(11*runwayLength/16), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2)-meterToPixel(runwayStripWidthFromCentreLine/4));
+		}else{
+			g2d.drawLine(xRunway+meterToPixel(runwayLength/4), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2), xRunway+meterToPixel(5*runwayLength/16), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2)+meterToPixel(runwayStripWidthFromCentreLine/4));
+			g2d.drawLine(xRunway+meterToPixel(runwayLength/4),yRunway-meterToPixel(runwayStripWidthFromCentreLine*2), xRunway+meterToPixel(5*runwayLength/16), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2)-meterToPixel(runwayStripWidthFromCentreLine/4));
+		}
+		}
 	}
 
 	public void createSlider(){
@@ -191,6 +217,48 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 				updateUI();
 			}
 		});
+	}
+	
+	public void drawKey(Graphics2D g2d){
+		g2d.setFont(new Font("key", 1, 15));
+		int textDistance = g2d.getFontMetrics().getHeight();
+		spaceForScale = 30;
+		int spaceFromLeftEdge = 10;
+		g2d.setColor(toraColor);
+		g2d.drawString("TORA", spaceFromLeftEdge, this.getHeight()- spaceForScale-textDistance);
+		g2d.setColor(todaColor);
+		g2d.drawString("TODA", spaceFromLeftEdge, this.getHeight()- spaceForScale-(2*textDistance) );
+		g2d.setColor(asdaColor);
+		g2d.drawString("ASDA",spaceFromLeftEdge, this.getHeight()- spaceForScale- (3*textDistance));
+		g2d.setColor(ldaColor);
+		g2d.drawString("LDA", spaceFromLeftEdge, this.getHeight()- spaceForScale);
+		
+		
+		g2d.setColor(dtColor);
+		g2d.drawString("DT", (2*spaceFromLeftEdge)+g2d.getFontMetrics().stringWidth("TODA"), this.getHeight()- spaceForScale);
+		g2d.setColor(Color.WHITE);
+		g2d.drawString("STOPWAY", (2*spaceFromLeftEdge)+g2d.getFontMetrics().stringWidth("TODA"), this.getHeight()- spaceForScale-textDistance);
+		g2d.setColor(resaColor);
+		g2d.drawString("RESA", (2*spaceFromLeftEdge)+g2d.getFontMetrics().stringWidth("TODA"), this.getHeight()- spaceForScale-(2*textDistance));
+		g2d.setColor(Color.BLACK);
+		g2d.drawString("ANGLE", (2*spaceFromLeftEdge)+g2d.getFontMetrics().stringWidth("TODA"), this.getHeight()- spaceForScale-(3*textDistance));
+//		int stringWidth = g2d.getFontMetrics().stringWidth("TODA")+ g2d.getFontMetrics().stringWidth("STOPWAY");
+//		g2d.drawRect(5, this.getHeight()+ spaceForScale+ (3*textDistance),  (spaceFromLeftEdge*2) + stringWidth, this.getHeight()-spaceForScale);
+	}
+	
+	public void drawScale(Graphics2D g2d){
+		if(airport!=null && runway!=null){
+			int scaleWidth = Math.round(pixelToMeter(this.getWidth()/3)/100)*100;
+			g2d.setColor(Color.BLACK);
+			g2d.setFont(new Font("scale", 1, 10));
+			g2d.fillRect(10, (int) this.getHeight()-10, (int) (scaleWidth*meterToPixel), 2);	
+			g2d.fillRect(10, (int) this.getHeight()-15, (int) 2, 5);
+			g2d.fillRect((int) (8+(scaleWidth*meterToPixel)), (int) this.getHeight()-15, (int) 2, 5);
+			g2d.fillRect((int) (8+(scaleWidth/2*meterToPixel)), (int) this.getHeight()-12, (int) 2, 2);
+			g2d.drawString(Integer.toString(scaleWidth)+"m", (int) ((scaleWidth*meterToPixel)), (int) this.getHeight()-15);
+			g2d.drawString(Integer.toString(scaleWidth/2)+"m", (int) ((scaleWidth/2*meterToPixel)), (int) this.getHeight()-12);
+			g2d.drawString("0m", 8, (int) this.getHeight()-15);
+		}
 	}
 
 	public void runwayCreation(Graphics2D g2d){
@@ -250,6 +318,7 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 		this.RESA = (int) airport.getCurrentPhysicalRunway().getRESA();
 		this.stopway = (int) airport.getCurrentPhysicalRunway().getStopway();
 		this.leftTag= airport.getCurrentPhysicalRunway().getRunway(0).getName();
+		this.runwayStripWidthFromCentreLine = (int) airport.getCurrentPhysicalRunway().getRunwayStripWidth();
 				
 		int pWidth = this.getWidth();
 		int pHeight = this.getHeight();

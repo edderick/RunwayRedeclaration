@@ -507,9 +507,9 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 			this.stopway = (int) airport.getCurrentPhysicalRunway().getStopway();
 			this.leftTag= airport.getCurrentPhysicalRunway().getRunway(0).getName();
 			this.rightTag = airport.getCurrentPhysicalRunway().getRunway(1).getName();
-			runwayStripWidthFromCentreLine=150;
+			runwayStripWidthFromCentreLine=(int) airport.getCurrentPhysicalRunway().getRunwayStripWidth();
 			runwayToEdgeOfCnGArea = stopway;
-			CnGAreaWidthFromCentreLine = 75;
+			CnGAreaWidthFromCentreLine = (int) airport.getCurrentPhysicalRunway().getClearedAndGradedWidth();
 			
 			int pWidth = this.getWidth();
 			int pHeight = this.getHeight();
