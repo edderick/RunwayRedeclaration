@@ -19,7 +19,7 @@ public class OpenRecentAirportListener implements ActionListener {
 	List<AirportObserver> airportObservers;
 	
 	public OpenRecentAirportListener(String filename, List<AirportObserver> airportObservers){
-		this.filename = filename.replaceAll("/|\\\\", File.pathSeparator);
+		this.filename = filename.replaceAll("/|\\\\", File.separator);
 		this.airportObservers = airportObservers;
 	}
 	
