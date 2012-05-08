@@ -85,7 +85,7 @@ public class LoadXMLFile {
 	 */
 	public Obstacle loadObstacle() throws Exception{		
 		if (toPromtOrNotToPromt == true){
-			JFileChooser fileChooser = new JFileChooser();
+			JFileChooser fileChooser = new JFileChooser("data/Obstacles");
 			XMLFileFilter fileFilter = new XMLFileFilter();
 			fileChooser.setFileFilter(fileFilter);
 			int returnValue = fileChooser.showOpenDialog(null);
@@ -148,7 +148,7 @@ public class LoadXMLFile {
 		runways = new ArrayList<Runway>();
 
 		if (toPromtOrNotToPromt == true){
-			JFileChooser fileChooser = new JFileChooser();
+			JFileChooser fileChooser = new JFileChooser("data/Airports");
 			XMLFileFilter fileFilter = new XMLFileFilter();
 			fileChooser.setFileFilter(fileFilter);
 			int returnValue = fileChooser.showOpenDialog(null);

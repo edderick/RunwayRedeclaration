@@ -42,7 +42,7 @@ public class SaveToXMLFile {
 		this.addNodesAndElements(airport);
 
 		//Creating JFileChooser object and storing its return value
-		this.createFChooserAndStore();
+		this.createFChooserAndStore("data/Airports");
 	}
 
 	/**
@@ -63,7 +63,7 @@ public class SaveToXMLFile {
 		this.addNodesAndElementsObstacle(obstacle);
 
 		//Creating JFileChooser object and storing its return value
-		this.createFChooserAndStore();
+		this.createFChooserAndStore("data/Obstacles");
 	}
 
 	/**
@@ -79,7 +79,7 @@ public class SaveToXMLFile {
 		this.addNodesAndElementsContacts(contacts);
 
 		//Creating JFileChooser object and storing its return value
-		this.createFChooserAndStore();
+		this.createFChooserAndStore("data");
 
 	}
 
@@ -298,9 +298,9 @@ public class SaveToXMLFile {
 	 * @throws IOException
 	 * @throws TransformerException
 	 */
-	public void createFChooserAndStore() throws IOException, TransformerException {
+	public void createFChooserAndStore(String path) throws IOException, TransformerException {
 
-		JFileChooser fileChooser = new JFileChooser();
+		JFileChooser fileChooser = new JFileChooser(path);
 
 		fileChooser.setFileFilter(new XMLFileFilter());
 
