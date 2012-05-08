@@ -32,7 +32,7 @@ public class OpenObstacleListener implements ActionListener, AirportObserver{
 			JOptionPane.showMessageDialog(null, "Airport does not contain any physical runways\r\nPlease add one by going to Edit > Airport", "", JOptionPane.ERROR_MESSAGE);
 		} else if (airport.getCurrentPhysicalRunway() == null){
 			JOptionPane.showMessageDialog(null, "Please select a physical runway", "", JOptionPane.ERROR_MESSAGE);
-		} else if (airport.getCurrentPhysicalRunway().getObstacle() == null){
+		} else {
 			LoadXMLFile lf = new LoadXMLFile();
 			try {
 				Obstacle o = lf.loadObstacle();

@@ -2,6 +2,7 @@ package Controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class OpenRecentObstacleListener implements ActionListener, AirportObserv
 	public OpenRecentObstacleListener(String filename, Airport airport, List<AirportObserver> airportObserver){
 		this.airportObservers = airportObserver;
 		this.airport = airport;
-		this.filename = filename;
+		this.filename = filename.replaceAll("/|\\\\", File.separator);
 	}
 
 	
@@ -33,7 +34,7 @@ public class OpenRecentObstacleListener implements ActionListener, AirportObserv
 			JOptionPane.showMessageDialog(null, "Airport does not contain any physical runways\r\nPlease add one by going to Edit > Airport", "", JOptionPane.ERROR_MESSAGE);
 		} else if (airport.getCurrentPhysicalRunway() == null){
 			JOptionPane.showMessageDialog(null, "Please select a physical runway", "", JOptionPane.ERROR_MESSAGE);
-		} else if (airport.getCurrentPhysicalRunway().getObstacle() == null){
+		} else {
 			LoadXMLFile lf = new LoadXMLFile();
 			try {
 				Obstacle o = lf.silentLoadObstacle(filename);

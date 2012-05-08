@@ -2,6 +2,7 @@ package Controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class OpenRecentAirportListener implements ActionListener {
 	List<AirportObserver> airportObservers;
 	
 	public OpenRecentAirportListener(String filename, List<AirportObserver> airportObservers){
-		this.filename = filename;
+		this.filename = filename.replaceAll("/|\\\\", File.pathSeparator);
 		this.airportObservers = airportObservers;
 	}
 	
@@ -29,7 +30,7 @@ public class OpenRecentAirportListener implements ActionListener {
 		Airport ap = new Airport("");
 
 		try {
-
+			
 			ap = lf.silentLoadAirport(filename);
 
 

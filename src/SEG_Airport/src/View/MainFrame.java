@@ -730,7 +730,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		for(String s : recentObstacles){
 			JMenuItem mntmRecentObstacle = new JMenuItem(s);
 			mnOpenRecentObstacles.add(mntmRecentObstacle);
-			OpenRecentObstacleListener orol = new OpenRecentObstacleListener(s, null, airportObservers);
+			OpenRecentObstacleListener orol = new OpenRecentObstacleListener(s, airport, airportObservers);
 			mntmRecentObstacle.addActionListener(orol);
 			airportObservers.add(orol);
 		}
