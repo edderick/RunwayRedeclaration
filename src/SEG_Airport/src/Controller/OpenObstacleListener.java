@@ -11,6 +11,7 @@ import Model.Airport;
 import Model.AirportObserver;
 import Model.LoadXMLFile;
 import Model.Obstacle;
+import View.EditObstacleDialog;
 import View.MainFrame;
 
 public class OpenObstacleListener implements ActionListener, AirportObserver{
@@ -47,7 +48,11 @@ public class OpenObstacleListener implements ActionListener, AirportObserver{
 				System.out.println("Obstacle Opened");
 				notifyAirportObservers();
 
-
+				Obstacle old = airport.getCurrentPhysicalRunway().getObstacle();
+				Obstacle obstacle = airport.getCurrentPhysicalRunway().getObstacle();
+				@SuppressWarnings("unused")
+				EditObstacleDialog eod = new EditObstacleDialog(obstacle, old, airport, airportObservers);
+				airport.getCurrentPhysicalRunway().setObstacle(obstacle);
 
 
 			} catch (Exception e1) {

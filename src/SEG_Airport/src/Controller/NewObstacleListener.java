@@ -28,22 +28,19 @@ public class NewObstacleListener implements ActionListener, AirportObserver{
 			JOptionPane.showMessageDialog(null, "Airport does not contain any physical runways\r\nPlease add one by going to Edit > Airport", "", JOptionPane.ERROR_MESSAGE);
 		} else if (airport.getCurrentPhysicalRunway() == null){
 			JOptionPane.showMessageDialog(null, "Please select a physical runway", "", JOptionPane.ERROR_MESSAGE);
-		} else if (airport.getCurrentPhysicalRunway().getObstacle() == null){
+		} else{
 			Obstacle old = new Obstacle("", 0);
 			Obstacle obstacle = new Obstacle("", 0);
 			@SuppressWarnings("unused")
 			EditObstacleDialog eod = new EditObstacleDialog(obstacle, old, airport, airportObservers);
 			airport.getCurrentPhysicalRunway().setObstacle(obstacle);			
-		}
-		else {
-			//This comment should be removed
-			Obstacle old = airport.getCurrentPhysicalRunway().getObstacle();
-			Obstacle obstacle = airport.getCurrentPhysicalRunway().getObstacle();
-			@SuppressWarnings("unused")
-			EditObstacleDialog eod = new EditObstacleDialog(obstacle, old, airport, airportObservers);
-			airport.getCurrentPhysicalRunway().setObstacle(obstacle);			
-		}		
+		
 			
+			
+		}
+		
+		
+		notifyAirportObservers();
 	}
 
 	@Override
