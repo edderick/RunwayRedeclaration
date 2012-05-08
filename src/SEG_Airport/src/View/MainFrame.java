@@ -387,6 +387,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		menuBar.add(mnHelp);
 
 		JMenuItem mntmShowHelp = new JMenuItem("Show help");
+		mntmShowHelp.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/HelpIcon.png")));
 		mntmShowHelp.setMnemonic('s');
 		mnHelp.add(mntmShowHelp);
 		mntmShowHelp.addActionListener(new ShowHelpListener());
