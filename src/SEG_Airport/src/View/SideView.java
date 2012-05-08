@@ -287,21 +287,75 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 	if(obstacle!=null){
 		g2d.setColor(Color.RED);
 		g2d.fillRect(meterToPixel(xObstacle)+xRunway, yRunway-meterToPixel(obstacleHeight), meterToPixel(obstacleLength), meterToPixel(obstacleHeight));
+		g2d.setStroke(new BasicStroke(1));
+		g2d.setColor(Color.BLACK);
+		g2d.drawLine(meterToPixel(xObstacle)+xRunway, yRunway-meterToPixel(obstacleHeight), xRunway+meterToPixel(xObstacle)-meterToPixel((int) (obstacleHeight*airport.getCurrentPhysicalRunway().getAngleOfSlope())), yRunway);
 	}
 	}
 
 	public void declaredRunwaysCreation(Graphics2D g2d){
 		if(airport!=null){
+			int yInc = 5;
+			int width=3;
 			g2d.setColor(toraColor);
-			g2d.fillRect(xRunway+TORAStart, yRunway+5, meterToPixel(TORA), 3);
+			g2d.fillRect(xRunway+TORAStart, yRunway +yInc, meterToPixel(TORA), width);
 			g2d.setColor(todaColor);
-			g2d.fillRect(xRunway+TODAStart, yRunway +10, meterToPixel(TODA), 3);
+			g2d.fillRect(xRunway+TODAStart, yRunway +2*yInc, meterToPixel(TODA), width);
 			g2d.setColor(asdaColor);
-			g2d.fillRect(xRunway+ASDAStart,  yRunway +15, meterToPixel(ASDA), 3);
+			g2d.fillRect(xRunway+ASDAStart,  yRunway +3*yInc, meterToPixel(ASDA), width);
 			g2d.setColor(ldaColor);
-			g2d.fillRect(xRunway+LDAStart,  yRunway +20, meterToPixel(LDA), 3);
+			g2d.fillRect(xRunway+LDAStart,  yRunway +4*yInc, meterToPixel(LDA), width);
 			g2d.setColor(dtColor);
-			g2d.fillRect(xRunway+DTStart,  yRunway +25, meterToPixel(DT), 3);
+			g2d.fillRect(xRunway+DTStart,  yRunway +5*yInc, meterToPixel(DT), width);
+			
+			if(obstacle!=null){
+				g2d.setColor(Color.WHITE);
+				g2d.fillRect(xRunway+TORAStart+ meterToPixel(TORA),  (yRunway+yInc),  meterToPixel(stopway), width);
+
+				g2d.fillRect(xRunway+TODAStart+ meterToPixel(TODA),  (yRunway+yInc*2),  meterToPixel(stopway), width);
+
+				g2d.fillRect(xRunway+ASDAStart+ meterToPixel(ASDA),  (yRunway+yInc*3),  meterToPixel(stopway), width);
+
+				g2d.fillRect(xRunway+LDAStart+ meterToPixel(LDA),  (yRunway+yInc*4),  meterToPixel(stopway), width);
+				
+				
+				int greater = RESA;
+				g2d.setColor(resaColor);
+				if(greater<ANGLE){
+					g2d.setColor(Color.BLACK);
+					greater=ANGLE;
+				}
+				
+				
+				if(airport.getCurrentRunway().getName().equals(leftTag)){
+									
+					g2d.fillRect(xRunway+TORAStart+ meterToPixel(TORA+stopway),  (yRunway+yInc),  meterToPixel(greater), width);
+		
+					g2d.fillRect(xRunway+TODAStart+ meterToPixel(TODA+stopway),  (yRunway+yInc*2),  meterToPixel(greater), width);
+		
+					g2d.fillRect(xRunway+ASDAStart+ meterToPixel(ASDA+stopway),  (yRunway+yInc*3),  meterToPixel(greater), width);
+					
+					g2d.setColor(resaColor);
+		
+					g2d.fillRect(xRunway+LDAStart+ meterToPixel(LDA+stopway),  (yRunway+yInc*4),  meterToPixel(RESA), width);
+				}else{
+					
+					
+					g2d.fillRect(xRunway+LDAStart+ meterToPixel(LDA+stopway),  (yRunway+yInc*4),  meterToPixel(greater), width);
+					
+					g2d.setColor(resaColor);
+					
+					g2d.fillRect(xRunway+TORAStart+ meterToPixel(TORA+stopway),  (yRunway+yInc),  meterToPixel(RESA), width);
+		
+					g2d.fillRect(xRunway+TODAStart+ meterToPixel(TODA+stopway),  (yRunway+yInc*2),  meterToPixel(RESA), width);
+		
+					g2d.fillRect(xRunway+ASDAStart+ meterToPixel(ASDA+stopway),  (yRunway+yInc*3),  meterToPixel(RESA), width);
+		
+					
+				}
+				
+				}
+			
 		}
 	}
 
