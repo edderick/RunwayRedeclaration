@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -561,6 +562,8 @@ public class MainFrame extends JFrame implements AirportObserver{
 	}
 
 	public static void saveRecentFile(Airport airport, String filename) throws IOException{
+		filename = filename.replaceAll("\\\\", "/");
+		
 		if(recentAirports.contains(filename)){
 			recentAirports.remove(filename);
 			recentAirports.add(0, filename);
@@ -579,6 +582,8 @@ public class MainFrame extends JFrame implements AirportObserver{
 	}
 
 	public static void saveRecentFile(Obstacle obstacle, String filename) throws IOException{
+		filename = filename.replaceAll("\\\\", "/");
+		
 		if(recentObstacles.contains(filename)){
 			recentObstacles.remove(filename);
 			recentObstacles.add(0, filename);
