@@ -50,7 +50,7 @@ public class AdvancedParametersDialog extends JDialog {
 		
 		JPanel fieldsPanel = new JPanel();
 		contentPane.add(fieldsPanel, "cell 0 0,grow");
-		fieldsPanel.setLayout(new MigLayout("", "[170px][90px][12px]", "[19px][19px][19px][19px][19px][19px][grow][19px][19px]"));
+		fieldsPanel.setLayout(new MigLayout("", "[170px][90px][12px]", "[19px][19px][19px][19px][19px][19px][0.45in,grow][19px][19px]"));
 		
 		
 		JLabel lblRESA = new JLabel("RESA");
@@ -109,7 +109,7 @@ public class AdvancedParametersDialog extends JDialog {
 		
 		
 		JLabel lblClearAndGradedWidth = new JLabel("Clear and Graded Width");
-		fieldsPanel.add(lblClearAndGradedWidth, "cell 0 5,alignx left,aligny center");
+		fieldsPanel.add(lblClearAndGradedWidth, "cell 0 5,alignx right,aligny center");
 		
 		tfClearAndGradedWidth = new JTextField();
 		fieldsPanel.add(tfClearAndGradedWidth, "cell 1 5,growx,aligny top");
