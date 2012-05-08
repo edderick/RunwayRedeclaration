@@ -48,6 +48,7 @@ import Controller.OpenAirportListener;
 import Controller.OpenObstacleListener;
 import Controller.OpenRecentAirportListener;
 import Controller.OpenRecentObstacleListener;
+import Controller.PrintCalculationsListener;
 import Controller.RemoveObstacleListener;
 import Controller.SaveAirportListener;
 import Controller.SaveObstacleListener;
@@ -384,7 +385,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		mnEmail.setMnemonic('m');
 		menuBar.add(mnEmail);
 
-		JMenuItem mntmSendEmail = new JMenuItem("Send email");
+		JMenuItem mntmSendEmail = new JMenuItem("Email Calculations");
 		mntmSendEmail.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/MailIcon.png")));
 		mntmSendEmail.setMnemonic('s');
 		ShowEmailDialogListener sedl = new ShowEmailDialogListener(addressBook, airport);
@@ -397,7 +398,16 @@ public class MainFrame extends JFrame implements AirportObserver{
 		mntmAddressBook.setMnemonic('a');
 		mntmAddressBook.addActionListener(new ShowAddressBookListener(addressBook));
 		mnEmail.add(mntmAddressBook);
-
+		
+		JMenu mnPrint = new JMenu("Print");
+		menuBar.add(mnPrint);
+		
+		JMenuItem mntmPrintCalculations = new JMenuItem("Print Calculations");
+		mnPrint.add(mntmPrintCalculations);
+		PrintCalculationsListener pcl = new PrintCalculationsListener(airport);
+		mntmPrintCalculations.addActionListener(pcl);
+		airportObservers.add(pcl);
+		
 		JMenu mnHelp = new JMenu("Help");
 		mnHelp.setMnemonic('h');
 		menuBar.add(mnHelp);

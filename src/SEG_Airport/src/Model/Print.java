@@ -17,7 +17,7 @@ public class Print {
 	/**
 	 * Default constructor for Print class
 	 */
-	public Print(String calculations){}
+	public Print(){}
 
 	
 	/**
@@ -25,7 +25,6 @@ public class Print {
 	 * @param String with the text to be printed to paper or pdf.
 	 */
 	public void print(String calculations){
-		
 		this.calculations = calculations;
 		
 		PrinterJob job = PrinterJob.getPrinterJob();

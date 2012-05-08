@@ -5,21 +5,24 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
-import Model.AddressBook;
 import Model.Airport;
 import Model.AirportObserver;
-import View.SendEmailDialog;
+import Model.Print;
 
-public class ShowEmailDialogListener implements ActionListener, AirportObserver{
+public class PrintCalculationsListener implements ActionListener, AirportObserver{
 
-	AddressBook addressBook;
 	Airport airport;
-
-	public ShowEmailDialogListener(AddressBook addressBook, Airport airport){
-		this.addressBook = addressBook;
+	Print print = new Print();
+	
+	public PrintCalculationsListener(Airport airport){
 		this.airport = airport;
 	}
-	
+
+	@Override
+	public void updateAirport(Airport airport) {
+		this.airport = airport;
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(airport.getCurrentPhysicalRunway() == null){
@@ -32,13 +35,7 @@ public class ShowEmailDialogListener implements ActionListener, AirportObserver{
 			JOptionPane.showMessageDialog(null, "No Runway Selected", "", JOptionPane.ERROR_MESSAGE);
 		}
 		else {
-			new SendEmailDialog(addressBook, airport);
+			print.print(airport.getCurrentPhysicalRunway().toCalculation(airport.getCurrentRunway().getName()));
 		}
 	}
-
-	@Override
-	public void updateAirport(Airport airport) {
-		this.airport = airport;
-	}
-
 }
