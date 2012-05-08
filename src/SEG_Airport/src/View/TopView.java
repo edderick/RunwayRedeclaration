@@ -380,6 +380,7 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 	
 	public void obstacleCreation(Graphics2D g2d){
 		if(obstacle!=null){
+			
 			g2d.setColor(Color.WHITE);
 			g2d.fillRect(meterToPixel(xObstacle-rightDT)+xRunway, meterToPixel(yObstacle-(obstacleWidth/2)+(runwayHeight/2))+yRunway, meterToPixel(obstacleLength), meterToPixel(obstacleWidth));
 			g2d.setColor(Color.BLACK);

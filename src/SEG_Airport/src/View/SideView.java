@@ -306,6 +306,7 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 
 	public void obstacleCreation(Graphics2D g2d){
 		if(obstacle!=null){
+			g2d.setFont(new Font("obstacle", 1, 10));
 			g2d.setColor(Color.WHITE);
 			g2d.fillRect(meterToPixel(xObstacle)+xRunway, yRunway-meterToPixel2(obstacleHeight), meterToPixel(obstacleLength), meterToPixel2(obstacleHeight));
 			g2d.setStroke(new BasicStroke(1));
