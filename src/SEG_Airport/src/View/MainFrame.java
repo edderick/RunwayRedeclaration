@@ -2,6 +2,7 @@ package View;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Toolkit;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.Vector;
 
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -151,6 +153,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		menuBar.add(mnFile);
 
 		JMenu mnAirport = new JMenu("New");
+		mnAirport.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/NewIcon.png")));
 		mnAirport.setMnemonic('n');
 		mnFile.add(mnAirport);
 
@@ -209,8 +212,10 @@ public class MainFrame extends JFrame implements AirportObserver{
 
 		populateRecentObstacles();
 
+
 		JMenu mnSave = new JMenu("Save");
 		mnSave.setMnemonic('s');
+		mnSave.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/SaveIcon.png")));
 		mnFile.add(mnSave);
 
 		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Airport");
