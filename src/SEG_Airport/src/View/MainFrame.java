@@ -260,6 +260,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		airportObservers.add(erl);
 
 		JMenuItem mntmAirport_1 = new JMenuItem("Airport");
+		mntmAirport_1.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/AirplaneIcon.png")));
 		mntmAirport_1.setMnemonic('a');
 		EditAirportListener eal = new EditAirportListener(airport, airportObservers);
 		airportObservers.add(eal);

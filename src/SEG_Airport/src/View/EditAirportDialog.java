@@ -1,5 +1,6 @@
 package View;
 
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -7,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JList;
@@ -69,11 +71,13 @@ public class EditAirportDialog extends JDialog {
 		getContentPane().add(btnEdit);
 
 		JButton btnNewRunway = new JButton("New Runway");
+		btnNewRunway.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/AddIcon.png")));
 		btnNewRunway.addActionListener(new EditListener(listOfRunways, true));
 		btnNewRunway.setBounds(185, 45, 130, 25);
 		getContentPane().add(btnNewRunway);
 
 		JButton btnDelete = new JButton("Delete");
+		btnDelete.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/DeleteIcon.png")));
 		btnDelete.addActionListener(new DeleteListener(listOfRunways));
 		btnDelete.setBounds(185, 145, 130, 25);
 		getContentPane().add(btnDelete);
