@@ -158,6 +158,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		mnFile.add(mnAirport);
 
 		JMenuItem mntmNewMenuItem = new JMenuItem("Airport");
+		mntmNewMenuItem.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/AirplaneIcon.png")));
 		mntmNewMenuItem.setMnemonic('a');
 		NewAirportListener nal = new NewAirportListener(airport, airportObservers);
 		mntmNewMenuItem.addActionListener(nal);
@@ -176,6 +177,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		mnFile.add(mnNewMenu);
 
 		JMenuItem mntmAirport = new JMenuItem("Airport");
+		mntmAirport.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/AirplaneIcon.png")));
 		mntmAirport.setMnemonic('a');
 		OpenAirportListener oal = new OpenAirportListener(airport, airportObservers);
 		mntmAirport.addActionListener(oal);
@@ -201,6 +203,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		}
 
 		mnOpenRecentAirports = new JMenu("Airport");
+		mnOpenRecentAirports.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/AirplaneIcon.png")));
 		mnOpenRecentAirports.setMnemonic('a');
 		mnOpenRecent.add(mnOpenRecentAirports);
 
@@ -219,6 +222,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		mnFile.add(mnSave);
 
 		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Airport");
+		mntmNewMenuItem_4.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/AirplaneIcon.png")));
 		mntmNewMenuItem_4.setMnemonic('a');
 		SaveAirportListener sal = new SaveAirportListener(airport, airportObservers);
 		mntmNewMenuItem_4.addActionListener(sal);
@@ -378,6 +382,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		mnEmail.add(mntmSendEmail);
 
 		JMenuItem mntmAddressBook = new JMenuItem("Address book");
+		mntmAddressBook.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/AddressBookIcon.png")));
 		mntmAddressBook.setMnemonic('a');
 		mntmAddressBook.addActionListener(new ShowAddressBookListener(addressBook));
 		mnEmail.add(mntmAddressBook);
