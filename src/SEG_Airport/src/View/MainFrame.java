@@ -166,6 +166,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		mnAirport.add(mntmNewMenuItem);
 
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Obstacle");
+		mntmNewMenuItem_1.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/ObstacleIcon.png")));
 		mntmNewMenuItem_1.setMnemonic('o');
 		NewObstacleListener nol = new NewObstacleListener(airport, airportObservers);
 		mntmNewMenuItem_1.addActionListener(nol);
@@ -185,6 +186,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		mnNewMenu.add(mntmAirport);
 
 		JMenuItem mntmObstacle = new JMenuItem("Obstacle");
+		mntmObstacle.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/ObstacleIcon.png")));
 		mntmObstacle.setMnemonic('o');
 		OpenObstacleListener ool = new OpenObstacleListener(airport, airportObservers);
 		mntmObstacle.addActionListener(ool);
@@ -210,6 +212,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		populateRecentAirports();
 
 		mnOpenRecentObstacles = new JMenu("Obstacle");
+		mnOpenRecentObstacles.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/ObstacleIcon.png")));
 		mnOpenRecentObstacles.setMnemonic('o');
 		mnOpenRecent.add(mnOpenRecentObstacles);
 
@@ -230,6 +233,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		mnSave.add(mntmNewMenuItem_4);
 
 		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Obstacle");
+		mntmNewMenuItem_5.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/ObstacleIcon.png")));
 		mntmNewMenuItem_5.setMnemonic('o');
 		SaveObstacleListener sol = new SaveObstacleListener(airport);
 		mntmNewMenuItem_5.addActionListener(sol);
@@ -268,6 +272,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		mnEdit.add(mntmAirport_1);
 
 		JMenuItem mntmNewMenuItem_7 = new JMenuItem("Obstacle");
+		mntmNewMenuItem_7.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/ObstacleIcon.png")));
 		mntmNewMenuItem_7.setMnemonic('o');
 		EditObstacleListener eol = new EditObstacleListener(airport, airportObservers);
 		mntmNewMenuItem_7.addActionListener(eol);
@@ -284,6 +289,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		generatePhysicalRunwayRadioButtons(physicalRunwayMenu);
 
 		JMenuItem mntmPositionObstacle = new JMenuItem("Advanced Parameters");
+		mntmPositionObstacle.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/AdvancedIcon.png")));
 		mntmPositionObstacle.setMnemonic('p');
 		AdvancedParametersListener opl = new AdvancedParametersListener(airport, airportObservers);
 		mntmPositionObstacle.addActionListener(opl);
