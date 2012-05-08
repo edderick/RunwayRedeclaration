@@ -273,19 +273,19 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 	
 	
 	public void drawScale2(Graphics2D g2d){
-		if(airport!=null && runway!=null){
-			int scaleWidth = Math.round(pixelToMeter(this.getHeight()/3)/100)*100;
-			g2d.setColor(Color.BLACK);
-			g2d.setFont(new Font("scale", 1, 10));
-			g2d.fillRect(this.getWidth()-10, 10, this.getWidth()-10, 10+meterToPixel2(scaleWidth));
-			g2d.fillRect(this.getWidth()-10, 10 ,this.getWidth()-15, 12);	
-			g2d.fillRect(this.getWidth()-10, 15,  2, 5);
-			g2d.fillRect((int) (8+(scaleWidth*meterToPixel)), (int) this.getHeight()-15, (int) 2, 5);
-			g2d.fillRect((int) (8+(scaleWidth/2*meterToPixel)), (int) this.getHeight()-12, (int) 2, 2);
-			g2d.drawString(Integer.toString(scaleWidth)+"m", (int) ((scaleWidth*meterToPixel)), (int) this.getHeight()-15);
-			g2d.drawString(Integer.toString(scaleWidth/2)+"m", (int) ((scaleWidth/2*meterToPixel)), (int) this.getHeight()-12);
-			g2d.drawString("0m", 8, (int) this.getHeight()-15);
-		}
+//		if(airport!=null && runway!=null){
+//			int scalehEIGHT = Math.round(pixelToMeter(this.getHeight()/3)/100)*100;
+//			g2d.setColor(Color.BLACK);
+//			g2d.setFont(new Font("scale", 1, 10));
+//			g2d.fillRect(this.getWidth()-10, 10, this.getWidth()-10, 10+meterToPixel2(scaleWidth));
+//			g2d.fillRect(this.getWidth()-10, 10 ,this.getWidth()-15, 12);	
+//			g2d.fillRect(this.getWidth()-10, 15,  2, 5);
+//			g2d.fillRect((int) (8+(scaleWidth*meterToPixel)), (int) this.getHeight()-15, (int) 2, 5);
+//			g2d.fillRect((int) (8+(scaleWidth/2*meterToPixel)), (int) this.getHeight()-12, (int) 2, 2);
+//			g2d.drawString(Integer.toString(scaleWidth)+"m", (int) ((scaleWidth*meterToPixel)), (int) this.getHeight()-15);
+//			g2d.drawString(Integer.toString(scaleWidth/2)+"m", (int) ((scaleWidth/2*meterToPixel)), (int) this.getHeight()-12);
+//			g2d.drawString("0m", 8, (int) this.getHeight()-15);
+//		}
 	}
 
 	public void runwayCreation(Graphics2D g2d){
