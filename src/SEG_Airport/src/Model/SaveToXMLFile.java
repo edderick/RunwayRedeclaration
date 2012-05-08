@@ -347,4 +347,8 @@ public class SaveToXMLFile {
 
 	}
 
+	public File getFile(){
+		return file;
+	}
+
 }

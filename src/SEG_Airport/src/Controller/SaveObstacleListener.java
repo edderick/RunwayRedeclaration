@@ -2,11 +2,13 @@ package Controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.JOptionPane;
 
 import Model.Airport;
 import Model.AirportObserver;
+import View.MainFrame;
 
 public class SaveObstacleListener implements ActionListener, AirportObserver{
 
@@ -20,8 +22,9 @@ public class SaveObstacleListener implements ActionListener, AirportObserver{
 	public void actionPerformed(ActionEvent e) {		
 		if((airport.getCurrentPhysicalRunway() != null) && (airport.getCurrentPhysicalRunway().getObstacle() != null)){
 			try {
-				airport.getCurrentPhysicalRunway().getObstacle().saveToXML();
+				File f = airport.getCurrentPhysicalRunway().getObstacle().saveToXML();
 				System.out.println("Saved Obstacle: " + airport.getCurrentPhysicalRunway().getObstacle().getName());
+				MainFrame.saveRecentFile(airport.getCurrentPhysicalRunway().getObstacle(), f.getAbsolutePath());
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

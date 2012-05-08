@@ -1,5 +1,6 @@
 package Model;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -111,14 +112,16 @@ public class Airport implements Saveable{
 	/**
 	 * Saves the airport to an xml file on disk
 	 */
-	public void saveToXML(){
+	public File saveToXML(){
 		try {
 			@SuppressWarnings("unused")
 			SaveToXMLFile xmlFile = new SaveToXMLFile(this);
 			saved = true;
+			return xmlFile.getFile();
 		} catch (Exception e) {
 			//TODO: Sort out dodgy catch
 			e.printStackTrace();
+			return null;
 		}
 
 	}

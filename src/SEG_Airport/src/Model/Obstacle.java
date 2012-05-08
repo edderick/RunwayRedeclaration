@@ -1,5 +1,7 @@
 package Model;
 
+import java.io.File;
+
 /**
  * Represents an obstacle that can be placed on a runway
  * @author Kelvin
@@ -93,15 +95,18 @@ public class Obstacle implements Saveable{
 	/**
 	 * Saves the obstacle to an xml file on disk
 	 */
-	public void saveToXML(){
+	public File saveToXML(){
 
 		try {
 			@SuppressWarnings("unused")
 			SaveToXMLFile xmlFile = new SaveToXMLFile(this);
+			saved = true;
+			return xmlFile.getFile();
 		} catch (Exception e) {
 			e.printStackTrace();
+			return null;
 		}
-		saved = true;
+		
 	}
 	
 	/**

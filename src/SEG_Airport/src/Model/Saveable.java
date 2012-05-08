@@ -1,4 +1,7 @@
 package Model;
+
+import java.io.File;
+
 /**
  * This Interface should be implemented by any model object that
  * can be saved to an xmlfile
@@ -18,8 +21,9 @@ public interface Saveable {
 	
 	/**
 	 * Saves the object to an xml file on disk
+	 * @return 
 	 */
-	public void saveToXML();
+	public File saveToXML();
 	
 	/**
 	 * @return The type of model enitity

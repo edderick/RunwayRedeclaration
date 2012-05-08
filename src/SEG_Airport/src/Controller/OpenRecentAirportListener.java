@@ -11,15 +11,14 @@ import Model.LoadXMLFile;
 import Model.PhysicalRunway;
 import View.MainFrame;
 
-public class OpenRecentAirportListener implements ActionListener, AirportObserver{
+public class OpenRecentAirportListener implements ActionListener {
 	
 	String filename;
 	Airport airport;
 	List<AirportObserver> airportObservers;
 	
-	public OpenRecentAirportListener(String filename, Airport airport, List<AirportObserver> airportObservers){
+	public OpenRecentAirportListener(String filename, List<AirportObserver> airportObservers){
 		this.filename = filename;
-		this.airport = airport;
 		this.airportObservers = airportObservers;
 	}
 	
@@ -71,11 +70,6 @@ public class OpenRecentAirportListener implements ActionListener, AirportObserve
 				e1.printStackTrace();
 			}
 		}
-	}
-
-	@Override
-	public void updateAirport(Airport airport) {
-		this.airport = airport;
 	}
 	
 	void notifyAirportObservers(){

@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JComboBox;
@@ -67,7 +68,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 
 	private static final int MAX_HISTORY = 10;
 	private static final int HISTORY_TO_SHOW = 5;
-
+	
 	private JPanel contentPane;
 	private JSplitPane rightSplitPane;
 	private JTable OriginalParametersTable;
@@ -88,8 +89,11 @@ public class MainFrame extends JFrame implements AirportObserver{
 	private static List<String> recentAirports;
 	private static List<String> recentObstacles;
 
-	private List<AirportObserver> airportObservers;
+	private Vector<AirportObserver> airportObservers;
 	private JMenu physicalRunwayMenu;
+
+	private JMenu mnOpenRecentAirports;
+	private JMenu mnOpenRecentObstacles;
 
 	/**
 	 * Launch the application.
@@ -116,7 +120,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		rightSplitPane = new JSplitPane();
 
 		airport = new Airport("");
-		airportObservers = new ArrayList<AirportObserver>();
+		airportObservers = new Vector<AirportObserver>();
 		airportObservers.add(this);
 
 		setTitle("SEG Group 9 - Runway Redeclaration System");
@@ -192,31 +196,17 @@ public class MainFrame extends JFrame implements AirportObserver{
 			e.printStackTrace();
 		}
 
-		JMenu mnOpenRecentAirports = new JMenu("Airport");
+		mnOpenRecentAirports = new JMenu("Airport");
 		mnOpenRecentAirports.setMnemonic('a');
 		mnOpenRecent.add(mnOpenRecentAirports);
 
-		//Populate list
-		for(String s : recentAirports){
-			JMenuItem mntmRecentAirport = new JMenuItem(s);
-			mnOpenRecentAirports.add(mntmRecentAirport);
-			OpenRecentAirportListener oral = new OpenRecentAirportListener(s, airport, airportObservers);
-			mntmRecentAirport.addActionListener(oral);
-			airportObservers.add(oral);
-		}
+		populateRecentAirports();
 
-		JMenu mnOpenRecentObstacles = new JMenu("Obstacle");
+		mnOpenRecentObstacles = new JMenu("Obstacle");
 		mnOpenRecentObstacles.setMnemonic('o');
 		mnOpenRecent.add(mnOpenRecentObstacles);
 
-		//Populate list
-		for(String s : recentObstacles){
-			JMenuItem mntmRecentObstacle = new JMenuItem(s);
-			mnOpenRecentObstacles.add(mntmRecentObstacle);
-			OpenRecentObstacleListener orol = new OpenRecentObstacleListener(s, null, airportObservers);
-			mntmRecentObstacle.addActionListener(orol);
-			airportObservers.add(orol);
-		}
+		populateRecentObstacles();
 
 		JMenu mnSave = new JMenu("Save");
 		mnSave.setMnemonic('s');
@@ -224,7 +214,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 
 		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Airport");
 		mntmNewMenuItem_4.setMnemonic('a');
-		SaveAirportListener sal = new SaveAirportListener(airport);
+		SaveAirportListener sal = new SaveAirportListener(airport, airportObservers);
 		mntmNewMenuItem_4.addActionListener(sal);
 		airportObservers.add(sal);
 		mnSave.add(mntmNewMenuItem_4);
@@ -289,9 +279,9 @@ public class MainFrame extends JFrame implements AirportObserver{
 		airportObservers.add(opl);
 
 		JMenuItem mntmRemoveObstacle = new JMenuItem("Remove Obstacle");
-//		RemoveObstacleListener rol = new RemoveObstacleListener(airport, airportObservers);
+		//		RemoveObstacleListener rol = new RemoveObstacleListener(airport, airportObservers);
 		//mntmRemoveObstacle.addActionListener(rol);
-	//	airportObservers.add(rol);
+		//	airportObservers.add(rol);
 		mnEdit.add(mntmRemoveObstacle);
 		mnEdit.add(mntmPositionObstacle);
 
@@ -530,7 +520,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		rightSplitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
 
 		try {
-			this.loadRecentFiles(HISTORY_TO_SHOW);
+			loadRecentFiles(HISTORY_TO_SHOW);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -539,7 +529,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 	}
 
 	public void loadRecentFiles(int numberToRead) throws IOException{
-		recentAirports = new ArrayList<String>();
+		recentAirports = new Vector<String>();
 
 		FileInputStream fis = new FileInputStream("data/recentAirports");
 		InputStreamReader in = new InputStreamReader(fis);
@@ -554,7 +544,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		}
 
 
-		recentObstacles = new ArrayList<String>();
+		recentObstacles = new Vector<String>();
 
 		fis = new FileInputStream("data/recentObstacles");
 		in = new InputStreamReader(fis);
@@ -604,6 +594,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 			bw.write(string + "\n");
 		}
 		bw.flush();
+
 	}
 
 	public Airport getAirport(){
@@ -622,7 +613,8 @@ public class MainFrame extends JFrame implements AirportObserver{
 		generatePhysicalRunwayRadioButtons(physicalRunwayMenu);
 		//currentRunwayCombo.setSelectedIndex(0);
 		updateTables();
-
+		
+		populateRecentAirports();
 	}
 
 	private void generateRunwayComboBox(JComboBox currentRunwayComboBox){
@@ -664,6 +656,20 @@ public class MainFrame extends JFrame implements AirportObserver{
 			redeclared.setValueAt(runway.getASDA(Runway.REDECLARED) + "m", 2, 1);
 			redeclared.setValueAt(runway.getLDA(Runway.REDECLARED) + "m", 3, 1);
 			redeclared.setValueAt(runway.getDisplacedThreshold(Runway.REDECLARED) + "m", 4, 1);
+		} else {
+			TableModel original = OriginalParametersTable.getModel();
+			original.setValueAt("", 0, 1);
+			original.setValueAt("", 1, 1);
+			original.setValueAt("", 2, 1);
+			original.setValueAt("", 3, 1);
+			original.setValueAt("", 4, 1);
+
+			TableModel redeclared = RedeclaredParametersTable.getModel();
+			redeclared.setValueAt("", 0, 1);
+			redeclared.setValueAt("", 1, 1);
+			redeclared.setValueAt("", 2, 1);
+			redeclared.setValueAt("", 3, 1);
+			redeclared.setValueAt("", 4, 1);
 		}
 
 		if(airport.getCurrentPhysicalRunway() != null && airport.getCurrentPhysicalRunway().getObstacle() != null){
@@ -694,7 +700,41 @@ public class MainFrame extends JFrame implements AirportObserver{
 			advancedParametersTab.setValueAt(physicalRunway.getBlastAllowance(), 2, 1);
 			advancedParametersTab.setValueAt(physicalRunway.getAngleOfSlope(), 3, 1);
 			advancedParametersTab.setValueAt(physicalRunway.getRunwayStripWidth(), 4, 1);
+		} else {
+			TableModel advancedParametersTab = AdvancedParametersTable.getModel();
+			advancedParametersTab.setValueAt("", 0, 1);
+			advancedParametersTab.setValueAt("", 1, 1);
+			advancedParametersTab.setValueAt("", 2, 1);
+			advancedParametersTab.setValueAt("", 3, 1);
+			advancedParametersTab.setValueAt("", 4, 1);
 		}
 	}
+
+	private void populateRecentAirports(){
+		
+		mnOpenRecentAirports.removeAll();
+		//Populate list
+		for(String s : recentAirports){
+			JMenuItem mntmRecentAirport = new JMenuItem(s);
+			mnOpenRecentAirports.add(mntmRecentAirport);
+			OpenRecentAirportListener oral = new OpenRecentAirportListener(s, airportObservers);
+			mntmRecentAirport.addActionListener(oral);
+		}
+		
+	}
+
+	private void populateRecentObstacles(){
+		
+		mnOpenRecentObstacles.removeAll();
+		//Populate list
+		for(String s : recentObstacles){
+			JMenuItem mntmRecentObstacle = new JMenuItem(s);
+			mnOpenRecentObstacles.add(mntmRecentObstacle);
+			OpenRecentObstacleListener orol = new OpenRecentObstacleListener(s, null, airportObservers);
+			mntmRecentObstacle.addActionListener(orol);
+			airportObservers.add(orol);
+		}
+	}
+
 }
 
