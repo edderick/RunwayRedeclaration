@@ -132,6 +132,11 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 		return (int) (meterToPixel2*x);
 	}
 	
+	public int pixelToMeter2(int x){
+		return (int) (x/meterToPixel2);
+	}	
+	
+	
 	public void setVisible(boolean b){
 		visible=b;
 	}
@@ -179,9 +184,10 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 		final JSlider zoomSlider = new JSlider();
 		zoomSlider.setMinorTickSpacing(1);
 		zoomSlider.setBackground(new Color(154, 205, 50));
-		zoomSlider.setValue(950);
-		zoomSlider.setMinimum(950);
+		
+		zoomSlider.setMinimum(900);
 		zoomSlider.setMaximum(6000);
+		zoomSlider.setValue(950);
 		zoomSlider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				JSlider slider = ((JSlider)e.getSource());
@@ -273,19 +279,19 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 	
 	
 	public void drawScale2(Graphics2D g2d){
-//		if(airport!=null && runway!=null){
-//			int scalehEIGHT = Math.round(pixelToMeter(this.getHeight()/3)/100)*100;
-//			g2d.setColor(Color.BLACK);
-//			g2d.setFont(new Font("scale", 1, 10));
-//			g2d.fillRect(this.getWidth()-10, 10, this.getWidth()-10, 10+meterToPixel2(scaleWidth));
-//			g2d.fillRect(this.getWidth()-10, 10 ,this.getWidth()-15, 12);	
+		if(airport!=null && runway!=null &&obstacle!=null){
+			int scaleHeight = Math.round(pixelToMeter2(this.getHeight()/3)/100)*100;
+			g2d.setColor(Color.BLACK);
+			g2d.setFont(new Font("scale", 1, 10));
+			g2d.fillRect(this.getWidth()-10, 10, 2, 10+meterToPixel2(scaleHeight));
+			g2d.fillRect(this.getWidth()-15, 10, 5, 2);	
 //			g2d.fillRect(this.getWidth()-10, 15,  2, 5);
 //			g2d.fillRect((int) (8+(scaleWidth*meterToPixel)), (int) this.getHeight()-15, (int) 2, 5);
 //			g2d.fillRect((int) (8+(scaleWidth/2*meterToPixel)), (int) this.getHeight()-12, (int) 2, 2);
 //			g2d.drawString(Integer.toString(scaleWidth)+"m", (int) ((scaleWidth*meterToPixel)), (int) this.getHeight()-15);
 //			g2d.drawString(Integer.toString(scaleWidth/2)+"m", (int) ((scaleWidth/2*meterToPixel)), (int) this.getHeight()-12);
 //			g2d.drawString("0m", 8, (int) this.getHeight()-15);
-//		}
+		}
 	}
 
 	public void runwayCreation(Graphics2D g2d){
@@ -301,7 +307,7 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 	
 			//calculates the x and y values to position the runway on the view
 			xRunway = (int) (((1.0-ratio)/2) * pWidth);
-			yRunway = pHeight/2;
+			yRunway = 3*pHeight/8;
 			g2d.setColor(new Color(135,206,250));
 			g2d.fillRect(-meterToPixel((int)(runwayLength*1.5)), yRunway-meterToPixel((int)(runwayLength*1.5)), pWidth+meterToPixel((int)(runwayLength*3)), +meterToPixel((int)(runwayLength*1.5)));
 			g2d.setColor(Color.GRAY);
@@ -412,7 +418,7 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 
 		//calculates the x and y values to position the runway on the view
 		xRunway = (int) (((1.0-ratio)/2) * pWidth);
-		yRunway = (pHeight - 5)/2;
+		yRunway = (3*pHeight/4);
 		
 		
 		

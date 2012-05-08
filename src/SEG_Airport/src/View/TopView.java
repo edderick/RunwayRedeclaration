@@ -162,9 +162,10 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 	public void createSlider(){
 		final JSlider zoomSlider = new JSlider();
 		zoomSlider.setBackground(null);
-		zoomSlider.setValue(950);
+		
 		zoomSlider.setMinimum(900);
 		zoomSlider.setMaximum(6000);
+		zoomSlider.setValue(950);
 		zoomSlider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				JSlider slider = ((JSlider)e.getSource());
