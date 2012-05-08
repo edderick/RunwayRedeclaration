@@ -48,6 +48,7 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 
 	//this value determines how much of the width of the panel the runway takes up.
 	double ratio = 0.95;
+	double ratio2 = 0.2;
 
 	//this value determines how much of the width of the runway the runwayTag takes up.
 	final double fontRatio = 0.5;
@@ -56,6 +57,7 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 
 	int spaceForScale;
 	double meterToPixel;
+	double meterToPixel2;
 	int TORA;
 	int TODA;
 	int ASDA;
@@ -126,6 +128,10 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 		return (int) (x/meterToPixel);
 	}	
 	
+	public int meterToPixel2(int x){
+		return (int) (meterToPixel2*x);
+	}
+	
 	public void setVisible(boolean b){
 		visible=b;
 	}
@@ -141,8 +147,12 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 			obstacleCreation(g2d);
 			declaredRunwaysCreation(g2d);
 			g.translate(-xOffset, -yOffset);
+			paintComponents(g2d);
 			drawKey(g2d);
 			drawScale(g2d);
+			if(obstacle!=null){
+				drawScale2(g2d);
+			}
 		}
 
 	}
@@ -251,8 +261,25 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 			int scaleWidth = Math.round(pixelToMeter(this.getWidth()/3)/100)*100;
 			g2d.setColor(Color.BLACK);
 			g2d.setFont(new Font("scale", 1, 10));
-			g2d.fillRect(10, (int) this.getHeight()-10, (int) (scaleWidth*meterToPixel), 2);	
+			g2d.fillRect(10, (int) this.getHeight()-10, meterToPixel(scaleWidth), 2);	
 			g2d.fillRect(10, (int) this.getHeight()-15, (int) 2, 5);
+			g2d.fillRect((int) (8+(scaleWidth*meterToPixel)), (int) this.getHeight()-15, (int) 2, 5);
+			g2d.fillRect((int) (8+(scaleWidth/2*meterToPixel)), (int) this.getHeight()-12, (int) 2, 2);
+			g2d.drawString(Integer.toString(scaleWidth)+"m", (int) ((scaleWidth*meterToPixel)), (int) this.getHeight()-15);
+			g2d.drawString(Integer.toString(scaleWidth/2)+"m", (int) ((scaleWidth/2*meterToPixel)), (int) this.getHeight()-12);
+			g2d.drawString("0m", 8, (int) this.getHeight()-15);
+		}
+	}
+	
+	
+	public void drawScale2(Graphics2D g2d){
+		if(airport!=null && runway!=null){
+			int scaleWidth = Math.round(pixelToMeter(this.getHeight()/3)/100)*100;
+			g2d.setColor(Color.BLACK);
+			g2d.setFont(new Font("scale", 1, 10));
+			g2d.fillRect(this.getWidth()-10, 10, this.getWidth()-10, 10+meterToPixel2(scaleWidth));
+			g2d.fillRect(this.getWidth()-10, 10 ,this.getWidth()-15, 12);	
+			g2d.fillRect(this.getWidth()-10, 15,  2, 5);
 			g2d.fillRect((int) (8+(scaleWidth*meterToPixel)), (int) this.getHeight()-15, (int) 2, 5);
 			g2d.fillRect((int) (8+(scaleWidth/2*meterToPixel)), (int) this.getHeight()-12, (int) 2, 2);
 			g2d.drawString(Integer.toString(scaleWidth)+"m", (int) ((scaleWidth*meterToPixel)), (int) this.getHeight()-15);
@@ -276,7 +303,7 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 			xRunway = (int) (((1.0-ratio)/2) * pWidth);
 			yRunway = pHeight/2;
 			g2d.setColor(new Color(135,206,250));
-			g2d.fillRect(0, 0, pWidth, yRunway);
+			g2d.fillRect(-meterToPixel((int)(runwayLength*1.5)), yRunway-meterToPixel((int)(runwayLength*1.5)), pWidth+meterToPixel((int)(runwayLength*3)), +meterToPixel((int)(runwayLength*1.5)));
 			g2d.setColor(Color.GRAY);
 			g2d.fillRect(xRunway,  yRunway, meterToPixel(runwayLength), 5);
 
@@ -289,14 +316,15 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 		g2d.fillRect(meterToPixel(xObstacle)+xRunway, yRunway-meterToPixel(obstacleHeight), meterToPixel(obstacleLength), meterToPixel(obstacleHeight));
 		g2d.setStroke(new BasicStroke(1));
 		g2d.setColor(Color.BLACK);
-		g2d.drawLine(meterToPixel(xObstacle)+xRunway, yRunway-meterToPixel(obstacleHeight), xRunway+meterToPixel(xObstacle)-meterToPixel((int) (obstacleHeight*airport.getCurrentPhysicalRunway().getAngleOfSlope())), yRunway);
+		g2d.drawLine(meterToPixel(xObstacle)+xRunway, yRunway-meterToPixel(obstacleHeight), xRunway+meterToPixel(xObstacle)-meterToPixel((int) (obstacle.getHeight()*airport.getCurrentPhysicalRunway().getAngleOfSlope())), yRunway);
 	}
 	}
 
 	public void declaredRunwaysCreation(Graphics2D g2d){
 		if(airport!=null){
-			int yInc = 5;
+			int yInc = 15;
 			int width=3;
+			
 			g2d.setColor(toraColor);
 			g2d.fillRect(xRunway+TORAStart, yRunway +yInc, meterToPixel(TORA), width);
 			g2d.setColor(todaColor);
@@ -393,8 +421,12 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 			this.threshold=airport.getCurrentPhysicalRunway().closeTo().getName(); 
 			if(threshold.equals(airport.getCurrentPhysicalRunway().getRunway(0).getName())){this.leftTag=airport.getCurrentPhysicalRunway().getRunway(1).getName();}else{this.leftTag=airport.getCurrentPhysicalRunway().getRunway(0).getName();}
 			this.xObstacle=runwayLength-distance;
+			int height = (int) obstacle.getHeight();
+			int l = (int) obstacle.getLength();
+			obstacleHeight = (int) (ratio2 * this.getHeight());
+			meterToPixel2 = height/obstacleHeight;
 			this.obstacleLength =(int) obstacle.getLength();
-			this.obstacleHeight = (int) obstacle.getHeight();
+			
 			this.ANGLE=(int) (obstacle.getHeight()*airport.getCurrentPhysicalRunway().getAngleOfSlope());
 			
 			
@@ -441,6 +473,20 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 	}
 
 	public void setOffset(int x, int y){
+		int a = meterToPixel(runwayLength/2);
+		int b = meterToPixel(this.getHeight());
+		if(x>a){
+			x=a;
+		}
+		if(y>b){
+			y=b;
+		}
+		if(x<-a){
+			x=-a;
+		}
+		if(y<-b){
+			y=-b;
+		}
 		this.xOffset=x;
 		this.yOffset=y;
 	}

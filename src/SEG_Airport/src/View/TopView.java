@@ -321,8 +321,12 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 	
 		ratioOfThresholdDashesWidthToRunwayHeight = 12;
 		dashesWidth=(runwayHeight/ratioOfThresholdDashesWidthToRunwayHeight);
-		if (dashesWidth == 0) dashesWidth = 3;
 		gaps=dashesWidth;
+		if(meterToPixel(dashesWidth)==0){
+			dashesWidth=pixelToMeter(3);
+			gaps=pixelToMeter(1);
+		}
+		
 		int dashesX = xRunway + meterToPixel((dashesLength/2)+leftDT);
 		dashesLength=dashesLength*ratioOfDashesToThresholdDashes;
 
