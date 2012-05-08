@@ -245,6 +245,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 
 		ExitListener exitListener = new ExitListener(airport);
 		JMenuItem mntmExit = new JMenuItem("Exit");
+		mntmExit.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/ExitIcon.png")));
 		mntmExit.setMnemonic('x');
 		mntmExit.addActionListener(exitListener);
 		mnFile.add(mntmExit);
@@ -382,6 +383,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		menuBar.add(mnEmail);
 
 		JMenuItem mntmSendEmail = new JMenuItem("Send email");
+		mntmSendEmail.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/MailIcon.png")));
 		mntmSendEmail.setMnemonic('s');
 		ShowEmailDialogListener sedl = new ShowEmailDialogListener(addressBook, airport);
 		airportObservers.add(sedl);
