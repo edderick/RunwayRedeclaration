@@ -497,14 +497,14 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 	}
 
 	public void setDragCursor(final JComponent component){
-		Cursor openHandCursor = Toolkit.getDefaultToolkit().createCustomCursor(Toolkit.getDefaultToolkit().getImage("data/opengrab.png"), new Point(16,16), "closed");
+		Cursor openHandCursor = Toolkit.getDefaultToolkit().createCustomCursor(Toolkit.getDefaultToolkit().getImage("data/Cursors/opengrab.png"), new Point(16,16), "closed");
 		component.setCursor(openHandCursor);	
 
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				super.mousePressed(e);
-				Cursor closedHandCursor = Toolkit.getDefaultToolkit().createCustomCursor(Toolkit.getDefaultToolkit().getImage("data/closedgrab.png"), new Point(16,16), "closed");
+				Cursor closedHandCursor = Toolkit.getDefaultToolkit().createCustomCursor(Toolkit.getDefaultToolkit().getImage("data/Cursors/closedgrab.png"), new Point(16,16), "closed");
 				component.setCursor(closedHandCursor);	
 
 			}
@@ -512,7 +512,7 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				super.mouseReleased(e);
-				Cursor openHandCursor = Toolkit.getDefaultToolkit().createCustomCursor(Toolkit.getDefaultToolkit().getImage("data/opengrab.png"), new Point(16,16), "closed");
+				Cursor openHandCursor = Toolkit.getDefaultToolkit().createCustomCursor(Toolkit.getDefaultToolkit().getImage("data/Cursors/opengrab.png"), new Point(16,16), "closed");
 				component.setCursor(openHandCursor);	
 			}
 		});
