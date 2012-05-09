@@ -146,8 +146,14 @@ public class SendEmailDialog extends JDialog {
 						} catch (MessagingException e) {
 							JOptionPane.showMessageDialog(null, "There has been an error sending the email, please check the settings and try again.", "", JOptionPane.ERROR_MESSAGE);
 						}
+						
+						JOptionPane.showMessageDialog(null, "Emails have been sent", "", JOptionPane.INFORMATION_MESSAGE);
+						
+					} else {
+						JOptionPane.showMessageDialog(null, "No recipients selected.", "", JOptionPane.ERROR_MESSAGE);
 					}
-					JOptionPane.showMessageDialog(null, "Emails have been sent", "", JOptionPane.INFORMATION_MESSAGE);
+						
+					
 				}
 			}.start();
 			
