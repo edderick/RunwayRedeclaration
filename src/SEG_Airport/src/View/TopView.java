@@ -601,7 +601,7 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 
 	public void setOffset(int x, int y){
 		int a = meterToPixel(runwayWidth/2);
-		int b = meterToPixel(this.getHeight());
+		int b = meterToPixel(runwayStripWidthFromCentreLine*2);
 		if(x>a){
 			x=a;
 		}
