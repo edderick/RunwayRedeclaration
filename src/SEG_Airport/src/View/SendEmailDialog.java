@@ -151,7 +151,7 @@ public class SendEmailDialog extends JDialog {
 				}
 			}.start();
 			
-
+			dispose();
 			
 		}
 	}
