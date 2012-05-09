@@ -1,5 +1,6 @@
 package Model;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import junit.framework.TestCase;
@@ -163,6 +164,183 @@ public class OscarJUnitTests extends TestCase{
 		one.setDistanceAwayFromCenterLine(awayFromCenter[0]);
 		
 		assertEquals(one.getDistanceAwayFromCenterLine(), awayFromCenter[0]);
+	}
+	
+	public void testLoadAirportObjectExists() {
+		Airport airport1 = null;
+
+		LoadXMLFile loadFile = new LoadXMLFile();
+		try {
+			airport1 = loadFile.loadAirport();
+		} catch (Exception e) {
+			System.out.println("Error: corrupted file");
+			e.printStackTrace();
+		}
+		
+		assertTrue(airport1 != null);
+	}
+	
+	public void testLoadAirportHasName() {
+		Airport airport1 = null;
+
+		LoadXMLFile loadFile = new LoadXMLFile();
+		try {
+			airport1 = loadFile.loadAirport();
+		} catch (Exception e) {
+			System.out.println("Error: corrupted file");
+			e.printStackTrace();
+		}
+		
+		assertTrue(airport1.getName() != null);
+	}
+	
+	public void testLoadAirportHasPhysicalRunways() {
+		Airport airport1 = null;
+
+		LoadXMLFile loadFile = new LoadXMLFile();
+		try {
+			airport1 = loadFile.loadAirport();
+		} catch (Exception e) {
+			System.out.println("Error: corrupted file");
+			e.printStackTrace();
+		}
+		
+		assertTrue(airport1.getPhysicalRunways().get(0) instanceof PhysicalRunway);
+	}
+	
+	public void testInstantiateObstacleName() {
+
+		this.setUp();
+		Obstacle obstacle = new Obstacle(names[0], dt[2]);
+
+		obstacle.setLength(dt[0]);
+		obstacle.setWidth(dt[1]);
+		
+		assertEquals(obstacle.getName(), names[0]);
+	}
+	
+	public void testInstantiateObstacleHeight() {
+
+		this.setUp();
+		Obstacle obstacle = new Obstacle(names[0], dt[2]);
+
+		obstacle.setLength(dt[0]);
+		obstacle.setWidth(dt[1]);
+		
+		assertEquals(obstacle.getHeight(), dt[2]);
+	}
+	
+	public void testInstantiateObstacleLength() {
+
+		this.setUp();
+		Obstacle obstacle = new Obstacle(names[0], dt[2]);
+
+		obstacle.setLength(dt[0]);
+		obstacle.setWidth(dt[1]);
+		
+		assertEquals(obstacle.getLength(), dt[0]);
+	}
+	
+	public void testInstantiateObstacleWidth() {
+
+		this.setUp();
+		Obstacle obstacle = new Obstacle(names[0], dt[2]);
+
+		obstacle.setLength(dt[0]);
+		obstacle.setWidth(dt[1]);
+		
+		assertEquals(obstacle.getWidth(), dt[1]);
+	}
+	
+	public void loadedObstacleExists() {
+		LoadXMLFile lof = new LoadXMLFile();
+		Obstacle obstacle1 = null;
+
+		try {
+			obstacle1 = lof.loadObstacle();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		assertTrue(obstacle1 != null);
+	}
+	
+	public void loadedObstacleHasName() {
+		LoadXMLFile lof = new LoadXMLFile();
+		Obstacle obstacle1 = null;
+
+		try {
+			obstacle1 = lof.loadObstacle();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		assertTrue(obstacle1.getName() != null);
+	}
+	
+	public void loadedObstacleHasHeight() {
+		LoadXMLFile lof = new LoadXMLFile();
+		Obstacle obstacle1 = null;
+
+		try {
+			obstacle1 = lof.loadObstacle();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		assertTrue((Double) obstacle1.getHeight() instanceof Double);
+	}
+	
+	public void testInstantiateContact(){
+		this.setUp();
+		Contact contact1 = new Contact(names[0], names[1], names[2]);
+		
+		assertTrue(contact1 != null);
+	}
+	
+	public void testInstantiatedContactsName(){
+		this.setUp();
+		Contact contact1 = new Contact(names[0], names[1], names[2]);
+		
+		assertEquals(contact1.getFirstName(), names[0]);
+	}
+	
+	public void testInstantiatedContactsLastName(){
+		this.setUp();
+		Contact contact1 = new Contact(names[0], names[1], names[2]);
+		
+		assertEquals(contact1.getLastName(), names[1]);
+	}
+	
+	public void testInstantiatedContactsEmail(){
+		this.setUp();
+		Contact contact1 = new Contact(names[0], names[1], names[2]);
+		
+		assertEquals(contact1.getEmail(), names[2]);
+	}
+	
+	public void testLoadContactsListExists(){
+		ArrayList<Contact> contactsList2 = null;
+		LoadXMLFile lof2 = new LoadXMLFile();
+		try {
+			contactsList2 = lof2.loadContacts();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		assertTrue(contactsList2 != null);
+	}
+	
+	public void testLoadContactsListHasContacts(){
+		ArrayList<Contact> contactsList2 = null;
+		LoadXMLFile lof2 = new LoadXMLFile();
+		try {
+			contactsList2 = lof2.loadContacts();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		assertTrue(contactsList2.size() > 0);
 	}
 	
 }
