@@ -117,7 +117,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 	}
 
 	public MainFrame() {
-		this.setIconImage(Toolkit.getDefaultToolkit().getImage("data/AirplaneIcon.png"));
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage("data/Icons/AirplaneIcon.png"));
 		
 		addressBook = new AddressBook();
 		LoadXMLFile lf = new LoadXMLFile();
@@ -156,12 +156,12 @@ public class MainFrame extends JFrame implements AirportObserver{
 		menuBar.add(mnFile);
 
 		JMenu mnAirport = new JMenu("New");
-		mnAirport.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/NewIcon.png")));
+		mnAirport.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/Icons/NewIcon.png")));
 		mnAirport.setMnemonic('n');
 		mnFile.add(mnAirport);
 
 		JMenuItem mntmNewMenuItem = new JMenuItem("Airport");
-		mntmNewMenuItem.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/AirplaneIcon.png")));
+		mntmNewMenuItem.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/Icons/AirplaneIcon.png")));
 		mntmNewMenuItem.setMnemonic('a');
 		NewAirportListener nal = new NewAirportListener(airport, airportObservers);
 		mntmNewMenuItem.addActionListener(nal);
@@ -169,7 +169,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		mnAirport.add(mntmNewMenuItem);
 
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Obstacle");
-		mntmNewMenuItem_1.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/ObstacleIcon.png")));
+		mntmNewMenuItem_1.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/Icons/ObstacleIcon.png")));
 		mntmNewMenuItem_1.setMnemonic('o');
 		NewObstacleListener nol = new NewObstacleListener(airport, airportObservers);
 		mntmNewMenuItem_1.addActionListener(nol);
@@ -177,12 +177,12 @@ public class MainFrame extends JFrame implements AirportObserver{
 		mnAirport.add(mntmNewMenuItem_1);
 
 		JMenu mnNewMenu = new JMenu("Open");
-		mnNewMenu.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/OpenIcon.png")));
+		mnNewMenu.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/Icons/OpenIcon.png")));
 		mnNewMenu.setMnemonic('o');
 		mnFile.add(mnNewMenu);
 
 		JMenuItem mntmAirport = new JMenuItem("Airport");
-		mntmAirport.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/AirplaneIcon.png")));
+		mntmAirport.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/Icons/AirplaneIcon.png")));
 		mntmAirport.setMnemonic('a');
 		OpenAirportListener oal = new OpenAirportListener(airport, airportObservers);
 		mntmAirport.addActionListener(oal);
@@ -190,7 +190,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		mnNewMenu.add(mntmAirport);
 
 		JMenuItem mntmObstacle = new JMenuItem("Obstacle");
-		mntmObstacle.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/ObstacleIcon.png")));
+		mntmObstacle.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/Icons/ObstacleIcon.png")));
 		mntmObstacle.setMnemonic('o');
 		OpenObstacleListener ool = new OpenObstacleListener(airport, airportObservers);
 		mntmObstacle.addActionListener(ool);
@@ -198,7 +198,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		mnNewMenu.add(mntmObstacle);
 
 		JMenu mnOpenRecent = new JMenu("Open Recent");
-		mnOpenRecent.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/OpenIcon.png")));
+		mnOpenRecent.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/Icons/OpenIcon.png")));
 		mnOpenRecent.setMnemonic('r');
 		mnFile.add(mnOpenRecent);
 
@@ -210,14 +210,14 @@ public class MainFrame extends JFrame implements AirportObserver{
 		}
 
 		mnOpenRecentAirports = new JMenu("Airport");
-		mnOpenRecentAirports.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/AirplaneIcon.png")));
+		mnOpenRecentAirports.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/Icons/AirplaneIcon.png")));
 		mnOpenRecentAirports.setMnemonic('a');
 		mnOpenRecent.add(mnOpenRecentAirports);
 
 		populateRecentAirports();
 
 		mnOpenRecentObstacles = new JMenu("Obstacle");
-		mnOpenRecentObstacles.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/ObstacleIcon.png")));
+		mnOpenRecentObstacles.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/Icons/ObstacleIcon.png")));
 		mnOpenRecentObstacles.setMnemonic('o');
 		mnOpenRecent.add(mnOpenRecentObstacles);
 
@@ -226,11 +226,11 @@ public class MainFrame extends JFrame implements AirportObserver{
 
 		JMenu mnSave = new JMenu("Save");
 		mnSave.setMnemonic('s');
-		mnSave.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/SaveIcon.png")));
+		mnSave.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/Icons/SaveIcon.png")));
 		mnFile.add(mnSave);
 
 		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Airport");
-		mntmNewMenuItem_4.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/AirplaneIcon.png")));
+		mntmNewMenuItem_4.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/Icons/AirplaneIcon.png")));
 		mntmNewMenuItem_4.setMnemonic('a');
 		SaveAirportListener sal = new SaveAirportListener(airport, airportObservers);
 		mntmNewMenuItem_4.addActionListener(sal);
@@ -238,7 +238,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		mnSave.add(mntmNewMenuItem_4);
 
 		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Obstacle");
-		mntmNewMenuItem_5.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/ObstacleIcon.png")));
+		mntmNewMenuItem_5.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/Icons/ObstacleIcon.png")));
 		mntmNewMenuItem_5.setMnemonic('o');
 		SaveObstacleListener sol = new SaveObstacleListener(airport);
 		mntmNewMenuItem_5.addActionListener(sol);
@@ -250,7 +250,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 
 		ExitListener exitListener = new ExitListener(airport);
 		JMenuItem mntmExit = new JMenuItem("Exit");
-		mntmExit.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/ExitIcon.png")));
+		mntmExit.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/Icons/ExitIcon.png")));
 		mntmExit.setMnemonic('x');
 		mntmExit.addActionListener(exitListener);
 		mnFile.add(mntmExit);
@@ -270,7 +270,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		airportObservers.add(erl);
 
 		JMenuItem mntmAirport_1 = new JMenuItem("Airport");
-		mntmAirport_1.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/AirplaneIcon.png")));
+		mntmAirport_1.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/Icons/AirplaneIcon.png")));
 		mntmAirport_1.setMnemonic('a');
 		EditAirportListener eal = new EditAirportListener(airport, airportObservers);
 		airportObservers.add(eal);
@@ -278,7 +278,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		mnEdit.add(mntmAirport_1);
 
 		JMenuItem mntmNewMenuItem_7 = new JMenuItem("Obstacle");
-		mntmNewMenuItem_7.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/ObstacleIcon.png")));
+		mntmNewMenuItem_7.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/Icons/ObstacleIcon.png")));
 		mntmNewMenuItem_7.setMnemonic('o');
 		EditObstacleListener eol = new EditObstacleListener(airport, airportObservers);
 		mntmNewMenuItem_7.addActionListener(eol);
@@ -295,14 +295,14 @@ public class MainFrame extends JFrame implements AirportObserver{
 		generatePhysicalRunwayRadioButtons(physicalRunwayMenu);
 
 		JMenuItem mntmPositionObstacle = new JMenuItem("Advanced Parameters");
-		mntmPositionObstacle.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/AdvancedIcon.png")));
+		mntmPositionObstacle.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/Icons/AdvancedIcon.png")));
 		mntmPositionObstacle.setMnemonic('p');
 		AdvancedParametersListener opl = new AdvancedParametersListener(airport, airportObservers);
 		mntmPositionObstacle.addActionListener(opl);
 		airportObservers.add(opl);
 
 		JMenuItem mntmRemoveObstacle = new JMenuItem("Remove Obstacle");
-		mntmRemoveObstacle.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/RemoveObstacleIcon.png")));
+		mntmRemoveObstacle.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/Icons/RemoveObstacleIcon.png")));
 		RemoveObstacleListener rol = new RemoveObstacleListener(airport, airportObservers);
 		mntmRemoveObstacle.addActionListener(rol);
 		airportObservers.add(rol);
@@ -389,7 +389,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		menuBar.add(mnEmail);
 
 		JMenuItem mntmSendEmail = new JMenuItem("Email Calculations");
-		mntmSendEmail.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/MailIcon.png")));
+		mntmSendEmail.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/Icons/MailIcon.png")));
 		mntmSendEmail.setMnemonic('s');
 		ShowEmailDialogListener sedl = new ShowEmailDialogListener(addressBook, airport);
 		airportObservers.add(sedl);
@@ -397,7 +397,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		mnEmail.add(mntmSendEmail);
 
 		JMenuItem mntmAddressBook = new JMenuItem("Address book");
-		mntmAddressBook.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/AddressBookIcon.png")));
+		mntmAddressBook.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/Icons/AddressBookIcon.png")));
 		mntmAddressBook.setMnemonic('a');
 		mntmAddressBook.addActionListener(new ShowAddressBookListener(addressBook));
 		mnEmail.add(mntmAddressBook);
@@ -406,7 +406,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		menuBar.add(mnPrint);
 		
 		JMenuItem mntmPrintCalculations = new JMenuItem("Print Calculations");
-		mntmPrintCalculations.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/PrintIcon.png")));
+		mntmPrintCalculations.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/Icons/PrintIcon.png")));
 		mnPrint.add(mntmPrintCalculations);
 		PrintCalculationsListener pcl = new PrintCalculationsListener(airport);
 		mntmPrintCalculations.addActionListener(pcl);
@@ -417,13 +417,13 @@ public class MainFrame extends JFrame implements AirportObserver{
 		menuBar.add(mnHelp);
 
 		JMenuItem mntmShowHelp = new JMenuItem("Show help");
-		mntmShowHelp.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/HelpIcon.png")));
+		mntmShowHelp.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/Icons/HelpIcon.png")));
 		mntmShowHelp.setMnemonic('s');
 		mnHelp.add(mntmShowHelp);
 		mntmShowHelp.addActionListener(new ShowHelpListener());
 
 		JMenuItem mntmAbout = new JMenuItem("About ");
-		mntmAbout.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/AboutIcon.png")));
+		mntmAbout.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/Icons/AboutIcon.png")));
 		mntmAbout.setMnemonic('a');
 		mnHelp.add(mntmAbout);
 		mntmAbout.addActionListener(new ShowAboutListener());
