@@ -398,15 +398,21 @@ public class PhysicalRunway {
 	 */
 	private void resultAppenderNoCalculationNeeded(StringBuilder result,
 			Runway runway, boolean detail) {
+		if(detail){
+			result.append("For runway "+runway.getName()+":\n");
+		}
+		
 		if (obstacle == null) {
 			result.append("There are no obstacle on runway at the moment.\n");
 		} else {
 			if (detail) {
 				result.append("Obstacle name: " + obstacle.getName() + "\n");
+				result.append("Obstacle height: " + obstacle.getHeight() + "m\n");
+			} else {
+				result.append("The obstacle is "
+						+ Math.abs(distanceAwayFromCenterLine)
+						+ "m away from center line. No new calculation needed.\n");
 			}
-			result.append("The obstacle is "
-					+ Math.abs(distanceAwayFromCenterLine)
-					+ " away from center line. No new calculation needed.\n");
 		}
 		if (!detail) {
 			result.append("TORA: " + runway.getTORA(Runway.DEFAULT) + "m\n");

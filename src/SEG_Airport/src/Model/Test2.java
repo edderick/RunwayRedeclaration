@@ -129,8 +129,9 @@ public class Test2 {
 		System.out.println(pr2.toCalculation("09R"));
 		System.out.println(pr2.toCalculation("27L"));
 		
-		pr2.placeNewObstacle(ob4, 250, 12, pr2.getRunway(1).getName());
+		pr2.placeNewObstacle(ob4, 250, 190, pr2.getRunway(1).getName());
 		System.out.println(pr2.toDetails("27L"));
+		System.out.println(pr2.toCalculation("27L"));
 		System.out.println(pr2.toDetails("09R"));
 		
 		/*
