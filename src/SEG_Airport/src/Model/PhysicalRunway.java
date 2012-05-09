@@ -400,6 +400,126 @@ public class PhysicalRunway {
 				if (obstacle == null) {
 					result.append("There are no obstacle on runway at the moment.\n");
 				} else {
+					result.append("The obstacle is closer to "
+							+ closeTo.getName() + "'s threshold\n");
+					result.append("The obstacle is "
+							+ Math.abs(distanceAwayFromCenterLine)
+							+ " away from center line. No new calculation needed.\n");
+				}
+				result.append("TORA: " + closeTo.getTORA(Runway.DEFAULT)
+						+ "m\n");
+				result.append("ASDA: " + closeTo.getASDA(Runway.DEFAULT)
+						+ "m\n");
+				result.append("TODA: " + closeTo.getTODA(Runway.DEFAULT)
+						+ "m\n");
+				result.append("LDA : " + closeTo.getLDA(Runway.DEFAULT) + "m\n");
+			} else {
+				String resa = "";
+
+				if (obstacle.getHeight() * angleOfSlope[REDECLARED] < RESA[REDECLARED]) {
+					resa = String.valueOf(RESA[REDECLARED]);
+				} else {
+					resa = "(" + obstacle.getHeight() + " * "
+							+ angleOfSlope[REDECLARED] + ")";
+				}
+				result.append("\n--Any negative result will be assigned as zero--\n");
+				result.append("New TORA : " + closeTo.getTORA(Runway.DEFAULT)
+						+ " - " + distanceAwayFromThreshold + " - "
+						+ blastAllowance[REDECLARED] + " - "
+						+ closeTo.getDisplacedThreshold(Runway.REDECLARED)
+						+ " = " + closeTo.getTORA(Runway.REDECLARED) + "m\n");
+				result.append("New ASDA : " + closeTo.getASDA(Runway.DEFAULT)
+						+ " - " + distanceAwayFromThreshold + " - "
+						+ blastAllowance[REDECLARED] + " - "
+						+ closeTo.getDisplacedThreshold(Runway.REDECLARED)
+						+ " = " + closeTo.getASDA(Runway.REDECLARED) + "m\n");
+				result.append("New TODA : " + closeTo.getTODA(Runway.DEFAULT)
+						+ " - " + distanceAwayFromThreshold + " - "
+						+ blastAllowance[REDECLARED] + " - "
+						+ closeTo.getDisplacedThreshold(Runway.REDECLARED)
+						+ " = " + closeTo.getTODA(Runway.REDECLARED) + "m\n");
+				result.append("New LDA : " + closeTo.getLDA(Runway.DEFAULT)
+						+ " - " + distanceAwayFromThreshold + " - " + resa
+						+ " - " + stopway[REDECLARED] + " = "
+						+ closeTo.getLDA(Runway.REDECLARED) + "m\n");
+			}
+		} else {
+			if (obstacle == null
+					|| Math.abs(distanceAwayFromCenterLine) > runwayStripWidth[REDECLARED]) {
+				if (obstacle == null) {
+					result.append("There are no obstacle on runway at the moment.\n");
+				} else {
+					result.append("The obstacle is closer to "
+							+ closeTo.getName() + "'s threshold\n");
+					result.append("The obstacle is "
+							+ Math.abs(distanceAwayFromCenterLine)
+							+ " away from center line. No new calculation needed.\n");
+				}
+				result.append("TORA: " + awayFrom.getTORA(Runway.DEFAULT)
+						+ "m\n");
+				result.append("ASDA: " + awayFrom.getASDA(Runway.DEFAULT)
+						+ "m\n");
+				result.append("TODA: " + awayFrom.getTODA(Runway.DEFAULT)
+						+ "m\n");
+				result.append("LDA : " + awayFrom.getLDA(Runway.DEFAULT)
+						+ "m\n");
+			} else {
+				String resa = "";
+
+				if (obstacle.getHeight() * angleOfSlope[REDECLARED] < RESA[REDECLARED]) {
+					resa = String.valueOf(RESA[REDECLARED]);
+				} else {
+					resa = "(" + obstacle.getHeight() + " * "
+							+ angleOfSlope[REDECLARED] + ")";
+				}
+
+				result.append("\n--Any negative result will be assigned as zero--\n");
+				result.append("New TORA : " + awayFrom.getTORA(Runway.DEFAULT)
+						+ " - " + distanceAwayFromThreshold + " - " + resa
+						+ " - " + stopway[REDECLARED] + " - "
+						+ closeTo.getDisplacedThreshold(Runway.REDECLARED)
+						+ " = " + awayFrom.getTORA(Runway.REDECLARED) + "m\n");
+			
+				result.append("New TODA : " + awayFrom.getTODA(Runway.DEFAULT)
+						+ " - " + distanceAwayFromThreshold + " - " + resa
+						+ " - " + stopway[REDECLARED] + " - "
+						+ closeTo.getDisplacedThreshold(Runway.REDECLARED)
+						+ " = " + awayFrom.getTODA(Runway.REDECLARED) + "m\n");
+				result.append("New ASDA : " + awayFrom.getASDA(Runway.DEFAULT)
+						+ " - " + distanceAwayFromThreshold + " - " + resa
+						+ " - " + stopway[REDECLARED] + " - "
+						+ closeTo.getDisplacedThreshold(Runway.REDECLARED)
+						+ " = " + awayFrom.getASDA(Runway.REDECLARED) + "m\n");
+				result.append("New LDA  : " + awayFrom.getLDA(Runway.DEFAULT)
+						+ " - "
+						+ closeTo.getDisplacedThreshold(Runway.REDECLARED)
+						+ " - " + distanceAwayFromThreshold + " - "
+						+ RESA[REDECLARED] + " - " + stopway[REDECLARED]
+						+ " = " + awayFrom.getLDA(Runway.REDECLARED) + "m\n");
+			}
+		}
+		return result.toString();
+	}
+	
+
+	/**
+	 * Produces the calculations as a human readable text in details
+	 * 
+	 * @param runwayName
+	 *            name of runway to perform calculation for
+	 * @return Text of detailed calculations
+	 */
+	public String toDetails(String runwayName) {
+		StringBuilder result = new StringBuilder();
+		Runway closeTo = closeToA ? runway[0] : runway[1];
+		Runway awayFrom = closeToA ? runway[1] : runway[0];
+
+		if (runwayName.equals(closeTo.getName())) {
+			if (obstacle == null
+					|| Math.abs(distanceAwayFromCenterLine) > runwayStripWidth[REDECLARED]) {
+				if (obstacle == null) {
+					result.append("There are no obstacle on runway at the moment.\n");
+				} else {
 					result.append("Obstacle name: " + obstacle.getName() + "\n");
 					result.append("The obstacle is closer to "
 							+ closeTo.getName() + "'s threshold\n");
