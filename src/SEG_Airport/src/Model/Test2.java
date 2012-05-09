@@ -118,20 +118,20 @@ public class Test2 {
 		a.addPhysicalRunway(pr2);
 		
 		pr1.placeNewObstacle(ob, 125, 20, pr1.getRunway(0).getName());
-		System.out.println(pr1.toCalculation("09L"));
-		System.out.println(pr1.toCalculation("27R"));
+		System.out.println(pr1.toDetails("09L"));
+		System.out.println(pr1.toDetails("27R"));
 		
 		pr1.placeNewObstacle(ob2, 500, 0, pr1.getRunway(1).getName());
-		System.out.println(pr1.toCalculation("27R"));
-		System.out.println(pr1.toCalculation("09L"));
+		System.out.println(pr1.toDetails("27R"));
+		System.out.println(pr1.toDetails("09L"));
 		
 		pr2.placeNewObstacle(ob3, 0, 5, pr2.getRunway(0).getName());
-		System.out.println(pr2.toCalculation("09R"));
-		System.out.println(pr2.toCalculation("27L"));
+		System.out.println(pr2.toDetails("09R"));
+		System.out.println(pr2.toDetails("27L"));
 		
 		pr2.placeNewObstacle(ob4, 250, 12, pr2.getRunway(1).getName());
-		System.out.println(pr2.toCalculation("27L"));
-		System.out.println(pr2.toCalculation("09R"));
+		System.out.println(pr2.toDetails("27L"));
+		System.out.println(pr2.toDetails("09R"));
 		
 		/*
 		pr1.removeObstacleAndReset();
