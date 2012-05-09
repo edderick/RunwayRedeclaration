@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -25,17 +26,17 @@ public class EditContactDialog extends JDialog {
 	private JTextField tfFirstName;
 	private JTextField tfLastName;
 	private JTextField tfEmail;
-	
+
 	private Contact contactCopy;
 	private JTable tblContactsCopy;
-	
+
 	public EditContactDialog(Contact contact, JTable tblContacts) {
 		setTitle("Edit Contact");
 		setBounds(100, 100, 360, 170);
 
 		this.contactCopy = contact;
 		this.tblContactsCopy = tblContacts;
-		
+
 		contentPanel = new JPanel();
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new MigLayout("", "[57.00][307.00,grow]", "[][][][]"));
@@ -53,7 +54,7 @@ public class EditContactDialog extends JDialog {
 		tfLastName = new JTextField();
 		contentPanel.add(tfLastName, "cell 1 1,growx");
 		tfLastName.setText(contact.getLastName());
-		
+
 		JLabel lblEmail = new JLabel("Email");
 		contentPanel.add(lblEmail, "cell 0 2,alignx trailing");
 
@@ -66,12 +67,19 @@ public class EditContactDialog extends JDialog {
 		btnOk.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent ae) {
-				contactCopy.setFirstName(tfFirstName.getText());
-				contactCopy.setLastName(tfLastName.getText());
-				contactCopy.setEmail(tfEmail.getText());
-				tblContactsCopy.updateUI();
-				((AddressBookTableModel)tblContactsCopy.getModel()).getAddressBook().saveToXML();
-				dispose();
+
+				if(tfEmail.getText().matches("^.*@.*$")){
+
+					contactCopy.setFirstName(tfFirstName.getText());
+					contactCopy.setLastName(tfLastName.getText());
+					contactCopy.setEmail(tfEmail.getText());
+					tblContactsCopy.updateUI();
+					((AddressBookTableModel)tblContactsCopy.getModel()).getAddressBook().saveToXML();
+					dispose();
+				}
+				else{
+					JOptionPane.showMessageDialog(null, "Invalid email address!", "", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 
