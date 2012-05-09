@@ -306,6 +306,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		RemoveObstacleListener rol = new RemoveObstacleListener(airport, airportObservers);
 		mntmRemoveObstacle.addActionListener(rol);
 		airportObservers.add(rol);
+		mntmRemoveObstacle.setMnemonic('m');
 		mnEdit.add(mntmRemoveObstacle);
 		mnEdit.add(mntmPositionObstacle);
 
@@ -390,7 +391,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 
 		JMenuItem mntmSendEmail = new JMenuItem("Email Calculations");
 		mntmSendEmail.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/Icons/MailIcon.png")));
-		mntmSendEmail.setMnemonic('s');
+		mntmSendEmail.setMnemonic('e');
 		ShowEmailDialogListener sedl = new ShowEmailDialogListener(addressBook, airport);
 		airportObservers.add(sedl);
 		mntmSendEmail.addActionListener(sedl);
@@ -403,11 +404,13 @@ public class MainFrame extends JFrame implements AirportObserver{
 		mnEmail.add(mntmAddressBook);
 		
 		JMenu mnPrint = new JMenu("Print");
+		mnPrint.setMnemonic('p');
 		menuBar.add(mnPrint);
 		
 		JMenuItem mntmPrintCalculations = new JMenuItem("Print Calculations");
 		mntmPrintCalculations.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/Icons/PrintIcon.png")));
 		mnPrint.add(mntmPrintCalculations);
+		mntmPrintCalculations.setMnemonic('p');
 		PrintCalculationsListener pcl = new PrintCalculationsListener(airport);
 		mntmPrintCalculations.addActionListener(pcl);
 		airportObservers.add(pcl);
