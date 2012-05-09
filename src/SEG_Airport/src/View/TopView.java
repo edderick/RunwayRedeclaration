@@ -394,7 +394,7 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 	public void drawKey(Graphics2D g2d){
 		g2d.setFont(new Font("key", 1, 15));
 		int textDistance = g2d.getFontMetrics().getHeight();
-		spaceForScale = 30;
+		spaceForScale = 30;		
 		int spaceFromLeftEdge = 10;
 		g2d.setColor(toraColor);
 		g2d.drawString("TORA", spaceFromLeftEdge, this.getHeight()- spaceForScale-textDistance);
@@ -414,6 +414,15 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 		g2d.drawString("RESA", (2*spaceFromLeftEdge)+g2d.getFontMetrics().stringWidth("TODA"), this.getHeight()- spaceForScale-(2*textDistance));
 		g2d.setColor(Color.BLACK);
 		g2d.drawString("ANGLE", (2*spaceFromLeftEdge)+g2d.getFontMetrics().stringWidth("TODA"), this.getHeight()- spaceForScale-(3*textDistance));
+		
+		
+
+		if(airport!=null && runway!=null){
+			Font f = new Font(null, Font.BOLD + Font.ITALIC, 20);
+			g2d.setFont(f);
+			g2d.drawString(leftTag, (1*spaceFromLeftEdge)+g2d.getFontMetrics().stringWidth(leftTag), this.getHeight() / 10);
+			g2d.drawString(rightTag, this.getWidth() - (10*spaceFromLeftEdge)+g2d.getFontMetrics().stringWidth(rightTag), this.getHeight() / 10);
+		}
 	}
 	
 	public void drawScale(Graphics2D g2d){

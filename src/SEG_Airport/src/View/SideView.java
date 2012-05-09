@@ -82,6 +82,7 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 	String threshold;
 	boolean obstacleLeft;
 	String leftTag;
+	String rightTag;
 	
 	int runwayStripWidthFromCentreLine;
 
@@ -264,6 +265,12 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 		g2d.setColor(Color.BLACK);
 		g2d.drawString("ANGLE", (2*spaceFromLeftEdge)+g2d.getFontMetrics().stringWidth("TODA"), this.getHeight()- spaceForScale-(3*textDistance));
 
+		if(airport!=null && runway!=null){
+			Font f = new Font(null, Font.BOLD + Font.ITALIC, 20);
+			g2d.setFont(f);
+			g2d.drawString(leftTag, (1*spaceFromLeftEdge)+g2d.getFontMetrics().stringWidth(leftTag), this.getHeight() / 10);
+			g2d.drawString(rightTag, this.getWidth() - (10*spaceFromLeftEdge)+g2d.getFontMetrics().stringWidth(rightTag), this.getHeight() / 10);
+		}
 	}
 	
 	public void drawScale(Graphics2D g2d){
@@ -405,6 +412,7 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 		this.RESA = (int) airport.getCurrentPhysicalRunway().getRESA();
 		this.stopway = (int) airport.getCurrentPhysicalRunway().getStopway();
 		this.leftTag= airport.getCurrentPhysicalRunway().getRunway(0).getName();
+		this.rightTag = airport.getCurrentPhysicalRunway().getRunway(1).getName();
 		this.runwayStripWidthFromCentreLine = (int) airport.getCurrentPhysicalRunway().getRunwayStripWidth();
 				
 		int pWidth = this.getWidth();
