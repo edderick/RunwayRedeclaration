@@ -12,6 +12,7 @@ import Model.Print;
 public class PrintCalculationsListener implements ActionListener, AirportObserver{
 
 	Airport airport;
+	StringBuilder body;
 	Print print = new Print();
 	
 	public PrintCalculationsListener(Airport airport){
@@ -35,7 +36,13 @@ public class PrintCalculationsListener implements ActionListener, AirportObserve
 			JOptionPane.showMessageDialog(null, "No Runway Selected", "", JOptionPane.ERROR_MESSAGE);
 		}
 		else {
-			print.print(airport.getCurrentPhysicalRunway().toCalculation(airport.getCurrentRunway().getName()));
+			body = new StringBuilder();
+			body.append(airport.getCurrentPhysicalRunway().toDetails(airport.getCurrentRunway().getName()));
+			body.append(airport.getCurrentPhysicalRunway().getRunway(0).getName());
+			body.append(airport.getCurrentPhysicalRunway().toCalculation(airport.getCurrentPhysicalRunway().getRunway(0).getName()));
+			body.append(airport.getCurrentPhysicalRunway().getRunway(1).getName());
+			body.append(airport.getCurrentPhysicalRunway().toCalculation(airport.getCurrentPhysicalRunway().getRunway(1).getName()));
+			print.print(body.toString());
 		}
 	}
 }

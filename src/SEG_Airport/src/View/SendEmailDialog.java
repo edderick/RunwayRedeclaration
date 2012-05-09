@@ -103,7 +103,8 @@ public class SendEmailDialog extends JDialog {
 
 		List<Contact> contacts; 
 		Airport airport;
-		String subject, body;
+		String subject;
+		StringBuilder body;
 
 		public sendButtonListener(List<Contact> contacts, Airport airport){
 			this.contacts = contacts;
@@ -113,9 +114,15 @@ public class SendEmailDialog extends JDialog {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 
+			body = new StringBuilder();
+			
 			if(airport.getCurrentRunway() != null && airport.getCurrentPhysicalRunway() != null){
 				subject = "Calculations for " + airport.getCurrentRunway().getName() +" at " +airport.getName();
-				body = airport.getCurrentPhysicalRunway().toCalculation(airport.getCurrentRunway().getName());
+				body.append(airport.getCurrentPhysicalRunway().toDetails(airport.getCurrentRunway().getName()));
+				body.append(airport.getCurrentPhysicalRunway().getRunway(0).getName());
+				body.append(airport.getCurrentPhysicalRunway().toCalculation(airport.getCurrentPhysicalRunway().getRunway(0).getName()));
+				body.append(airport.getCurrentPhysicalRunway().getRunway(1).getName());
+				body.append(airport.getCurrentPhysicalRunway().toCalculation(airport.getCurrentPhysicalRunway().getRunway(1).getName()));
 			}
 			else {
 				JOptionPane.showMessageDialog(null, "No current obstacle!");
@@ -131,7 +138,7 @@ public class SendEmailDialog extends JDialog {
 						Email email = new Email();
 						email.addRecipients(contacts);
 						email.setSubject(subject);
-						email.setBody(body);
+						email.setBody(body.toString());
 						try {
 							email.send();
 						} catch (AddressException e) {
@@ -140,7 +147,7 @@ public class SendEmailDialog extends JDialog {
 							JOptionPane.showMessageDialog(null, "There has been an error sending the email, please check the settings and try again.", "", JOptionPane.ERROR_MESSAGE);
 						}
 					}
-					JOptionPane.showMessageDialog(null, "Emails have been sent", "", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Emails have been sent", "", JOptionPane.INFORMATION_MESSAGE);
 				}
 			}.start();
 			

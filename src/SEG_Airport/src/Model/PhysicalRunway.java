@@ -525,7 +525,7 @@ public class PhysicalRunway {
 	}
 
 	/**
-	 * Produces the calculations as a human readable text in details
+	 * Produces the details of the runway at the time of calculation
 	 * 
 	 * @param runwayName
 	 *            name of runway to perform calculation for
