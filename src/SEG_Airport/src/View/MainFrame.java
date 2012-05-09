@@ -177,6 +177,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		mnAirport.add(mntmNewMenuItem_1);
 
 		JMenu mnNewMenu = new JMenu("Open");
+		mnNewMenu.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/OpenIcon.png")));
 		mnNewMenu.setMnemonic('o');
 		mnFile.add(mnNewMenu);
 
@@ -197,6 +198,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		mnNewMenu.add(mntmObstacle);
 
 		JMenu mnOpenRecent = new JMenu("Open Recent");
+		mnOpenRecent.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/OpenIcon.png")));
 		mnOpenRecent.setMnemonic('r');
 		mnFile.add(mnOpenRecent);
 
@@ -248,7 +250,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 
 		ExitListener exitListener = new ExitListener(airport);
 		JMenuItem mntmExit = new JMenuItem("Exit");
-//		mntmExit.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/ExitIcon.png")));
+		mntmExit.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/ExitIcon.png")));
 		mntmExit.setMnemonic('x');
 		mntmExit.addActionListener(exitListener);
 		mnFile.add(mntmExit);
@@ -300,6 +302,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		airportObservers.add(opl);
 
 		JMenuItem mntmRemoveObstacle = new JMenuItem("Remove Obstacle");
+		mntmRemoveObstacle.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/RemoveObstacleIcon.png")));
 		RemoveObstacleListener rol = new RemoveObstacleListener(airport, airportObservers);
 		mntmRemoveObstacle.addActionListener(rol);
 		airportObservers.add(rol);
@@ -403,6 +406,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		menuBar.add(mnPrint);
 		
 		JMenuItem mntmPrintCalculations = new JMenuItem("Print Calculations");
+		mntmPrintCalculations.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/PrintIcon.png")));
 		mnPrint.add(mntmPrintCalculations);
 		PrintCalculationsListener pcl = new PrintCalculationsListener(airport);
 		mntmPrintCalculations.addActionListener(pcl);
@@ -419,6 +423,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		mntmShowHelp.addActionListener(new ShowHelpListener());
 
 		JMenuItem mntmAbout = new JMenuItem("About ");
+		mntmAbout.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("data/AboutIcon.png")));
 		mntmAbout.setMnemonic('a');
 		mnHelp.add(mntmAbout);
 		mntmAbout.addActionListener(new ShowAboutListener());
