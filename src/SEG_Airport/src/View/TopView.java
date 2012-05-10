@@ -606,6 +606,7 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 
 	public void setZoom(double ratio){
 		this.ratio = ratio;
+		setOffset(0, 0);
 	}
 
 	public void setOffset(int x, int y){
