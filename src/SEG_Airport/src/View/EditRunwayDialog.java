@@ -53,7 +53,7 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 
 		this.airportObservers = airportObservers;
 
-		setResizable(false);
+		setResizable(true);
 		setTitle("Edit Runway");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 490, 315);
