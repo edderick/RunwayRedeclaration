@@ -150,9 +150,10 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 			setValues();
 			Graphics2D g2d = (Graphics2D)g;
 			runwayCreation(g2d);
-			drawDirection(g2d);
+			
 			obstacleCreation(g2d);
 			declaredRunwaysCreation(g2d);
+			drawDirection(g2d);
 			g.translate(-xOffset, -yOffset);
 			paintComponents(g2d);
 			drawKey(g2d);
@@ -166,12 +167,12 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 			for(int i=5; i<1000; i++){
 				Font f = new Font("tag", 1, i);
 				g2d.setFont(f);
-				if(g2d.getFontMetrics().stringWidth("Runway Take-off/Landing Direction")>=meterToPixel(runwayLength/2)){
+				if(g2d.getFontMetrics().stringWidth("Runway Take-off/Landing Direction")>=meterToPixel(7*runwayLength/16)){
 					f = new Font("tag", 1, i-1);break;
 				}
 			}			
 		g2d.setColor(Color.BLACK);
-		g2d.drawString("Runway Take-off/Landing Direction", xRunway+meterToPixel(runwayLength/4),  yRunway+-10-meterToPixel(runwayStripWidthFromCentreLine*2));
+//		g2d.drawString("Runway Take-off/Landing Direction", xRunway+meterToPixel(runwayLength/4),  yRunway+-10-meterToPixel(runwayStripWidthFromCentreLine*2));
 		
 		g2d.setStroke(new BasicStroke(3));
 		g2d.drawLine(xRunway+meterToPixel(runwayLength/4), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2), xRunway+meterToPixel(3*runwayLength/4), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2));
@@ -179,9 +180,11 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 		if(airport.getCurrentRunway().getName().equals(leftTag)){
 			g2d.drawLine(xRunway+meterToPixel(3*runwayLength/4), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2), xRunway+meterToPixel(11*runwayLength/16), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2)+meterToPixel(runwayStripWidthFromCentreLine/4));
 			g2d.drawLine(xRunway+meterToPixel(3*runwayLength/4), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2), xRunway+meterToPixel(11*runwayLength/16), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2)-meterToPixel(runwayStripWidthFromCentreLine/4));
+			g2d.drawString("Runway Take-off/Landing Direction", xRunway+meterToPixel(runwayLength/4),  yRunway+-10-meterToPixel(runwayStripWidthFromCentreLine*2));
 		}else{
 			g2d.drawLine(xRunway+meterToPixel(runwayLength/4), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2), xRunway+meterToPixel(5*runwayLength/16), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2)+meterToPixel(runwayStripWidthFromCentreLine/4));
 			g2d.drawLine(xRunway+meterToPixel(runwayLength/4),yRunway-meterToPixel(runwayStripWidthFromCentreLine*2), xRunway+meterToPixel(5*runwayLength/16), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2)-meterToPixel(runwayStripWidthFromCentreLine/4));
+			g2d.drawString("Runway Take-off/Landing Direction", xRunway+meterToPixel(5*runwayLength/16),  yRunway+-10-meterToPixel(runwayStripWidthFromCentreLine*2));
 		}
 		}
 	}
