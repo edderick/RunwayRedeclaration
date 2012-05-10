@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Airport>
+<Airport_Name>Southampton - SOU EGHI</Airport_Name>
+<PhysicalRunway>
+<Name>02/20</Name>
+<RESA>240.0</RESA>
+<Stopway>60.0</Stopway>
+<Blast_Allowance>300.0</Blast_Allowance>
+<Runway_Strip_Width>150.0</Runway_Strip_Width>
+<Clear_And_Graded_Width>75.0</Clear_And_Graded_Width>
+<Distance_Away_From_Threshold>0.0</Distance_Away_From_Threshold>
+<Distance_Away_From_Centerline>0.0</Distance_Away_From_Centerline>
+<Angle_Of_Slope>50.0</Angle_Of_Slope>
+<Runway>
+<RunwayName>02</RunwayName>
+<TORA>1723.0</TORA>
+<ASDA>1723.0</ASDA>
+<TODA>1831.0</TODA>
+<LDA>1650.0</LDA>
+<DisplacedThreshold>73.0</DisplacedThreshold>
+</Runway>
+<Runway>
+<RunwayName>20</RunwayName>
+<TORA>1650.0</TORA>
+<ASDA>1650.0</ASDA>
+<TODA>1805.0</TODA>
+<LDA>1605.0</LDA>
+<DisplacedThreshold>44.0</DisplacedThreshold>
+</Runway>
+</PhysicalRunway>
+</Airport>
