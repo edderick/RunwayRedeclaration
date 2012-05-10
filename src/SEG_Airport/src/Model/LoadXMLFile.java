@@ -283,10 +283,21 @@ public class LoadXMLFile {
 				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 
 					Element eElement = (Element) nNode;
+					String firstName = "";
+					String lastName = "";
 
-					String firstName = getTagValue("First_Name", eElement);
-					String lastName = getTagValue("Last_Name", eElement);
+					try{
+						firstName = getTagValue("First_Name", eElement);
+					}catch(Exception e){
+						
+					}
+					try{
+						lastName = getTagValue("Last_Name", eElement);
+					}catch(Exception e){
+						
+					}
 					String email = getTagValue("Email_Address", eElement);
+					
 				
 					Contact contact = new Contact(firstName, lastName, email);
 					contacts.add(contact);
