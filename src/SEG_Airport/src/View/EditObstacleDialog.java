@@ -161,6 +161,7 @@ public class EditObstacleDialog extends JDialog {
 			obstacle.setName(tfName.getText());
 			
 			obstacle.setModified();
+			airport.getCurrentPhysicalRunway().setObstacle(obstacle);
 			
 			notifyAirportObservers();
 			dispose();

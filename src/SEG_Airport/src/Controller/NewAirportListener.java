@@ -21,12 +21,9 @@ public class NewAirportListener implements ActionListener, AirportObserver{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		Airport old = airport;
-		airport = new Airport("");
 		System.out.println("Creating new Airport");
 		@SuppressWarnings("unused")
-		EditAirportDialog ead = new EditAirportDialog(airport, old, airportObservers);
-		notifyAirportObservers();
+		EditAirportDialog ead = new EditAirportDialog(new Airport(""), airport, airportObservers);
 	}
 
 	@Override
