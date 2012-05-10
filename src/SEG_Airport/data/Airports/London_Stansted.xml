@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Airport>
+<Airport_Name>London Stansted - STN EGSS</Airport_Name>
+<PhysicalRunway>
+<Name>05/23</Name>
+<RESA>240.0</RESA>
+<Stopway>60.0</Stopway>
+<Blast_Allowance>300.0</Blast_Allowance>
+<Runway_Strip_Width>150.0</Runway_Strip_Width>
+<Clear_And_Graded_Width>75.0</Clear_And_Graded_Width>
+<Distance_Away_From_Threshold>0.0</Distance_Away_From_Threshold>
+<Distance_Away_From_Centerline>0.0</Distance_Away_From_Centerline>
+<Angle_Of_Slope>50.0</Angle_Of_Slope>
+<Runway>
+<RunwayName>05</RunwayName>
+<TORA>3048.0</TORA>
+<ASDA>3048.0</ASDA>
+<TODA>3338.0</TODA>
+<LDA>2750.0</LDA>
+<DisplacedThreshold>0.0</DisplacedThreshold>
+</Runway>
+<Runway>
+<RunwayName>23</RunwayName>
+<TORA>3048.0</TORA>
+<ASDA>3048.0</ASDA>
+<TODA>3316.0</TODA>
+<LDA>3048.0</LDA>
+<DisplacedThreshold>0.0</DisplacedThreshold>
+</Runway>
+</PhysicalRunway>
+</Airport>
