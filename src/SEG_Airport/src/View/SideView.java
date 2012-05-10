@@ -462,19 +462,17 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 		}
 		
 		if(leftTag.equals(airport.getCurrentRunway().getName())){
-			if(leftDT>0){
-				DTStart=0;
-				LDAStart=DTStart+meterToPixel(DT);
-			}
+			DT=leftDT;
+			DTStart=0;
+			LDAStart=meterToPixel(DT);
 		}else{
-			LDAStart = 0;
-			if(rightDT>0 && obstacle==null){
-				
-				DTStart = meterToPixel(LDA);
+			if(obstacle==null){
+				DT=rightDT;
 			}else{
 				DT=0;
 			}
-
+			LDAStart=0;
+			DTStart=meterToPixel(LDA);
 		}
 		
 		

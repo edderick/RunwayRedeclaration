@@ -576,14 +576,18 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 				
 			}
 			
-			if(rightDT>0){
-				DTStart = runwayWidth-meterToPixel(DT);
-				LDAStart = 0;
-			}
-			
-			if(leftDT>0&&leftTag.equals(airport.getCurrentRunway().getName())){
-				DTStart = 0;
-				LDAStart = meterToPixel(DT);
+			if(leftTag.equals(airport.getCurrentRunway().getName())){
+				DT=leftDT;
+				DTStart=0;
+				LDAStart=meterToPixel(DT);
+			}else{
+				if(obstacle==null){
+					DT=rightDT;
+				}else{
+					DT=0;
+				}
+				LDAStart=0;
+				DTStart=meterToPixel(LDA);
 			}
 			
 				
