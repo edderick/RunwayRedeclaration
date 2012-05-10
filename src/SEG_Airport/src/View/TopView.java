@@ -576,14 +576,16 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 				
 			}
 			
-			if(leftDT>0){
-				DTStart = 0;
-				LDAStart = meterToPixel(DT);
-			}
 			if(rightDT>0){
 				DTStart = runwayWidth-meterToPixel(DT);
 				LDAStart = 0;
 			}
+			
+			if(leftDT>0&&leftTag.equals(airport.getCurrentRunway().getName())){
+				DTStart = 0;
+				LDAStart = meterToPixel(DT);
+			}
+			
 				
 			
 			
@@ -606,7 +608,6 @@ public class TopView extends JPanel implements AirportObserver, ViewPanel{
 
 	public void setZoom(double ratio){
 		this.ratio = ratio;
-		setOffset(0, 0);
 	}
 
 	public void setOffset(int x, int y){

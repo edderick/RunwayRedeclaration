@@ -120,7 +120,6 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 
 	public void setZoom(double ratio){
 		this.ratio = ratio;
-		setOffset(0, 0);
 	}
 	
 	public int meterToPixel(int x){
@@ -324,7 +323,7 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 			g2d.drawLine(meterToPixel(xObstacle-rightDT)+xRunway, yRunway-meterToPixel2(obstacleHeight), meterToPixel(xObstacle+obstacleLength-rightDT)+xRunway, yRunway);
 			g2d.drawLine(meterToPixel(xObstacle+obstacleLength-rightDT)+xRunway, yRunway-meterToPixel2(obstacleHeight), meterToPixel(xObstacle-rightDT)+xRunway, yRunway);
 			g2d.drawLine(meterToPixel(xObstacle-rightDT)+xRunway, yRunway-meterToPixel2(obstacleHeight), xRunway+meterToPixel(xObstacle-rightDT)-meterToPixel((int) (obstacle.getHeight()*airport.getCurrentPhysicalRunway().getAngleOfSlope())), yRunway);
-			g2d.drawString("1:"+ Integer.toString((int)airport.getCurrentPhysicalRunway().getAngleOfSlope()),g2d.getFontMetrics().stringWidth("1:"+ Integer.toString((int)airport.getCurrentPhysicalRunway().getAngleOfSlope()))+meterToPixel(xObstacle-rightDT)+xRunway-(meterToPixel((int) (obstacle.getHeight()*airport.getCurrentPhysicalRunway().getAngleOfSlope()))/2), yRunway-meterToPixel2(obstacleHeight/2));
+			g2d.drawString("1:"+ Integer.toString((int)airport.getCurrentPhysicalRunway().getAngleOfSlope()), -g2d.getFontMetrics().stringWidth("1:"+ Integer.toString((int)airport.getCurrentPhysicalRunway().getAngleOfSlope()))+meterToPixel(xObstacle-rightDT)+xRunway-(meterToPixel((int) (obstacle.getHeight()*airport.getCurrentPhysicalRunway().getAngleOfSlope()))/2), yRunway-meterToPixel2(obstacleHeight/2));
 			g2d.drawString(Integer.toString(obstacleHeight)+"m", meterToPixel(xObstacle+obstacleLength-rightDT)+xRunway+10, yRunway-meterToPixel2(obstacleHeight/2));
 			g2d.setStroke(new BasicStroke(2));
 			g2d.drawLine(meterToPixel(xObstacle+obstacleLength-rightDT)+xRunway+5, yRunway-meterToPixel2(obstacleHeight), meterToPixel(xObstacle+obstacleLength-rightDT)+xRunway+5, yRunway );
@@ -462,14 +461,24 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 			rightDT =(int) airport.getCurrentPhysicalRunway().getRunway(1).getDisplacedThreshold(0);
 		}
 		
-		if(leftDT>0){
-			DTStart=0;
-			LDAStart=DTStart+meterToPixel(DT);
-		}
-		if(rightDT>0){
-			DTStart = runwayLength-meterToPixel(DT);
+		if(leftTag.equals(airport.getCurrentRunway().getName())){
+			if(leftDT>0){
+				DTStart=0;
+				LDAStart=DTStart+meterToPixel(DT);
+			}
+		}else{
 			LDAStart = 0;
+			if(rightDT>0 && obstacle==null){
+				
+				DTStart = meterToPixel(LDA);
+			}else{
+				DT=0;
+			}
+
 		}
+		
+		
+		
 	
 		this.TORAStart=0;
 		this.TODAStart=(int) (TORAStart+meterToPixel(TORA-TODA));
