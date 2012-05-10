@@ -41,7 +41,7 @@ public class EditAirportDialog extends JDialog {
 			physicalRunwayNames.add(p.getId());
 		}
 
-		setResizable(false);
+		setResizable(true);
 		setTitle("Edit airport");
 		setBounds(100, 100, 352, 300);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
