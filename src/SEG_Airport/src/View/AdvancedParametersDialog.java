@@ -7,6 +7,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import net.miginfocom.swing.MigLayout;
@@ -171,6 +172,12 @@ public class AdvancedParametersDialog extends JDialog {
 		buttonsPanel.add(btnApply, "cell 3 1");
 		btnApply.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				if (Double.parseDouble(tfClearAndGradedWidth.getText()) > Double.parseDouble(tfRunwayStripWidth.getText())){
+					JOptionPane.showMessageDialog(null, "The Clear and Graded Area width may not be less than that of the Runway Strip width!", "", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				
 				physicalRunway.setAngleOfSlope(Double.parseDouble(tfAngleOfSlope.getText()));
 				physicalRunway.setBlastAllowance(Double.parseDouble(tfBlastAllowance.getText()));
 				physicalRunway.setClearedAndGradedWidth(Double.parseDouble(tfClearAndGradedWidth.getText()));

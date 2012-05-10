@@ -12,6 +12,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import Model.Airport;
@@ -83,14 +84,14 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 		lblLeftTODA.setLabelFor(tfLeftTODA);
 		leftFeildsPanel.add(tfLeftTODA, "flowx,cell 1 1,growx");
 		tfLeftTODA.setColumns(10);
-		
-				JLabel lblLeftASDA = new JLabel("ASDA");
-				lblLeftASDA.setToolTipText("Accelerate Stop Distance Available");
-				leftFeildsPanel.add(lblLeftASDA, "cell 0 2,alignx trailing,aligny top");
-		
-				tfLeftASDA = new JTextField();
-				leftFeildsPanel.add(tfLeftASDA, "flowx,cell 1 2,growx");
-				tfLeftASDA.setColumns(10);
+
+		JLabel lblLeftASDA = new JLabel("ASDA");
+		lblLeftASDA.setToolTipText("Accelerate Stop Distance Available");
+		leftFeildsPanel.add(lblLeftASDA, "cell 0 2,alignx trailing,aligny top");
+
+		tfLeftASDA = new JTextField();
+		leftFeildsPanel.add(tfLeftASDA, "flowx,cell 1 2,growx");
+		tfLeftASDA.setColumns(10);
 
 		JLabel lbLeftLDA = new JLabel("LDA");
 		lbLeftLDA.setToolTipText("Landing Distance Available");
@@ -120,9 +121,9 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 
 		JLabel lblm5 = new JLabel("m");
 		leftFeildsPanel.add(lblm5, "cell 1 4");
-		
-				JLabel lblm1 = new JLabel("m");
-				leftFeildsPanel.add(lblm1, "cell 1 2");
+
+		JLabel lblm1 = new JLabel("m");
+		leftFeildsPanel.add(lblm1, "cell 1 2");
 
 		JPanel leftNamePanel = new JPanel();
 		contentPane.add(leftNamePanel, "cell 0 0,grow");
@@ -157,14 +158,14 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 		tfRightTODA = new JTextField();
 		tfRightTODA.setColumns(10);
 		rightFeildsPanel.add(tfRightTODA, "flowx,cell 1 1,growx");
-		
-				JLabel lblRightASDA = new JLabel("ASDA");
-				lblRightASDA.setToolTipText("Accelerate Stop Distance Available");
-				rightFeildsPanel.add(lblRightASDA, "cell 0 2,alignx trailing");
-		
-				tfRightASDA = new JTextField();
-				tfRightASDA.setColumns(10);
-				rightFeildsPanel.add(tfRightASDA, "flowx,cell 1 2,growx");
+
+		JLabel lblRightASDA = new JLabel("ASDA");
+		lblRightASDA.setToolTipText("Accelerate Stop Distance Available");
+		rightFeildsPanel.add(lblRightASDA, "cell 0 2,alignx trailing");
+
+		tfRightASDA = new JTextField();
+		tfRightASDA.setColumns(10);
+		rightFeildsPanel.add(tfRightASDA, "flowx,cell 1 2,growx");
 
 		JLabel lblRightLDA = new JLabel("LDA");
 		lblRightLDA.setToolTipText("Landing Distance Available");
@@ -193,9 +194,9 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 
 		JLabel labelm10 = new JLabel("m");
 		rightFeildsPanel.add(labelm10, "cell 1 4");
-		
-				JLabel label_m6 = new JLabel("m");
-				rightFeildsPanel.add(label_m6, "cell 1 2");
+
+		JLabel label_m6 = new JLabel("m");
+		rightFeildsPanel.add(label_m6, "cell 1 2");
 
 		JPanel rightNamePanel = new JPanel();
 		contentPane.add(rightNamePanel, "cell 2 0,grow");
@@ -237,18 +238,18 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 			Runway rightRunway = airport.getPhysicalRunways().get(index).getRunway(1);
 
 			tfLeftName.setText(leftRunway.getName());
-			tfLeftASDA.setText(Double.toString(leftRunway.getASDA(0)));
-			tfLeftTORA.setText(Double.toString(leftRunway.getTORA(0)));
-			tfLeftTODA.setText(Double.toString(leftRunway.getTODA(0)));
-			tfLeftLDA.setText(Double.toString(leftRunway.getLDA(0)));
-			tfLeftDisplacementThreshold.setText(Double.toString(leftRunway.getDisplacedThreshold(0)));
+			tfLeftASDA.setText(Double.toString(leftRunway.getASDA(Runway.DEFAULT)));
+			tfLeftTORA.setText(Double.toString(leftRunway.getTORA(Runway.DEFAULT)));
+			tfLeftTODA.setText(Double.toString(leftRunway.getTODA(Runway.DEFAULT)));
+			tfLeftLDA.setText(Double.toString(leftRunway.getLDA(Runway.DEFAULT)));
+			tfLeftDisplacementThreshold.setText(Double.toString(leftRunway.getDisplacedThreshold(Runway.DEFAULT)));
 
 			tfRightName.setText(rightRunway.getName());
-			tfRightASDA.setText(Double.toString(rightRunway.getASDA(0)));
-			tfRightTORA.setText(Double.toString(rightRunway.getTORA(0)));
-			tfRightTODA.setText(Double.toString(rightRunway.getTODA(0)));
-			tfRightLDA.setText(Double.toString(rightRunway.getLDA(0)));
-			tfRightDisplacedThreshold.setText(Double.toString(rightRunway.getDisplacedThreshold(0)));
+			tfRightASDA.setText(Double.toString(rightRunway.getASDA(Runway.DEFAULT)));
+			tfRightTORA.setText(Double.toString(rightRunway.getTORA(Runway.DEFAULT)));
+			tfRightTODA.setText(Double.toString(rightRunway.getTODA(Runway.DEFAULT)));
+			tfRightLDA.setText(Double.toString(rightRunway.getLDA(Runway.DEFAULT)));
+			tfRightDisplacedThreshold.setText(Double.toString(rightRunway.getDisplacedThreshold(Runway.DEFAULT)));
 		}		
 
 		setAlwaysOnTop(true);
@@ -267,6 +268,38 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 
 		public void actionPerformed(ActionEvent e) {
 
+			
+			
+			try{
+			
+			double leftTORA = DoubleParser.parse(tfLeftTORA.getText());
+			double leftTODA = DoubleParser.parse(tfLeftTODA.getText());
+			double leftASDA = DoubleParser.parse(tfLeftASDA.getText());
+			
+			double rightTORA = DoubleParser.parse(tfRightTORA.getText());
+			double rightTODA = DoubleParser.parse(tfRightTODA.getText());
+			double rightASDA = DoubleParser.parse(tfRightASDA.getText());
+			
+			if(tfLeftName.getText().equals("") || tfRightName.getText().equals("")){
+				JOptionPane.showMessageDialog(null, "Both runways must be named", "", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			
+			if(leftTODA < leftTORA || rightTODA < rightTORA){
+				JOptionPane.showMessageDialog(null, "TODA cannot be smaller than TORA", "", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			
+			if(leftASDA < leftTORA || rightASDA < rightTORA){
+				JOptionPane.showMessageDialog(null, "ASDA cannot be smaller than TORA", "", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			
+			if(leftASDA < leftTODA || rightASDA < rightTODA){
+				JOptionPane.showMessageDialog(null, "ASDA cannot be smaller than TODA", "", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+				
 			if(airport.getPhysicalRunways().size() > 0 & !newRunway){ // get the physical runway and change the values
 				int index = physicalRunwayJList.getSelectedIndex();
 				if(index == -1) index = airport.getPhysicalRunways().indexOf(airport.getCurrentPhysicalRunway());
@@ -276,18 +309,18 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 				Runway rightRunway = airport.getPhysicalRunways().get(index).getRunway(1);
 
 				leftRunway.setName(tfLeftName.getText());
-				leftRunway.setASDA(0, DoubleParser.parse(tfLeftASDA.getText()));
-				leftRunway.setTORA(0, DoubleParser.parse(tfLeftTORA.getText()));
-				leftRunway.setTODA(0, DoubleParser.parse(tfLeftTODA.getText()));
-				leftRunway.setLDA(0, DoubleParser.parse(tfLeftLDA.getText()));
-				leftRunway.setDisplacedThreshold(0, DoubleParser.parse(tfLeftDisplacementThreshold.getText()));
+				leftRunway.setASDA(Runway.DEFAULT, DoubleParser.parse(tfLeftASDA.getText()));
+				leftRunway.setTORA(Runway.DEFAULT, DoubleParser.parse(tfLeftTORA.getText()));
+				leftRunway.setTODA(Runway.DEFAULT, DoubleParser.parse(tfLeftTODA.getText()));
+				leftRunway.setLDA(Runway.DEFAULT, DoubleParser.parse(tfLeftLDA.getText()));
+				leftRunway.setDisplacedThreshold(Runway.DEFAULT, DoubleParser.parse(tfLeftDisplacementThreshold.getText()));
 
 				rightRunway.setName(tfRightName.getText());
-				rightRunway.setASDA(0, DoubleParser.parse(tfRightASDA.getText()));
-				rightRunway.setTORA(0, DoubleParser.parse(tfRightTORA.getText()));
-				rightRunway.setTODA(0, DoubleParser.parse(tfRightTODA.getText()));
-				rightRunway.setLDA(0, DoubleParser.parse(tfRightLDA.getText()));
-				rightRunway.setDisplacedThreshold(0, DoubleParser.parse(tfRightDisplacedThreshold.getText()));
+				rightRunway.setASDA(Runway.DEFAULT, DoubleParser.parse(tfRightASDA.getText()));
+				rightRunway.setTORA(Runway.DEFAULT, DoubleParser.parse(tfRightTORA.getText()));
+				rightRunway.setTODA(Runway.DEFAULT, DoubleParser.parse(tfRightTODA.getText()));
+				rightRunway.setLDA(Runway.DEFAULT, DoubleParser.parse(tfRightLDA.getText()));
+				rightRunway.setDisplacedThreshold(Runway.DEFAULT, DoubleParser.parse(tfRightDisplacedThreshold.getText()));
 
 				airport.getPhysicalRunways().get(index).calculateParameters();
 
@@ -298,17 +331,17 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 				airport.addPhysicalRunway(
 						new PhysicalRunway(tfLeftName.getText() + "/" +  tfRightName.getText(), 
 								new Runway(tfLeftName.getText(), 
-										   DoubleParser.parse(tfLeftTORA.getText()), 
-									       DoubleParser.parse(tfLeftASDA.getText()), 
-										   DoubleParser.parse(tfLeftTODA.getText()), 
-										   DoubleParser.parse(tfLeftLDA.getText()), 
-										   DoubleParser.parse(tfLeftDisplacementThreshold.getText())),	
-								new Runway(tfRightName.getText(), 
-								    	   DoubleParser.parse(tfRightTORA.getText()), 
-										   DoubleParser.parse(tfRightASDA.getText()), 
-										   DoubleParser.parse(tfRightTODA.getText()), 
-										   DoubleParser.parse(tfRightLDA.getText()), 
-										   DoubleParser.parse(tfRightDisplacedThreshold.getText())))); 
+										DoubleParser.parse(tfLeftTORA.getText()), 
+										DoubleParser.parse(tfLeftASDA.getText()), 
+										DoubleParser.parse(tfLeftTODA.getText()), 
+										DoubleParser.parse(tfLeftLDA.getText()), 
+										DoubleParser.parse(tfLeftDisplacementThreshold.getText())),	
+										new Runway(tfRightName.getText(), 
+												DoubleParser.parse(tfRightTORA.getText()), 
+												DoubleParser.parse(tfRightASDA.getText()), 
+												DoubleParser.parse(tfRightTODA.getText()), 
+												DoubleParser.parse(tfRightLDA.getText()), 
+												DoubleParser.parse(tfRightDisplacedThreshold.getText())))); 
 				if(airport.getPhysicalRunways().size() == 1){
 					airport.setCurrentPhysicalRunway(airport.getPhysicalRunways().get(0));
 					airport.setCurrentRunway(airport.getCurrentPhysicalRunway().getRunway(0));
@@ -329,9 +362,14 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 			physicalRunwayJList.setSelectedIndex(0);
 
 			airport.setModified();
-			
+
 			notifyAirportObservers();
 			dispose();
+			
+			}catch(NumberFormatException nfe){
+				JOptionPane.showMessageDialog(null, "One of the parameters contains an invalid number, please check you inputs and try again.", "", JOptionPane.ERROR_MESSAGE);
+			}
+			
 		}
 
 
@@ -349,11 +387,8 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 
 
 class DoubleParser{
-	static double parse(String s){
-		double d = 0;
-		try{
-			d = Double.parseDouble(s);
-		} catch (NumberFormatException e) {}
-		return d;
+	static double parse(String s) throws NumberFormatException{
+		if(s.equals("")) return 0.0;
+		return Double.parseDouble(s);
 	}
 }

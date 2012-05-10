@@ -547,6 +547,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 						{"Blast Allowance", ""},
 						{"Angle of Slope", ""},
 						{"Strip Width", ""},
+						{"Clear & Graded Width", ""},
 				},
 				new String[] {
 						"Property", "Value"
@@ -754,6 +755,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 			advancedParametersTab.setValueAt(physicalRunway.getBlastAllowance(), 2, 1);
 			advancedParametersTab.setValueAt(physicalRunway.getAngleOfSlope(), 3, 1);
 			advancedParametersTab.setValueAt(physicalRunway.getRunwayStripWidth(), 4, 1);
+			advancedParametersTab.setValueAt(physicalRunway.getClearedAndGradedWidth(), 5, 1);
 		} else {
 			TableModel advancedParametersTab = AdvancedParametersTable.getModel();
 			advancedParametersTab.setValueAt("", 0, 1);
@@ -761,6 +763,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 			advancedParametersTab.setValueAt("", 2, 1);
 			advancedParametersTab.setValueAt("", 3, 1);
 			advancedParametersTab.setValueAt("", 4, 1);
+			advancedParametersTab.setValueAt("", 5, 1);
 		}
 	}
 
