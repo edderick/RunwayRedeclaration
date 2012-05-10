@@ -442,6 +442,15 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 			}
 			this.xObstacle=runwayLength-distance;
 			obstacleHeight = (int) obstacle.getHeight();
+			if(obstacleHeight<5){
+				ratio2=0.1;
+			}else{
+				if(obstacleHeight>15){
+					ratio2=0.25;
+				}else{
+					ratio2= ((obstacleHeight-5)*0.015)+0.1;
+				}
+			}
 			meterToPixel2 = (ratio2*this.getHeight())/obstacleHeight;
 			this.obstacleLength =(int) obstacle.getLength();
 			
