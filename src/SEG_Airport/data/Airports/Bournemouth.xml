@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Airport>
+<Airport_Name>Bournemouth - BOH EGHH</Airport_Name>
+<PhysicalRunway>
+<Name>08/26</Name>
+<RESA>240.0</RESA>
+<Stopway>60.0</Stopway>
+<Blast_Allowance>300.0</Blast_Allowance>
+<Runway_Strip_Width>150.0</Runway_Strip_Width>
+<Clear_And_Graded_Width>75.0</Clear_And_Graded_Width>
+<Distance_Away_From_Threshold>0.0</Distance_Away_From_Threshold>
+<Distance_Away_From_Centerline>0.0</Distance_Away_From_Centerline>
+<Angle_Of_Slope>50.0</Angle_Of_Slope>
+<Runway>
+<RunwayName>08</RunwayName>
+<TORA>2271.0</TORA>
+<ASDA>2271.0</ASDA>
+<TODA>2576.0</TODA>
+<LDA>1838.0</LDA>
+<DisplacedThreshold>422.0</DisplacedThreshold>
+</Runway>
+<Runway>
+<RunwayName>26</RunwayName>
+<TORA>2026.0</TORA>
+<ASDA>2086.0</ASDA>
+<TODA>2086.0</TODA>
+<LDA>1970.0</LDA>
+<DisplacedThreshold>0.0</DisplacedThreshold>
+</Runway>
+</PhysicalRunway>
+</Airport>
