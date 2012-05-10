@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ItemListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -662,14 +663,22 @@ public class MainFrame extends JFrame implements AirportObserver{
 		populateRecentAirports();
 	}
 
-	private void generateRunwayComboBox(JComboBox currentRunwayComboBox){
+	private synchronized void generateRunwayComboBox(JComboBox currentRunwayComboBox){
 		if ((airport.getCurrentPhysicalRunway() != null) && 
 				(airport.getCurrentPhysicalRunway().getRunway(0) != currentRunwayCombo.getItemAt(0))){
 			PhysicalRunway r = airport.getCurrentPhysicalRunway();
+			
+			ItemListener itemListener = currentRunwayComboBox.getItemListeners()[0];
+			
+			currentRunwayComboBox.removeItemListener(itemListener);
+			
 			currentRunwayComboBox.removeAllItems();
 			currentRunwayComboBox.addItem(r.getRunway(0));
-			currentRunwayComboBox.addItem(r.getRunway(1));
+			currentRunwayComboBox.addItem(r.getRunway(1));	
+			
+			currentRunwayComboBox.addItemListener(itemListener);
 		}
+		
 	}
 
 	private void  generatePhysicalRunwayRadioButtons(JMenu parentMenuItem){
