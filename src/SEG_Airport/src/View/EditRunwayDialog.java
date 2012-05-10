@@ -290,12 +290,12 @@ public class EditRunwayDialog extends JDialog implements AirportObserver{
 				return;
 			}
 			
-			if(leftASDA < leftTORA || rightASDA < rightTORA){
+			if(leftASDA < leftTORA|| rightASDA < rightTORA){
 				JOptionPane.showMessageDialog(null, "ASDA cannot be smaller than TORA", "", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
 			
-			if(leftASDA < leftTODA || rightASDA < rightTODA){
+			if(leftTODA < leftASDA || rightTODA < rightASDA){
 				JOptionPane.showMessageDialog(null, "ASDA cannot be smaller than TODA", "", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
