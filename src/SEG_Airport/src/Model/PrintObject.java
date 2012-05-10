@@ -1,6 +1,7 @@
 package Model;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.print.PageFormat;
@@ -35,7 +36,11 @@ class PrintObject implements Printable {
 	 * Writes the text from the tokens into a graphics context.
 	 */
 	public int print(Graphics g, PageFormat f, int pageIndex) {
-		Graphics2D g2 = (Graphics2D) g; 
+		Font font = new Font("serif", Font.PLAIN, 12);
+		Font bigFont = new Font("arial", Font.BOLD, 16);
+		
+		Graphics2D g2 = (Graphics2D) g;
+		g2.setFont(bigFont);
 		
 		int x = 80;
 		int y = 100;
@@ -43,8 +48,14 @@ class PrintObject implements Printable {
 		switch (pageIndex) {
 		case 0:
 			g2.setColor(Color.black);
+			
+			String header = "Redeclaration Details for " + tokens[0] + " Airport";
+			
+			g2.drawString(header, x, y);
+			g2.setFont(font);
+			y += 20;
 
-			for (int i = 0; i < tokens.length; i++) {
+			for (int i = 1; i < tokens.length; i++) {
 
 				g2.drawString(tokens[i], x, y);
 				y += 20;
