@@ -264,7 +264,7 @@ public class PhysicalRunway {
 	public void placeNewObstacle(Obstacle obstacle,
 			double distanceAwayFromThreshold,
 			double distanceAwayFromCenterLine, String closeToRunwayName) {
-		reset();
+		//reset();
 		this.obstacle = obstacle;
 		this.distanceAwayFromThreshold = distanceAwayFromThreshold;
 		this.distanceAwayFromCenterLine = distanceAwayFromCenterLine;
@@ -324,7 +324,7 @@ public class PhysicalRunway {
 		obstacle = null;
 		distanceAwayFromThreshold = 0;
 		distanceAwayFromCenterLine = 0;
-		reset();
+		//reset();
 	}
 
 	/**
