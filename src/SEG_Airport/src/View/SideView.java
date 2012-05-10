@@ -464,6 +464,10 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 			}
 		}
 		int leftDT;
+		this.TORAStart=0;
+		this.TODAStart=(int) (TORAStart+meterToPixel(TORA-TODA));
+		this.ASDAStart=(int) (TORAStart+meterToPixel(TORA-ASDA));
+		
 		
 		if(leftTag.equals(airport.getCurrentPhysicalRunway().getRunway(1).getName())){
 			leftDT =(int) airport.getCurrentPhysicalRunway().getRunway(1).getDisplacedThreshold(0);
@@ -477,22 +481,26 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 			DT=leftDT;
 			DTStart=0;
 			LDAStart=meterToPixel(DT);
+			this.TORAStart=0;
+			this.TODAStart=0;
+			this.ASDAStart=0;
 		}else{
 			if(obstacle==null){
 				DT=rightDT;
+				DTStart=meterToPixel(runwayLength-DT);
+				LDAStart=meterToPixel(runwayLength-DT-LDA);
+			
 			}else{
 				DT=0;
+				LDAStart=0;
 			}
-			LDAStart=0;
-			DTStart=meterToPixel(LDA);
+		
+			
 		}
 		
 		
 		
 	
-		this.TORAStart=0;
-		this.TODAStart=(int) (TORAStart+meterToPixel(TORA-TODA));
-		this.ASDAStart=(int) (TORAStart+meterToPixel(TORA-ASDA));
 		
 		}
 	}
