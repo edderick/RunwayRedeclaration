@@ -163,30 +163,30 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 	}
 	
 	public void drawDirection(Graphics2D g2d){
-		if(airport.getCurrentRunway()!=null){
-			for(int i=5; i<1000; i++){
-				Font f = new Font("tag", 1, i);
-				g2d.setFont(f);
-				if(g2d.getFontMetrics().stringWidth("Runway Take-off/Landing Direction")>=meterToPixel(7*runwayLength/16)){
-					f = new Font("tag", 1, i-1);break;
-				}
-			}			
-		g2d.setColor(Color.BLACK);
+//		if(airport.getCurrentRunway()!=null){
+//			for(int i=5; i<1000; i++){
+//				Font f = new Font("tag", 1, i);
+//				g2d.setFont(f);
+//				if(g2d.getFontMetrics().stringWidth("Runway Take-off/Landing Direction")>=meterToPixel(7*runwayLength/16)){
+//					f = new Font("tag", 1, i-1);break;
+//				}
+//			}			
+//		g2d.setColor(Color.BLACK);
 //		g2d.drawString("Runway Take-off/Landing Direction", xRunway+meterToPixel(runwayLength/4),  yRunway+-10-meterToPixel(runwayStripWidthFromCentreLine*2));
-		
-		g2d.setStroke(new BasicStroke(3));
-		g2d.drawLine(xRunway+meterToPixel(runwayLength/4), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2), xRunway+meterToPixel(3*runwayLength/4), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2));
-
-		if(airport.getCurrentRunway().getName().equals(leftTag)){
-			g2d.drawLine(xRunway+meterToPixel(3*runwayLength/4), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2), xRunway+meterToPixel(11*runwayLength/16), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2)+meterToPixel(runwayStripWidthFromCentreLine/4));
-			g2d.drawLine(xRunway+meterToPixel(3*runwayLength/4), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2), xRunway+meterToPixel(11*runwayLength/16), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2)-meterToPixel(runwayStripWidthFromCentreLine/4));
-			g2d.drawString("Runway Take-off/Landing Direction", xRunway+meterToPixel(runwayLength/4),  yRunway+-10-meterToPixel(runwayStripWidthFromCentreLine*2));
-		}else{
-			g2d.drawLine(xRunway+meterToPixel(runwayLength/4), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2), xRunway+meterToPixel(5*runwayLength/16), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2)+meterToPixel(runwayStripWidthFromCentreLine/4));
-			g2d.drawLine(xRunway+meterToPixel(runwayLength/4),yRunway-meterToPixel(runwayStripWidthFromCentreLine*2), xRunway+meterToPixel(5*runwayLength/16), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2)-meterToPixel(runwayStripWidthFromCentreLine/4));
-			g2d.drawString("Runway Take-off/Landing Direction", xRunway+meterToPixel(5*runwayLength/16),  yRunway+-10-meterToPixel(runwayStripWidthFromCentreLine*2));
-		}
-		}
+//		
+//		g2d.setStroke(new BasicStroke(3));
+//		g2d.drawLine(xRunway+meterToPixel(runwayLength/4), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2), xRunway+meterToPixel(3*runwayLength/4), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2));
+//
+//		if(airport.getCurrentRunway().getName().equals(leftTag)){
+//			g2d.drawLine(xRunway+meterToPixel(3*runwayLength/4), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2), xRunway+meterToPixel(11*runwayLength/16), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2)+meterToPixel(runwayStripWidthFromCentreLine/4));
+//			g2d.drawLine(xRunway+meterToPixel(3*runwayLength/4), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2), xRunway+meterToPixel(11*runwayLength/16), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2)-meterToPixel(runwayStripWidthFromCentreLine/4));
+//			g2d.drawString("Runway Take-off/Landing Direction", xRunway+meterToPixel(runwayLength/4),  yRunway+-10-meterToPixel(runwayStripWidthFromCentreLine*2));
+//		}else{
+//			g2d.drawLine(xRunway+meterToPixel(runwayLength/4), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2), xRunway+meterToPixel(5*runwayLength/16), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2)+meterToPixel(runwayStripWidthFromCentreLine/4));
+//			g2d.drawLine(xRunway+meterToPixel(runwayLength/4),yRunway-meterToPixel(runwayStripWidthFromCentreLine*2), xRunway+meterToPixel(5*runwayLength/16), yRunway-meterToPixel(runwayStripWidthFromCentreLine*2)-meterToPixel(runwayStripWidthFromCentreLine/4));
+//			g2d.drawString("Runway Take-off/Landing Direction", xRunway+meterToPixel(5*runwayLength/16),  yRunway+-10-meterToPixel(runwayStripWidthFromCentreLine*2));
+//		}
+//		}
 	}
 
 	public void createSlider(){
@@ -274,6 +274,33 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 			g2d.drawString(leftTag, (1*spaceFromLeftEdge)+g2d.getFontMetrics().stringWidth(leftTag), this.getHeight() / 10);
 			g2d.drawString(rightTag, this.getWidth() - (10*spaceFromLeftEdge)+g2d.getFontMetrics().stringWidth(rightTag), this.getHeight() / 10);
 		}
+		for(int i=5; i<1000; i++){
+			Font f = new Font("tag", 1, i);
+			g2d.setFont(f);
+			if(g2d.getFontMetrics().stringWidth("Runway Take-off/Landing Direction")>=7*this.getWidth()/16){
+				g2d.setFont(new Font("tag", 1, i-1));break;
+			}
+		}	
+		
+		if(airport.getCurrentRunway()!=null){
+		g2d.setColor(Color.BLACK);
+		
+		g2d.setStroke(new BasicStroke(3));
+		g2d.drawLine(this.getWidth()/4, this.getHeight()/10, 3*this.getWidth()/4, this.getHeight()/10);
+
+		if(airport.getCurrentRunway().getName().equals(leftTag)){
+			g2d.drawLine(3*this.getWidth()/4, this.getHeight()/10, 11*this.getWidth()/16, this.getHeight()/20 );
+			g2d.drawLine(3*this.getWidth()/4, this.getHeight()/10, 11*this.getWidth()/16, 3*(this.getHeight()/20));
+			g2d.drawString("Runway Take-off/Landing Direction", this.getWidth()/4, -2+this.getHeight()/10);
+			
+		}else{
+			g2d.drawLine(this.getWidth()/4, this.getHeight()/10, 5*this.getWidth()/16, this.getHeight()/20);
+			g2d.drawLine(this.getWidth()/4, this.getHeight()/10, 5*this.getWidth()/16, 3*this.getHeight()/20);
+			g2d.drawString("Runway Take-off/Landing Direction", 5*this.getWidth()/16,  -2+this.getHeight()/10);
+			
+		}
+		}
+	}
 	}
 	
 	public void drawScale(Graphics2D g2d){
