@@ -6,6 +6,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import Model.Airport;
 import Model.AirportObserver;
 import Model.LoadXMLFile;
@@ -18,7 +22,8 @@ public class OpenRecentAirportListener implements ActionListener {
 	Airport airport;
 	List<AirportObserver> airportObservers;
 	
-	public OpenRecentAirportListener(String filename, List<AirportObserver> airportObservers){
+	public OpenRecentAirportListener(String filename, Airport airport, List<AirportObserver> airportObservers){
+		this.airport = airport;
 		this.filename = systemIndependentPath(filename);
 		this.airportObservers = airportObservers;
 	}
@@ -36,11 +41,25 @@ public class OpenRecentAirportListener implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
+		if(airport != null && airport.getSaved() == false){
+
+			Object[] options = { "Yes", "No" };	
+			JOptionPane pane = new JOptionPane("You have an unsaved airport, are you sure you wish to continue?", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,null, options, options[0]);
+			JDialog dialog = pane.createDialog(new JFrame(), "Unsaved Work");
+			dialog.show();
+
+			if(pane.getValue().equals("No")) return;
+
+		}
+		
+		
 		System.out.println("Opening: " + filename);		
 		LoadXMLFile lf = new LoadXMLFile();
 		Airport ap = new Airport("");
 
 		try {
+			
 			
 			ap = lf.silentLoadAirport(filename);
 

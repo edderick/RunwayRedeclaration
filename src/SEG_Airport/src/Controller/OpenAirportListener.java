@@ -5,6 +5,10 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.List;
 
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import Model.Airport;
 import Model.AirportObserver;
 import Model.LoadXMLFile;
@@ -27,6 +31,17 @@ public class OpenAirportListener implements ActionListener, AirportObserver{
 		Airport ap;
 
 		try {
+			if(airport.getSaved() == false){
+
+				Object[] options = { "Yes", "No" };	
+				JOptionPane pane = new JOptionPane("You have an unsaved airport, are you sure you wish to continue?", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,null, options, options[0]);
+				JDialog dialog = pane.createDialog(new JFrame(), "Unsaved Work");
+				dialog.show();
+
+				if(pane.getValue().equals("No")) return;
+
+			}
+			
 			ap = lf.loadAirport();
 
 			System.out.println("This is the airport opened:: " + ap.getName());
@@ -83,40 +98,3 @@ public class OpenAirportListener implements ActionListener, AirportObserver{
 
 }
 
-
-
-/*
-public void actionPerformed(ActionEvent arg0) {
-/*
- *  Open airport code goes here - need to reset airport if the user decides to cancel
-
-LoadXMLFile lf = new LoadXMLFile();
-Airport ap = airport;
-try {
-	airport = lf.loadFile();
-	System.out.println("This is the airport opened: " + airport.getName());
-	//iterate over the runways in the loaded airport and print all values
-	for (PhysicalRunway r : airport.runways()) { // this will show all the physical runways
-		System.out.println(((PhysicalRunway) r).getId() 
-				+" "+ r.getRunway(0).getName() 
-				+" "+ r.getRunway(0).getTORA(1)
-				+" "+ r.getRunway(0).getASDA(1)
-				+" "+ r.getRunway(0).getTODA(1)
-				+" "+ r.getRunway(0).getLDA(1)
-
-				+" "+ r.getRunway(1).getName()
-				+" "+ r.getRunway(1).getTORA(1)
-				+" "+ r.getRunway(1).getASDA(1)
-				+" "+ r.getRunway(1).getTODA(1)
-				+" "+ r.getRunway(1).getLDA(1)
-
-				);
-	}
-	lblCurrentAirport.setText("Current Airport: " + airport.getName());
-} catch (Exception e) {}
-if (airport == null) {
-	airport = ap;
-}
-}
-}
- */

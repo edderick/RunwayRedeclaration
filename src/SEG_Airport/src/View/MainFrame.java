@@ -774,7 +774,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 		for(String s : recentAirports){
 			JMenuItem mntmRecentAirport = new JMenuItem(s);
 			mnOpenRecentAirports.add(mntmRecentAirport);
-			OpenRecentAirportListener oral = new OpenRecentAirportListener(s, airportObservers);
+			OpenRecentAirportListener oral = new OpenRecentAirportListener(s, airport, airportObservers);
 			mntmRecentAirport.addActionListener(oral);
 		}
 		

@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.List;
 
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import Model.Airport;
@@ -35,6 +37,19 @@ public class OpenObstacleListener implements ActionListener, AirportObserver{
 		} else {
 			LoadXMLFile lf = new LoadXMLFile();
 			try {
+				
+				
+				if(airport.getCurrentPhysicalRunway().getObstacle() != null && airport.getCurrentPhysicalRunway().getObstacle().getSaved() == false){
+
+					Object[] options = { "Yes", "No" };	
+					JOptionPane pane = new JOptionPane("You have an unsaved obstacle, are you sure you wish to continue?", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,null, options, options[0]);
+					JDialog dialog = pane.createDialog(new JFrame(), "Unsaved Work");
+					dialog.show();
+
+					if(pane.getValue().equals("No")) return;
+
+				}
+				
 				Obstacle o = lf.loadObstacle();
 				airport.getCurrentPhysicalRunway().setObstacle(o);
 
