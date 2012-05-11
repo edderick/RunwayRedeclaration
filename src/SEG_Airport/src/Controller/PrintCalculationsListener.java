@@ -39,9 +39,9 @@ public class PrintCalculationsListener implements ActionListener, AirportObserve
 			body = new StringBuilder();
 			body.append(airport.getName() + "\n\n");
 			body.append(airport.getCurrentPhysicalRunway().toDetails(airport.getCurrentRunway().getName()) + "\n");
-			body.append(airport.getCurrentPhysicalRunway().getRunway(0).getName());
+			body.append(airport.getCurrentPhysicalRunway().getRunway(0).getName()  + "\n");
 			body.append(airport.getCurrentPhysicalRunway().toCalculation(airport.getCurrentPhysicalRunway().getRunway(0).getName())+ "\n");
-			body.append(airport.getCurrentPhysicalRunway().getRunway(1).getName());
+			body.append(airport.getCurrentPhysicalRunway().getRunway(1).getName()  + "\n");
 			body.append(airport.getCurrentPhysicalRunway().toCalculation(airport.getCurrentPhysicalRunway().getRunway(1).getName()));
 			print.print(body.toString());
 		}

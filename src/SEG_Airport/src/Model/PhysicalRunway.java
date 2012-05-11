@@ -456,29 +456,34 @@ public class PhysicalRunway {
 		}
 
 		if (detail) {
-			result.append("Details on runway "
-					+ (close ? closeTo.getName() : awayFrom.getName()) + ":\n");
+			result.append("Calculations for runway "
+					+ (this.getId()) + ":\n");
 			result.append("Obstacle name: " + obstacle.getName() + "\n");
 			result.append("The obstacle is closer to " + closeTo.getName()
 					+ "'s threshold\n");
 			result.append("Obstacle height: " + obstacle.getHeight() + "m\n");
-			result.append("Distance away from threshold: "
+			result.append("Distance from threshold: "
 					+ distanceAwayFromThreshold + "m\n");
-			result.append("Blast allowance: " + blastAllowance[REDECLARED]
-					+ "m\n");
+			result.append("Distance from centre line: "
+					+ distanceAwayFromCenterLine + "m\n\n");
+
 			result.append("Displaced threshold: "
 					+ (close ? closeTo.getDisplacedThreshold(Runway.REDECLARED)
 							: awayFrom.getDisplacedThreshold(Runway.REDECLARED))
 					+ "m\n");
 			result.append("Angle of slope: " + angleOfSlope[REDECLARED] + "\n");
+			result.append("Blast allowance: " + blastAllowance[REDECLARED]
+					+ "m\n");
 			result.append("Stopway: " + stopway[REDECLARED] + "m\n");
+			result.append("Stip Width: " + runwayStripWidth[REDECLARED] + "m\n");
+			result.append("Clear and Graded Area Width: " + clearedAndGradedWidth[REDECLARED] + "m\n");
 			if (needRESA)
 				result.append("RESA: " + RESA[REDECLARED] + "m\n");
 
 		} else {
 
 			if (close) {
-				result.append("\n--Any negative result will be assigned as zero--\n");
+				//result.append("\n--Any negative result will be assigned as zero--\n");
 				result.append("New TORA : " + closeTo.getTORA(Runway.DEFAULT)
 						+ " - " + distanceAwayFromThreshold + " - "
 						+ blastAllowance[REDECLARED] + " - "
@@ -499,7 +504,7 @@ public class PhysicalRunway {
 						+ " - " + stopway[REDECLARED] + " = "
 						+ closeTo.getLDA(Runway.REDECLARED) + "m\n");
 			} else {
-				result.append("\n--Any negative result will be assigned as zero--\n");
+				//result.append("\n--Any negative result will be assigned as zero--\n");
 				result.append("New TORA : " + awayFrom.getTORA(Runway.DEFAULT)
 						+ " - " + distanceAwayFromThreshold + " - " + resa
 						+ " - " + stopway[REDECLARED] + " - "

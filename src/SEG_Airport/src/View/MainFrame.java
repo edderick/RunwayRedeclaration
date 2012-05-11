@@ -753,7 +753,7 @@ public class MainFrame extends JFrame implements AirportObserver{
 			advancedParametersTab.setValueAt(physicalRunway.getRESA(), 0, 1);
 			advancedParametersTab.setValueAt(physicalRunway.getStopway(), 1, 1);
 			advancedParametersTab.setValueAt(physicalRunway.getBlastAllowance(), 2, 1);
-			advancedParametersTab.setValueAt(physicalRunway.getAngleOfSlope(), 3, 1);
+			advancedParametersTab.setValueAt("1:" + physicalRunway.getAngleOfSlope(), 3, 1);
 			advancedParametersTab.setValueAt(physicalRunway.getRunwayStripWidth(), 4, 1);
 			advancedParametersTab.setValueAt(physicalRunway.getClearedAndGradedWidth(), 5, 1);
 		} else {
