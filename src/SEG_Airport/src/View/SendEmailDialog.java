@@ -41,7 +41,7 @@ public class SendEmailDialog extends JDialog {
 	private JButton btnCancel;
 
 	public SendEmailDialog(AddressBook addressBook, Airport airport) {
-		setTitle("Address Book");
+		setTitle("Email Calculations");
 		setBounds(100, 100, 481, 300);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
