@@ -291,17 +291,17 @@ public class SideView extends JPanel implements AirportObserver, ViewPanel{
 		if(airport.getCurrentRunway().getName().equals(leftTag)){
 			g2d.drawLine(3*this.getWidth()/4, this.getHeight()/10, 11*this.getWidth()/16, this.getHeight()/20 );
 			g2d.drawLine(3*this.getWidth()/4, this.getHeight()/10, 11*this.getWidth()/16, 3*(this.getHeight()/20));
-			g2d.drawString("Runway Take-off/Landing Direction", this.getWidth()/4, -2+this.getHeight()/10);
+			g2d.drawString("Runway Take-off/Landing Direction", this.getWidth()/4, -5+this.getHeight()/10);
 			
 		}else{
 			g2d.drawLine(this.getWidth()/4, this.getHeight()/10, 5*this.getWidth()/16, this.getHeight()/20);
 			g2d.drawLine(this.getWidth()/4, this.getHeight()/10, 5*this.getWidth()/16, 3*this.getHeight()/20);
-			g2d.drawString("Runway Take-off/Landing Direction", 5*this.getWidth()/16,  -2+this.getHeight()/10);
+			g2d.drawString("Runway Take-off/Landing Direction", 5*this.getWidth()/16,  -5+this.getHeight()/10);
 			
 		}
 		}
 	}
-	}
+
 	
 	public void drawScale(Graphics2D g2d){
 		if(airport!=null && runway!=null){
