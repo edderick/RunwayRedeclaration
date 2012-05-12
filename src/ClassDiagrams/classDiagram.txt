@@ -1,60 +1,86 @@
 @startuml img/classDiagram.png
 
+
 title Class Diagram 
 
+
+
 package Model{
+	
 	class Runway{
-		-TORA
-		-TODA
-		-ASDA
-		-LDA
+				
 		+getTORA()
+		
 		+getTODA()
+		
 		+getASDA()
+		
 		+getLDA()
+	
 	}
+
+	
 	
 	class Airport{
+		
 		-AirportList
+	
 	}
 
+	
+	
 	Airport "1" *-- "*" Runway
+	
 	Runway "1" o-- "1" Obstacle
 
+	
 	AddressBook "1" *-- "*" Contact
+
+
+	class SaveToXML{
+		+save()
+	}
+
+	class LoadFromXML{
+		+load()
+	}
+
+	class Email{
+		+send()
+	}
+
+	Email "1" *-- "1" AddressBook
+
+	Interface AirportObserver
 }
+
+
 
 package View{
+
 	JFrame <|-- MainFrame
+
 	MainFrame "1" *-- "1" ContentPane
-	JSplitPanel <|-- ContentPane
-	ContentPane "1" *-- "1" SidePane
-	JPane <|-- SidePane
-	JSplitPane <|-- ViewWrapperPane
-	JPanel <|-- TopViewPanel
-	JPanel <|-- SideViewPanel
-	ViewWrapperPane "1" o-- "1" TopViewPanel
-	ViewWrapperPane "1" o-- "1" SideViewPanel
-	JMenuBar <|-- MenuBar
-	MainFrame "1" o-- "1" MenuBar
-	class JMenuItem{
-		+addActionListener()
-	}
-	class JMenu{
-		+addActionListener()
-	}
-	class JCheckboxMenuItem{
-		+addActionListener()
-	}
-	MenuBar "1" *-- "1" JMenuItem
-	MenuBar "1" *-- "1" JMenu
-	MenuBar "1" *-- "1" JCheckboxMenuItem
+
+	MainFrame "1" o-- "1" Airport
+	MainFrame "1" o-- "*" AirportObserver
+	class JDialogBox
+	class JMenuItem
+	JDialogBox --|> AirportObserver
+	JMenuItem --|> AirportObserver
 }
+
+
 
 package Controller{
-	class Listeners
+
+	ActionListener <|-- Listener
+	Listener "*" *-- "*" JDialogBox
+	JMenuItem "*" *-- "*" Listener
+
 
 }
+
 
 
 @enduml
