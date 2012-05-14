@@ -68,6 +68,12 @@ package View{
 	class JMenuItem
 	JDialogBox --|> AirportObserver
 	JMenuItem --|> AirportObserver
+	TopView --|> AirportObserver
+	SideView --|> AirportObserver
+	CalculationsView --|> AirportObserver
+	MainFrame "1" *-- "1" TopView
+	MainFrame "1" *-- "1" SideView
+	MainFrame "1" *-- "1" CalculationsView
 }
 
 
