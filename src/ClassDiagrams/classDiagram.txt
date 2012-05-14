@@ -31,9 +31,10 @@ package Model{
 	
 	Airport "1" *-- "*" Runway
 	
-	Runway "1" o-- "1" Obstacle
+	Runway "1" *-- "2" PhysicalRunway
 
-	
+	PhysicalRunway "1" o-- "1" Obstacle
+
 	AddressBook "1" *-- "*" Contact
 
 
@@ -59,9 +60,6 @@ package Model{
 package View{
 
 	JFrame <|-- MainFrame
-
-	MainFrame "1" *-- "1" ContentPane
-
 	MainFrame "1" o-- "1" Airport
 	MainFrame "1" o-- "*" AirportObserver
 	class JDialogBox
