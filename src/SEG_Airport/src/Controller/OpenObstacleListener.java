@@ -50,24 +50,34 @@ public class OpenObstacleListener implements ActionListener, AirportObserver{
 
 				}
 				
-				Obstacle o = lf.loadObstacle();
-				airport.getCurrentPhysicalRunway().setObstacle(o);
-
+				Obstacle o;
+				
 				try {
-					MainFrame.saveRecentFile(o, LocalPathTrimmer.trimLocalPath(lf.getFile()));
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					o = lf.loadObstacle();					
+				} catch (Exception e2) {
+					o = null;
 				}
 
-				System.out.println("Obstacle Opened");
-				notifyAirportObservers();
+				if(o != null){
+					airport.getCurrentPhysicalRunway().setObstacle(o);
+					
+					try {
+						MainFrame.saveRecentFile(o, LocalPathTrimmer.trimLocalPath(lf.getFile()));
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+					System.out.println("Obstacle Opened");
+					notifyAirportObservers();
+					
+					Obstacle old = airport.getCurrentPhysicalRunway().getObstacle();
+					Obstacle obstacle = airport.getCurrentPhysicalRunway().getObstacle();
+					@SuppressWarnings("unused")
+					EditObstacleDialog eod = new EditObstacleDialog(obstacle, old, airport, airportObservers);
+					airport.getCurrentPhysicalRunway().setObstacle(obstacle);
+				}
 
-				Obstacle old = airport.getCurrentPhysicalRunway().getObstacle();
-				Obstacle obstacle = airport.getCurrentPhysicalRunway().getObstacle();
-				@SuppressWarnings("unused")
-				EditObstacleDialog eod = new EditObstacleDialog(obstacle, old, airport, airportObservers);
-				airport.getCurrentPhysicalRunway().setObstacle(obstacle);
 
 
 			} catch (Exception e1) {

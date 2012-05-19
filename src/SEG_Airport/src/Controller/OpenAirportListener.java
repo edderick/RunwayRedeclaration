@@ -42,28 +42,34 @@ public class OpenAirportListener implements ActionListener, AirportObserver{
 
 			}
 			
-			ap = lf.loadAirport();
-
-			System.out.println("This is the airport opened:: " + ap.getName());
-			//iterate over the runways in the loaded airport and print all values
-			for (PhysicalRunway r : ap.getPhysicalRunways()) { // this will show all the physical runways
-				System.out.println(((PhysicalRunway) r).getId() 
-						+" "+ r.getRunway(0).getName() 
-						+" "+ r.getRunway(0).getTORA(1)
-						+" "+ r.getRunway(0).getASDA(1)
-						+" "+ r.getRunway(0).getTODA(1)
-						+" "+ r.getRunway(0).getLDA(1)
-
-						+" "+ r.getRunway(1).getName()
-						+" "+ r.getRunway(1).getTORA(1)
-						+" "+ r.getRunway(1).getASDA(1)
-						+" "+ r.getRunway(1).getTODA(1)
-						+" "+ r.getRunway(1).getLDA(1)
-
-						);
+			try {
+				ap = lf.loadAirport();				
+			} catch (Exception e2) {
+				ap = null;
 			}
 
-			airport = ap;
+			if(ap != null){
+				airport = ap;
+				System.out.println("This is the airport opened:: " + ap.getName());
+				//iterate over the runways in the loaded airport and print all values
+				for (PhysicalRunway r : ap.getPhysicalRunways()) { // this will show all the physical runways
+					System.out.println(((PhysicalRunway) r).getId() 
+							+" "+ r.getRunway(0).getName() 
+							+" "+ r.getRunway(0).getTORA(1)
+							+" "+ r.getRunway(0).getASDA(1)
+							+" "+ r.getRunway(0).getTODA(1)
+							+" "+ r.getRunway(0).getLDA(1)
+							
+							+" "+ r.getRunway(1).getName()
+							+" "+ r.getRunway(1).getTORA(1)
+							+" "+ r.getRunway(1).getASDA(1)
+							+" "+ r.getRunway(1).getTODA(1)
+							+" "+ r.getRunway(1).getLDA(1)
+							
+							);
+				}
+				
+			}
 			
 			if(airport.getPhysicalRunways().size() != 0) { 
 				airport.setCurrentPhysicalRunway(airport.getPhysicalRunways().get(0));
@@ -71,15 +77,19 @@ public class OpenAirportListener implements ActionListener, AirportObserver{
 			}
 			
 			
-			try {
-				MainFrame.saveRecentFile(ap, LocalPathTrimmer.trimLocalPath(lf.getFile()));
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+			if(ap != null){
+				try {
+					MainFrame.saveRecentFile(ap, LocalPathTrimmer.trimLocalPath(lf.getFile()));
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				notifyAirportObservers();
 			}
-			notifyAirportObservers();
 			
-		} catch (Exception ex) {System.out.println(ex);}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 
 
 	}
