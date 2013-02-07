@@ -3,3 +3,7 @@ all:
 run:
 	cd src; \
 	java -cp lib/mail.jar:lib/activation.jar:lib/miglayout15-swing.jar:.  View/MainFrame
+clean:
+	rm src/View/*.class
+	rm src/Model/*.class
+	rm src/Controller/*.class

@@ -1,0 +1,5 @@
+SEG
+===
+
+> make
+> make run
